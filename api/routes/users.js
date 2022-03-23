@@ -11,5 +11,7 @@ userRouter.get('/allUsers', GetAllUsers) // traer todos los usuarios
 
 userRouter.delete('/deleteUser/:id', DeleteUser) // elimina un usuario
 
+module.exports = userRouter
+
 
 
