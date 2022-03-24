@@ -17,8 +17,6 @@ function App() {
     dispatch(userLogin());
   }, []);
 
-  console.log(user);
-
   return (
     <div>
       <NavbarComponent />
