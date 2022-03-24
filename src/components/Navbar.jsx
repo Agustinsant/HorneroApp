@@ -5,7 +5,7 @@ const NavbarComponent = () => {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="/"><img src={logo} width='180px' /></Navbar.Brand>
+        <Navbar.Brand href="/"><img src={logo} width='160px' /></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

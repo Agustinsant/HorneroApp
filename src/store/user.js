@@ -9,6 +9,10 @@ const userInitialState = {
 
 export const userLogin = createAsyncThunk('LOGIN', usersServices.userLoginService)
 
+export const getUsers = createAsyncThunk('GET_USERS', usersServices.getUsersService)
+
+export const signInUser = createAsyncThunk('SIGN_IN', usersServices.signInUserSerice)
+
 const userSlice = createSlice({
     name: 'user',
     initialState: userInitialState,
@@ -23,6 +27,25 @@ const userSlice = createSlice({
         [userLogin.rejected]: (state, action) => {
             state.error = action.error.message
         },
+        [getUsers.pending]: state => {
+          state.loading = true  
+        },
+        [getUsers.fulfilled]: (state, action) => {
+            state.data = action.payload
+            state.loading = false
+        },
+        [getUsers.rejected]: (state, action) => {
+            state.error = action.error.message
+        },
+        [signInUser.pending]: state => {
+          state.loading = true  
+        },
+        [signInUser.fulfilled]: (state, action) => {
+            state.loading = false
+        },
+        [signInUser.rejected]: (state, action) => {
+            state.error = action.error.message
+        }
 
     }
 })

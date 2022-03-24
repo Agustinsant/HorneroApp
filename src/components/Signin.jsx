@@ -1,16 +1,20 @@
 import { useState } from "react";
 import useInput from "../hooks/useInput";
 import { FaAngleRight } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { signInUser } from "../store/user";
 
 import Form from "../commons/Form";
 import Button from "../commons/Button";
 
 function Signin() {
+  const dispatch = useDispatch();
   ///Catch input states
   const validationCod = useInput();
   const fullName = useInput();
   const email = useInput();
   const password = useInput();
+  console.log("NAME", fullName.value);
   ///Control button disabled
   const [btnDisabled, setBtnDisabled] = useState(false);
   ///messages for controled fields
@@ -19,7 +23,16 @@ function Signin() {
   const [messageEmail, setMessageEmail] = useState("");
   const [messagePassword, setMessagePassword] = useState("");
 
-  const handleSubmit = () => {};
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(
+      signInUser({
+        name: fullName.value,
+        email: email.value,
+        password: password.value,
+      })
+    );
+  };
 
   ///control every field and dispatch a message
   const fieldsControl = () => {
@@ -31,15 +44,15 @@ function Signin() {
 
   return (
     <div className="signin">
-      <Form onSubmit={handleSubmit}>
+      <form className={`form`} onSubmit={handleSubmit}>
         <h2 className="signin__title">Nuevo por Aqui?</h2>
         <h3 className="signin__subtitle">Registro</h3>
         <div className="signin__validationCod">
           <div className="signin__validationCod--title">¿Qué es esto?</div>
-          <spam className="signin__validationCod--message">
+          <span className="signin__validationCod--message">
             Permite acreditar su relación con Globant. Solicitelo a su
             responsable.
-          </spam>
+          </span>
         </div>
         <input
           type="text"
@@ -57,10 +70,10 @@ function Signin() {
         <input type="text" {...email} placeholder="Ingresa un email" />
         <input type="password" {...password} placeholder="Contraseña" />
 
-        <Button type="submit" isDisabled={btnDisabled}>
+        <button type="submit" isDisabled={btnDisabled}>
           Enviar <FaAngleRight />
-        </Button>
-      </Form>
+        </button>
+      </form>
     </div>
   );
 }
