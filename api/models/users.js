@@ -21,7 +21,7 @@ const UserSchema = new Schema({
     },
     city: {
         type: String,
-        required:true,
+        //required:true,
     },
     isAdmin: {
         type: Boolean,

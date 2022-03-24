@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { Route, Routes } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogin } from "./store/user";
+import { getUsers } from "./store/user";
 
 import NavbarComponent from "./components/Navbar";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Signin from "./components/Signin";
+import MyProfile from "./components/MyProfile";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -14,7 +15,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(userLogin());
+    dispatch(getUsers());
   }, []);
 
   return (
@@ -23,7 +24,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
-        <Route path="/mi_perfil" element="Mi Perfil" />
+        <Route path="/mi_perfil" element={<MyProfile/>} />
       </Routes>
       <Footer />
     </div>
