@@ -54,6 +54,15 @@ function Signin() {
       required: true,
     },
     {
+      name: "city",
+      type: "text",
+      placeholder: "Ingrese ciudad de residencia",
+      errorMessage: "Ingrese una residencia valida",
+      //label: "ValidationCod",
+      pattern: "^[a-zA-Z]+(([',.- ][a-zA-Z ])?[a-zA-Z]*)*$",
+      required: true,
+    },
+    {
       name: "password",
       type: "password",
       placeholder: "Ingresa una contraseña",

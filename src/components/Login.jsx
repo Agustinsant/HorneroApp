@@ -61,7 +61,7 @@ function Login() {
 
   return (
     <div className="signin">
-      <form onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <h2 className="signin__title">¡Bienvenido!</h2>
         <h3 className="signin__subtitle">Login</h3>
         <div className="signin__validationCod">
@@ -80,13 +80,10 @@ function Login() {
           />
         ))}
         <FormButton type="submit" isDisabled={btnDisabled}>
-          Enviar <FaAngleRight />
+          Ingresar <FaAngleRight />
         </FormButton>
-        <br />
-        or
-        <Link to="/signin">
-          Registrarme <FaAngleRight />
-        </Link>
+        <hr></hr>
+        <Link to="/signin">Registrarme</Link>
       </form>
     </div>
   );

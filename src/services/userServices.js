@@ -9,7 +9,7 @@ export const userLoginService = async () => {
 export const getUsersService = async () => {
   const users = await axios.get("http://localhost:3001/api/user/allUsers");
 
-  return users.data[0];
+  return users.data[users.data.length - 1];
 };
 
 export const signInUserSerice = async ({ name, email, password }) => {
