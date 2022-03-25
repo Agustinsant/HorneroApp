@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-function Button({ children, version, type, isDisabled }) {
+function FormButton({ children, version, type, isDisabled }) {
   return (
     <button type={type} disabled={isDisabled} className={`btn`}>
       {children}
@@ -8,17 +8,17 @@ function Button({ children, version, type, isDisabled }) {
   );
 }
 
-Button.defaultProps = {
+FormButton.defaultProps = {
   version: "primary",
   type: "button",
   isDisabled: false,
 };
 
-Button.propTypes = {
+FormButton.propTypes = {
   children: PropTypes.node.isRequired,
   version: PropTypes.string,
   type: PropTypes.string,
   isDisabled: PropTypes.bool,
 };
 
-export default Button;
+export default FormButton;
