@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Signin from "./components/Signin";
 import MyProfile from "./components/MyProfile";
+import Floors from "./components/Floors";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -26,6 +27,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/mi_perfil" element={<MyProfile />} />
+        <Route path="building/floor" element={<Floors />} />
       </Routes>
       <Footer />
     </div>
