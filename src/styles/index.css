@@ -200,3 +200,8 @@ hr {
     transform: translate(0);
   }
 }
+
+.floor {
+  width: 50vh;
+  height: 50vh;
+}
