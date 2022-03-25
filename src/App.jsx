@@ -11,7 +11,6 @@ import MyProfile from "./components/MyProfile";
 
 function App() {
   const user = useSelector((state) => state.user);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
