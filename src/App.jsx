@@ -22,9 +22,10 @@ function App() {
     <div>
       <NavbarComponent />
       <Routes>
+        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
-        <Route path="/mi_perfil" element={<MyProfile/>} />
+        <Route path="/mi_perfil" element={<MyProfile />} />
       </Routes>
       <Footer />
     </div>

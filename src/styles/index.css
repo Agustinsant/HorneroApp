@@ -21,8 +21,11 @@ code {
   justify-content: flex-start;
   align-items: center;
   height: 600px;
+  animation: moveInLeft 1s;
+  animation-timing-function: ease-in;
 }
 .signin__title {
+  text-align: center;
   font-size: 24px;
   margin: 30px;
 }
@@ -61,6 +64,8 @@ code {
   margin: 20px;
   display: flex;
   flex-direction: column;
+  animation: moveInLeft 1s;
+  animation-timing-function: ease-in;
 }
 
 .form__input {
@@ -73,7 +78,7 @@ code {
   padding: 10px;
   flex-grow: 2;
   border: 1px solid #bfd732;
-  border-radius: 5%;
+  border-radius: 5px 0 5px 0;
 }
 input:focus {
   outline: none;
@@ -86,6 +91,17 @@ input:focus {
   color: red;
   display: none;
 }
+.form a {
+  margin-top: 20px;
+  font-size: 15px;
+  align-self: center;
+  text-decoration: none;
+  color: #444444;
+}
+.form svg {
+  height: 30px;
+  color: #bfd732;
+}
 
 input:invalid[focused="true"] {
   border: 1px solid red;
@@ -96,14 +112,15 @@ input:invalid[focused="true"] ~ span {
 }
 
 .btn {
+  padding-left: 24px;
   align-self: center;
-  width: 100px;
+  width: 150px;
   height: 35px;
   margin: 20px;
-  background: #e5e5e5;
+  background: #fff;
   color: #444444;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 20px;
   line-height: 21px;
   cursor: pointer;
 }
@@ -163,4 +180,23 @@ input:invalid[focused="true"] ~ span {
   text-decoration: none;
   color: #bfd732;
   font-size: 30px;
+}
+hr {
+  align-self: center;
+  width: 50%;
+  border-top: 2px solid #bfd732;
+}
+
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  80% {
+    transform: translate(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
 }
