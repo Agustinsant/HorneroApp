@@ -21,3 +21,9 @@ export const signInUserSerice = async ({ name, email, password }) => {
 
   return user;
 };
+
+export const persistUserSerice = async () => {
+  const user = await axios.get("http://localhost:3001/api/user/me")
+
+  return user
+}
