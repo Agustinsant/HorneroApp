@@ -1,9 +1,10 @@
 import axios from "axios";
 
-export const userLoginService = async () => {
-  const user = await axios.get("https://fakestoreapi.com/users");
-
-  return user.data;
+export const userLoginService = async ({email, password}) => {
+  const user = await axios.post("http://localhost:3001/api/user/login", {email, password});
+  localStorage.setItem('token', user.data.data.token )
+  
+  return user.data.data.token;
 };
 
 export const getUsersService = async () => {
@@ -12,18 +13,27 @@ export const getUsersService = async () => {
   return users.data[users.data.length - 1];
 };
 
-export const signInUserSerice = async ({ name, email, password }) => {
+export const signInUserSerice = async ({ name, city, email, password }) => {
   const user = await axios.post("http://localhost:3001/api/user/register", {
     name,
+    city,
     email,
     password,
+    
   });
 
   return user;
 };
 
-export const persistUserSerice = async () => {
-  const user = await axios.get("http://localhost:3001/api/user/me")
+export const persistUserSerice = async (token) => {
+  const user = await axios ({
+    method: 'GET',
+    headers: {'auth-token' : token},
+    url: "http://localhost:3001/api/user/me"})
 
-  return user
+  return user.data
+}
+
+export const logOutService = async () => {
+  localStorage.removeItem('token')
 }

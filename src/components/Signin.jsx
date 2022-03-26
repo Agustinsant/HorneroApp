@@ -16,6 +16,7 @@ function Signin() {
     validationCod: "",
     fullname: "",
     email: "",
+    city: "",
     password: "",
     confirmPassword: "",
   });
@@ -32,7 +33,7 @@ function Signin() {
       placeholder: "Ingresa tu codigo de validación",
       errorMessage: "Ingrese el codigo alfanumérico de 8 digitos",
       //label: "ValidationCod",
-      pattern: "^(?=.*[0-9]+.*)(?=.*[A-Z]+.*)[0-9A-Z]{8}$",
+      //pattern: "^(?=.*[0-9]+.*)(?=.*[A-Z]+.*)[0-9A-Z]{8}$",
       required: true,
     },
     {
@@ -88,14 +89,15 @@ function Signin() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(
+      dispatch(
       signInUser({
         name: values.fullname,
+        city: values.city,
         email: values.email,
         password: values.password,
       })
     );
-    navigate("/mi_perfil");
+    navigate("/login");
   };
   return (
     <div className="signin">
