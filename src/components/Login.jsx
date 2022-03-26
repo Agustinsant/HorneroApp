@@ -21,7 +21,6 @@ function Login() {
 
   useEffect(() => {
     const checkFieldsAreNotEmpty = Object.values(values).every((x) => x !== "");
-    console.log(checkFieldsAreNotEmpty);
     checkFieldsAreNotEmpty ? setBtnDisabled(false) : setBtnDisabled(true);
   }, [values]);
 
@@ -57,6 +56,7 @@ function Login() {
         password: values.password,
       })
     );
+    navigate('/mi_perfil')
   };
 
   return (

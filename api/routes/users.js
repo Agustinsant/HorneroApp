@@ -8,12 +8,11 @@ userRouter.post('/register', Register) //Registro de usuario
 
 userRouter.post('/login', Login) //logueo de usuario
 
-//userRouter.get("/logout", Logout) //deslogueo de usuario
-userRouter.get('/verify', verifyToken, Me)
+userRouter.get('/me', verifyToken, Me)
 
-userRouter.get('/allUsers',verifyToken, GetAllUsers) // traer todos los usuarios
+userRouter.get('/allUsers', GetAllUsers) // traer todos los usuarios
 
-userRouter.delete('/deleteUser/:id',verifyToken, DeleteUser) // elimina un usuario
+userRouter.delete('/deleteUser/:id', DeleteUser) // elimina un usuario
 
 module.exports = userRouter
 

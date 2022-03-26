@@ -20,7 +20,7 @@ module.exports.Login = async (req, res, next) => {
     const { email, password } = req.body
     try {
         //FIND USER
-        const user = await UserModel.findOne({ email: email });
+        const user = await UserModel.findOne({ email });
         if (!user) return res.status(400).send({ error: 'Usuario no encontrado' });
         
         //MATCH PASSWORD
@@ -29,7 +29,7 @@ module.exports.Login = async (req, res, next) => {
        
         //CREATE TOKEN 
         const token = jwt.sign({
-            id: user._id,
+            _id: user._id,
             name: user.name,
             email: user.email,
             city: user.city,

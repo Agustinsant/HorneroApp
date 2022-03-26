@@ -1,7 +1,16 @@
 import {Navbar, Container, NavDropdown, Nav} from "react-bootstrap";
 import logo from '../resources/img/logo.svg'
+import { useSelector, useDispatch } from 'react-redux'
+import {logOut} from '../store/user'
 
 const NavbarComponent = () => {
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
+
+  const logoutUser = () => {
+    dispatch(logOut())
+  }
+
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -10,7 +19,8 @@ const NavbarComponent = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/mi_perfil">Mi Perfil</Nav.Link>
-            <Nav.Link href="/login">Login</Nav.Link>
+            {user.isLogged ? <Nav.Link onClick={()=> logoutUser()}  >Logout</Nav.Link> : <Nav.Link href="/login">Login</Nav.Link> }
+            
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
