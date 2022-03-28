@@ -10,13 +10,12 @@ function generateShapes() {
     isDragging: false,
     building: "Mar del Plata",
     floor: 1,
-    calendar: [{}],
   }));
 }
 
 const INITIAL_STATE = generateShapes();
 
-function Floors() {
+function FloorsTest() {
   const [stars, setStars] = useState(INITIAL_STATE);
 
   const handleDragStart = (e) => {
@@ -76,4 +75,4 @@ function Floors() {
   );
 }
 
-export default Floors;
+export default FloorsTest;
