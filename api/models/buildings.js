@@ -1,6 +1,20 @@
 const {Schema, model}= require("mongoose");
 
+const EventItem = new Schema({
 
+    start: {
+        type: String
+    },
+    end: {
+        type: String
+    },
+    userId: {
+        type: String
+    }
+
+})
+
+const EventModel = model("Event", EventItem)
 
 const DeskItem = new Schema({
 
@@ -14,13 +28,15 @@ const DeskItem = new Schema({
         type: Number
     },
     imgDesk: {
-        type : String
+        type: String
+    },
+    calendarEvent: {
+        type: [EventItem] 
     }
-
 
 })
 
-const DeskModel = model( "Desk", DeskItem ) 
+const DeskModel = model( "Desk", DeskItem )
 
 
 
@@ -62,4 +78,4 @@ const BuildingSchema = new Schema({
 const BuildingModel = model( "Building", BuildingSchema );
 
 
-module.exports = { BuildingModel, DeskModel, FloorModel };
+module.exports = { BuildingModel, DeskModel, FloorModel, EventModel };
