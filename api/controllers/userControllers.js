@@ -49,11 +49,36 @@ module.exports.Login = async (req, res, next) => {
     }
 }
 
+module.exports.GetUser = async (req, res, next) => {
+    const {id} = req.params
+    try {
+        const user = await UserModel.findById(id)
+        return res.status(200).send(user)
+    }
+    catch (error) {
+        next(error)
+    }
+}
+
 module.exports.GetAllUsers = async (req, res, next) => {
 
     try {
         const users = await UserModel.find({})
         return res.status(200).send(users)
+    }
+    catch (error) {
+        next(error)
+    }
+}
+
+module.exports.UpdateUser = async (req, res, next) => {
+    const {id} = req.params
+    const options = {
+        returnDocument: "after"
+    }
+    try {
+        const user = await UserModel.findByIdAndUpdate(id, req.body, options)
+        return res.status(200).send(user)
     }
     catch (error) {
         next(error)
