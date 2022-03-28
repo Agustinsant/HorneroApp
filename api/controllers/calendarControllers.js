@@ -1,0 +1,77 @@
+const { CalendarModel, DeskModel } = require ('../models/buildings')
+
+module.exports.AddEventCalendar = async (req, res, next) => {
+
+    const { idDesk } = req.params
+    const { start, end, userId} = req.body
+
+    const option ={
+        returnDocument : "after"
+    }
+
+    try {
+        const newEventCalendar = await CalendarModel({ start, end, userId}).save()
+        const desk = await DeskModel.findById(idDesk) 
+
+        desk.calendarEvent.push(newEventCalendar)
+
+        const updateDesk = await DeskModel.findByIdAndUpdate(idDesk, desk, option)
+        return res.status(201).send(updateDesk)
+    }
+    catch (error) {
+        next (error)
+    }
+
+}
+
+module.exports.getEventCalendarById = async (req, res, next) => { 
+    const { id } = req.params
+
+    try {
+        const eventCalendar = await CalendarModel.findById(id)
+        return res.status(200).send(eventCalendar)
+    }
+    catch (error){
+        next (error)
+    }
+}
+
+module.exports.getAllEventCalendar = async (req, res, next) => { 
+
+    try {
+        const eventCalendar = await CalendarModel.find({})
+        return res.status(200).send(eventCalendar)
+    }
+    catch (error){
+        next (error)
+    }
+}
+
+module.exports.updateEventCalendarById = async (req, res, next) => { 
+    const { id } = req.params
+    
+    const option ={
+        returnDocument : "after"
+    }
+
+    try {
+        const updateEventCalendar = await CalendarModel.findByIdAndUpdate(id, req.body, option)
+        return res.status(202).send(updateEventCalendar)
+    }
+    catch (error){
+        next (error)
+    }
+}
+
+
+module.exports.deleteEventCalendarById = async (req, res, next) => { 
+    const { id } = req.params
+
+    try {
+        const deleteEventCalendar = await CalendarModel.findByIdAndRemove(id)
+        return res.status(200).send(deleteEventCalendar)
+    }
+    catch (error){
+        next (error)
+    }
+}
