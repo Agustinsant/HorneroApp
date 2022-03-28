@@ -14,7 +14,7 @@ const EventItem = new Schema({
 
 })
 
-const EventModel = model("Event", EventItem)
+const CalendarModel = model("Calendar", EventItem)
 
 const DeskItem = new Schema({
 
@@ -78,4 +78,4 @@ const BuildingSchema = new Schema({
 const BuildingModel = model( "Building", BuildingSchema );
 
 
-module.exports = { BuildingModel, DeskModel, FloorModel, EventModel };
+module.exports = { BuildingModel, DeskModel, FloorModel, CalendarModel };
