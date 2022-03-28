@@ -8,12 +8,12 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Signin from "./components/Signin";
 import MyProfile from "./components/MyProfile";
-import Floors from "./components/Floors";
+import Selector from "./components/Selector";
 
 function App() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     if (token) dispatch(persistUser(token));
@@ -23,11 +23,14 @@ function App() {
     <div>
       <NavbarComponent />
       <Routes>
-        <Route path="/" element={user.isLogged ? <h2>Pantalla inicio</h2> : <Login />} />
+        <Route
+          path="/"
+          element={user.isLogged ? <h2>Pantalla inicio</h2> : <Login />}
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/mi_perfil" element={<MyProfile />} />
-        <Route path="building/floor" element={<Floors />} />
+        <Route path="explore" element={user.isLogged ? "401" : <Selector />} />
       </Routes>
       <Footer />
     </div>
