@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { persistUser } from "./store/user";
+import { getBuildings } from "./store/building";
 
 import NavbarComponent from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -26,8 +27,12 @@ const App = () => {
   const [modalState, setModalState] = useState(false);
 
   useEffect(() => {
-    if (token) return dispatch(persistUser(token));
-    navigate("/login");
+
+    if (token) {
+      dispatch(persistUser(token));
+      dispatch(getBuildings());
+    }
+ navigate("/login");
   }, [token]);
 
   return (
@@ -40,16 +45,14 @@ const App = () => {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
+
+        <Route path="explore" element={<Selector />} />
         <Route
           path="/mi_perfil"
           element={
             <MyProfile modalState={modalState} setModalState={setModalState} />
           }
         />
-        <Route path="building/floor" element={<Floors />} />
-
-        <Route path="explore" element={user.isLogged ? "401" : <Selector />} />
-        <Route path="/calendar" element={<Calendar />} />
       </Routes>
       <Footer />
       <Modal modalState={modalState} setModalState={setModalState} />
