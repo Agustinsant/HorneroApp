@@ -10,6 +10,15 @@ const EventItem = new Schema({
     },
     userId: {
         type: String
+    },
+    buildingId: {
+        type: String
+    },
+    floorId: {
+        type: String
+    },
+    deskId: {
+        type: String
     }
 
 })
@@ -32,6 +41,12 @@ const DeskItem = new Schema({
     },
     calendarEvent: {
         type: [EventItem] 
+    },
+    buildingId: {
+        type: String
+    },
+    floorId: {
+        type: String
     }
 
 })
@@ -49,8 +64,12 @@ const FloorItem = new Schema({
        type:[DeskItem]
    },
    imgFloor: {
-       type : String
+       type: String
+   },
+   buildingId: {
+       type: String
    }
+   
   });
 
   const FloorModel = model( "Floor", FloorItem )
