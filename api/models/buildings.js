@@ -1,7 +1,9 @@
 const {Schema, model}= require("mongoose");
 
 const EventItem = new Schema({
-
+    title: {
+        type: String
+    },
     start: {
         type: String
     },

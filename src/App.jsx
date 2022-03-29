@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import Signin from "./components/Signin";
 import MyProfile from "./components/MyProfile";
 import Selector from "./components/Selector";
+import Calendar from "./components/Calendar";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -31,6 +32,7 @@ function App() {
         <Route path="/signin" element={<Signin />} />
         <Route path="/mi_perfil" element={<MyProfile />} />
         <Route path="explore" element={user.isLogged ? "401" : <Selector />} />
+        <Route path="/calendar" element={<Calendar/>}/>
       </Routes>
       <Footer />
     </div>
