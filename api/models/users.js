@@ -29,6 +29,7 @@ const UserSchema = new Schema({
     },
     img: {
         type: String,
+        default: 'nophoto.jpg'
     }
 })
 //HASH PASSWORD
