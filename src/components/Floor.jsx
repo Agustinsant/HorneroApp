@@ -1,10 +1,10 @@
-import { Stage, Layer, Rect, Text } from "react-konva";
+import { Stage, Layer, Rect } from "react-konva";
 
 function Floor({ desks }) {
   console.log(desks);
 
   const onClick = (e) => {
-    console.log(e.target.attrs.id);
+    console.log(e.target.attrs);
   };
 
   return (
@@ -13,6 +13,7 @@ function Floor({ desks }) {
         <Layer>
           {desks.map((desk) => (
             <Rect
+              calendar={desk.calendar}
               key={desk._id}
               id={desk._id}
               x={desk.x}
@@ -22,6 +23,7 @@ function Floor({ desks }) {
               fill="#39B54A"
               rotation={desk.rotation}
               onClick={onClick}
+              onTap={onClick}
             />
           ))}
         </Layer>
