@@ -46,7 +46,9 @@ const MyProfile = ({ modalState, setModalState }) => {
           <FaUserEdit className="editPhotoIcon" />
         </button>
         <div className="profile_photo">
-          <img src={imgs(`./${user.img}`) || noPhoto} />
+          <img src={ imgs(`./${user.img}`) || noPhoto} />
+          {//imgs(`./${user.img}`) ||
+          }
         </div>
       </div>
 
