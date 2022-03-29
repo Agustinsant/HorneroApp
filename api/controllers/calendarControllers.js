@@ -11,10 +11,9 @@ module.exports.AddEventCalendar = async (req, res, next) => {
 
     try {
 
-        //const newEventCalendar = await CalendarModel({ title, start, end, userId}).save()
 
         const desk = await DeskModel.findById(idDesk) 
-        const newEventCalendar = await CalendarModel({ start, end, userId, buildingId: desk.buildingId, floorId: desk.floorId, deskId: desk._id}).save()
+        const newEventCalendar = await CalendarModel({ title, start, end, userId, buildingId: desk.buildingId, floorId: desk.floorId, deskId: desk._id}).save()
 
         desk.calendarEvent.push(newEventCalendar)
 

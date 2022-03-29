@@ -2,7 +2,7 @@ const { FloorModel, BuildingModel, DeskModel, CalendarModel } = require('../mode
 
 module.exports.addFloor = async (req, res, next) => {
     const { idBuilding } = req.params
-    const { name, imgFloor,  } = req.body
+    const { name, imgFloor  } = req.body
     const options = {
         returnDocument: "after"
     }
