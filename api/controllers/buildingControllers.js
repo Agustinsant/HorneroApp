@@ -1,4 +1,4 @@
-const { BuildingModel } = require('../models/buildings')
+const { BuildingModel, FloorModel, DeskModel, CalendarModel } = require('../models/buildings')
 
 module.exports.AddBuilding = async (req, res, next) => {
 
@@ -63,6 +63,9 @@ module.exports.deleteBuildingById = async (req, res, next) => {
 
     try {
         const deleteBuilding = await BuildingModel.findByIdAndRemove(id)
+        const deleteFloors = await FloorModel.deleteMany({buildingId: id})
+        const deleteDesks = await DeskModel.deleteMany({buildingId: id})
+        const deleteCalendars = await CalendarModel.deleteMany({buildingId: id})
         return res.status(200).send(deleteBuilding)
     }
     catch (error) {
@@ -70,5 +73,3 @@ module.exports.deleteBuildingById = async (req, res, next) => {
     }
 
 }
-
-
