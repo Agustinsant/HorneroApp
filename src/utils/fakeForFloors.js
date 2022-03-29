@@ -14,12 +14,56 @@ export const buildings = [
             x: 50, //debe ser un FLOAT
             y: 50, //debe ser un FLOAT
             rotation: 90, //debe ser un FLOAT
+            calendar: [
+              {
+                start: "28-03-2022T10:00",
+                end: "28-03-2022T15:30",
+                userId: "1",
+              },
+              {
+                start: "30-03-2022T10:00",
+                end: "30-03-2022T15:30",
+                userId: "1",
+              },
+              {
+                start: "28-03-2022T10:00",
+                end: "28-03-2022T15:30",
+                userId: "2",
+              },
+              {
+                start: "30-03-2022T10:00",
+                end: "30-03-2022T15:30",
+                userId: "2",
+              },
+            ],
           },
           {
             _id: "2",
             x: 50, //debe ser un FLOAT
             y: 90, //debe ser un FLOAT
             rotation: 90, //debe ser un FLOAT
+            calendar: [
+              {
+                start: "28-03-2022T10:00",
+                end: "28-03-2022T15:30",
+                userId: "1",
+              },
+              {
+                start: "30-03-2022T10:00",
+                end: "30-03-2022T15:30",
+                userId: "1",
+              },
+              {
+                start: "28-03-2022T10:00",
+                end: "28-03-2022T15:30",
+                userId: "2",
+              },
+              {
+                start: "30-03-2022T10:00",
+                end: "30-03-2022T15:30",
+                userId: "2",
+              },
+            ],
           },
           {
             _id: "3",
@@ -159,6 +203,32 @@ export const buildings = [
             x: 50.05, //debe ser un FLOAT
             y: 50.05, //debe ser un FLOAT
             rotation: 0, //debe ser un FLOAT
+            calendar: [
+              {
+                start: "28-03-2022T10:00",
+                end: "28-03-2022T15:30",
+                userId: "1",
+                deskId: "1",
+              },
+              {
+                start: "30-03-2022T10:00",
+                end: "30-03-2022T15:30",
+                userId: "1",
+                deskId: "3",
+              },
+              {
+                start: "28-03-2022T10:00",
+                end: "28-03-2022T15:30",
+                userId: "2",
+                deskId: "2",
+              },
+              {
+                start: "30-03-2022T10:00",
+                end: "30-03-2022T15:30",
+                userId: "2",
+                deskId: "1",
+              },
+            ],
           },
           {
             x: 10.155, //debe ser un FLOAT
