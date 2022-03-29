@@ -1,17 +1,17 @@
-const { FloorModel, DeskModel } = require('../models/buildings')
+const { FloorModel, DeskModel, CalendarModel } = require('../models/buildings')
 
 module.exports.addDesk = async (req, res, next) => {
 
     const { idFloor } = req.params
-    const { positionX, positionY, rotation, imgDesk } = req.body
+    const { positionX, positionY, rotation } = req.body
 
     const option ={
         returnDocument : "after"
     }
 
     try {
-        const newDesk = await DeskModel({ positionX, positionY, rotation, imgDesk }).save()
         const floor = await FloorModel.findById(idFloor) 
+        const newDesk = await DeskModel({ positionX, positionY, rotation,  floorId: floor._id, buildingId: floor.buildingId }).save()
 
         floor.desks.push(newDesk)
 
@@ -69,6 +69,7 @@ module.exports.deleteDeskById = async (req, res, next) => {
 
     try {
         const deleteDesk = await DeskModel.findByIdAndRemove(id)
+        const deleteCalendars = await CalendarModel.deleteMany({deskId: id})
         return res.status(200).send(deleteDesk)
     }
     catch (error){
