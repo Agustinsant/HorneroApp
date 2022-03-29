@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
-import { Route, Routes } from "react-router";
+import React, { useEffect, useState } from "react";
+import { Route, Routes, useNavigate, } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { persistUser } from "./store/user";
+
 
 import NavbarComponent from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -9,27 +10,35 @@ import Login from "./components/Login";
 import Signin from "./components/Signin";
 import MyProfile from "./components/MyProfile";
 import Floors from "./components/Floors";
+import Modal from "./components/Modal";
 
-function App() {
-  const user = useSelector((state) => state.user);
+const App =  () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
+  const user =  useSelector(state => state.user.data)
+  const isLogged =  useSelector(state => state.user.isLogged)
   const token = localStorage.getItem('token')
+  
+  const [modalState, setModalState] = useState(false)
 
   useEffect(() => {
-    if (token) dispatch(persistUser(token));
-  }, [token]);
-
+    if(token)return dispatch(persistUser(token)) 
+    navigate('/login')  
+  },[token]);
+  
+  
   return (
     <div>
       <NavbarComponent />
       <Routes>
-        <Route path="/" element={user.isLogged ? <h2>Pantalla inicio</h2> : <Login />} />
+        <Route path="/" element={isLogged ? <h2>Hola {user.name}</h2> : <Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
-        <Route path="/mi_perfil" element={<MyProfile />} />
+        <Route path="/mi_perfil" element={<MyProfile modalState={modalState} setModalState={setModalState} />} />
         <Route path="building/floor" element={<Floors />} />
       </Routes>
       <Footer />
+      <Modal modalState={modalState} setModalState={setModalState} />
     </div>
   );
 }
