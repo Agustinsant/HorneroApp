@@ -10,7 +10,7 @@ import Login from "./components/Login";
 import Signin from "./components/Signin";
 import MyProfile from "./components/MyProfile";
 
-import Floors from "./components/Floors";
+import Floors from "./components/Floor";
 import Modal from "./components/Modal";
 
 import Selector from "./components/Selector";

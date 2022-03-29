@@ -2,10 +2,10 @@ const { BuildingModel, FloorModel, DeskModel, CalendarModel } = require('../mode
 
 module.exports.AddBuilding = async (req, res, next) => {
 
-    const { name, address, city, imgBuilding } = req.body
+    const { name, address, city } = req.body
 
     try {
-        const newBuilding = await BuildingModel({ name, address, city, imgBuilding }).save()
+        const newBuilding = await BuildingModel({ name, address, city }).save()
         return res.status(201).send(newBuilding)
     }
     catch (error) {

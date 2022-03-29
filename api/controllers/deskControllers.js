@@ -3,7 +3,7 @@ const { FloorModel, DeskModel, CalendarModel } = require('../models/buildings')
 module.exports.addDesk = async (req, res, next) => {
 
     const { idFloor } = req.params
-    const { positionX, positionY, rotation, imgDesk } = req.body
+    const { positionX, positionY, rotation } = req.body
 
     const option ={
         returnDocument : "after"
@@ -11,7 +11,7 @@ module.exports.addDesk = async (req, res, next) => {
 
     try {
         const floor = await FloorModel.findById(idFloor) 
-        const newDesk = await DeskModel({ positionX, positionY, rotation, imgDesk,  floorId: floor._id, buildingId: floor.buildingId }).save()
+        const newDesk = await DeskModel({ positionX, positionY, rotation,  floorId: floor._id, buildingId: floor.buildingId }).save()
 
         floor.desks.push(newDesk)
 
