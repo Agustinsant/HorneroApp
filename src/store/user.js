@@ -33,6 +33,13 @@ export const logOut = createAsyncThunk(
   usersServices.logOutService
 );
 
+export const editUser = createAsyncThunk(
+  "LOGOUT",
+  usersServices.editUserService
+);
+
+
+
 const userSlice = createSlice({
   name: "user",
   initialState: userInitialState,
@@ -42,6 +49,7 @@ const userSlice = createSlice({
     },
     [userLogin.fulfilled]: (state, action) => {
       state.token = action.payload;
+      state.isLogged = true
       state.loading = false;
     },
     [userLogin.rejected]: (state, action) => {
@@ -70,8 +78,8 @@ const userSlice = createSlice({
       state.loading = true;
     },
     [persistUser.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.isLogged = true;
+      state.data = action.payload
+      state.isLogged = true
       state.loading = false;
     },
     [persistUser.rejected]: (state, action) => {

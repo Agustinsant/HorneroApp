@@ -12,7 +12,7 @@ function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [btnDisabled, setBtnDisabled] = useState(true);
+  const [btnDisabled, setBtnDisabled] = useState(false);
 
   const [values, setValues] = useState({
     email: "",
@@ -56,7 +56,7 @@ function Login() {
         password: values.password,
       })
     );
-    navigate('/mi_perfil')
+    navigate('/')
   };
 
   return (
