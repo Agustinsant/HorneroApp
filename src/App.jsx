@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Route, Routes } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { persistUser } from "./store/user";
+import { getBuildings } from "./store/building";
 
 import NavbarComponent from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -17,7 +18,10 @@ function App() {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    if (token) dispatch(persistUser(token));
+    if (token) {
+      dispatch(persistUser(token));
+      dispatch(getBuildings());
+    }
   }, [token]);
 
   return (
@@ -31,8 +35,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/mi_perfil" element={<MyProfile />} />
-        <Route path="explore" element={user.isLogged ? "401" : <Selector />} />
-        <Route path="/calendar" element={<Calendar/>}/>
+        <Route path="explore" element={<Selector />} />
+        <Route path="/calendar" element={<Calendar />} />
       </Routes>
       <Footer />
     </div>
