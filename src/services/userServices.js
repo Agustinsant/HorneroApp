@@ -3,6 +3,7 @@ import axios from "axios";
 export const userLoginService = async ({email, password}) => {
   const user = await axios.post("http://localhost:3001/api/user/login", {email, password});
   localStorage.setItem('token', user.data.data.token )
+ 
   
   return user.data.data.token;
 };
@@ -31,9 +32,16 @@ export const persistUserSerice = async (token) => {
     headers: {'auth-token' : token},
     url: "http://localhost:3001/api/user/me"})
 
+    localStorage.setItem('user', JSON.stringify(user.data))
+
   return user.data
 }
 
 export const logOutService = async () => {
   localStorage.removeItem('token')
+  localStorage.removeItem('user')
+}
+
+export const editUserService = async ({id, name, city, img}) => {
+  const user = await axios.post(`http://localhost:3001/api/user/updateUser/${id}`, )
 }

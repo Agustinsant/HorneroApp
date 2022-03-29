@@ -1,42 +1,43 @@
-import {Navbar, Container, NavDropdown, Nav} from "react-bootstrap";
-import logo from '../resources/img/logo.svg'
-import { useSelector, useDispatch } from 'react-redux'
-import {logOut} from '../store/user'
+import { Navbar, Container, NavDropdown, Nav } from "react-bootstrap";
+import logo from "../resources/img/logo.svg";
+import { useSelector, useDispatch } from "react-redux";
+import { logOut, persistUser } from "../store/user";
+import { useNavigate } from "react-router";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const NavbarComponent = () => {
-  const dispatch = useDispatch()
-  const user = useSelector(state => state.user)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isLogged = useSelector((state) => state.user.isLogged);
+  const user = useSelector((state) => state.user.data);
+  const token = localStorage.getItem("token");
 
-  const logoutUser = () => {
-    dispatch(logOut())
-  }
+  const logoutUser = (e) => {
+    e.preventDefault();
+    dispatch(logOut());
+    navigate("/");
+  };
 
   return (
-    <Navbar bg="light" expand="lg">
-      <Container>
-        <Navbar.Brand href="/"><img src={logo} width='160px' /></Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="/mi_perfil">Mi Perfil</Nav.Link>
-            {user.isLogged ? <Nav.Link onClick={()=> logoutUser()}  >Logout</Nav.Link> : <Nav.Link href="/login">Login</Nav.Link> }
-            
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <nav>
+      <div className="navContainer">
+        <div className="navLogo">
+          <Link className="linksNav" to="/">
+            <img src={logo} width="160px" />
+          </Link>
+        </div>
+        <div className="navMenu">
+          {isLogged ? <Link className="linksNav" to="mi_perfil">Mi Perfil</Link> : <></>}
+          {isLogged ? (
+            <button className="logOutBtn" onClick={logoutUser}>Logout</button>
+          ) : (
+            <Link className="linksNav" to="login">Login</Link>
+          )}
+        </div>
+      </div>
+    </nav>
   );
 };
 
-export default NavbarComponent
+export default NavbarComponent;

@@ -3,13 +3,16 @@ const { CalendarModel, DeskModel } = require ('../models/buildings')
 module.exports.AddEventCalendar = async (req, res, next) => {
 
     const { idDesk } = req.params
-    const { start, end, userId} = req.body
+    const { start, end, userId, title} = req.body
 
     const option ={
         returnDocument : "after"
     }
 
     try {
+
+        const newEventCalendar = await CalendarModel({ title, start, end, userId}).save()
+
         const desk = await DeskModel.findById(idDesk) 
         const newEventCalendar = await CalendarModel({ start, end, userId, buildingId: desk.buildingId, floorId: desk.floorId, deskId: desk._id}).save()
 
