@@ -327,3 +327,26 @@ hr {
   width: 50vh;
   height: 50vh;
 }
+
+.selector__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.selector__inputs {
+  padding: 2em;
+}
+.selector__inputs select {
+  margin: 1em;
+  display: block;
+  align-self: center;
+  border: none;
+  background-color: #fff;
+  border-bottom: 2px solid #bfd732;
+}
+
+.floor_container {
+  width: 320px;
+  height: 320px;
+  border: 5px solid #666666;
+}
