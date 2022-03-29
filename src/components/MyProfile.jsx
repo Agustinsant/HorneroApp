@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaAngleRight, FaUserEdit } from "react-icons/fa";
-import noPhoto from "../resources/img/noPhoto.webp";
-import useInput from "../hooks/useInput";
 import { persistUser } from "../store/user";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
@@ -46,7 +44,7 @@ const MyProfile = ({ modalState, setModalState }) => {
           <FaUserEdit className="editPhotoIcon" />
         </button>
         <div className="profile_photo">
-          <img src={imgs(`./${user.img}`) || noPhoto} />
+          <img src={imgs(`./${user.img}`)} />
         </div>
       </div>
 
