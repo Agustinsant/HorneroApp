@@ -15,7 +15,6 @@ import Modal from "./components/Modal";
 
 import Selector from "./components/Selector";
 
-
 const App = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -27,27 +26,22 @@ const App = () => {
   const [modalState, setModalState] = useState(false);
 
   useEffect(() => {
-
     if (token) {
       dispatch(persistUser(token));
       dispatch(getBuildings());
-
-    } else{navigate("/login");}
-
+    } else {
+      navigate("/login");
+    }
   }, [token]);
 
   return (
     <div>
       <NavbarComponent />
       <Routes>
-        <Route
-          path="/"
-          element={isLogged ? <h2>Hola {user.name}</h2> : <Login />}
-        />
+        <Route path="/" element={isLogged ? <Selector /> : <Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
 
-        <Route path="explore" element={<Selector />} />
         <Route
           path="/mi_perfil"
           element={
