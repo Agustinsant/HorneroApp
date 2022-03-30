@@ -53,7 +53,7 @@ const MyProfile = ({ modalState, setModalState }) => {
         </div>
         <div>
           <h4> Mis amigos</h4>
-          <Link className="link_arrows" to="/amigos">
+          <Link className="link_arrows" to="/mi_perfil/mis_amigos">
             <FaAngleRight />
           </Link>
         </div>
