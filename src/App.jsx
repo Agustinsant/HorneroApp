@@ -14,6 +14,7 @@ import Floors from "./components/Floor";
 import Modal from "./components/Modal";
 
 import Selector from "./components/Selector";
+import My_friends from "./components/My_friends";
 
 const App = () => {
   const navigate = useNavigate();
@@ -41,13 +42,13 @@ const App = () => {
         <Route path="/" element={isLogged ? <Selector /> : <Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
-
         <Route
           path="/mi_perfil"
           element={
             <MyProfile modalState={modalState} setModalState={setModalState} />
           }
         />
+        <Route path='/mi_perfil/mis_amigos' element={<My_friends />}/>
       </Routes>
       <Footer />
       <Modal modalState={modalState} setModalState={setModalState} />
