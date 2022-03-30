@@ -14,7 +14,7 @@ import Floors from "./components/Floor";
 import Modal from "./components/Modal";
 
 import Selector from "./components/Selector";
-import Calendar from "./components/Calendar";
+
 
 const App = () => {
   const navigate = useNavigate();
@@ -31,8 +31,9 @@ const App = () => {
     if (token) {
       dispatch(persistUser(token));
       dispatch(getBuildings());
+
     } else{navigate("/login");}
- 
+
   }, [token]);
 
   return (
