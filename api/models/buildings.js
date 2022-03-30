@@ -21,6 +21,9 @@ const EventItem = new Schema({
     },
     deskId: {
         type: String
+    },
+    userImg:{
+        type: String
     }
 
 })
