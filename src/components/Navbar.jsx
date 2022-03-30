@@ -3,10 +3,14 @@ import logo from "../resources/img/logo.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { logOut, persistUser } from "../store/user";
 import { useNavigate } from "react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { FaBars } from "react-icons/fa";
+
 const NavbarComponent = () => {
+
+  const [openMenu, setOpenMenu] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLogged = useSelector((state) => state.user.isLogged);
@@ -28,12 +32,28 @@ const NavbarComponent = () => {
           </Link>
         </div>
         <div className="navMenu">
-          {isLogged ? <Link className="linksNav" to="mi_perfil">Mi Perfil</Link> : <></>}
-          {isLogged ? (
-            <button className="logOutBtn" onClick={logoutUser}>Logout</button>
-          ) : (
-            <Link className="linksNav" to="login">Login</Link>
-          )}
+          <button onClick={() => setOpenMenu(!openMenu)} className="dropDownMenu">
+            <FaBars className="dropDownMenuIcon" />
+          </button>
+
+          <div className={ openMenu ? 'dropDownSubMenuOpen' : 'dropDownSubMenuClosed' }>
+            {isLogged ? (
+              <Link className="linksNav" to="mi_perfil">
+                Mi Perfil
+              </Link>
+            ) : (
+              <></>
+            )}
+            {isLogged ? (
+              <button className="logOutBtn" onClick={logoutUser}>
+                Logout
+              </button>
+            ) : (
+              <Link className="linksNav" to="login">
+                Login
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </nav>

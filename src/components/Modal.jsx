@@ -9,6 +9,7 @@ const Modal = ({modalState, setModalState}) => {
   const user = useSelector((state) => state.user.data);
   const token = localStorage.getItem('token')
   const [file, setFile] = useState();
+  
   const send = async (e) => {
     e.preventDefault();
     const data = new FormData();
