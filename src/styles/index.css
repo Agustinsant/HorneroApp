@@ -176,6 +176,7 @@ nav {
   
 }
 
+
 .friendIconsRemove{
   display: flex;
   padding-left: 4px;
@@ -190,6 +191,11 @@ nav {
   background: #ff0000;
   color: white;
   border-radius: 50%;
+
+.dropDownMenu {
+  background: none;
+  border: none;
+
 }
 
 .addRemoveFrienIcon{
@@ -241,6 +247,7 @@ nav {
   align-items: center;
 }
 
+
 .friends_container{
 
   width: 100%;
@@ -266,10 +273,8 @@ margin-bottom: 15px;
 }
 
 
-
-
-
 /* ------ END FRIENDS COMPONENT STYLES ------- */
+
 
 .signin {
   display: flex;
@@ -325,7 +330,7 @@ margin-bottom: 15px;
 }
 
 .form__input {
-  margin-bottom: 17px;
+  margin-bottom: 30px;
 }
 
 .form__input input {
@@ -348,7 +353,6 @@ input:focus {
   display: none;
 }
 .form a {
-  margin-top: 20px;
   font-size: 15px;
   align-self: center;
   text-decoration: none;
@@ -365,6 +369,7 @@ input:invalid[focused="true"] {
 
 input:invalid[focused="true"] ~ span {
   display: block;
+  position: absolute;
 }
 
 .btn {
@@ -511,16 +516,16 @@ hr {
   border: 5px solid #666666;
 }
 
-.image_calendar{
+.image_calendar {
   position: relative;
   margin: 0 auto;
   width: 50px;
   height: 50px;
-  border:  2px solid #fff;
+  border: 2px solid #fff;
   border-radius: 50%;
 }
 
-.userImg_calendar{
+.userImg_calendar {
   width: 100%;
   height: 100%;
   border-radius: 50%;
