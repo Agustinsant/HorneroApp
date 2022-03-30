@@ -50,7 +50,7 @@ nav {
 }
 
 .dropDown {
-  /* position: relative; */
+  position: relative;
   display: block;
 }
 
@@ -270,7 +270,7 @@ nav {
 .friendsSearch button{
 background: none;
 border: none;
-margin-bottom: 15px;
+margin-bottom: 30px;
 }
 
 
