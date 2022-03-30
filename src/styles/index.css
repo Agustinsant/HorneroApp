@@ -15,64 +15,66 @@ code {
     monospace;
 }
 
-nav{
+nav {
   padding: 10px 15px;
 }
 
-.navContainer{
+.navContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.linksNav{
+.linksNav {
+  text-align: right;
   text-decoration: none;
   color: #444444;
 }
 
-.linksNav:hover{
-  color: #bfd732 ;
+.linksNav:hover {
+  color: #bfd732;
 }
 
-.logOutBtn{
+.logOutBtn {
+  text-align: right;
   background: none;
   border: none;
   color: #444444;
 }
 
-.logOutBtn:hover{
+.logOutBtn:hover {
   color: #bfd732;
 }
 
-.overlay{
+.overlay {
   width: 100vw;
   height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.60);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.modalContainer{
-  display:flex;
+.modalContainer {
+  display: flex;
   flex-direction: column;
   width: 300px;
   padding: 20px;
   min-height: 100px;
   background: white;
   border-radius: 5px;
-  box-shadow: 0 7px 30px 0 rgba(0, 0, 0, 0.50);
+  box-shadow: 0 7px 30px 0 rgba(0, 0, 0, 0.5);
 }
 
-.modalContainer form{
+.modalContainer form {
   display: flex;
   flex-direction: column;
 }
 
-.modalContainer input{
+.modalContainer input {
   width: 0.1px;
   height: 0.1px;
   opacity: 0;
@@ -81,31 +83,70 @@ nav{
   z-index: -1;
 }
 
-
-.loadImageBtn{
+.loadImageBtn {
   text-align: center;
   background-color: #bfd732;
   padding: 10px 40px;
   margin-bottom: 20px;
 }
 
-
-.modalSendBtn{
+.modalSendBtn {
   padding: 5px;
   background-color: rgb(209, 209, 209);
   border: none;
   margin-bottom: 5px;
 }
 
-.modalCancelBtn{
+.modalCancelBtn {
   color: white;
   font-weight: 600;
   padding: 5px;
   background-color: rgb(255, 0, 0);
   border: none;
-  
 }
 
+.dropDown {
+  /* position: relative; */
+  display: block;
+}
+
+.dropDownMenu {
+ 
+  background: none;
+  border: none;
+}
+
+.dropDownMenuIcon {
+  color: #444444;
+  margin-top: 10px;
+  font-size: 24px;
+}
+
+.dropDownSubMenuClosed {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 140px;
+  right: 15px;
+  top: 60px;
+  max-height: 0px;
+  overflow: hidden;
+  transition: all 300ms ease;
+}
+
+.dropDownSubMenuOpen {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  position: absolute;
+  z-index: 1;
+  width: 140px;
+  right: 15px;
+  top: 60px;
+  max-height: 150px;
+  overflow: hidden;
+  transition: all 300ms ease;
+}
 
 
 
@@ -250,7 +291,7 @@ input:invalid[focused="true"] ~ span {
   object-fit: cover;
 }
 
-.profilePhotoContainer{
+.profilePhotoContainer {
   position: relative;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -258,7 +299,7 @@ input:invalid[focused="true"] ~ span {
   height: 220px;
 }
 
-.editProfilePhotoBtn{
+.editProfilePhotoBtn {
   display: flex;
   padding-left: 4px;
   align-items: center;
@@ -271,13 +312,11 @@ input:invalid[focused="true"] ~ span {
   height: 50px;
   background: #bfd732;
   border-radius: 50%;
-  
 }
 
-.editPhotoIcon{
+.editPhotoIcon {
   color: white;
   font-size: 24px;
-
 }
 
 .profile_links {

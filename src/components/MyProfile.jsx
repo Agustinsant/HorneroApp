@@ -1,37 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaAngleRight, FaUserEdit } from "react-icons/fa";
-import { persistUser } from "../store/user";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-
-import axios from "axios";
+import noPhoto from '../resources/img/noPhoto.webp'
 
 const imgs = require.context("../storage/upload", true);
 
 const MyProfile = ({ modalState, setModalState }) => {
-  const dispatch = useDispatch();
+  
+  
+  
   const navigate = useNavigate();
-  const [file, setFile] = useState();
-
+  
   const user = useSelector((state) => state.user.data);
-  const token = localStorage.getItem("token");
   const isLogged = useSelector((state) => state.user);
+  const imgProfile = imgs(`./${user.img}`)
 
   useEffect(() => {
     if (!isLogged) navigate("/login");
+   
   }, []);
-
-  const send = async (e) => {
-    e.preventDefault();
-    const data = new FormData();
-    data.append("image", file);
-    const userEdited = await axios.post(
-      `http://localhost:3001/api/user/updateUser/${user._id}`,
-      data
-    );
-    dispatch(persistUser(token));
-  };
 
   return (
     <div className="profile_container">
@@ -44,9 +33,7 @@ const MyProfile = ({ modalState, setModalState }) => {
           <FaUserEdit className="editPhotoIcon" />
         </button>
         <div className="profile_photo">
-
-          <img src={imgs(`./${user.img}`)} />
-
+          <img src={imgProfile || noPhoto} />
         </div>
       </div>
 

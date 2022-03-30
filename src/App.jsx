@@ -31,8 +31,8 @@ const App = () => {
     if (token) {
       dispatch(persistUser(token));
       dispatch(getBuildings());
-    }
- navigate("/login");
+    } else{navigate("/login");}
+ 
   }, [token]);
 
   return (
