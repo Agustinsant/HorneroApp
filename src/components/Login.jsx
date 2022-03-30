@@ -56,7 +56,7 @@ function Login() {
         password: values.password,
       })
     );
-    navigate('/')
+    navigate("/");
   };
 
   return (
@@ -64,6 +64,11 @@ function Login() {
       <form className="form" onSubmit={handleSubmit}>
         <h2 className="signin__title">¡Bienvenido!</h2>
         <h3 className="signin__subtitle">Login</h3>
+        <FormInput
+          {...inputs[0]}
+          value={values[inputs[0].name]}
+          onChange={onChange}
+        />
         <div className="signin__validationCod">
           <Link to="/recover">
             <div className="signin__validationCod--title">
@@ -71,14 +76,12 @@ function Login() {
             </div>
           </Link>
         </div>
-        {inputs.map((input, i) => (
-          <FormInput
-            key={i}
-            {...input}
-            value={values[input.name]}
-            onChange={onChange}
-          />
-        ))}
+        <FormInput
+          {...inputs[1]}
+          value={values[inputs[1].name]}
+          onChange={onChange}
+        />
+
         <FormButton type="submit" isDisabled={btnDisabled}>
           Ingresar <FaAngleRight />
         </FormButton>

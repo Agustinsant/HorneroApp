@@ -111,7 +111,6 @@ nav {
 }
 
 .dropDownMenu {
- 
   background: none;
   border: none;
 }
@@ -147,8 +146,6 @@ nav {
   overflow: hidden;
   transition: all 300ms ease;
 }
-
-
 
 .signin {
   display: flex;
@@ -204,7 +201,7 @@ nav {
 }
 
 .form__input {
-  margin-bottom: 17px;
+  margin-bottom: 30px;
 }
 
 .form__input input {
@@ -227,7 +224,6 @@ input:focus {
   display: none;
 }
 .form a {
-  margin-top: 20px;
   font-size: 15px;
   align-self: center;
   text-decoration: none;
@@ -244,6 +240,7 @@ input:invalid[focused="true"] {
 
 input:invalid[focused="true"] ~ span {
   display: block;
+  position: absolute;
 }
 
 .btn {
@@ -390,16 +387,16 @@ hr {
   border: 5px solid #666666;
 }
 
-.image_calendar{
+.image_calendar {
   position: relative;
   margin: 0 auto;
   width: 50px;
   height: 50px;
-  border:  2px solid #fff;
+  border: 2px solid #fff;
   border-radius: 50%;
 }
 
-.userImg_calendar{
+.userImg_calendar {
   width: 100%;
   height: 100%;
   border-radius: 50%;
