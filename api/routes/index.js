@@ -5,7 +5,7 @@ const building = require('./buildings')
 const floor = require('./floors')
 const desk = require('./desks')
 const calendar = require('./calendar')
-
+const search = require('./search')
 
 router.use("/user", user)
 
@@ -16,5 +16,7 @@ router.use("/floor", floor)
 router.use("/desk", desk)
 
 router.use("/calendar", calendar)
+
+router.use("/search", search)
 
 module.exports = router

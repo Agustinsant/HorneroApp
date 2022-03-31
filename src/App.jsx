@@ -10,7 +10,7 @@ import Login from "./components/Login";
 import Signin from "./components/Signin";
 import MyProfile from "./components/MyProfile";
 
-import Floors from "./components/Floor";
+import Welcome from "./components/Welcome";
 import Modal from "./components/Modal";
 
 import Selector from "./components/Selector";
@@ -40,7 +40,7 @@ const App = () => {
     <div>
       <NavbarComponent />
       <Routes>
-        <Route path="/" element={isLogged ? <Selector /> : <Login />} />
+        <Route path="/" element={isLogged ? <Welcome /> : <Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
         <Route
@@ -51,6 +51,8 @@ const App = () => {
         />
         <Route path='/mi_perfil/mis_amigos' element={<My_friends />}/>
         <Route path='/mi_perfil/mis_datos' element={<My_info />}/>
+        <Route path="/explore" element={<Selector />} />
+
       </Routes>
       <Footer />
       <Modal modalState={modalState} setModalState={setModalState} />

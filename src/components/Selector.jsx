@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 import Floor from "./Floor";
+import Welcome from "./Welcome";
 import { getFloor } from "../services/buildingServices";
 
 function Selector() {
@@ -31,36 +32,43 @@ function Selector() {
       {buildings[0] && (
         <div className="selector__container">
           <div className="selector__inputs">
-            <select
-              name="building"
-              id="buildings"
-              onChange={handleSelectBuilding}
-            >
-              <option value="" disabled selected hidden>
-                Select building
-              </option>
-              {buildings.map((building, i) => (
-                <option key={i} value={building.city}>
-                  {building.city}
+            <div className="selector__box">
+              <select
+                name="building"
+                id="buildings"
+                onChange={handleSelectBuilding}
+              >
+                <option value="" disabled selected hidden>
+                  Select building
                 </option>
-              ))}
-            </select>
-            {floors[0] ? (
-              <>
-                <select name="floors" id="floors" onChange={handleSelectFloor}>
-                  <option value="" disabled selected hidden>
-                    Select floor
+                {buildings.map((building, i) => (
+                  <option key={i} value={building.city}>
+                    {building.city}
                   </option>
-                  {floors.map((f, i) => (
-                    <option key={i} value={f.name}>
-                      {f.name}
+                ))}
+              </select>
+              {floors[0] ? (
+                <>
+                  <select
+                    name="floors"
+                    id="floors"
+                    onChange={handleSelectFloor}
+                  >
+                    <option value="" disabled selected hidden>
+                      Select floor
                     </option>
-                  ))}
-                </select>
-              </>
-            ) : (
-              <></>
-            )}
+                    {floors.map((f, i) => (
+                      <option key={i} value={f.name}>
+                        {f.name}
+                      </option>
+                    ))}
+                  </select>
+                </>
+              ) : (
+                <></>
+              )}
+            </div>
+
             {floor.desks && <Floor floor={floor} />}
           </div>
         </div>
