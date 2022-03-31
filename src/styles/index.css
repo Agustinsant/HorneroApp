@@ -21,6 +21,33 @@ nav {
 
 /* ------ START NAV STYLES ----- */
 
+.cardImg {
+  width: 80%;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.cardImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.navProfilePick {
+  margin-right: 20px;
+  margin-top: 5px;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.navProfilePick img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .navContainer {
   display: flex;
   justify-content: space-between;
@@ -46,6 +73,11 @@ nav {
 
 .logOutBtn:hover {
   color: #bfd732;
+}
+
+.navMenu {
+  display: flex;
+  align-items: center;
 }
 
 .dropDown {
@@ -363,6 +395,7 @@ nav {
 
 .friendsSearch {
   margin-top: 15px;
+
   display: flex;
   align-items: center;
 }
@@ -374,6 +407,73 @@ nav {
 }
 
 /* ------ END FRIENDS COMPONENT STYLES ------- */
+
+
+/* ------ START MIS DATOS COMPONENT STYLES ------- */
+.misDatosContainer {
+  width: 100%;
+  padding: 20px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.misDatosContainer>h6{
+  margin-bottom: 30px;
+}
+
+.misDatosContainer form {
+  margin-top: 20px;
+  width: 350px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editInputsContainer h5 {
+  margin: 0 15px 0 0;
+}
+
+.misDatosBtns {
+  background: none;
+  border: none;
+  margin: 5px;
+  font-size: 20px;
+}
+
+.editInputsContainer input {
+  width: 250px;
+  margin-right: 15px;
+  padding: 5px 10px;
+  border: 1px solid #bfd732;
+}
+
+.hrDatos {
+  width: 350px;
+  margin-top: 5px;
+}
+
+.editInfoIcon{
+  font-size: 26px;
+  color: #bfd732;
+}
+
+.submitInfoIcon{
+  font-size: 30px;
+  color: #bfd732;
+}
+
+.cancelEditIcon{
+  font-size: 22px;
+  color: #ff0000;
+}
+
+
+
+/* ------ END MIS DATOS COMPONENT STYLES ------- */
+
 
 .signin {
   display: flex;

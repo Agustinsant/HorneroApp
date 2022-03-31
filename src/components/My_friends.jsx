@@ -6,6 +6,7 @@ import {FaAngleRight} from 'react-icons/fa'
 
 
 export default function My_friends() {
+  
   const [amigos, setAmigos] = useState([]);
 
   useEffect(async () => {
@@ -17,7 +18,7 @@ export default function My_friends() {
 
   return (
     <div className="friendsCompContainer">
-      <h6>Mi Perfil</h6>
+      <h6>Mis Amigos</h6>
       <div className="friendsSearch">
         <FormInput type="text" placeholder="A quien buscas?" />
         <button> <FaAngleRight className="link_arrows" /></button>
