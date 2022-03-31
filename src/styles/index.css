@@ -19,8 +19,34 @@ nav {
   padding: 10px 15px;
 }
 
-
 /* ------ START NAV STYLES ----- */
+
+.cardImg {
+  width: 80%;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.cardImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.navProfilePick {
+  margin-right: 20px;
+  margin-top: 5px;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.navProfilePick img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 .navContainer {
   display: flex;
@@ -49,13 +75,17 @@ nav {
   color: #bfd732;
 }
 
+.navMenu {
+  display: flex;
+  align-items: center;
+}
+
 .dropDown {
   position: relative;
   display: block;
 }
 
 .dropDownMenu {
- 
   background: none;
   border: none;
 }
@@ -159,7 +189,7 @@ nav {
 
 /* -------- START CARDS STYLES-------- */
 
-.friendIconsAdd{
+.friendIconsAdd {
   display: flex;
   padding-left: 4px;
   align-items: center;
@@ -173,11 +203,9 @@ nav {
   background: #bfd732;
   color: white;
   border-radius: 50%;
-  
 }
 
-
-.friendIconsRemove{
+.friendIconsRemove {
   display: flex;
   padding-left: 4px;
   align-items: center;
@@ -196,61 +224,53 @@ nav {
 .dropDownMenu {
   background: none;
   border: none;
-
 }
 
-.addRemoveFrienIcon{
+.addRemoveFrienIcon {
   font-size: 18px;
-  
 }
 
-.cardContainer{
+.cardContainer {
   width: 120px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.cardPhotoContainer{
+.cardPhotoContainer {
   position: relative;
 }
 
-
-
-
-.cardContainer h5{
+.cardContainer h5 {
   margin-left: -20px;
   padding: 10px;
   font-size: 14px;
 }
 
-.cardImg{
+.cardImg {
   width: 80%;
   overflow: hidden;
   border-radius: 50%;
 }
 
-.cardImg img{
+.cardImg img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-
 }
 
 /* ------ END CARDS STYLES ------- */
 
 /* ------ START FRIENDS COMPONENT STYLES ------- */
 
-.friendsCompContainer{
+.friendsCompContainer {
   margin-top: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-
-.friends_container{
-
+.friends_container {
   width: 100%;
   padding: 20px;
   margin: 0 auto;
@@ -259,22 +279,84 @@ nav {
   flex-wrap: wrap;
 }
 
-
-
-.friendsSearch{
+.friendsSearch {
   margin-top: 15px;
   display: flex;
   align-items: center;
 }
 
-.friendsSearch button{
-background: none;
-border: none;
-margin-bottom: 30px;
+.friendsSearch button {
+  background: none;
+  border: none;
+  margin-bottom: 30px;
+}
+
+/* ------ END FRIENDS COMPONENT STYLES ------- */
+
+
+/* ------ START MIS DATOS COMPONENT STYLES ------- */
+.misDatosContainer {
+  width: 100%;
+  padding: 20px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.misDatosContainer>h6{
+  margin-bottom: 30px;
+}
+
+.misDatosContainer form {
+  margin-top: 20px;
+  width: 350px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editInputsContainer h5 {
+  margin: 0 15px 0 0;
+}
+
+.misDatosBtns {
+  background: none;
+  border: none;
+  margin: 5px;
+  font-size: 20px;
+}
+
+.editInputsContainer input {
+  width: 250px;
+  margin-right: 15px;
+  padding: 5px 10px;
+  border: 1px solid #bfd732;
+}
+
+.hrDatos {
+  width: 350px;
+  margin-top: 5px;
+}
+
+.editInfoIcon{
+  font-size: 26px;
+  color: #bfd732;
+}
+
+.submitInfoIcon{
+  font-size: 30px;
+  color: #bfd732;
+}
+
+.cancelEditIcon{
+  font-size: 22px;
+  color: #ff0000;
 }
 
 
-/* ------ END FRIENDS COMPONENT STYLES ------- */
+
+/* ------ END MIS DATOS COMPONENT STYLES ------- */
 
 
 .signin {
@@ -517,18 +599,13 @@ hr {
   border: 5px solid #666666;
 }
 
-
-
-
-
-
 /* ///////////// CALENDAR  \\\\\\\\\\\\\ */
-.image_calendar{
+.image_calendar {
   position: relative;
   margin: 0 auto;
   width: 35px;
   height: 35px;
-  border:  2px solid #fff;
+  border: 2px solid #fff;
   border-radius: 50%;
 }
 
@@ -538,17 +615,14 @@ hr {
   border-radius: 50%;
 }
 
-
-.calendar_container{
+.calendar_container {
   margin: 20px auto 0px auto;
-
 }
 
-
-.event_calendar{
+.event_calendar {
   font-size: 0.8rem;
 }
-.event_timeText{
+.event_timeText {
   font-size: 0.6rem;
 }
 .fc .fc-toolbar-title {
@@ -556,7 +630,6 @@ hr {
   margin-right: 3px !important;
   font-size: 1rem !important;
 }
-
 
 .fc .fc-button-primary {
   color: #fff;
@@ -570,9 +643,9 @@ hr {
 .fc .fc-button-primary:hover {
   color: #fff;
   color: var(--fc-button-text-color, #fff);
-  background-color: #444444!important;
+  background-color: #444444 !important;
   background-color: var(--fc-button-bg-color, #444444) !important;
-  border-color: #444444!important;
+  border-color: #444444 !important;
   border-color: var(--fc-button-border-color, #444444) !important;
 }
 
@@ -581,7 +654,6 @@ hr {
   overflow: hidden;
   text-align: center;
 }
-
 
 .fc .fc-col-header-cell-cushion {
   display: inline-block;
@@ -597,10 +669,10 @@ hr {
   display: none;
 }
 
-
-.fc-theme-standard td, .fc-theme-standard th {
+.fc-theme-standard td,
+.fc-theme-standard th {
   border-radius: 10px;
-  border: 1px solid  #63E3CF  !important;
+  border: 1px solid #63e3cf !important;
   border: 1px solid var(--fc-border-color, #bfd732) !important;
 }
 .fc .fc-timegrid-axis-frame {
@@ -612,14 +684,10 @@ hr {
   display: none;
 }
 
-.fc-col-header{
+.fc-col-header {
   border-bottom-style: hidden;
 }
 
 .fc .fc-scrollgrid-liquid {
   border-style: none !important;
 }
-
-
-
-
