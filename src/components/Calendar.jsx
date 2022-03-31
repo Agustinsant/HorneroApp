@@ -6,18 +6,21 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { getCalendar } from "../services/calendarServices";
-import listPlugin from "@fullcalendar/list";
+
+
 
 const Calendar = ({ deskId }) => {
   const user = useSelector((state) => state.user);
   const [events, setEvents] = useState([]);
   const imgs = require.context("../storage/upload", true);
+
   let render = 0;
+
 
   useEffect(async () => {
     const deskCalendar = await getCalendar(deskId);
     setEvents(deskCalendar);
-  }, [render]);
+  }, [deskId]);
 
   const handleDateSelect = (selectInfo) => {
     let calendarApi = selectInfo.view.calendar;
@@ -48,6 +51,7 @@ const Calendar = ({ deskId }) => {
     render = 1;
   };
 
+
   const handleEventChange = (eventInfo) => {
     render = 2;
     console.log("event", eventInfo.event.toPlainObject())
@@ -56,7 +60,9 @@ const Calendar = ({ deskId }) => {
   
 
   }
+
   const renderEventContent = (eventInfo) => {
+    console.log("event", eventInfo);
     //eventinfo trae un monton de propiedades para darle estilos
     let checkId = eventInfo.event.extendedProps.userId;
     let userImg = eventInfo.event.extendedProps.userImg
@@ -83,6 +89,7 @@ const Calendar = ({ deskId }) => {
     );
   };
 
+
   const officeHours = () => {
     return {
       daysOfWeek: [1, 2, 3, 4, 5],
@@ -91,11 +98,12 @@ const Calendar = ({ deskId }) => {
     };
   };
 
+
   return (
     <div className="calendar_container" mou>
       <FullCalendar
         height={400}
-        plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin]}
+        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         headerToolbar={{
           right: "next",
           center: "title",
@@ -105,6 +113,7 @@ const Calendar = ({ deskId }) => {
           center: "dayGridMonth timeGridDay",
         }}
         initialView="dayGridMonth"
+
         editable={true}
         selectable={true}
         navLinks={true}
@@ -118,6 +127,7 @@ const Calendar = ({ deskId }) => {
         events={events}
         eventContent={renderEventContent}
         eventChange={handleEventChange} // custom render function
+
 
         /* datesSet={this.handleDates}
             eventClick={this.handleEventClick}
