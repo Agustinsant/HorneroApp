@@ -71,6 +71,16 @@ module.exports.deleteEventCalendarById = async (req, res, next) => {
 
     try {
         const deleteEventCalendar = await CalendarModel.findByIdAndRemove(id)
+
+        const deskByCalendar = await DeskModel.findById(deleteEventCalendar.deskId)
+        
+        const newEvents = deskByCalendar.calendarEvent.filter(event => event._id.toHexString() !== deleteEventCalendar._id.toHexString() )
+        
+        deskByCalendar.calendarEvent = newEvents
+
+        await DeskModel.findByIdAndUpdate(deskByCalendar._id, deskByCalendar)
+
+
         return res.status(200).send(deleteEventCalendar)
     }
     catch (error){
