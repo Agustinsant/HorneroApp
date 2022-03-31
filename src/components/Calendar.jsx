@@ -7,6 +7,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { getCalendar } from "../services/calendarServices";
 
+
 const Calendar = ({ deskId }) => {
   const user = useSelector((state) => state.user);
   const [events, setEvents] = useState([]);
@@ -19,12 +20,11 @@ const Calendar = ({ deskId }) => {
 
   const handleDateSelect = (selectInfo) => {
     let calendarApi = selectInfo.view.calendar;
-    let title = `Reserved by ${user.data.name}`; 
     calendarApi.unselect(); // clear date selection
       calendarApi.addEvent(           // will render immediately. will call handleEventAdd
 
         {
-          title,
+          title: user.data.name,
           start: selectInfo.startStr,
           end: selectInfo.endStr,
           userId: user.data._id,
@@ -51,34 +51,41 @@ const Calendar = ({ deskId }) => {
      let checkId = eventInfo.event.extendedProps.userId
      let userImg = eventInfo.event.extendedProps.userImg ? eventInfo.event.extendedProps.userImg : "nophoto.jpg"
      if(user.data._id === checkId){
-      eventInfo.backgroundColor = "green";
-      eventInfo.borderColor= "yellow";
+      eventInfo.backgroundColor = "#00A99D ";
+      eventInfo.borderColor= "#00A99D";
+     } else {
+      eventInfo.backgroundColor = "#444444";
+      eventInfo.borderColor= "#444444";
+     }  
 
-     }
-     console.log("img",eventInfo.event.extendedProps.userImg)
+   
+    
     return (
-      <>  
-      <div className="image_calendar">
-      {<img className="userImg_calendar"src={imgs(`./${userImg}`)} />}
-      </div>
-        <br/>
-        <b>{eventInfo.timeText}</b><br/>
-        <i>{eventInfo.event.title}</i>
-        
-      </>
+       <div className="event_container">
+        <div className="image_calendar">
+          {<img className="userImg_calendar"src={imgs(`./${userImg}`)} />}
+        </div>
+            <br/>
+            <b className="event_timeText">{eventInfo.timeText}</b><br/>
+            <i className="event_calendar">{eventInfo.event.title}</i>
+        </div>
+     
     )
   }
-
+  
   return (
-    <div className="calendar-container">
+    <div className="calendar_container">
       <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+       expandRows={true}
+       height={400}
+        plugins={[timeGridPlugin, interactionPlugin]}
         headerToolbar={{
-          left: "prev,next today",
+          right: "next today",
           center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay",
+          left: "prev"
         }}
         initialView="timeGridWeek"
+        duration={{"days":"3"}}
         editable={true}
         selectable={true}
         selectMirror={true}

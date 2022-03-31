@@ -390,11 +390,16 @@ hr {
   border: 5px solid #666666;
 }
 
+
+
+
+
+/* ///////////// CALENDAR  \\\\\\\\\\\\\ */
 .image_calendar{
   position: relative;
   margin: 0 auto;
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
   border:  2px solid #fff;
   border-radius: 50%;
 }
@@ -404,3 +409,88 @@ hr {
   height: 100%;
   border-radius: 50%;
 }
+
+.calendar_container{
+  margin: 20px auto 0px auto;
+
+}
+
+
+.event_calendar{
+  font-size: 0.8rem;
+}
+.event_timeText{
+  font-size: 0.6rem;
+}
+.fc .fc-toolbar-title {
+  margin-left: 3px !important;
+  margin-right: 3px !important;
+  font-size: 1rem !important;
+}
+
+
+.fc .fc-button-primary {
+  color: #fff;
+  color: var(--fc-button-text-color, #fff);
+  background-color: #bfd732 !important;
+  background-color: var(--fc-button-bg-color, #bfd732) !important;
+  border-color: #bfd732 !important;
+  border-color: var(--fc-button-border-color, #bfd732) !important;
+}
+
+.fc .fc-button-primary:hover {
+  color: #fff;
+  color: var(--fc-button-text-color, #fff);
+  background-color: #444444!important;
+  background-color: var(--fc-button-bg-color, #444444) !important;
+  border-color: #444444!important;
+  border-color: var(--fc-button-border-color, #444444) !important;
+}
+
+.fc-timegrid-event .fc-event-main {
+  padding: 1px 1px 0;
+  overflow: hidden;
+  text-align: center;
+}
+
+
+.fc .fc-col-header-cell-cushion {
+  display: inline-block;
+  padding: 2px 4px;
+  text-decoration: none;
+  color: black;
+  font-size: 0.8rem !important;
+}
+
+.fc .fc-daygrid-day-frame {
+  height: 20px;
+  background-color: #bfd732;
+  display: none;
+}
+
+
+.fc-theme-standard td, .fc-theme-standard th {
+  border-radius: 10px;
+  border: 1px solid  #63E3CF  !important;
+  border: 1px solid var(--fc-border-color, #bfd732) !important;
+}
+.fc .fc-timegrid-axis-frame {
+  border-style: none !important;
+  display: none !important;
+}
+
+.fc .fc-timegrid-divider {
+  display: none;
+}
+
+.fc-col-header{
+  border-bottom-style: hidden;
+}
+
+.fc .fc-scrollgrid-liquid {
+  border-style: none !important;
+}
+
+
+
+
