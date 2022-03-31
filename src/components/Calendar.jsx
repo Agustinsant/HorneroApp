@@ -12,11 +12,12 @@ const Calendar = ({ deskId }) => {
   const user = useSelector((state) => state.user);
   const [events, setEvents] = useState([]);
   const imgs = require.context("../storage/upload", true);
+  let render = 0;
 
   useEffect(async () => {
     const deskCalendar = await getCalendar(deskId);
     setEvents(deskCalendar);
-  }, []);
+  }, [render]);
 
   const handleDateSelect = (selectInfo) => {
     let calendarApi = selectInfo.view.calendar;
@@ -44,7 +45,17 @@ const Calendar = ({ deskId }) => {
       userId: extendedProps.userId,
       userImg: extendedProps.userImg,
     });
+    render = 1;
   };
+
+  const handleEventChange = (eventInfo) => {
+    render = 2;
+    console.log("event", eventInfo.event.toPlainObject())
+   // const { title, end, start, extendedProps } = addInfo.event.toPlainObject();
+    //axios.update(`http://localhost:3001/api/calendar/update/${}`)
+  
+
+  }
   const renderEventContent = (eventInfo) => {
     //eventinfo trae un monton de propiedades para darle estilos
     let checkId = eventInfo.event.extendedProps.userId;
@@ -105,11 +116,12 @@ const Calendar = ({ deskId }) => {
         select={handleDateSelect}
         eventAdd={handleEventAdd}
         events={events}
-        eventContent={renderEventContent} // custom render function
+        eventContent={renderEventContent}
+        eventChange={handleEventChange} // custom render function
 
         /* datesSet={this.handleDates}
             eventClick={this.handleEventClick}
-            eventChange={this.handleEventChange} // called for drag-n-drop/resize
+            // called for drag-n-drop/resize
             eventRemove={this.handleEventRemove}
         */
       />
