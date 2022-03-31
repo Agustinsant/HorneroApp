@@ -69,7 +69,17 @@ module.exports.deleteDeskById = async (req, res, next) => {
 
     try {
         const deleteDesk = await DeskModel.findByIdAndRemove(id)
-        const deleteCalendars = await CalendarModel.deleteMany({deskId: id})
+
+        const floorByDesk = await FloorModel.findById(deleteDesk.floorId)
+        
+        const newDesks = floorByDesk.desks.filter(desk => desk._id.toHexString() !== deleteDesk._id.toHexString() )
+        
+        floorByDesk.desks = newDesks
+
+        await FloorModel.findByIdAndUpdate(floorByDesk._id, floorByDesk)
+
+        await CalendarModel.deleteMany({deskId: id})
+        
         return res.status(200).send(deleteDesk)
     }
     catch (error){
