@@ -20,6 +20,7 @@ const NavbarComponent = () => {
   const logoutUser = (e) => {
     e.preventDefault();
     dispatch(logOut());
+    setOpenMenu(false)
     navigate("/");
   };
 
@@ -27,7 +28,7 @@ const NavbarComponent = () => {
     <nav>
       <div className="navContainer">
         <div className="navLogo">
-          <Link className="linksNav" to="/">
+          <Link onClick={() => setOpenMenu(false)} className="linksNav" to="/">
             <img src={logo} width="160px" />
           </Link>
         </div>
@@ -38,7 +39,7 @@ const NavbarComponent = () => {
 
           <div className={ openMenu ? 'dropDownSubMenuOpen' : 'dropDownSubMenuClosed' }>
             {isLogged ? (
-              <Link className="linksNav" to="mi_perfil">
+              <Link onClick={() => setOpenMenu(false)} className="linksNav" to="mi_perfil">
                 Mi Perfil
               </Link>
             ) : (
@@ -49,7 +50,7 @@ const NavbarComponent = () => {
                 Logout
               </button>
             ) : (
-              <Link className="linksNav" to="login">
+              <Link onClick={() => setOpenMenu(false)} className="linksNav" to="login">
                 Login
               </Link>
             )}
