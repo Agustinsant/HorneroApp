@@ -592,14 +592,27 @@ hr {
 }
 
 .fc .fc-daygrid-day-frame {
-  height: 20px;
-  background-color: #bfd732;
+ text-decoration: none;
+ align-items: center;
+ text-align: center;
+ display: flex;
+ justify-content: center;
+
+}
+.fc .fc-daygrid-day-number {
+  text-decoration: none;
+  color: black;
+  font-size: 1rem;
+}
+
+
+.fc .fc-daygrid-more-link {
   display: none;
 }
 
 
 .fc-theme-standard td, .fc-theme-standard th {
-  border-radius: 10px;
+  border-radius: 5px;
   border: 1px solid  #63E3CF  !important;
   border: 1px solid var(--fc-border-color, #bfd732) !important;
 }
@@ -621,5 +634,7 @@ hr {
 }
 
 
-
-
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+  background-color: #bfd732;
+  display: none;
+}

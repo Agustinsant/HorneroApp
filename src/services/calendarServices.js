@@ -5,3 +5,4 @@ export const getCalendar = async (deskId) => {
 
   return desk.data.calendarEvent;
 };
+
