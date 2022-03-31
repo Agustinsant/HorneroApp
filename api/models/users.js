@@ -2,6 +2,7 @@ const {Schema, model}= require("mongoose");
 const bcrypt = require("bcrypt");
 
 
+
 const UserSchema = new Schema({
     name: {
         type: String,
@@ -23,9 +24,17 @@ const UserSchema = new Schema({
         type: String,
         //required:true,
     },
-    isAdmin: {
-        type: Boolean,
-        default: false
+    friends:{
+        type: [String]
+    },
+    preferencesBuildings:{
+        type: [String]
+    },
+    preferencesFloors:{
+        type: [String]
+    },
+    preferencesDesks:{
+        type: [String]
     },
     img: {
         type: String,
@@ -49,4 +58,4 @@ UserSchema.pre("save", async function(next){
 const UserModel = model("User", UserSchema);
 
 
-module.exports = {UserModel};
+module.exports = { UserModel };
