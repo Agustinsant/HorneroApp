@@ -31,6 +31,18 @@ module.exports.getEventCalendarById = async (req, res, next) => {
 
     try {
         const eventCalendar = await CalendarModel.findById(id)
+        console.log(eventCalendar.userId)
+        return res.status(200).send(eventCalendar)
+    }
+    catch (error){
+        next (error)
+    }
+}  
+
+module.exports.getAllEventCalendar = async (req, res, next) => { 
+
+    try {
+        const eventCalendar = await CalendarModel.find({})
         return res.status(200).send(eventCalendar)
     }
     catch (error){
@@ -38,11 +50,12 @@ module.exports.getEventCalendarById = async (req, res, next) => {
     }
 }
 
-module.exports.getAllEventCalendar = async (req, res, next) => { 
+module.exports.getAllEventCalendarByUserId = async (req, res, next) => {
+    const { userId } = req.params
 
     try {
-        const eventCalendar = await CalendarModel.find({})
-        return res.status(200).send(eventCalendar)
+        const eventsCalendar = await CalendarModel.find({userId: userId})
+        return res.status(200).send(eventsCalendar)
     }
     catch (error){
         next (error)
