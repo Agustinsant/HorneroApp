@@ -720,9 +720,8 @@ hr {
 /* ///////////// CALENDAR  \\\\\\\\\\\\\ */
 .image_calendar {
   position: relative;
-  margin: 0 auto;
-  width: 35px;
-  height: 35px;
+  width: 45px;
+  height: 45px;
   border: 2px solid #fff;
   border-radius: 50%;
 }
@@ -735,6 +734,7 @@ hr {
 
 .calendar_container {
   margin: 20px auto 0px auto;
+  width: 80% !important;
 }
 
 .event_container{
@@ -746,12 +746,11 @@ hr {
 }
 
 .event_calendar{
-  font-size: 0.75rem;
+  font-size: 0.85rem;
 }
 .event_timeText{
-  font-size: 0.8rem;  
+  font-size: 0.85rem;  
   margin-right: 2px;
-
 }
 
 
@@ -848,9 +847,9 @@ hr {
   display: none;
 }
 
-
-
-
+.desk__calendar{
+  width: 80%;
+}
 
 /* --------- RESERVAS ---------- */
 

@@ -92,6 +92,7 @@ const Calendar = ({ deskId }) => {
     <div className="calendar_container" >
       <FullCalendar
         height={400}
+        width={700}
         longPressDelay={200}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         headerToolbar={{ right: "next", center: "title", left: "prev"}}
