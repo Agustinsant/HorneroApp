@@ -7,8 +7,10 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 module.exports.Register = async (req, res, next) => {
+  const {name,city,email,password} = req.body
+
   try {
-    const user = await UserModel(req.body).save();
+    const user = await UserModel({name : name.replace(/\b\w/g, l => l.toUpperCase()),city,email,password}).save();
     return res.status(201).send(user);
   } catch (error) {
     next(error);
