@@ -722,8 +722,8 @@ hr {
 /* ///////////// CALENDAR  \\\\\\\\\\\\\ */
 .image_calendar {
   position: relative;
-  width: 45px;
-  height: 45px;
+  width: 50px;
+  height: 50px;
   border: 2px solid #fff;
   border-radius: 50%;
 }
@@ -736,7 +736,7 @@ hr {
 
 .calendar_container {
   margin: 20px auto 0px auto;
-  width: 80% !important;
+  width: 70% !important;
 }
 
 .event_container {
@@ -747,14 +747,14 @@ hr {
 }
 
 .event_calendar {
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 .event_timeText {
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   margin-right: 4px;
 }
 .delete_envent {
-  font-size: 0.95rem;
+  font-size: 1.3rem;
 }
 
 .fc .fc-toolbar-title {
@@ -910,3 +910,10 @@ hr {
   justify-content: end;
   text-align: end;
 }
+
+.swal-modal{
+  max-width: 300px;
+  font-size: 1rem;
+  margin-right: 150px;
+}
+
