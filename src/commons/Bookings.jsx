@@ -36,7 +36,7 @@ const Booking = ({userId}) => {
             <hr/>
             <div className="booking_container">
                 <FullCalendar
-                    height={400}
+                    height={340}
                     plugins={[listPlugin]}
                     headerToolbar={{right: "next", center: "title", left: "prev" }}
                     initialView="listMonth"
