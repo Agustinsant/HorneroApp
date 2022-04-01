@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FaUserEdit, FaReply, FaAngleRight } from "react-icons/fa";
 import { editUser } from "../store/user";
+import swal from "sweetalert";
 
 import useInput from "../hooks/useInput";
 
@@ -24,7 +25,13 @@ const My_info = () => {
         name: name.value,
       })
     );
-    setNameEdit(!nameEdit);
+    swal({
+      text: "Nombre modificado con éxito!",
+      icon: "success",
+      timer: 1000,
+      buttons:false
+    }).then(() => setNameEdit(!nameEdit));
+    
   };
   const handleEmailSubmit = (e) => {
     e.preventDefault();
@@ -34,7 +41,12 @@ const My_info = () => {
         email: email.value,
       })
     );
-    setEmailEdit(!emailEdit);
+    swal({
+      text: "Email modificado con éxito!",
+      icon: "success",
+      timer: 1000,
+      buttons:false
+    }).then(() => setEmailEdit(!emailEdit));
   };
   const handleCitySubmit = (e) => {
     e.preventDefault();
@@ -44,7 +56,13 @@ const My_info = () => {
         city: city.value,
       })
     );
-    setCityEdit(!cityEdit);
+    swal({
+      text: "Ciudad modificada con éxito!",
+      icon: "success",
+      timer: 1000,
+      buttons:false
+    }).then(() => setCityEdit(!cityEdit));
+    
   };
 
   return (
@@ -100,7 +118,7 @@ const My_info = () => {
             <input
               {...email}
               type="text"
-              placeholder="Editar nombre y apellido"
+              placeholder="Editar email."
               disabled={!emailEdit}
             />
           ) : (
@@ -144,7 +162,7 @@ const My_info = () => {
             <input
               {...city}
               type="text"
-              placeholder="Editar nombre y apellido"
+              placeholder="Editar ciudad."
               disabled={!cityEdit}
             />
           ) : (
