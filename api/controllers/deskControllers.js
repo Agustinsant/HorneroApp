@@ -55,7 +55,22 @@ module.exports.updateDeskById = async (req, res, next) => {
     }
 
     try {
+        const beforeUpdate = await DeskModel.findById(id)
+
         const updateDesk = await DeskModel.findByIdAndUpdate(id, req.body, option)
+        
+        const floorByDesk = await FloorModel.findById(updateDesk.floorId)
+
+        const positionNewDesk = floorByDesk.desks.indexOf(beforeUpdate)
+
+        const desklessFloor = floorByDesk.desks.filter(desk => desk._id.toHexString() !== updateDesk._id.toHexString()  )
+        
+        desklessFloor.splice(positionNewDesk,0,updateDesk)
+
+        floorByDesk.desks = desklessFloor
+
+        await FloorModel.findByIdAndUpdate(floorByDesk._id, floorByDesk)
+
         return res.status(202).send(updateDesk)
     }
     catch (error){
