@@ -96,6 +96,16 @@ const userSlice = createSlice({
     [logOut.rejected]: (state, action) => {
       state.error = action.error.message;
     },
+    [editUser.pending]: (state) => {
+      state.loading = true;
+    },
+    [editUser.fulfilled]: (state, action) => {
+      state.data = action.payload
+      state.loading = false;
+    },
+    [editUser.rejected]: (state, action) => {
+      state.error = action.error.message;
+    }
   },
 });
 
