@@ -60,7 +60,7 @@ const My_info = () => {
               disabled={!nameEdit}
             />
           ) : (
-            <h5>{user.name}</h5>
+            <h5>{user?.name}</h5>
           )}
         </div>
         <div className="editBtnsContainer">
@@ -104,7 +104,7 @@ const My_info = () => {
               disabled={!emailEdit}
             />
           ) : (
-            <h5>{user.email}</h5>
+            <h5>{user?.email}</h5>
           )}
         </div>
         <div className="editBtnsContainer">
@@ -148,7 +148,7 @@ const My_info = () => {
               disabled={!cityEdit}
             />
           ) : (
-            <h5>{user.city}</h5>
+            <h5>{user?.city}</h5>
           )}
         </div>
         <div className="editBtnsContainer">

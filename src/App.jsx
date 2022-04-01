@@ -23,19 +23,19 @@ const App = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLogged = useSelector((state) => state.user.isLogged);
-  const user = useSelector(state => state.user.data)
+  const user = useSelector((state) => state.user.data);
   const token = localStorage.getItem("token");
 
-  console.log(token)
+  console.log(token);
 
   const [modalState, setModalState] = useState(false);
 
   useEffect(() => {
-    if(!token) navigate("/login");
-    else if(token) {
+    if (!token) navigate("/login");
+    else if (token) {
       dispatch(persistUser(token));
       dispatch(getBuildings());
-    } 
+    }
   }, [token]);
 
   return (
@@ -51,12 +51,13 @@ const App = () => {
             <MyProfile modalState={modalState} setModalState={setModalState} />
           }
         />
-        <Route path='/mi_perfil/mis_amigos' element={<My_friends />}/>
-        <Route path="/reservas" element={isLogged ? <Booking userId={user._id}/> : <Login />}/>
-        <Route path='/mi_perfil/mis_datos' element={<My_info />}/>
+        <Route path="/mi_perfil/mis_amigos" element={<My_friends />} />
+        <Route
+          path="/reservas"
+          element={isLogged ? <Booking userId={user?._id} /> : <Login />}
+        />
+        <Route path="/mi_perfil/mis_datos" element={<My_info />} />
         <Route path="/explore" element={<Selector />} />
-
-
       </Routes>
       <Footer />
       <Modal modalState={modalState} setModalState={setModalState} />

@@ -408,7 +408,6 @@ nav {
 
 /* ------ END FRIENDS COMPONENT STYLES ------- */
 
-
 /* ------ START MIS DATOS COMPONENT STYLES ------- */
 .misDatosContainer {
   width: 100%;
@@ -419,8 +418,7 @@ nav {
   align-items: center;
 }
 
-
-.misDatosContainer>h6{
+.misDatosContainer > h6 {
   margin-bottom: 30px;
 }
 
@@ -455,25 +453,22 @@ nav {
   margin-top: 5px;
 }
 
-.editInfoIcon{
+.editInfoIcon {
   font-size: 26px;
   color: #bfd732;
 }
 
-.submitInfoIcon{
+.submitInfoIcon {
   font-size: 30px;
   color: #bfd732;
 }
 
-.cancelEditIcon{
+.cancelEditIcon {
   font-size: 22px;
   color: #ff0000;
 }
 
-
-
 /* ------ END MIS DATOS COMPONENT STYLES ------- */
-
 
 .signin {
   display: flex;
@@ -695,6 +690,7 @@ hr {
   background-size: cover;
   background-position: center;
   clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+  margin-bottom: 1em;
 }
 .selector__inputs {
   padding: 2em;
@@ -737,23 +733,22 @@ hr {
   width: 80% !important;
 }
 
-.event_container{
+.event_container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
- 
 }
 
-.event_calendar{
-  font-size: 0.90rem;
+.event_calendar {
+  font-size: 0.9rem;
 }
-.event_timeText{
-  font-size: 0.90rem;  
+.event_timeText {
+  font-size: 0.9rem;
   margin-right: 4px;
 }
-.delete_envent{
-  font-size: 0.95rem; 
+.delete_envent {
+  font-size: 0.95rem;
 }
 
 .fc .fc-toolbar-title {
@@ -795,12 +790,11 @@ hr {
 }
 
 .fc .fc-daygrid-day-frame {
- text-decoration: none;
- align-items: center;
- text-align: center;
- display: flex;
- justify-content: center;
-
+  text-decoration: none;
+  align-items: center;
+  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 .fc .fc-daygrid-day-number {
   text-decoration: none;
@@ -808,15 +802,12 @@ hr {
   font-size: 1rem;
 }
 
-
 .fc .fc-daygrid-more-link {
   display: none;
 }
 
-
-
-
-.fc-theme-standard td, .fc-theme-standard th {
+.fc-theme-standard td,
+.fc-theme-standard th {
   border-radius: 5px;
 }
 
@@ -842,20 +833,18 @@ hr {
   border-style: none !important;
 }
 
-
-
 .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
   background-color: #bfd732;
   display: none;
 }
 
-.desk__calendar{
+.desk__calendar {
   width: 80%;
 }
 
 /* --------- RESERVAS ---------- */
 
-.booking_container{
+.booking_container {
   border-radius: 15px;
   width: 95%;
   margin-top: 5px;
@@ -873,19 +862,20 @@ hr {
   width: 100%;
   border-style: hidden;
   border-top-style: hidden !important;
-  
 }
 
 .fc-theme-standard .fc-list-day-cushion {
   text-decoration: none !important;
 }
 
-.fc-direction-ltr .fc-list-day-text, .fc-direction-rtl .fc-list-day-side-text {
+.fc-direction-ltr .fc-list-day-text,
+.fc-direction-rtl .fc-list-day-side-text {
   text-decoration: none !important;
   color: #fff;
 }
 
-.fc-direction-ltr .fc-list-day-side-text, .fc-direction-rtl .fc-list-day-text {
+.fc-direction-ltr .fc-list-day-side-text,
+.fc-direction-rtl .fc-list-day-text {
   text-decoration: none !important;
   color: #fff;
 }
@@ -896,8 +886,8 @@ hr {
   text-align: center;
   justify-content: center;
   width: 3px !important;
-  color: #F7931E !important;
-  border: 5px solid #F7931E!important;
+  color: #f7931e !important;
+  border: 5px solid #f7931e !important;
   margin-right: 30px;
   margin-top: 7px;
 }
@@ -907,10 +897,10 @@ hr {
   justify-content: center;
 }
 
-.fc .fc-list-table td, .fc .fc-list-day-cushion {
+.fc .fc-list-table td,
+.fc .fc-list-day-cushion {
   padding: 8px 14px;
   border-style: hidden !important;
   justify-content: end;
   text-align: end;
 }
-
