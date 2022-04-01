@@ -1,6 +1,4 @@
-const { openSync } = require('fs-extra')
 const { FloorModel, BuildingModel, DeskModel, CalendarModel } = require('../models/buildings')
-const { DeleteFriend } = require('./userControllers')
 
 module.exports.addFloor = async (req, res, next) => {
     const { idBuilding } = req.params
@@ -54,7 +52,22 @@ module.exports.UpdateFloorById = async (req, res, next) => {
     }
 
     try {
+        const beforeUpdate = await FloorModel.findById(id)
+
         const updateFloor = await FloorModel.findByIdAndUpdate(id, req.body, options)
+
+        const buildingByFloor = await BuildingModel.findById(updateFloor.buildingId)
+
+        const positionNewFloor = buildingByFloor.floors.indexOf(beforeUpdate)
+
+        const floorlessBuilding = buildingByFloor.floors.filter(floor => floor._id.toHexString() !== updateFloor._id.toHexString()  )
+        
+        floorlessBuilding.splice(positionNewFloor,0,updateFloor)
+
+        buildingByFloor.floors = floorlessBuilding
+
+        await BuildingModel.findByIdAndUpdate(buildingByFloor._id, buildingByFloor)
+        
         return res.status(202).send(updateFloor)
     }
     catch (error) {

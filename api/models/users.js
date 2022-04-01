@@ -1,4 +1,6 @@
 const {Schema, model}= require("mongoose");
+const mongoosePaginate = require('mongoose-paginate-v2');
+
 const bcrypt = require("bcrypt");
 
 
@@ -55,6 +57,8 @@ UserSchema.pre("save", async function(next){
     }
 })
 
+
+UserSchema.plugin(mongoosePaginate)
 const UserModel = model("User", UserSchema);
 
 
