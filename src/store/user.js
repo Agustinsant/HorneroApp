@@ -48,7 +48,6 @@ const userSlice = createSlice({
       state.loading = true;
     },
     [userLogin.fulfilled]: (state, action) => {
-      state.token = action.payload;
       state.isLogged = true
       state.loading = false;
     },

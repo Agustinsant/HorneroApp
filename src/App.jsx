@@ -20,27 +20,27 @@ import My_info from "./components/My_info";
 const App = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const user = useSelector((state) => state.user.data);
   const isLogged = useSelector((state) => state.user.isLogged);
+  const user = useSelector(state => state.user.data)
   const token = localStorage.getItem("token");
+
+  console.log(token)
 
   const [modalState, setModalState] = useState(false);
 
   useEffect(() => {
-    if (token) {
+    if(!token) navigate("/login");
+    else if(token) {
       dispatch(persistUser(token));
       dispatch(getBuildings());
-    } else {
-      navigate("/login");
-    }
+    } 
   }, [token]);
 
   return (
     <div>
       <NavbarComponent />
       <Routes>
-        <Route path="/" element={isLogged ? <Welcome /> : <Login />} />
+        <Route path="/" element={user?._id ? <Welcome /> : <Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
         <Route

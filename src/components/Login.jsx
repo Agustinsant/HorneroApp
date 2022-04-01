@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { FaAngleRight } from "react-icons/fa";
+import swal from "sweetalert";
 
 import { userLogin } from "../store/user";
 import FormInput from "../commons/FormInput";
@@ -56,7 +57,12 @@ function Login() {
         password: values.password,
       })
     );
-    navigate("/");
+
+    swal({
+      text: "Bienvenido!",
+      icon: "success",
+      timer: 2000,
+    }).then(() => navigate("/"));
   };
 
   return (

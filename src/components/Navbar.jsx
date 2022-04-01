@@ -5,6 +5,9 @@ import { logOut, persistUser } from "../store/user";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import swal from 'sweetalert';
+
+
 
 
 import { FaBars } from "react-icons/fa";
@@ -21,13 +24,19 @@ const NavbarComponent = () => {
   const user = useSelector((state) => state.user.data);
   const token = localStorage.getItem("token");
 
-  const imgProfile = imgs(`./${user.img || 'nophoto.jpg' }`)
+  const imgProfile = imgs(`./${user?.img || 'nophoto.jpg' }`)
 
   const logoutUser = (e) => {
     e.preventDefault();
     dispatch(logOut());
     setOpenMenu(false)
-    navigate("/");
+
+    swal({
+      text: "Deslogueo Exitoso!",
+      icon: "success",
+      timer: 2000
+    }).then(()=> navigate("/"))
+    
   };
 
   return (
