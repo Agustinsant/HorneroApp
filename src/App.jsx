@@ -17,6 +17,8 @@ import Selector from "./components/Selector";
 import My_friends from "./components/My_friends";
 import My_info from "./components/My_info";
 
+import Booking from "./commons/Bookings";
+
 const App = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -50,8 +52,10 @@ const App = () => {
           }
         />
         <Route path='/mi_perfil/mis_amigos' element={<My_friends />}/>
+        <Route path="/reservas" element={<Booking userId={user._id}/>}/>
         <Route path='/mi_perfil/mis_datos' element={<My_info />}/>
         <Route path="/explore" element={<Selector />} />
+
 
       </Routes>
       <Footer />
