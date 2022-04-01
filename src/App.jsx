@@ -16,6 +16,8 @@ import Modal from "./components/Modal";
 import Selector from "./components/Selector";
 import My_friends from "./components/My_friends";
 
+import Booking from "./commons/Bookings";
+
 const App = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -49,6 +51,7 @@ const App = () => {
           }
         />
         <Route path='/mi_perfil/mis_amigos' element={<My_friends />}/>
+        <Route path="/reservas" element={<Booking userId={user._id}/>}/>
       </Routes>
       <Footer />
       <Modal modalState={modalState} setModalState={setModalState} />

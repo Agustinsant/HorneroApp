@@ -52,7 +52,6 @@ module.exports.getAllEventCalendar = async (req, res, next) => {
 
 module.exports.getAllEventCalendarByUserId = async (req, res, next) => {
     const { userId } = req.params
-
     try {
         const eventsCalendar = await CalendarModel.find({userId: userId})
         return res.status(200).send(eventsCalendar)
@@ -71,6 +70,7 @@ module.exports.updateEventCalendarById = async (req, res, next) => {
 
     try {
         const updateEventCalendar = await CalendarModel.findByIdAndUpdate(id, req.body, option)
+        console.log("updated", updateEventCalendar)
         return res.status(202).send(updateEventCalendar)
     }
     catch (error){

@@ -525,9 +525,8 @@ hr {
 /* ///////////// CALENDAR  \\\\\\\\\\\\\ */
 .image_calendar{
   position: relative;
-  margin: 0 auto;
-  width: 35px;
-  height: 35px;
+  width: 45px;
+  height: 45px;
   border:  2px solid #fff;
   border-radius: 50%;
 }
@@ -541,16 +540,24 @@ hr {
 
 .calendar_container{
   margin: 20px auto 0px auto;
-
 }
-
+.event_container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+ 
+}
 
 .event_calendar{
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 .event_timeText{
-  font-size: 0.6rem;
+  font-size: 0.8rem;  
+  margin-right: 2px;
 }
+
+
 .fc .fc-toolbar-title {
   margin-left: 3px !important;
   margin-right: 3px !important;
@@ -611,9 +618,9 @@ hr {
 }
 
 
+
 .fc-theme-standard td, .fc-theme-standard th {
   border-radius: 5px;
-  border: 1px solid  #63E3CF  !important;
   border: 1px solid var(--fc-border-color, #bfd732) !important;
 }
 .fc .fc-timegrid-axis-frame {
@@ -637,4 +644,69 @@ hr {
 .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
   background-color: #bfd732;
   display: none;
+}
+
+
+
+
+
+/* --------- RESERVAS ---------- */
+
+.booking_container{
+  border-radius: 15px;
+  width: 95%;
+  margin-top: 5px;
+}
+
+.fc-theme-standard .fc-list {
+  border: 1px solid #bfd732 !important;
+  border-radius: 3px;
+}
+.fc-theme-standard .fc-list-day-cushion {
+  background-color: #bfd732 !important;
+  background-color: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));
+}
+.fc .fc-list-table {
+  width: 100%;
+  border-style: hidden;
+  border-top-style: hidden !important;
+  
+}
+
+.fc-theme-standard .fc-list-day-cushion {
+  text-decoration: none !important;
+}
+
+.fc-direction-ltr .fc-list-day-text, .fc-direction-rtl .fc-list-day-side-text {
+  text-decoration: none !important;
+  color: #fff;
+}
+
+.fc-direction-ltr .fc-list-day-side-text, .fc-direction-rtl .fc-list-day-text {
+  text-decoration: none !important;
+  color: #fff;
+}
+
+.fc .fc-list-event-dot {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: 3px !important;
+  color: #F7931E !important;
+  border: 5px solid #F7931E!important;
+  margin-right: 30px;
+  margin-top: 7px;
+}
+
+.fc-direction-ltr .fc-list-table .fc-list-event-graphic {
+  display: flex;
+  justify-content: center;
+}
+
+.fc .fc-list-table td, .fc .fc-list-day-cushion {
+  padding: 8px 14px;
+  border-style: hidden !important;
+  justify-content: end;
+  text-align: end;
 }
