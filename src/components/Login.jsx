@@ -62,6 +62,7 @@ function Login() {
       text: "Bienvenido!",
       icon: "success",
       timer: 2000,
+      buttons:false
     }).then(() => navigate("/"));
   };
 
