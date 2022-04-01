@@ -55,6 +55,7 @@ nav {
 }
 
 .linksNav {
+  margin-top: 15px;
   text-align: right;
   text-decoration: none;
   color: #444444;
@@ -97,9 +98,11 @@ nav {
 }
 
 .dropDownSubMenuClosed {
+  background-color: rgba(255, 255, 255, 0.685);
   display: flex;
   flex-direction: column;
   position: absolute;
+  z-index: 1;
   width: 140px;
   right: 15px;
   top: 60px;
@@ -109,14 +112,17 @@ nav {
 }
 
 .dropDownSubMenuOpen {
+  background-color: rgba(255, 255, 255, 0.685);
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   justify-content: left;
   position: absolute;
   z-index: 1;
   width: 140px;
   right: 15px;
   top: 60px;
+  min-height: 80px;
   max-height: 150px;
   overflow: hidden;
   transition: all 300ms ease;

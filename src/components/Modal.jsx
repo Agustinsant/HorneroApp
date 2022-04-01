@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { persistUser } from "../store/user";
-
+import swal from "sweetalert";
 
 const Modal = ({modalState, setModalState}) => {
   const dispatch = useDispatch();
@@ -18,8 +18,14 @@ const Modal = ({modalState, setModalState}) => {
       `http://localhost:3001/api/user/updateUser/${user._id}`,
       data
     );
-    setModalState(!modalState)
+    
     dispatch(persistUser(token));
+    swal({
+      text: "Imagen editada con éxito!",
+      icon: "success",
+      timer: 1000,
+      buttons:false
+    }).then(() => setModalState(!modalState));
   };
   return (
     <>
