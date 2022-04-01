@@ -58,7 +58,12 @@ const Calendar = ({ deskId }) => {
   /* -------------  UPDATE FUNCTION ------------ */
     const handleEventChange = async (eventInfo) => {
     const { end, start, extendedProps} = eventInfo.event.toPlainObject();
-    await updateEventCalendar(extendedProps._id, {start, end})
+    const isTheUser = (extendedProps.userId === user._id)
+    if(isTheUser){
+      await updateEventCalendar(extendedProps._id, {start, end})
+    } else{
+      alert("Sorry! you cannot change reservations from other users")
+    }
     rendering();
   } 
 
@@ -81,7 +86,7 @@ const Calendar = ({ deskId }) => {
         </div>
         <i className="event_calendar">{eventInfo.event.title}</i>
         <b className="event_timeText">{eventInfo.timeText}</b>
-        {isTheUser && (<FaRegTimesCircle onClick={() => handleDelete(eventInfo.event)} />)}
+        {isTheUser && (<FaRegTimesCircle  className="delete_envent" onClick={() => handleDelete(eventInfo.event)} />)}
       </div>
     );
   };

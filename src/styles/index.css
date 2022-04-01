@@ -746,13 +746,15 @@ hr {
 }
 
 .event_calendar{
-  font-size: 0.85rem;
+  font-size: 0.90rem;
 }
 .event_timeText{
-  font-size: 0.85rem;  
-  margin-right: 2px;
+  font-size: 0.90rem;  
+  margin-right: 4px;
 }
-
+.delete_envent{
+  font-size: 0.95rem; 
+}
 
 .fc .fc-toolbar-title {
   margin-left: 3px !important;
