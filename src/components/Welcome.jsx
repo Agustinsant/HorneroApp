@@ -1,10 +1,12 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { useEffect } from 'react'
 
 function Welcome() {
   const user = useSelector((state) => state.user.data);
   const navigate = useNavigate();
 
+  
   return (
     <div className="welcome__container">
       <div className="welcome__box">
