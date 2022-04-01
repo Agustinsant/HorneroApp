@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { FaRegTimesCircle } from "react-icons/fa";
 import { getCalendar, addEventCalendar, deleteEventCalendar, updateEventCalendar } from "../services/calendarServices";
+import swal from "sweetalert";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -45,7 +46,29 @@ const Calendar = ({ deskId }) => {
 
   /* -------------  DELETE FUNCTIONS ------------ */
   const handleDelete = (eventInfo) => {
-    if(window.confirm(`Are you sure you want to delete your reservation?`)) eventInfo.remove()
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this reservation!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        eventInfo.remove()
+        swal("Poof! Your reservation has been deleted!", {
+          icon: "success",
+          buttons: false,
+          timer: 1000
+        });
+      } else {
+        swal("Your reservation is safe!", {
+          icon: "success",
+          buttons: false,
+          timer: 1000
+        });
+      }
+    }) 
   };
 
   const handleEventRemove = async (eventInfo) => {
@@ -62,7 +85,14 @@ const Calendar = ({ deskId }) => {
     if(isTheUser){
       await updateEventCalendar(extendedProps._id, {start, end})
     } else{
-      alert("Sorry! you cannot change reservations from other users")
+      swal({
+        title: "Sorry! you cannot" ,
+        text: "change reservations from other users",
+        icon: "error",
+        timer: 2000,
+        buttons:false
+      })
+   
     }
     rendering();
   } 
