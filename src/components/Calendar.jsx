@@ -155,7 +155,7 @@ const Calendar = ({ deskId }) => {
         footerToolbar={{center: "dayGridMonth timeGridDay"}}
         initialView="dayGridMonth"
         businessHours= {{
-          daysOfWeek: [ 1, 2, 3, 4, 5 ], 
+          daysOfWeek: [ 1, 2, 3, 4, 5], 
           startTime: '07:00', 
           endTime: '21:00',
         }}
