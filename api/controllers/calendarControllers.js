@@ -3,7 +3,7 @@ const { CalendarModel, DeskModel } = require ('../models/buildings')
 module.exports.AddEventCalendar = async (req, res, next) => {
 
     const { idDesk } = req.params
-    const { start, end, userId, title, userImg} = req.body
+    const { start, end, userId } = req.body
 
     const option ={
         returnDocument : "after"
@@ -13,8 +13,8 @@ module.exports.AddEventCalendar = async (req, res, next) => {
 
 
         const desk = await DeskModel.findById(idDesk) 
-        const newEventCalendar = await CalendarModel({ title, start, end, userImg, userId, buildingId: desk.buildingId, floorId: desk.floorId, deskId: desk._id}).save()
-
+        const newEventCalendar = await CalendarModel({ start, end, buildingId: desk.buildingId, floorId: desk.floorId, deskId: desk._id}).save()
+        newEventCalendar.usersId.push(userId)
         desk.calendarEvent.push(newEventCalendar)
 
         const updateDesk = await DeskModel.findByIdAndUpdate(idDesk, desk, option)
@@ -93,6 +93,63 @@ module.exports.updateEventCalendarById = async (req, res, next) => {
     }
 }
 
+
+module.exports.AddUsersIdEvent = async (req, res, next) => { 
+    
+    const { id } = req.params
+  
+    const {userId} = req.body
+  
+  
+    const options = {
+      returnDocument: "after",
+    };
+  
+    try {
+      
+      const calendarEvent = await CalendarModel.findById(id)
+
+      calendarEvent.usersId.push(userId)
+      const updateCalendarEvent = await CalendarModel.findByIdAndUpdate(id, calendarEvent, options)
+  
+      return res.status(201).send(updateCalendarEvent)
+  
+    } 
+    
+    catch (error) {
+      next (error)
+    }
+
+
+}
+
+module.exports.DeleteUsersIdEvent = async (req, res, next) => { 
+
+ 
+    const {id} = req.params
+  
+    const {userId} = req.body
+    const options = {
+      returnDocument: "after",
+    };
+  
+    try {
+      
+      const calendarEvent = await CalendarModel.findById(id)
+      const newUsersId = calendarEvent.usersId.filter( (id) =>  id !== userId)
+      calendarEvent.usersId = newUsersId
+      const updateCalendarEvent = await CalendarModel.findByIdAndUpdate(id, calendarEvent, options)
+  
+      return res.status(200).send(updateCalendarEvent)
+  
+    } 
+    
+    catch (error) {
+      next (error)
+    }
+  
+
+}
 
 module.exports.deleteEventCalendarById = async (req, res, next) => { 
     const { id } = req.params

@@ -1,17 +1,14 @@
 const {Schema, model}= require("mongoose");
 
 const EventItem = new Schema({
-    title: {
-        type: String
-    },
     start: {
         type: String
     },
     end: {
         type: String
     },
-    userId: {
-        type: String
+    usersId: {
+        type: [String]
     },
     buildingId: {
         type: String
@@ -22,16 +19,15 @@ const EventItem = new Schema({
     deskId: {
         type: String
     },
-    userImg:{
-        type: String
-    }
-
 })
 
 const CalendarModel = model("Calendar", EventItem)
 
 const DeskItem = new Schema({
 
+    type : {
+        type: String
+    },
     positionX : {
         type: Number
     },
