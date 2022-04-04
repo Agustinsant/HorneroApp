@@ -747,10 +747,10 @@ hr {
 }
 
 .event_calendar {
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 .event_timeText {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-right: 4px;
 }
 .delete_envent {

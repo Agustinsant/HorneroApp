@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { FaRegTimesCircle } from "react-icons/fa";
+import { getUserById } from "../services/userServices";
 import { getCalendar, addEventCalendar, deleteEventCalendar, updateEventCalendar } from "../services/calendarServices";
 import swal from "sweetalert";
 import FullCalendar from "@fullcalendar/react";
@@ -15,7 +16,14 @@ const Calendar = ({ deskId }) => {
 
   const rendering = async () => {
     const deskCalendar = await getCalendar(deskId);
-    setEvents(deskCalendar);
+    const addTitleAndImg = await Promise.all(deskCalendar.map( async (event)=> {
+      //ver si viene mas de un id
+      const user =  await getUserById(event.userId)
+      event.title = user.name;
+      event.img= user.img;
+      return event
+    }))
+    setEvents(addTitleAndImg);
   }
 
   useEffect( () => {
@@ -29,11 +37,9 @@ const Calendar = ({ deskId }) => {
     calendarApi.unselect();
     calendarApi.addEvent(
       {
-        title: user.name,
         start: selectInfo.startStr,
         end: selectInfo.endStr,
         userId: user._id,
-        userImg: user.img,
       },true
       );
   };
@@ -84,6 +90,11 @@ const Calendar = ({ deskId }) => {
     const isTheUser = (extendedProps.userId === user._id)
     if(isTheUser){
       await updateEventCalendar(extendedProps._id, {start, end})
+      swal("Updated reservation", {
+        icon: "success",
+        buttons: false,
+        timer: 1000
+      });
     } else{
       swal({
         title: "Sorry! you cannot" ,
@@ -103,7 +114,7 @@ const Calendar = ({ deskId }) => {
   const renderEventContent = (eventInfo) => {
     let checkId = eventInfo.event.extendedProps.userId;
     let isTheUser = (user._id === checkId);
-    let userImg = eventInfo.event.extendedProps.userImg ? (eventInfo.event.extendedProps.userImg) : ("nophoto.jpg");
+    let userImg = eventInfo.event.extendedProps.img ? (eventInfo.event.extendedProps.img) : ("nophoto.jpg");
     let colorEvent = isTheUser ? "#00A99D" : "#444444" ;
     
     eventInfo.backgroundColor = colorEvent
@@ -112,7 +123,8 @@ const Calendar = ({ deskId }) => {
     return (
       <div className="event_container">
         <div className="image_calendar">
-          {<img className="userImg_calendar" src={imgs(`./${userImg}`)} />}
+          { //mapear imagenes cierta cantidad
+            <img className="userImg_calendar" src={imgs(`./${userImg}`)} />}
         </div>
         <i className="event_calendar">{eventInfo.event.title}</i>
         <b className="event_timeText">{eventInfo.timeText}</b>
