@@ -19,8 +19,34 @@ nav {
   padding: 10px 15px;
 }
 
-
 /* ------ START NAV STYLES ----- */
+
+.cardImg {
+  width: 80%;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.cardImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.navProfilePick {
+  margin-right: 20px;
+  margin-top: 5px;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.navProfilePick img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 .navContainer {
   display: flex;
@@ -29,6 +55,7 @@ nav {
 }
 
 .linksNav {
+  margin-top: 15px;
   text-align: right;
   text-decoration: none;
   color: #444444;
@@ -49,13 +76,17 @@ nav {
   color: #bfd732;
 }
 
+.navMenu {
+  display: flex;
+  align-items: center;
+}
+
 .dropDown {
   position: relative;
   display: block;
 }
 
 .dropDownMenu {
- 
   background: none;
   border: none;
 }
@@ -67,9 +98,11 @@ nav {
 }
 
 .dropDownSubMenuClosed {
+  background-color: rgba(255, 255, 255, 0.685);
   display: flex;
   flex-direction: column;
   position: absolute;
+  z-index: 1;
   width: 140px;
   right: 15px;
   top: 60px;
@@ -79,20 +112,137 @@ nav {
 }
 
 .dropDownSubMenuOpen {
+  background-color: rgba(255, 255, 255, 0.685);
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   justify-content: left;
   position: absolute;
   z-index: 1;
   width: 140px;
   right: 15px;
   top: 60px;
+  min-height: 80px;
   max-height: 150px;
   overflow: hidden;
   transition: all 300ms ease;
 }
 
 /* ------ END NAV STYLES ----- */
+
+/* ------ START WELCOME STYLES ----- */
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  80% {
+    transform: translate(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  80% {
+    transform: translate(-15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+@keyframes goButton {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  80% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+.welcome__container {
+  margin: 1em;
+  height: 60vh;
+  background-image: linear-gradient(to right bottom, #bfd732, #28b4857c),
+    url("../assets/main.jpg");
+  background-size: cover;
+  background-position: left;
+  clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+  position: relative;
+}
+
+.welcome__box {
+  text-align: center;
+  color: #444444;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* offset-x | offset-y | blur-radius | color */
+  text-shadow: 5px 5px 20px rgba(0, 0, 0, 0.301);
+}
+.welcome__title {
+  animation: moveInLeft 1s ease-in;
+}
+.welcome__message {
+  font-style: italic;
+  animation: moveInRight 1s ease-in;
+}
+.welcome__goButton {
+  display: inline-block;
+  position: relative;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #555;
+  margin-top: 15px;
+  padding: 12px 50px;
+  border-radius: 100px;
+  border-color: #bfd732;
+  animation: goButton 1s ease-out 1.5s;
+  animation-fill-mode: backwards;
+  transition: all 0.2s;
+}
+
+.welcome__goButton::after {
+  content: "";
+  display: inline-block;
+  background-color: #fff;
+  border-radius: 100px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+.welcome__goButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.welcome__goButton:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+.welcome__goButton:active {
+  transform: translateY(1px);
+}
+
+/* ------ END WELCOME STYLES ----- */
 
 /* ------ START MODAL STYLES ----- */
 
@@ -159,7 +309,7 @@ nav {
 
 /* -------- START CARDS STYLES-------- */
 
-.friendIconsAdd{
+.friendIconsAdd {
   display: flex;
   padding-left: 4px;
   align-items: center;
@@ -173,11 +323,9 @@ nav {
   background: #bfd732;
   color: white;
   border-radius: 50%;
-  
 }
 
-
-.friendIconsRemove{
+.friendIconsRemove {
   display: flex;
   padding-left: 4px;
   align-items: center;
@@ -196,61 +344,53 @@ nav {
 .dropDownMenu {
   background: none;
   border: none;
-
 }
 
-.addRemoveFrienIcon{
+.addRemoveFrienIcon {
   font-size: 18px;
-  
 }
 
-.cardContainer{
+.cardContainer {
   width: 120px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.cardPhotoContainer{
+.cardPhotoContainer {
   position: relative;
 }
 
-
-
-
-.cardContainer h5{
+.cardContainer h5 {
   margin-left: -20px;
   padding: 10px;
   font-size: 14px;
 }
 
-.cardImg{
+.cardImg {
   width: 80%;
   overflow: hidden;
   border-radius: 50%;
 }
 
-.cardImg img{
+.cardImg img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-
 }
 
 /* ------ END CARDS STYLES ------- */
 
 /* ------ START FRIENDS COMPONENT STYLES ------- */
 
-.friendsCompContainer{
+.friendsCompContainer {
   margin-top: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-
-.friends_container{
-
+.friends_container {
   width: 100%;
   padding: 20px;
   margin: 0 auto;
@@ -259,23 +399,82 @@ nav {
   flex-wrap: wrap;
 }
 
-
-
-.friendsSearch{
+.friendsSearch {
   margin-top: 15px;
+
   display: flex;
   align-items: center;
 }
 
-.friendsSearch button{
-background: none;
-border: none;
-margin-bottom: 30px;
+.friendsSearch button {
+  background: none;
+  border: none;
+  margin-bottom: 30px;
 }
-
 
 /* ------ END FRIENDS COMPONENT STYLES ------- */
 
+/* ------ START MIS DATOS COMPONENT STYLES ------- */
+.misDatosContainer {
+  width: 100%;
+  padding: 20px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.misDatosContainer > h6 {
+  margin-bottom: 30px;
+}
+
+.misDatosContainer form {
+  margin-top: 20px;
+  width: 350px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editInputsContainer h5 {
+  margin: 0 15px 0 0;
+}
+
+.misDatosBtns {
+  background: none;
+  border: none;
+  margin: 5px;
+  font-size: 20px;
+}
+
+.editInputsContainer input {
+  width: 250px;
+  margin-right: 15px;
+  padding: 5px 10px;
+  border: 1px solid #bfd732;
+}
+
+.hrDatos {
+  width: 350px;
+  margin-top: 5px;
+}
+
+.editInfoIcon {
+  font-size: 26px;
+  color: #bfd732;
+}
+
+.submitInfoIcon {
+  font-size: 30px;
+  color: #bfd732;
+}
+
+.cancelEditIcon {
+  font-size: 22px;
+  color: #ff0000;
+}
+
+/* ------ END MIS DATOS COMPONENT STYLES ------- */
 
 .signin {
   display: flex;
@@ -475,20 +674,6 @@ hr {
   border-top: 2px solid #bfd732;
 }
 
-@keyframes moveInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-100px);
-  }
-  80% {
-    transform: translate(15px);
-  }
-  100% {
-    opacity: 1;
-    transform: translate(0);
-  }
-}
-
 .floor {
   width: 50vh;
   height: 50vh;
@@ -499,8 +684,25 @@ hr {
   flex-direction: column;
   align-items: center;
 }
+
+.selector__box {
+  width: 75vh;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: linear-gradient(to right bottom, #bfd732, #28b4857c),
+    url("../assets/selector.jpg");
+  background-size: cover;
+  background-position: center;
+  clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+  margin-bottom: 1em;
+}
 .selector__inputs {
   padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .selector__inputs select {
   margin: 1em;
@@ -517,18 +719,12 @@ hr {
   border: 5px solid #666666;
 }
 
-
-
-
-
-
 /* ///////////// CALENDAR  \\\\\\\\\\\\\ */
-.image_calendar{
+.image_calendar {
   position: relative;
-  margin: 0 auto;
-  width: 35px;
-  height: 35px;
-  border:  2px solid #fff;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #fff;
   border-radius: 50%;
 }
 
@@ -538,25 +734,34 @@ hr {
   border-radius: 50%;
 }
 
-
-.calendar_container{
+.calendar_container {
   margin: 20px auto 0px auto;
-
+  width: 70% !important;
 }
 
+.event_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
 
-.event_calendar{
-  font-size: 0.8rem;
+.event_calendar {
+  font-size: 1rem;
 }
-.event_timeText{
-  font-size: 0.6rem;
+.event_timeText {
+  font-size: 1.2rem;
+  margin-right: 4px;
 }
+.delete_envent {
+  font-size: 1.3rem;
+}
+
 .fc .fc-toolbar-title {
   margin-left: 3px !important;
   margin-right: 3px !important;
   font-size: 1rem !important;
 }
-
 
 .fc .fc-button-primary {
   color: #fff;
@@ -570,9 +775,9 @@ hr {
 .fc .fc-button-primary:hover {
   color: #fff;
   color: var(--fc-button-text-color, #fff);
-  background-color: #444444!important;
+  background-color: #444444 !important;
   background-color: var(--fc-button-bg-color, #444444) !important;
-  border-color: #444444!important;
+  border-color: #444444 !important;
   border-color: var(--fc-button-border-color, #444444) !important;
 }
 
@@ -581,7 +786,6 @@ hr {
   overflow: hidden;
   text-align: center;
 }
-
 
 .fc .fc-col-header-cell-cushion {
   display: inline-block;
@@ -592,15 +796,30 @@ hr {
 }
 
 .fc .fc-daygrid-day-frame {
-  height: 20px;
-  background-color: #bfd732;
+  text-decoration: none;
+  align-items: center;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.fc .fc-daygrid-day-number {
+  text-decoration: none;
+  color: black;
+  font-size: 1rem;
+}
+
+.fc .fc-daygrid-more-link {
   display: none;
 }
 
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border-radius: 5px;
+}
 
-.fc-theme-standard td, .fc-theme-standard th {
+.fc-theme-standard td,
+.fc-theme-standard th {
   border-radius: 10px;
-  border: 1px solid  #63E3CF  !important;
   border: 1px solid var(--fc-border-color, #bfd732) !important;
 }
 .fc .fc-timegrid-axis-frame {
@@ -612,7 +831,7 @@ hr {
   display: none;
 }
 
-.fc-col-header{
+.fc-col-header {
   border-bottom-style: hidden;
 }
 
@@ -620,10 +839,86 @@ hr {
   border-style: none !important;
 }
 
+
 .recover {
   text-align: center;
 }
 
 
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+  background-color: #bfd732;
+  display: none;
+}
 
+.desk__calendar {
+  width: 80%;
+}
+
+/* --------- RESERVAS ---------- */
+
+
+.booking_container {
+  border-radius: 15px;
+  width: 95%;
+  margin-top: 5px;
+}
+
+.fc-theme-standard .fc-list {
+  border: 1px solid #bfd732 !important;
+  border-radius: 3px;
+}
+.fc-theme-standard .fc-list-day-cushion {
+  background-color: #bfd732 !important;
+  background-color: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));
+}
+.fc .fc-list-table {
+  width: 100%;
+  border-style: hidden;
+  border-top-style: hidden !important;
+}
+
+.fc-theme-standard .fc-list-day-cushion {
+  text-decoration: none !important;
+}
+
+.fc-direction-ltr .fc-list-day-text,
+.fc-direction-rtl .fc-list-day-side-text {
+  text-decoration: none !important;
+  color: #fff;
+}
+
+.fc-direction-ltr .fc-list-day-side-text,
+.fc-direction-rtl .fc-list-day-text {
+  text-decoration: none !important;
+  color: #fff;
+}
+
+.fc .fc-list-event-dot {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: 3px !important;
+  color: #f7931e !important;
+  border: 5px solid #f7931e !important;
+  margin-right: 30px;
+  margin-top: 7px;
+}
+
+.fc-direction-ltr .fc-list-table .fc-list-event-graphic {
+  display: flex;
+  justify-content: center;
+}
+
+.fc .fc-list-table td,
+.fc .fc-list-day-cushion {
+  padding: 8px 14px;
+  border-style: hidden !important;
+  justify-content: end;
+  text-align: end;
+}
+
+.swal-modal{
+  max-width: 300px;
+}
 

@@ -15,12 +15,12 @@ const MyProfile = ({ modalState, setModalState }) => {
   
   const user = useSelector((state) => state.user.data);
   const isLogged = useSelector((state) => state.user);
-  const imgProfile = imgs(`./${user.img}`)
+  const imgProfile = imgs(`./${user.img || 'nophoto.jpg' }`)
 
   useEffect(() => {
-    if (!isLogged) navigate("/login");
+    if (!user || !isLogged) navigate("/login");
    
-  }, []);
+  }, [isLogged]);
 
   return (
     <div className="profile_container">
@@ -33,7 +33,7 @@ const MyProfile = ({ modalState, setModalState }) => {
           <FaUserEdit className="editPhotoIcon" />
         </button>
         <div className="profile_photo">
-          <img src={imgProfile || noPhoto} />
+          <img src={imgProfile} />
         </div>
       </div>
 
@@ -41,7 +41,7 @@ const MyProfile = ({ modalState, setModalState }) => {
       <div className="profile_links">
         <div>
           <h4> Mis datos personales</h4>
-          <Link className="link_arrows" to="/datos">
+          <Link className="link_arrows" to="/mi_perfil/mis_datos">
             <FaAngleRight />
           </Link>
         </div>

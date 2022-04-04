@@ -48,7 +48,6 @@ const userSlice = createSlice({
       state.loading = true;
     },
     [userLogin.fulfilled]: (state, action) => {
-      state.token = action.payload;
       state.isLogged = true
       state.loading = false;
     },
@@ -96,6 +95,16 @@ const userSlice = createSlice({
     [logOut.rejected]: (state, action) => {
       state.error = action.error.message;
     },
+    [editUser.pending]: (state) => {
+      state.loading = true;
+    },
+    [editUser.fulfilled]: (state, action) => {
+      state.data = action.payload
+      state.loading = false;
+    },
+    [editUser.rejected]: (state, action) => {
+      state.error = action.error.message;
+    }
   },
 });
 

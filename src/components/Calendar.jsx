@@ -1,106 +1,149 @@
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { FaRegTimesCircle } from "react-icons/fa";
+import { getCalendar, addEventCalendar, deleteEventCalendar, updateEventCalendar } from "../services/calendarServices";
+import swal from "sweetalert";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { useSelector } from "react-redux";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { getCalendar } from "../services/calendarServices";
-
 
 const Calendar = ({ deskId }) => {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user.data);
   const [events, setEvents] = useState([]);
-  const imgs = require.context("../storage/upload", true)
+  const imgs = require.context("../storage/upload", true);
 
-  useEffect(async () => {
+  const rendering = async () => {
     const deskCalendar = await getCalendar(deskId);
     setEvents(deskCalendar);
-  }, []);
+  }
 
+  useEffect( () => {
+    rendering();
+  }, [deskId]);
+
+  
+  /* ------------- ADD FUNCTIONS ------------ */
   const handleDateSelect = (selectInfo) => {
     let calendarApi = selectInfo.view.calendar;
-    calendarApi.unselect(); // clear date selection
-      calendarApi.addEvent(           // will render immediately. will call handleEventAdd
+    calendarApi.unselect();
+    calendarApi.addEvent(
+      {
+        title: user.name,
+        start: selectInfo.startStr,
+        end: selectInfo.endStr,
+        userId: user._id,
+        userImg: user.img,
+      },true
+      );
+  };
 
-        {
-          title: user.data.name,
-          start: selectInfo.startStr,
-          end: selectInfo.endStr,
-          userId: user.data._id,
-          userImg: user.data.img    
-        },
-        true
-      ); // temporary=true, will get overwritten when reducer gives new events
+  const handleEventAdd = async (addInfo) => {
+    await addEventCalendar(deskId, addInfo.event.toPlainObject())
+    rendering();
+  };
  
+
+  /* -------------  DELETE FUNCTIONS ------------ */
+  const handleDelete = (eventInfo) => {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this reservation!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        eventInfo.remove()
+        swal("Poof! Your reservation has been deleted!", {
+          icon: "success",
+          buttons: false,
+          timer: 1000
+        });
+      } else {
+        swal("Your reservation is safe!", {
+          icon: "success",
+          buttons: false,
+          timer: 1000
+        });
+      }
+    }) 
   };
 
-  const handleEventAdd = (addInfo) => {
-    const { title, end, start, extendedProps } = addInfo.event.toPlainObject();
-    axios.post(`http://localhost:3001/api/calendar/add/${deskId}`, {
-      title: title,
-      start: start,
-      end: end,
-      userId: extendedProps.userId,
-      userImg: extendedProps.userImg
-    });
+  const handleEventRemove = async (eventInfo) => {
+    const eventId = eventInfo.event.extendedProps._id;
+    await deleteEventCalendar(eventId)
+    rendering();
   };
-   const renderEventContent= (eventInfo) => {
-     console.log("event", eventInfo)
-     //eventinfo trae un monton de propiedades para darle estilos
-     let checkId = eventInfo.event.extendedProps.userId
-     let userImg = eventInfo.event.extendedProps.userImg ? eventInfo.event.extendedProps.userImg : "nophoto.jpg"
-     if(user.data._id === checkId){
-      eventInfo.backgroundColor = "#00A99D ";
-      eventInfo.borderColor= "#00A99D";
-     } else {
-      eventInfo.backgroundColor = "#444444";
-      eventInfo.borderColor= "#444444";
-     }  
 
+ 
+  /* -------------  UPDATE FUNCTION ------------ */
+    const handleEventChange = async (eventInfo) => {
+    const { end, start, extendedProps} = eventInfo.event.toPlainObject();
+    const isTheUser = (extendedProps.userId === user._id)
+    if(isTheUser){
+      await updateEventCalendar(extendedProps._id, {start, end})
+    } else{
+      swal({
+        title: "Sorry! you cannot" ,
+        text: "change reservations from other users",
+        icon: "error",
+        timer: 2000,
+        buttons:false
+      })
    
+    }
+    rendering();
+  } 
+
+
+
+  /* -------------  EVENT VIEW FUNCTION ------------ */
+  const renderEventContent = (eventInfo) => {
+    let checkId = eventInfo.event.extendedProps.userId;
+    let isTheUser = (user._id === checkId);
+    let userImg = eventInfo.event.extendedProps.userImg ? (eventInfo.event.extendedProps.userImg) : ("nophoto.jpg");
+    let colorEvent = isTheUser ? "#00A99D" : "#444444" ;
     
+    eventInfo.backgroundColor = colorEvent
+    eventInfo.borderColor = colorEvent
+
     return (
-       <div className="event_container">
+      <div className="event_container">
         <div className="image_calendar">
-          {<img className="userImg_calendar"src={imgs(`./${userImg}`)} />}
+          {<img className="userImg_calendar" src={imgs(`./${userImg}`)} />}
         </div>
-            <br/>
-            <b className="event_timeText">{eventInfo.timeText}</b><br/>
-            <i className="event_calendar">{eventInfo.event.title}</i>
-        </div>
-     
-    )
-  }
-  
+        <i className="event_calendar">{eventInfo.event.title}</i>
+        <b className="event_timeText">{eventInfo.timeText}</b>
+        {isTheUser && (<FaRegTimesCircle  className="delete_envent" onClick={() => handleDelete(eventInfo.event)} />)}
+      </div>
+    );
+  };
+
+
+  /* ---------- COMPONENT --------- */
   return (
-    <div className="calendar_container">
+    <div className="calendar_container" >
       <FullCalendar
-       expandRows={true}
-       height={400}
-        plugins={[timeGridPlugin, interactionPlugin]}
-        headerToolbar={{
-          right: "next today",
-          center: "title",
-          left: "prev"
-        }}
-        initialView="timeGridWeek"
-        duration={{"days":"3"}}
+        height={400}
+        longPressDelay={200}
+        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+        headerToolbar={{ right: "next", center: "title", left: "prev"}}
+        footerToolbar={{center: "dayGridMonth timeGridDay"}}
+        initialView="dayGridMonth"
+        events={events} 
         editable={true}
         selectable={true}
+        navLinks={true}
         selectMirror={true}
         dayMaxEvents={true}
+        nowIndicator={true}
         select={handleDateSelect}
         eventAdd={handleEventAdd}
-        events={events}
-        eventContent={renderEventContent} // custom render function
-
-
-        /* datesSet={this.handleDates}
-            eventClick={this.handleEventClick}
-            eventChange={this.handleEventChange} // called for drag-n-drop/resize
-            eventRemove={this.handleEventRemove}
-        */
+        eventContent={renderEventContent}
+        eventRemove={handleEventRemove}
+        eventChange={handleEventChange} 
       />
     </div>
   );
