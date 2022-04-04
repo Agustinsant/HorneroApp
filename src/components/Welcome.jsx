@@ -6,6 +6,8 @@ function Welcome() {
   const user = useSelector((state) => state.user.data);
   const navigate = useNavigate();
 
+  if(!user.name) return navigate('login')
+
   return (
     <div className="welcome__container">
       <div className="welcome__box">
