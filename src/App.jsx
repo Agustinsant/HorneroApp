@@ -15,9 +15,13 @@ import Modal from "./components/Modal";
 
 import Selector from "./components/Selector";
 import My_friends from "./components/My_friends";
+
+import RecoverPassword from "./components/RecoverPassword";
+
 import My_info from "./components/My_info";
 
 import Booking from "./commons/Bookings";
+
 
 const App = () => {
   const navigate = useNavigate();
@@ -45,6 +49,7 @@ const App = () => {
         <Route path="/" element={user?._id ? <Welcome /> : <Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
+        <Route path="/recover" element={<RecoverPassword />} />
         <Route
           path="/mi_perfil"
           element={

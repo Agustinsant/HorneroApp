@@ -839,6 +839,12 @@ hr {
   border-style: none !important;
 }
 
+
+.recover {
+  text-align: center;
+}
+
+
 .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
   background-color: #bfd732;
   display: none;
@@ -849,6 +855,7 @@ hr {
 }
 
 /* --------- RESERVAS ---------- */
+
 
 .booking_container {
   border-radius: 15px;
