@@ -6,13 +6,11 @@ export const getCalendar = async (deskId) => {
 };
 
 export const addEventCalendar = async (deskId, eventObject) => {
-  const {title, start, end, extendedProps} = eventObject
+  const {start, end, extendedProps} = eventObject
   const newEvent = await axios.post(`http://localhost:3001/api/calendar/add/${deskId}`, {
-      title: title,
       start: start,
       end: end,
       userId: extendedProps.userId,
-      userImg: extendedProps.userImg,
   })
   return newEvent.data.calendarEvent;
 };
@@ -28,6 +26,6 @@ export const updateEventCalendar = async (evenId, eventObject) => {
 
 export const getUserBooking= async (userId) => {
   const booking = await axios.get(`http://localhost:3001/api/calendar/all/${userId}`)
-  console.log("userBooking", booking)
   return booking.data
 };
+
