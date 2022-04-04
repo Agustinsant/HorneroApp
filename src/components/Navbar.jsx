@@ -19,19 +19,27 @@ const NavbarComponent = () => {
   const user = useSelector((state) => state.user.data);
   const token = localStorage.getItem("token");
 
+  useEffect(() => {
+    if (!token) navigate("/login");
+    else if (token) {
+      dispatch(persistUser(token));
+     
+    }
+  }, []);
+
   const imgProfile = imgs(`./${user?.img || "nophoto.jpg"}`);
 
   const logoutUser = (e) => {
     e.preventDefault();
     dispatch(logOut());
     setOpenMenu(false);
-
+    navigate("/")
     swal({
       text: "Deslogueo Exitoso!",
       icon: "success",
-      timer: 2000,
+      timer: 1000,
       buttons: false,
-    }).then(() => navigate("/"));
+    });
   };
 
   return (
@@ -43,7 +51,7 @@ const NavbarComponent = () => {
           </Link>
         </div>
         <div className="navMenu">
-          {isLogged && (
+          {user && (
             <div className="navProfilePick">
               <img src={imgProfile}></img>
             </div>
@@ -61,7 +69,7 @@ const NavbarComponent = () => {
               openMenu ? "dropDownSubMenuOpen" : "dropDownSubMenuClosed"
             }
           >
-            {isLogged ? (
+            {user ? (
               <Link
                 onClick={() => setOpenMenu(false)}
                 className="linksNav"
@@ -72,7 +80,7 @@ const NavbarComponent = () => {
             ) : (
               <></>
             )}
-            {isLogged ? (
+            {user ? (
               <button className="logOutBtn" onClick={logoutUser}>
                 Logout
               </button>

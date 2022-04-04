@@ -18,9 +18,9 @@ const MyProfile = ({ modalState, setModalState }) => {
   const imgProfile = imgs(`./${user.img || 'nophoto.jpg' }`)
 
   useEffect(() => {
-    if (!isLogged) navigate("/login");
+    if (!user || !isLogged) navigate("/login");
    
-  }, []);
+  }, [isLogged]);
 
   return (
     <div className="profile_container">
