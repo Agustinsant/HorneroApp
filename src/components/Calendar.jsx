@@ -108,6 +108,14 @@ const Calendar = ({ deskId }) => {
     rendering();
   } 
 
+  /* -------------  OVERLAP FUNCTION ------------ */
+  const handleOverlap = () => {
+    swal("Select an available time", {
+      icon: "error",
+      buttons: false,
+      timer: 1250
+    });
+  }
 
 
   /* -------------  EVENT VIEW FUNCTION ------------ */
@@ -133,6 +141,8 @@ const Calendar = ({ deskId }) => {
     );
   };
 
+  
+
 
   /* ---------- COMPONENT --------- */
   return (
@@ -145,6 +155,7 @@ const Calendar = ({ deskId }) => {
         footerToolbar={{center: "dayGridMonth timeGridDay"}}
         initialView="dayGridMonth"
         events={events} 
+        selectOverlap={handleOverlap}
         editable={true}
         selectable={true}
         navLinks={true}
