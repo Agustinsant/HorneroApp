@@ -154,6 +154,11 @@ const Calendar = ({ deskId }) => {
         headerToolbar={{ right: "next", center: "title", left: "prev"}}
         footerToolbar={{center: "dayGridMonth timeGridDay"}}
         initialView="dayGridMonth"
+        businessHours= {{
+          daysOfWeek: [ 1, 2, 3, 4, 5 ], 
+          startTime: '07:00', 
+          endTime: '21:00',
+        }}
         events={events} 
         selectOverlap={handleOverlap}
         editable={true}
