@@ -17,7 +17,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(multer({dest: path.join(__dirname,'../src/storage/upload/temp')}).single('image'))
+app.use(multer({dest: path.join(__dirname,'./storage/upload')}).single('image'))
 
 app.use('/api', routes)
 

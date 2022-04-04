@@ -40,7 +40,7 @@ const UserSchema = new Schema({
     },
     img: {
         type: String,
-        default: 'nophoto.jpg'
+        default: 'https://hornero-app.s3.amazonaws.com/no-user-image-icon-3.jpg'
     }
 })
 //HASH PASSWORD
