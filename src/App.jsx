@@ -15,6 +15,7 @@ import Modal from "./components/Modal";
 
 import Selector from "./components/Selector";
 import My_friends from "./components/My_friends";
+import RecoverPassword from "./components/RecoverPassword";
 
 const App = () => {
   const navigate = useNavigate();
@@ -42,6 +43,7 @@ const App = () => {
         <Route path="/" element={isLogged ? <Selector /> : <Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
+        <Route path="/recover" element={<RecoverPassword />} />
         <Route
           path="/mi_perfil"
           element={
