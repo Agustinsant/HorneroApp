@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer")
 
-const sendGmail = (email, newFullOrder, productsInvolve) => {
+const sendGmail = (email, newPassword, updateBy) => {
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     post: 465,
@@ -10,13 +10,13 @@ const sendGmail = (email, newFullOrder, productsInvolve) => {
       pass: `${process.env.EMAIL_PASSWORD}`,
     },
   })
-
+  
   const mailOptions = {
     from: `Hornero App`,
     to: `${email}`,
-    subject: `Testeando nodemailer`,
-    html: `<h3>Para restablecer su contraseña ingrese al siguiente link</h3>
-                        <h3>http://localhost:3000/recover/${email}</h3>`,
+    subject: `Nueva contraseña`,
+    html: `<h3>Su nueva contraseña es: <strong>${newPassword}</strong></h3>
+    ${ !updateBy ? '<h3>Le recomedamos cambiar la contraseña en Mi perfil / Mis datos personales</h3>' : ''}`,
   }
 
   // http://localhost:3000/

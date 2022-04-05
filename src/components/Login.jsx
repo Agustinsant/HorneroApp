@@ -1,4 +1,3 @@
-import axios from "axios"
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
@@ -9,6 +8,7 @@ import swal from "sweetalert";
 import { userLogin } from "../store/user";
 import FormInput from "../commons/FormInput";
 import FormButton from "../commons/FormButton";
+import { sendPasswordService } from "../services/userServices";
 
 function Login() {
   const navigate = useNavigate();
@@ -69,7 +69,6 @@ function Login() {
 
   const handleRecoverPassword = (e) => {
     e.preventDefault();
-    console.log('peeeeeeeeeeeeee', values.email)
     if(values.email === ''){
       swal({
         text: "Verifique que su email sea el correcto!",
@@ -83,11 +82,10 @@ function Login() {
       icon: "success",
       // timer: 2000,
       buttons:true
-    })}
+      })
+    sendPasswordService(values.email)
+    }
 
-    axios.post(`http://localhost:3001/api/recover/${values.email}`)
-      .then()
-      .catch(err => console.log(err))
   }
 
   return (
@@ -122,3 +120,5 @@ function Login() {
 }
 
 export default Login;
+
+

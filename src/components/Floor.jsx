@@ -1,42 +1,70 @@
 import { useState } from "react";
-import { Stage, Layer, Rect } from "react-konva";
+import { Stage, Layer, Rect, Group, Image } from "react-konva";
 import Calendar from "./Calendar";
+import useImage from "use-image";
+import Map from "../commons/Map";
 
 function Floor({ floor }) {
   const { desks } = floor;
   const [desk, setDesk] = useState([]);
+  const [deskCalendarUp, setDeskCalendarUp] = useState(false);
 
   const onClick = (e) => {
-    console.log(e.target.attrs);
     setDesk(e.target.attrs);
+    setDeskCalendarUp((prev) => !prev);
+  };
+  const closeCalendar = () => {
+    setDeskCalendarUp((prev) => !prev);
   };
 
   return (
     <>
       <div className="floor_container">
-        <Stage width={320} height={320}>
+        <Stage width={600} height={300}>
           <Layer>
+            <Map url={floor.imgFloor} />
             {desks.map((desk) => (
-              <Rect
-                calendar={desk.calendar}
-                key={desk._id}
-                id={desk._id}
-                x={desk.positionX}
-                y={desk.positionY}
-                width={35}
-                height={20}
-                fill="#39B54A"
-                rotation={desk.rotation}
-                onClick={onClick}
-                onTap={onClick}
-              />
+              <Group onClick={onClick} onTap={onClick}>
+                <Rect
+                  calendar={desk.calendar}
+                  key={desk._id}
+                  id={desk._id}
+                  x={180 + 7.5}
+                  y={40 + 10}
+                  width={15}
+                  height={15}
+                  fill="#39B54A"
+                  rotation={0}
+                  onClick={onClick}
+                  onTap={onClick}
+                  stroke={0.1}
+                />
+                <Rect
+                  calendar={desk.calendar}
+                  key={desk._id}
+                  id={desk._id}
+                  x={180}
+                  y={40}
+                  width={30}
+                  height={18}
+                  fill="#39B54A"
+                  rotation={0}
+                  stroke={0.1}
+                />
+              </Group>
             ))}
           </Layer>
         </Stage>
       </div>
-      <div className="desk__calendar">
-        {desk.id && <Calendar deskId={desk.id} />}
-      </div>
+      {deskCalendarUp ? (
+        <div className="desk__calendar">
+          {desk.id && (
+            <Calendar deskId={desk.id} closeCalendar={closeCalendar} />
+          )}
+        </div>
+      ) : (
+        <></>
+      )}
     </>
   );
 }
