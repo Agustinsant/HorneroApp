@@ -1,8 +1,21 @@
 import React from "react";
+import {useDispatch, useSelector} from 'react-redux'
+import {addFriend, removeFriend} from '../store/user'
 import { FaUserPlus, FaUserMinus } from "react-icons/fa";
 
-const FrienCard = ({ img, name, friend }) => {
-  console.log(img, name, friend);
+const FrienCard = ({ friendId, img, name, friend }) => {
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.user.data)
+
+  const handleAdd = () => {
+    dispatch(addFriend({userId: user._id, friendId}))
+  }
+
+  const handleRemove = () => {
+    dispatch(removeFriend({userId: user._id, friendId}))
+  }
+
+  
   return (
     <div className="cardContainer">
       <div className="cardPhotoContainer">
@@ -12,12 +25,12 @@ const FrienCard = ({ img, name, friend }) => {
 
         {!friend && (
           <button className="friendIconsAdd">
-            <FaUserPlus className="addRemoveFrienIcon" />
+            <FaUserPlus onClick={handleAdd} className="addRemoveFrienIcon" />
           </button>
         )}
         {friend && (
           <button className="friendIconsRemove">
-            <FaUserMinus className="addRemoveFrienIcon" />
+            <FaUserMinus onClick={handleRemove} className="addRemoveFrienIcon" />
           </button>
         )}
       </div>

@@ -1,17 +1,13 @@
 import axios from "axios";
 
-export const userLoginService = async ({email, password}) => {
-  const user = await axios.post("http://localhost:3001/api/user/login", {email, password});
-  localStorage.setItem('token', user.data.data.token )
- 
-  
+export const userLoginService = async ({ email, password }) => {
+  const user = await axios.post("http://localhost:3001/api/user/login", {
+    email,
+    password,
+  });
+  localStorage.setItem("token", user.data.data.token);
+
   return user.data.data.token;
-};
-
-export const getUsersService = async () => {
-  const users = await axios.get("http://localhost:3001/api/user/allUsers");
-
-  return users.data[users.data.length - 1];
 };
 
 export const signInUserSerice = async ({ name, city, email, password }) => {
@@ -20,28 +16,61 @@ export const signInUserSerice = async ({ name, city, email, password }) => {
     city,
     email,
     password,
-    
   });
 
   return user;
 };
 
 export const persistUserSerice = async (token) => {
-  const user = await axios ({
-    method: 'GET',
-    headers: {'auth-token' : token},
-    url: "http://localhost:3001/api/user/me"})
+  const user = await axios({
+    method: "GET",
+    headers: { "auth-token": token },
+    url: "http://localhost:3001/api/user/me",
+  });
 
-    localStorage.setItem('user', JSON.stringify(user.data))
+  localStorage.setItem("user", JSON.stringify(user.data));
 
-  return user.data
-}
+  return user.data;
+};
 
 export const logOutService = async () => {
-  localStorage.removeItem('token')
-  localStorage.removeItem('user')
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+};
+
+export const editUserService = async ({ id, name, city, email, password }) => {
+  const user = await axios.post(
+    `http://localhost:3001/api/user/updateUser/${id}`,
+    { name, city, email, password }
+  );
+  return user.data;
+};
+
+export const getUserById = async (userId) => {
+  const user = await axios.get(`http://localhost:3001/api/user/${userId}`);
+  return user.data;
+};
+
+export const addFriendService = async ({userId, friendId}) => {
+  const user = await axios.post(`http://localhost:3001/api/user/${userId}/addFriend`, {friendId});
+  return user.data;
 }
 
+
+export const removeFriendService = async ({userId, friendId}) => {
+  const user = await axios({
+    method: 'DELETE',
+    data: {friendId},
+    url: `http://localhost:3001/api/user/${userId}/deletefriend`
+  });
+  return user.data;
+}
+
+export const getAllFriendsService = async (userId) => {
+  const friends = await axios.get(`http://localhost:3001/api/user/${userId}/allFriends`)
+
+  return friends.data
+}
 export const editUserService = async ({id, name, city, email}) => {
   const user = await axios.post(`http://localhost:3001/api/user/updateUser/${id}`, {name, city, email} )
   return user.data
@@ -60,4 +89,5 @@ export const getUserById = async (userId) => {
 export const sendPasswordService = async (email) => {
   const user = await axios.post(`http://localhost:3001/api/recover/${email}`)
   return user.data
+
 }

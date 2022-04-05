@@ -1,42 +1,38 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import * as usersServices from "../services/userServices";
+import * as userServices from "../services/userServices";
 
 const userInitialState = {
   loading: false,
   data: {},
+  friends:[],
   error: "",
   isLogged: false,
 };
 
 export const userLogin = createAsyncThunk(
   "LOGIN",
-  usersServices.userLoginService
-);
-
-export const getUsers = createAsyncThunk(
-  "GET_USERS",
-  usersServices.getUsersService
+  userServices.userLoginService
 );
 
 export const signInUser = createAsyncThunk(
   "SIGN_IN",
-  usersServices.signInUserSerice
+  userServices.signInUserSerice
 );
 
 export const persistUser = createAsyncThunk(
   "PERSIST",
-  usersServices.persistUserSerice
+  userServices.persistUserSerice
 );
 
-export const logOut = createAsyncThunk(
-  "LOGOUT",
-  usersServices.logOutService
-);
+export const logOut = createAsyncThunk("LOGOUT", userServices.logOutService);
 
 export const editUser = createAsyncThunk(
-  "LOGOUT",
-  usersServices.editUserService
+  "EDIT_USER",
+  userServices.editUserService
 );
+
+
+export const addFriend = createAsyncThunk("ADD_FRIEND", userServices.addFriendService);
 
 export const editUserPassword = createAsyncThunk(
   "EDIT_USER_PASSWORD",
@@ -44,6 +40,10 @@ export const editUserPassword = createAsyncThunk(
 );
 
 
+
+export const removeFriend = createAsyncThunk("REMOVE_FRIEND", userServices.removeFriendService)
+
+export const getAllFriends = createAsyncThunk("GET_ALL_FRIENDS", userServices.getAllFriendsService)
 
 const userSlice = createSlice({
   name: "user",
@@ -53,20 +53,10 @@ const userSlice = createSlice({
       state.loading = true;
     },
     [userLogin.fulfilled]: (state, action) => {
-      state.isLogged = true
+      state.isLogged = true;
       state.loading = false;
     },
     [userLogin.rejected]: (state, action) => {
-      state.error = action.error.message;
-    },
-    [getUsers.pending]: (state) => {
-      state.loading = true;
-    },
-    [getUsers.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.loading = false;
-    },
-    [getUsers.rejected]: (state, action) => {
       state.error = action.error.message;
     },
     [signInUser.pending]: (state) => {
@@ -82,8 +72,8 @@ const userSlice = createSlice({
       state.loading = true;
     },
     [persistUser.fulfilled]: (state, action) => {
-      state.data = action.payload
-      state.isLogged = true
+      state.data = action.payload;
+      state.isLogged = true;
       state.loading = false;
     },
     [persistUser.rejected]: (state, action) => {
@@ -104,12 +94,42 @@ const userSlice = createSlice({
       state.loading = true;
     },
     [editUser.fulfilled]: (state, action) => {
-      state.data = action.payload
+      state.data = action.payload;
       state.loading = false;
     },
     [editUser.rejected]: (state, action) => {
       state.error = action.error.message;
     },
+
+    [addFriend.pending]: (state) => {
+      state.loading = true;
+    },
+    [addFriend.fulfilled]: (state, action) => {
+      state.data = action.payload;
+      state.loading = false;
+    },
+    [addFriend.rejected]: (state, action) => {
+      state.error = action.error.message;
+    },
+    [removeFriend.pending]: (state) => {
+      state.loading = true;
+    },
+    [removeFriend.fulfilled]: (state, action) => {
+      state.data = action.payload;
+      state.loading = false;
+    },
+    [removeFriend.rejected]: (state, action) => {
+      state.error = action.error.message;
+    },
+    [getAllFriends.pending]: (state) => {
+      state.loading = true;
+    },
+    [getAllFriends.fulfilled]: (state, action) => {
+      state.friends = action.payload;
+      state.loading = false;
+    },
+    [getAllFriends.rejected]: (state, action) => {
+
     [editUserPassword.pending]: (state) => {
       state.loading = true;
     },
@@ -118,6 +138,7 @@ const userSlice = createSlice({
       state.loading = false;
     },
     [editUserPassword.rejected]: (state, action) => {
+
       state.error = action.error.message;
     }
   },
