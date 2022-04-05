@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FaUserEdit, FaReply, FaAngleRight } from "react-icons/fa";
-import { editUser } from "../store/user";
+import { editUser, editUserPassword } from "../store/user";
 import swal from "sweetalert";
 
 import useInput from "../hooks/useInput";
@@ -12,10 +12,12 @@ const My_info = () => {
   const name = useInput();
   const email = useInput();
   const city = useInput();
+  const password = useInput();
 
   const [nameEdit, setNameEdit] = useState(false);
   const [emailEdit, setEmailEdit] = useState(false);
   const [cityEdit, setCityEdit] = useState(false);
+  const [passwordEdit, setPasswordEdit] = useState(false);
 
   const handleNameSubmit = (e) => {
     e.preventDefault();
@@ -64,6 +66,22 @@ const My_info = () => {
     }).then(() => setCityEdit(!cityEdit));
     
   };
+  const handlePasswordSubmit = (e) => {
+    e.preventDefault();
+    dispatch(
+      editUserPassword({
+        id: user._id,
+        password: password.value,
+      })
+    );
+    swal({
+      text: "Contraseña modificada con éxito!",
+      icon: "success",
+      timer: 1000,
+      buttons:false
+    }).then(() => setPasswordEdit(!passwordEdit));
+    
+  };
 
   return (
     <div className="misDatosContainer">
@@ -74,7 +92,7 @@ const My_info = () => {
             <input
               {...name}
               type="text"
-              placeholder="Editar nombre y apellido"
+              placeholder="Editar nombre y apellido."
               disabled={!nameEdit}
             />
           ) : (
@@ -193,6 +211,50 @@ const My_info = () => {
             </button>
           )}
           {cityEdit && (
+            <button className="misDatosBtns" type="submit">
+              <FaAngleRight className="submitInfoIcon" />
+            </button>
+          )}
+        </div>
+      </form>
+      <hr className="hrDatos"></hr>
+      <form onSubmit={handlePasswordSubmit}>
+        <div className="editInputsContainer">
+          {passwordEdit ? (
+            <input
+              {...password}
+              type="password"
+              placeholder="Editar contraseña."
+              disabled={!passwordEdit}
+            />
+          ) : (
+            <h5>**********</h5>
+          )}
+        </div>
+        <div className="editBtnsContainer">
+          {passwordEdit ? (
+            <button
+              className="misDatosBtns"
+              onClick={(e) => {
+                e.preventDefault();
+                name.setValue("");
+                setPasswordEdit(!passwordEdit);
+              }}
+            >
+              <FaReply className="cancelEditIcon" />
+            </button>
+          ) : (
+            <button
+              className="misDatosBtns"
+              onClick={(e) => {
+                e.preventDefault();
+                setPasswordEdit(!passwordEdit);
+              }}
+            >
+              <FaUserEdit className="editInfoIcon" />
+            </button>
+          )}
+          {passwordEdit && (
             <button className="misDatosBtns" type="submit">
               <FaAngleRight className="submitInfoIcon" />
             </button>

@@ -38,6 +38,11 @@ export const editUser = createAsyncThunk(
   usersServices.editUserService
 );
 
+export const editUserPassword = createAsyncThunk(
+  "EDIT_USER_PASSWORD",
+  usersServices.editUserPasswordService
+);
+
 
 
 const userSlice = createSlice({
@@ -103,6 +108,16 @@ const userSlice = createSlice({
       state.loading = false;
     },
     [editUser.rejected]: (state, action) => {
+      state.error = action.error.message;
+    },
+    [editUserPassword.pending]: (state) => {
+      state.loading = true;
+    },
+    [editUserPassword.fulfilled]: (state, action) => {
+      state.data = action.payload
+      state.loading = false;
+    },
+    [editUserPassword.rejected]: (state, action) => {
       state.error = action.error.message;
     }
   },
