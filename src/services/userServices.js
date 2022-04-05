@@ -42,7 +42,7 @@ export const logOutService = async () => {
   localStorage.removeItem('user')
 }
 
-export const editUserService = async ({id, name, city, email}) => {
-  const user = await axios.post(`http://localhost:3001/api/user/updateUser/${id}`, {name, city, email} )
+export const editUserService = async ({id, name, city, email, password}) => {
+  const user = await axios.post(`http://localhost:3001/api/user/updateUser/${id}`, {name, city, email, password} )
   return user.data
 }

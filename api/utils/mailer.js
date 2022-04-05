@@ -11,16 +11,6 @@ const sendGmail = (email, newFullOrder, productsInvolve) => {
     },
   })
 
-  // const mailOptions = {
-  //   from: `Hornero App`,
-  //   to: `${email}`,
-  //   subject: `Confirmacion de compra Nª ${newFullOrder.id}`,
-  //   html: `<h3>El estado de su compra es: ${newFullOrder.state}</h3>
-  //   <h3>La dirección de envío: ${newFullOrder.address}</h3>
-  //   <h3>Método de pago elegido : ${newFullOrder.payment}</h3>
-  //   <h3>El total de su compra es $${newFullOrder.total}</h3>`,
-  // };
-
   const mailOptions = {
     from: `Hornero App`,
     to: `${email}`,
