@@ -36,7 +36,7 @@ export const addFriend = createAsyncThunk("ADD_FRIEND", userServices.addFriendSe
 
 export const editUserPassword = createAsyncThunk(
   "EDIT_USER_PASSWORD",
-  usersServices.editUserPasswordService
+  userServices.editUserPasswordService
 );
 
 
@@ -129,6 +129,8 @@ const userSlice = createSlice({
       state.loading = false;
     },
     [getAllFriends.rejected]: (state, action) => {
+      state.error = action.error.message;
+    },
 
     [editUserPassword.pending]: (state) => {
       state.loading = true;

@@ -138,7 +138,7 @@ const Calendar = ({ deskId, closeCalendar }) => {
 
           {
             //mapear imagenes cierta cantidad
-            <img className="userImg_calendar" src={imgs(`./${userImg}`)} />
+            <img className="userImg_calendar" src={userImg} />
           }
 
         </div>
