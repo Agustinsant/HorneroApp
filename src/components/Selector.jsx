@@ -3,18 +3,19 @@ import { useSelector } from "react-redux";
 
 import Floor from "./Floor";
 import Welcome from "./Welcome";
+import CalendarMonth from "../commons/CalendarMonth";
 import { getFloor } from "../services/buildingServices";
 
 function Selector() {
   const buildings = useSelector((state) => state.buildings.data);
 
   const [floors, setFloors] = useState([]);
-  const [floor, setFloor] = useState([]);
+  const [floor, setFloor] = useState({});
+  const [dateSelector, setDateSelector] = useState(false);
+  const [day, setDay] = useState("");
 
   const handleSelectBuilding = (e) => {
     let selectedBuilding = e.target.value;
-    console.log(selectedBuilding);
-    console.log(buildings);
     let getData = buildings.filter((b) => b.city === selectedBuilding)[0]
       .floors;
     setFloors(getData);
@@ -24,7 +25,11 @@ function Selector() {
     let selectedFloor = e.target.value;
     let getData = floors.filter((f) => f.name === selectedFloor)[0]._id;
     let data = await getFloor(getData);
+    console.log("floor", data);
     setFloor(data);
+  };
+  const showCalendarMonth = () => {
+    setDateSelector(true);
   };
 
   return (
@@ -67,9 +72,15 @@ function Selector() {
               ) : (
                 <></>
               )}
+              {floor._id ? (
+                <button onClick={showCalendarMonth}>Date</button>
+              ) : (
+                <></>
+              )}
+              {}
             </div>
 
-            {floor.desks && <Floor floor={floor} />}
+            {floor.desks && <Floor floor={floor} day={day} />}
           </div>
         </div>
       )}
