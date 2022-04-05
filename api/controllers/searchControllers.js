@@ -1,4 +1,5 @@
 const { UserModel } = require('../models/users')
+const { DeskModel, CalendarModel } = require ('../models/buildings')
 
 module.exports.getForNameOrEmail = async (req, res, next) => {
 
@@ -29,4 +30,45 @@ module.exports.getForNameOrEmail = async (req, res, next) => {
     catch (error) {
         next(error)
     }
+}
+
+module.exports.EventDayByDeskId = async (req, res, next) => {
+
+    const { deskId , date } = req.body
+
+    const validateDate = new RegExp("^((?!"+date+").)*$")
+
+    try {
+        
+      const desk = await DeskModel.findById(deskId)
+      
+      const eventsDay =  desk.calendarEvent.filter(event => validateDate.test(event.start) === false)
+        
+        return res.status(200).send(eventsDay)
+    }
+    catch (error) {
+        next(error)
+    }
+    
+}
+
+module.exports.EventDayByFloorId = async (req, res, next) => {
+
+    const { floorId , date } = req.body
+
+    const validateDate = new RegExp("^((?!"+date+").)*$")
+
+    try {
+        
+      const calendars = await CalendarModel.find({floorId})
+      
+      const eventsDay = calendars.filter(event => validateDate.test(event.start) === false)
+
+      return res.status(200).send(eventsDay)
+    
+    }
+    catch (error) {
+        next(error)
+    }
+    
 }
