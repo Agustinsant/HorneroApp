@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import noPhoto from '../resources/img/noPhoto.webp'
 
-const imgs = require.context("../storage/upload", true);
+
 
 const MyProfile = ({ modalState, setModalState }) => {
   
@@ -15,7 +15,7 @@ const MyProfile = ({ modalState, setModalState }) => {
   
   const user = useSelector((state) => state.user.data);
   const isLogged = useSelector((state) => state.user);
-  const imgProfile = imgs(`./${user.img || 'nophoto.jpg' }`)
+  
 
   useEffect(() => {
     if (!user || !isLogged) navigate("/login");
@@ -33,7 +33,7 @@ const MyProfile = ({ modalState, setModalState }) => {
           <FaUserEdit className="editPhotoIcon" />
         </button>
         <div className="profile_photo">
-          <img src={imgProfile} />
+          <img src={user.img} />
         </div>
       </div>
 

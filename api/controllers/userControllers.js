@@ -1,12 +1,18 @@
-const { UserModel } = require("../models/users")
-const bcrypt = require("bcrypt")
-const { randomName } = require("../utils/helpers")
-const path = require("path")
-const fs = require("fs-extra")
-const jwt = require("jsonwebtoken")
-require("dotenv").config()
+const { UserModel } = require("../models/users");
+const bcrypt = require("bcrypt");
+const { randomName } = require("../utils/helpers");
+const path = require("path");
+const jwt = require("jsonwebtoken");
+const uploadFile = require("../utils/s3");
+require("dotenv").config();
+
+const fs = require("fs");
+const util = require("util");
+
+const unlinkFile = util.promisify(fs.unlink);
 
 module.exports.Register = async (req, res, next) => {
+
   const { name, city, email, password } = req.body
 
   try {
@@ -17,6 +23,7 @@ module.exports.Register = async (req, res, next) => {
       password,
     }).save()
     return res.status(201).send(user)
+
   } catch (error) {
     next(error)
   }
@@ -83,38 +90,36 @@ module.exports.GetAllUsers = async (req, res, next) => {
 }
 
 module.exports.UpdateUser = async (req, res, next) => {
-  const { id } = req.params
+  const { id } = req.params;
 
-  console.log(req.file)
+  
   const options = {
     returnDocument: "after",
-  }
+  };
   if (req.file) {
-    const imgUrl = randomName()
-    const imgTemPath = req.file.path
-    const ext = path.extname(req.file.originalname).toLocaleLowerCase()
-    const targetPath = path.resolve(`src/storage/upload/${imgUrl}${ext}`)
-    if (ext === ".png" || ext === ".jpg" || ext === ".jpeg" || ext === ".gif")
-      await fs.rename(imgTemPath, targetPath)
+    const file = req.file;
+    const result = await uploadFile(file);
+
     try {
+      await unlinkFile(file.path);
       const user = await UserModel.findByIdAndUpdate(
         id,
-        { img: imgUrl + ext },
+        { img: result.Location },
         options
-      )
-      return res.status(200).send(user)
+      );
+      return res.status(200).send(user);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 
   try {
-    const user = await UserModel.findByIdAndUpdate(id, req.body, options)
-    return res.status(200).send(user)
+    const user = await UserModel.findByIdAndUpdate(id, req.body, options);
+    return res.status(200).send(user);
   } catch (error) {
-    next(error)
+    next(error);
   }
-}
+};
 
 module.exports.updatePassword = async (req, res, next) => {
   const { password } = req.body
@@ -157,15 +162,3 @@ module.exports.Me = async (req, res, next) => {
   } catch (error) {
     next(error)
   }
-}
-
-module.exports.EditImage = async (req, res, next) => {
-  const imgUrl = randomName()
-  const imgTemPath = req.file.path
-  const ext = path.extname(req.file.originalname).toLocaleLowerCase()
-  const targetPath = path.resolve(`public/upload/${imgUrl}${ext}`)
-  if (ext === ".png" || ext === ".jpg" || ext === ".jpeg" || ext === ".gif")
-    await fs.rename(imgTemPath, targetPath)
-  console.log(req.file)
-  res.send("Listo")
-}

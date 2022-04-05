@@ -9,7 +9,7 @@ import swal from "sweetalert";
 
 import { FaBars } from "react-icons/fa";
 
-const imgs = require.context("../storage/upload", true);
+
 
 const NavbarComponent = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -27,8 +27,7 @@ const NavbarComponent = () => {
     }
   }, []);
 
-  const imgProfile = imgs(`./${user?.img || "nophoto.jpg"}`);
-
+  
   const logoutUser = (e) => {
     e.preventDefault();
     dispatch(logOut());
@@ -53,7 +52,7 @@ const NavbarComponent = () => {
         <div className="navMenu">
           {user && (
             <div className="navProfilePick">
-              <img src={imgProfile}></img>
+              <img src={user.img}></img>
             </div>
           )}
 
