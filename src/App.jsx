@@ -46,10 +46,10 @@ const App = () => {
     <div>
       <NavbarComponent />
       <Routes>
+        <Route path="/recover/:email" element={ <RecoverPassword />} />
         <Route path="/" element={user?._id ? <Welcome /> : <Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
-        <Route path="/recover" element={<RecoverPassword />} />
         <Route
           path="/mi_perfil"
           element={

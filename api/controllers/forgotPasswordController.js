@@ -1,15 +1,14 @@
-const sendGmail = require('../utils/mailer')
+const { UserModel } = require("../models/users")
+const sendGmail = require("../utils/mailer")
 
 module.exports.ForgotPassword = async (req, res, next) => {
+  const { email } = req.params
 
-    const { gmail } = req.params
-
-    try {
-        sendGmail(gmail, )
-        return res.send('send')
-    }
-    catch (error) {
-        next(error)
-    }
-
-} 
+  try {
+    const dato = await UserModel.findOne({ email })
+    if (dato) sendGmail(email)
+    res.send("send")
+  } catch (error) {
+    next(error)
+  }
+}

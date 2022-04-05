@@ -12,7 +12,8 @@ const util = require("util");
 const unlinkFile = util.promisify(fs.unlink);
 
 module.exports.Register = async (req, res, next) => {
-  const { name, city, email, password } = req.body;
+
+  const { name, city, email, password } = req.body
 
   try {
     const user = await UserModel({
@@ -20,24 +21,25 @@ module.exports.Register = async (req, res, next) => {
       city,
       email,
       password,
-    }).save();
-    return res.status(201).send(user);
+    }).save()
+    return res.status(201).send(user)
+
   } catch (error) {
-    next(error);
+    next(error)
   }
-};
+}
 
 module.exports.Login = async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password } = req.body
   try {
     //FIND USER
-    const user = await UserModel.findOne({ email });
-    if (!user) return res.status(400).send({ error: "Usuario no encontrado" });
+    const user = await UserModel.findOne({ email })
+    if (!user) return res.status(400).send({ error: "Usuario no encontrado" })
 
     //MATCH PASSWORD
-    const validPassword = await bcrypt.compare(password, user.password);
+    const validPassword = await bcrypt.compare(password, user.password)
     if (!validPassword)
-      return res.status(400).send({ error: "contraseña no válida" });
+      return res.status(400).send({ error: "contraseña no válida" })
 
     //CREATE TOKEN
     const token = jwt.sign(
@@ -46,35 +48,46 @@ module.exports.Login = async (req, res, next) => {
         name: user.name,
       },
       process.env.TOKEN_SECRET
-    );
+    )
 
     res.header("auth-token", token).json({
       error: null,
       data: { token },
-    });
+    })
   } catch (error) {
-    next(error);
+    next(error)
   }
-};
+}
 
 module.exports.GetUser = async (req, res, next) => {
-  const { id } = req.params;
+  const { id } = req.params
   try {
-    const user = await UserModel.findById(id);
-    return res.status(200).send(user);
+    const user = await UserModel.findById(id)
+    return res.status(200).send(user)
   } catch (error) {
-    next(error);
+    next(error)
   }
-};
+}
+
+module.exports.GetUserByEmail = async (req, res, next) => {
+  const { email } = req.params
+  console.log("email ===>", email)
+  try {
+    const user = await UserModel.findOne({ email: email })
+    return res.status(200).send(user)
+  } catch (error) {
+    next(error)
+  }
+}
 
 module.exports.GetAllUsers = async (req, res, next) => {
   try {
-    const users = await UserModel.find({});
-    return res.status(200).send(users);
+    const users = await UserModel.find({})
+    return res.status(200).send(users)
   } catch (error) {
-    next(error);
+    next(error)
   }
-};
+}
 
 module.exports.UpdateUser = async (req, res, next) => {
   const { id } = req.params;
@@ -108,23 +121,44 @@ module.exports.UpdateUser = async (req, res, next) => {
   }
 };
 
-module.exports.DeleteUser = async (req, res, next) => {
-  const { id } = req.params;
-  try {
-    const userDelete = await UserModel.findOneAndRemove(id);
-    return res.status(200).send(userDelete);
-  } catch (error) {
-    next(error);
+module.exports.updatePassword = async (req, res, next) => {
+  const { password } = req.body
+  const { id } = req.params
+
+  const options = {
+    returnDocument: "after",
   }
-};
+  try {
+    const user = await UserModel.findById(id)
+
+    const salt = await bcrypt.genSalt(10)
+    const hash = await bcrypt.hash(password, salt)
+    user.password = hash
+    user.salt = salt
+
+    const userUpdate = await UserModel.findOneAndUpdate(id, user, options)
+    return res.status(200).send(userUpdate)
+    
+  } catch (error) {
+    next(error)
+  }
+}
+
+module.exports.DeleteUser = async (req, res, next) => {
+  const { id } = req.params
+  try {
+    const userDelete = await UserModel.findOneAndRemove(id)
+    return res.status(200).send(userDelete)
+  } catch (error) {
+    next(error)
+  }
+}
 
 module.exports.Me = async (req, res, next) => {
-  if (!req.user) return res.status(404).send("User not Found");
+  if (!req.user) return res.status(404).send("User not Found")
   try {
-    const user = await UserModel.findById(req.user._id);
-    return res.status(200).send(user);
+    const user = await UserModel.findById(req.user._id)
+    return res.status(200).send(user)
   } catch (error) {
-    next(error);
+    next(error)
   }
-};
-

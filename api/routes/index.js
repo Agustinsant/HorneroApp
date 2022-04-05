@@ -5,11 +5,8 @@ const building = require('./buildings')
 const floor = require('./floors')
 const desk = require('./desks')
 const calendar = require('./calendar')
-
-const recover = require('./recoverPassword')
-
 const search = require('./search')
-
+const recover = require('./forgotPassword')
 
 router.use("/user", user)
 
@@ -21,9 +18,8 @@ router.use("/desk", desk)
 
 router.use("/calendar", calendar)
 
-router.use("/recover", recover)
-
 router.use("/search", search)
 
+router.use("/recover", recover)
 
 module.exports = router

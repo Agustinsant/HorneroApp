@@ -1,3 +1,4 @@
+import axios from "axios"
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
@@ -66,6 +67,29 @@ function Login() {
     }).then(() => navigate("/"));
   };
 
+  const handleRecoverPassword = (e) => {
+    e.preventDefault();
+    console.log('peeeeeeeeeeeeee', values.email)
+    if(values.email === ''){
+      swal({
+        text: "Verifique que su email sea el correcto!",
+        icon: "error",
+        // timer: 2000,
+        buttons:true
+      })
+    }
+    else { swal({
+      text: "Para restablecer la contraseña, revise su email!",
+      icon: "success",
+      // timer: 2000,
+      buttons:true
+    })}
+
+    axios.post(`http://localhost:3001/api/recover/${values.email}`)
+      .then()
+      .catch(err => console.log(err))
+  }
+
   return (
     <div className="signin">
       <form className="form" onSubmit={handleSubmit}>
@@ -76,12 +100,10 @@ function Login() {
           value={values[inputs[0].name]}
           onChange={onChange}
         />
-        <div className="signin__validationCod">
-          <Link to="/recover">
-            <div className="signin__validationCod--title">
+        <div  className="signin__validationCod">
+            <div onClick={handleRecoverPassword} className="signin__validationCod--title">
               Recuperar contraseña
             </div>
-          </Link>
         </div>
         <FormInput
           {...inputs[1]}
