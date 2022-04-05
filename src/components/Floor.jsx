@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Stage, Layer, Rect } from "react-konva";
 import Calendar from "./Calendar";
 
-function Floor({ floor }) {
+function Floor({ floor, day }) {
   const { desks } = floor;
   const [desk, setDesk] = useState([]);
 
@@ -35,7 +35,7 @@ function Floor({ floor }) {
         </Stage>
       </div>
       <div className="desk__calendar">
-        {desk.id && <Calendar deskId={desk.id} />}
+        {desk.id && <Calendar deskId={desk.id} day={day} />}
       </div>
     </>
   );
