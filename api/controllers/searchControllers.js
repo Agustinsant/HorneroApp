@@ -3,7 +3,7 @@ const { DeskModel, CalendarModel } = require ('../models/buildings')
 
 module.exports.getForNameOrEmail = async (req, res, next) => {
 
-    const { value } = req.body
+    const { value , userId } = req.body
 
     const limit = parseInt(req.query.limit, 10) || 9
 
@@ -15,7 +15,8 @@ module.exports.getForNameOrEmail = async (req, res, next) => {
         if (validateToMail.test(value)) {
 
             const user = await UserModel.paginate({ email: value })
-
+            const newUsers = user.docs.filter(user => user._id.toHexString() != userId)
+            user.docs = newUsers
             return res.status(200).send(user)
 
         }
@@ -23,7 +24,8 @@ module.exports.getForNameOrEmail = async (req, res, next) => {
         else {
             
             const user = await UserModel.paginate({ name: { $regex: value.replace(/\b\w/g, l => l.toUpperCase()) }},{ limit, page })
-
+            const newUsers = user.docs.filter(user => user._id.toHexString() != userId)
+            user.docs = newUsers
             return res.status(200).send(user)
         }
     }
