@@ -14,7 +14,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
-const Calendar = ({ deskId }) => {
+const Calendar = ({ deskId, closeCalendar }) => {
   const user = useSelector((state) => state.user.data);
   const [events, setEvents] = useState([]);
   const imgs = require.context("../storage/upload", true);
