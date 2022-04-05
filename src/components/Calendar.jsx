@@ -12,7 +12,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 const Calendar = ({ deskId }) => {
   const user = useSelector((state) => state.user.data);
   const [events, setEvents] = useState([]);
-  const imgs = require.context("../storage/upload", true);
+  
 
   const rendering = async () => {
     const deskCalendar = await getCalendar(deskId);
@@ -132,7 +132,7 @@ const Calendar = ({ deskId }) => {
       <div className="event_container">
         <div className="image_calendar">
           { //mapear imagenes cierta cantidad
-            <img className="userImg_calendar" src={imgs(`./${userImg}`)} />}
+            <img className="userImg_calendar" src={user.img} />}
         </div>
         <i className="event_calendar">{eventInfo.event.title}</i>
         <b className="event_timeText">{eventInfo.timeText}</b>

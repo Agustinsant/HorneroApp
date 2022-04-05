@@ -3,7 +3,7 @@ const { getForNameOrEmail } = require('../controllers/searchControllers')
 const searchRouter = express.Router()
 
 
-searchRouter.get("/nameOrEmail", getForNameOrEmail )
+searchRouter.post("/nameOrEmail", getForNameOrEmail )
 
 
 

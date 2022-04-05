@@ -2,7 +2,7 @@ const express = require('express')
 const multer = require('multer')
 const userRouter = express.Router()
 
-const { Register, Login, GetAllUsers, DeleteUser, Me, UpdateUser, GetUser, GetUserByEmail, updatePassword }= require('../controllers/userControllers')
+const { Register, Login, GetAllUsers, DeleteUser, Me, UpdateUser, GetUser, GetUserByEmail, updatePassword, GetAllFriends }= require('../controllers/userControllers')
 
 const { AddFriend, DeleteFriend } = require('../controllers/userFriendControllers')
 const { AddBuilding, addFloor, addDesk, DeleteBuilding, DeleteFloor, DeleteDesk } = require('../controllers/userPreferenceControllers')
@@ -18,6 +18,8 @@ userRouter.post('/login', Login) //logueo de usuario
 userRouter.get('/me', verifyToken,  Me)
 
 userRouter.get('/allUsers', GetAllUsers) // traer todos los usuarios
+
+userRouter.get('/:userId/allFriends', GetAllFriends) // traer todos los amigos de un usuario
 
 userRouter.get('/:id', GetUser) // traer un usuario
 

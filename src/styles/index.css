@@ -21,17 +21,6 @@ nav {
 
 /* ------ START NAV STYLES ----- */
 
-.cardImg {
-  width: 80%;
-  overflow: hidden;
-  border-radius: 50%;
-}
-
-.cardImg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
 .navProfilePick {
   margin-right: 20px;
@@ -316,7 +305,7 @@ nav {
   justify-content: center;
   position: absolute;
   bottom: 0px;
-  right: 15px;
+  right: 0px;
   border: solid 4px white;
   width: 35px;
   height: 35px;
@@ -332,7 +321,7 @@ nav {
   justify-content: center;
   position: absolute;
   bottom: 0px;
-  right: 15px;
+  right: 0px;
   border: solid 4px white;
   width: 35px;
   height: 35px;
@@ -362,20 +351,20 @@ nav {
 }
 
 .cardContainer h5 {
-  margin-left: -20px;
+  text-align: center;
   padding: 10px;
   font-size: 14px;
 }
 
 .cardImg {
-  width: 80%;
+  width: 100%;
   overflow: hidden;
   border-radius: 50%;
 }
 
 .cardImg img {
-  width: 100%;
-  height: 100%;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
 }
 
