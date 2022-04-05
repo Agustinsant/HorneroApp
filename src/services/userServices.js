@@ -71,20 +71,14 @@ export const getAllFriendsService = async (userId) => {
 
   return friends.data
 }
-export const editUserService = async ({id, name, city, email}) => {
-  const user = await axios.post(`http://localhost:3001/api/user/updateUser/${id}`, {name, city, email} )
-  return user.data
-} 
+
 
 export const editUserPasswordService = async ({id, password}) => {
   const user = await axios.post(`http://localhost:3001/api/user/updateUserPassword/${id}`, { password } )
   return user.data
 }
 
-export const getUserById = async (userId) => {
-  const user = await axios.get(`http://localhost:3001/api/user/${userId}`)
-  return user.data
-}
+
 
 export const sendPasswordService = async (email) => {
   const user = await axios.post(`http://localhost:3001/api/recover/${email}`)
