@@ -72,15 +72,11 @@ function Selector() {
               ) : (
                 <></>
               )}
-              {floor._id ? (
-                <button onClick={showCalendarMonth}>Date</button>
-              ) : (
-                <></>
-              )}
+              {floor._id ? <input type="date"></input> : <></>}
               {}
             </div>
 
-            {floor.desks && <Floor floor={floor} day={day} />}
+            {floor.desks && <Floor floor={floor} />}
           </div>
         </div>
       )}
