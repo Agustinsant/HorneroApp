@@ -1,6 +1,7 @@
 const { UserModel } = require("../models/users");
 const bcrypt = require("bcrypt");
 const { randomName } = require("../utils/helpers");
+const sendGmail = require("../utils/mailer")
 const path = require("path");
 const jwt = require("jsonwebtoken");
 const uploadFile = require("../utils/s3");
@@ -69,17 +70,6 @@ module.exports.GetUser = async (req, res, next) => {
   }
 }
 
-module.exports.GetUserByEmail = async (req, res, next) => {
-  const { email } = req.params
-  console.log("email ===>", email)
-  try {
-    const user = await UserModel.findOne({ email: email })
-    return res.status(200).send(user)
-  } catch (error) {
-    next(error)
-  }
-}
-
 module.exports.GetAllUsers = async (req, res, next) => {
   try {
     const users = await UserModel.find({})
@@ -121,28 +111,32 @@ module.exports.UpdateUser = async (req, res, next) => {
   }
 };
 
-module.exports.updatePassword = async (req, res, next) => {
-  const { password } = req.body
-  const { id } = req.params
+module.exports.updateUserPassword = async (req, res, next) => {
 
+  const { id } = req.params
+  const { password } = req.body
   const options = {
     returnDocument: "after",
   }
+
   try {
+
     const user = await UserModel.findById(id)
+
+    sendGmail(user.email, password, 'updateByClient')
 
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
     user.password = hash
     user.salt = salt
 
-    const userUpdate = await UserModel.findOneAndUpdate(id, user, options)
-    return res.status(200).send(userUpdate)
+    const passwordUpdate = await UserModel.findByIdAndUpdate( id, user, options)
+    return res.status(200).send(passwordUpdate)
     
   } catch (error) {
     next(error)
   }
-}
+} 
 
 module.exports.DeleteUser = async (req, res, next) => {
   const { id } = req.params
@@ -162,3 +156,4 @@ module.exports.Me = async (req, res, next) => {
   } catch (error) {
     next(error)
   }
+}
