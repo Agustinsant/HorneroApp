@@ -3,7 +3,7 @@ const multer = require('multer')
 const userRouter = express.Router()
 
 
-const { Register, Login, GetAllUsers, DeleteUser, Me, UpdateUser, GetUser, GetUserByEmail, updatePassword, GetAllFriends }= require('../controllers/userControllers')
+const { Register, Login, GetAllUsers, DeleteUser, Me, UpdateUser, GetUser, GetUserByEmail, updateUserPassword, GetAllFriends }= require('../controllers/userControllers')
 
 
 const { AddFriend, DeleteFriend } = require('../controllers/userFriendControllers')
