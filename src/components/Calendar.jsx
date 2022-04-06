@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { FaRegTimesCircle } from "react-icons/fa";
 import { getUserById } from "../services/userServices";
-import {getCalendar, addEventCalendar, deleteEventCalendar, updateEventCalendar} from "../services/calendarServices";
+import {getCalendar, addEventCalendar, deleteEventCalendar, updateEventCalendar, getDayEventsInDesk} from "../services/calendarServices";
 import swal from "sweetalert";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -14,13 +14,12 @@ import interactionPlugin from "@fullcalendar/interaction";
 
 const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
   const user = useSelector((state) => state.user.data);
-  const [allEvents, setAllEvents] = useState([]);
-  const [dayEvents, setDayEvents] = useState([])
+  const [events, setEvents] = useState([]);
+ 
 
 
   const rendering = async () => {
-    const deskCalendar = await getCalendar(deskId);
-    
+    const deskCalendar =  day ? (await getDayEventsInDesk(day, deskId)): (await getCalendar(deskId));
     const addTitleAndImg = await Promise.all(
       deskCalendar.map(async (event) => {
         let user = {}
@@ -32,7 +31,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
         return event;
       })
     );
-    setAllEvents(addTitleAndImg);
+    setEvents(addTitleAndImg);
   };
 
   useEffect(() => {
@@ -185,7 +184,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
             startTime: "07:00",
             endTime: "21:00",
           }}
-          events={day ? (dayEvents): (allEvents) }
+          events={events}
           selectOverlap={handleOverlap}
           editable={true}
           selectable={true}
