@@ -165,7 +165,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
       <div className="close-buton-container">
         <FaRegTimesCircle className="close_calendar" onClick={() => setDeskCalendarUp(false)}/>
       </div>
-      <div className="calendar_containe">
+      <div className="calendar_container">
         <FullCalendar
           height={400}
           longPressDelay={200}
