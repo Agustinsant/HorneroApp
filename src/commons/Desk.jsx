@@ -1,4 +1,4 @@
-import { Stage, Layer, Rect, Group, Image } from "react-konva";
+import { Rect } from "react-konva";
 
 function Desk({ desk }) {
   const chairPosition = {
@@ -17,11 +17,10 @@ function Desk({ desk }) {
         height={10}
         fill="#39B54A"
         rotation={0}
-        stroke={0.1}
       />
       <Rect
         calendar={desk.calendar}
-        key={desk._id + 1}
+        key={desk._id.concat("chair")}
         id={desk._id}
         x={desk.positionX}
         y={desk.positionY}
@@ -29,7 +28,6 @@ function Desk({ desk }) {
         height={12}
         fill="#39B54A"
         rotation={0}
-        stroke={0.1}
       />
     </>
   );

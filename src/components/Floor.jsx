@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-import { Stage, Layer, Rect, Group, Image } from "react-konva";
+import { useState } from "react";
+import { Stage, Layer, Group } from "react-konva";
 import Calendar from "./Calendar";
-import useImage from "use-image";
 import Map from "../commons/Map";
 import Desk from "../commons/Desk";
 
@@ -22,7 +21,7 @@ function Floor({ floor, day }) {
           <Layer>
             <Map url={floor.imgFloor} />
             {desks.map((desk) => (
-              <Group onClick={onClick} onTap={onClick}>
+              <Group onClick={onClick} onTap={onClick} key={desk._id}>
                 <Desk desk={desk} />
               </Group>
             ))}
