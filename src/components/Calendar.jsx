@@ -10,11 +10,11 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
 
-const Calendar = ({ deskId }) => {
+const Calendar = ({ deskId, closeCalendar }) => {
   const user = useSelector((state) => state.user.data);
   const [events, setEvents] = useState([]);
-  const [view, setView] = useState("dayGridMonth")
- 
+  
+
 
   const rendering = async () => {
     const deskCalendar = await getCalendar(deskId);
@@ -134,10 +134,12 @@ const Calendar = ({ deskId }) => {
     return (
       <div className="event_container">
         <div className="image_calendar">
+
           {
             //mapear imagenes cierta cantidad
             <img className="userImg_calendar" src={userImg} />
           }
+
         </div>
         <i className="event_calendar">{eventInfo.event.title}</i>
         <b className="event_timeText">{eventInfo.timeText}</b>

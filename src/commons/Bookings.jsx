@@ -8,10 +8,8 @@ import listPlugin from '@fullcalendar/list';
 
 const Booking = ({userId}) => {
     const user = useSelector(state => state.user.data);
-    //const match = useMatch("./mis_reservas");
     const [events, setEvents] = useState([]);
-    const imgs = require.context("../storage/upload", true);
-    const imgProfile = user.img ? (imgs(`./${user.img}`)) : (noPhoto)
+    
     
     useEffect(async () => {
         if(userId) {
@@ -29,7 +27,7 @@ const Booking = ({userId}) => {
             <h6>Mi Reservas</h6>
             <div className="profilePhotoContainer">
                 <div className="profile_photo">
-                    <img src={imgProfile || noPhoto} />
+                    <img src={user.img} />
                 </div>
             </div>
             <h5>{user.name}</h5>

@@ -21,17 +21,6 @@ nav {
 
 /* ------ START NAV STYLES ----- */
 
-.cardImg {
-  width: 80%;
-  overflow: hidden;
-  border-radius: 50%;
-}
-
-.cardImg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
 .navProfilePick {
   margin-right: 20px;
@@ -316,7 +305,7 @@ nav {
   justify-content: center;
   position: absolute;
   bottom: 0px;
-  right: 15px;
+  right: 0px;
   border: solid 4px white;
   width: 35px;
   height: 35px;
@@ -332,7 +321,7 @@ nav {
   justify-content: center;
   position: absolute;
   bottom: 0px;
-  right: 15px;
+  right: 0px;
   border: solid 4px white;
   width: 35px;
   height: 35px;
@@ -362,20 +351,20 @@ nav {
 }
 
 .cardContainer h5 {
-  margin-left: -20px;
+  text-align: center;
   padding: 10px;
   font-size: 14px;
 }
 
 .cardImg {
-  width: 80%;
+  width: 100%;
   overflow: hidden;
   border-radius: 50%;
 }
 
 .cardImg img {
-  width: 100%;
-  height: 100%;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
 }
 
@@ -683,11 +672,12 @@ hr {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 .selector__box {
   width: 75vh;
-  height: 20vh;
+  height: 28vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -704,7 +694,10 @@ hr {
   flex-direction: column;
   align-items: center;
 }
-.selector__inputs select {
+.selector__inputs select,
+.selector__inputs input {
+  border-radius: 100px;
+  padding: 3px;
   margin: 1em;
   display: block;
   align-self: center;
@@ -714,8 +707,8 @@ hr {
 }
 
 .floor_container {
-  width: 320px;
-  height: 320px;
+  width: 600px;
+  height: 300px;
   border: 5px solid #666666;
 }
 
@@ -735,8 +728,10 @@ hr {
 }
 
 .calendar_container {
-  margin: 20px auto 0px auto;
+  margin: 2em auto 2em auto;
   width: 70% !important;
+  padding: 1em;
+  background: #fff;
 }
 
 .event_container {
@@ -839,11 +834,9 @@ hr {
   border-style: none !important;
 }
 
-
 .recover {
   text-align: center;
 }
-
 
 .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
   background-color: #bfd732;
@@ -851,11 +844,12 @@ hr {
 }
 
 .desk__calendar {
-  width: 80%;
+  width: 100%;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.4);
 }
 
 /* --------- RESERVAS ---------- */
-
 
 .booking_container {
   border-radius: 15px;
@@ -918,7 +912,28 @@ hr {
   text-align: end;
 }
 
-.swal-modal{
+.swal-modal {
   max-width: 300px;
 }
 
+@media all and (min-width: 600px) {
+  .floor_container {
+    width: 590px !important;
+    height: 297px !important;
+  }
+  .floor_container canvas {
+    width: 590px !important;
+    height: 297px !important;
+  }
+}
+
+@media all and (min-width: 768px) {
+  .selector__inputs {
+    flex-direction: row;
+  }
+  .selector__box {
+    width: 200px;
+    height: 297px;
+    margin-bottom: 0;
+  }
+}

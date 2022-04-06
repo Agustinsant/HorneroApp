@@ -3,7 +3,9 @@ const { getForNameOrEmail, EventDayByDeskId, EventDayByFloorId } = require('../c
 const searchRouter = express.Router()
 
 
-searchRouter.get('/nameOrEmail', getForNameOrEmail )
+
+searchRouter.post("/nameOrEmail", getForNameOrEmail )
+
 
 searchRouter.get('/eventDayByDesk', EventDayByDeskId)
 
