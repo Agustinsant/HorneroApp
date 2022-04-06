@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import swal from "sweetalert";
 
 import { FaBars } from "react-icons/fa";
+import DarkMode from "./DarkMode";
 
 
 
@@ -15,9 +16,9 @@ const NavbarComponent = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLogged = useSelector((state) => state.user.isLogged);
   const user = useSelector((state) => state.user.data);
   const token = localStorage.getItem("token");
+  const theme = localStorage.getItem('theme')
 
   useEffect(() => {
     if (!token) navigate("/login");
@@ -48,7 +49,9 @@ const NavbarComponent = () => {
             <img src={logo} width="160px" />
           </Link>
         </div>
+        
         <div className="navMenu">
+        <DarkMode />
           {user.name && (
             <div className="navProfilePick">
               <img src={user.img}></img>
