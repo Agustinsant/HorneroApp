@@ -8,8 +8,8 @@ export const getUsersService = async () => {
   };
 
 
-export const searchUsersService = async ({value}) => {
-    const users = await axios.post(`http://localhost:3001/api/search/nameOrEmail`, { value })
+export const searchUsersService = async ({value, userId}) => {
+    const users = await axios.post(`http://localhost:3001/api/search/nameOrEmail`, { value, userId })
     console.log('SEARCH', users)
     return users.data
   }
