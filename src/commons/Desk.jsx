@@ -1,9 +1,24 @@
 import { Rect } from "react-konva";
 
 function Desk({ desk }) {
-  const chairPosition = {
-    x: desk.positionX + 5,
-    y: desk.positionY + 7,
+  console.log("desk", desk);
+  const chairPositionBaseOnRotation = {
+    0: {
+      x: desk.positionX + 5,
+      y: desk.positionY + 7,
+    },
+    90: {
+      x: desk.positionX - 16,
+      y: desk.positionY + 4.5,
+    },
+    180: {
+      x: desk.positionX - 15,
+      y: desk.positionY - 17,
+    },
+    270: {
+      x: desk.positionX + 6,
+      y: desk.positionY - 15,
+    },
   };
   return (
     <>
@@ -11,8 +26,8 @@ function Desk({ desk }) {
         calendar={desk.calendar}
         key={desk._id}
         id={desk._id}
-        x={chairPosition.x}
-        y={chairPosition.y}
+        x={chairPositionBaseOnRotation[desk.rotation].x}
+        y={chairPositionBaseOnRotation[desk.rotation].y}
         width={10}
         height={10}
         fill="#39B54A"
@@ -27,8 +42,31 @@ function Desk({ desk }) {
         width={20}
         height={12}
         fill="#39B54A"
+        rotation={desk.rotation}
+      />
+
+      {/* <Rect
+        calendar={desk.calendar}
+        key={desk._id}
+        id={desk._id}
+        x={+6}
+        y={110 - 15}
+        width={10}
+        height={10}
+        fill="#39B54A"
         rotation={0}
       />
+      <Rect
+        calendar={desk.calendar}
+        key={desk._id.concat("chair")}
+        id={desk._id}
+        x={390}
+        y={113}
+        width={20}
+        height={12}
+        fill="#39B54A"
+        rotation={0}
+      /> */}
     </>
   );
 }

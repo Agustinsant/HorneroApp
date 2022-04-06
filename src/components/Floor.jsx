@@ -6,6 +6,7 @@ import Desk from "../commons/Desk";
 
 function Floor({ floor, day }) {
   const { desks } = floor;
+  console.log("floor desks", desks);
   const [desk, setDesk] = useState([]);
   const [deskCalendarUp, setDeskCalendarUp] = useState(false);
 
@@ -22,7 +23,7 @@ function Floor({ floor, day }) {
             <Map url={floor.imgFloor} />
             {desks.map((desk) => (
               <Group onClick={onClick} onTap={onClick} key={desk._id}>
-                <Desk desk={desk} />
+                <Desk desk={desk} rotation={desk.rotation} />
               </Group>
             ))}
           </Layer>
