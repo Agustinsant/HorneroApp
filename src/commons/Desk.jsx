@@ -1,4 +1,4 @@
-import { Stage, Layer, Rect, Group, Image } from "react-konva";
+import { Rect } from "react-konva";
 
 function Desk({ desk }) {
   const chairPosition = {

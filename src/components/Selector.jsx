@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import Floor from "./Floor";
 import { getFloor } from "../services/buildingServices";
 import useInput from "../hooks/useInput";
-import { EventBridge } from "aws-sdk";
 
 function Selector() {
   const buildings = useSelector((state) => state.buildings.data);
@@ -79,7 +78,3 @@ function Selector() {
 }
 
 export default Selector;
-
-let start = new Date(day.concat("T00:00:00"));
-let end = new Date(start);
-end.setDate(end.getDate() + 1);
