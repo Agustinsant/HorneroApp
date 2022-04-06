@@ -74,3 +74,31 @@ module.exports.EventDayByFloorId = async (req, res, next) => {
     }
     
 }
+
+module.exports.EventsDay = async (req, res, next) => {
+
+    const { deskCalendar } = req.body
+
+    const events = []
+    
+    try {
+    
+        for (const event of deskCalendar) {
+            let user = {}
+            if(event.usersId.length > 0 ){
+                user = await UserModel.findById(event.usersId[0]);
+                event.title = user.name;
+                event.img = user.img;
+
+                events.push(event)
+              } 
+        }
+        return res.status(200).send(events)
+    } 
+
+    
+    catch (error) {
+        next(error)
+    }
+   
+}

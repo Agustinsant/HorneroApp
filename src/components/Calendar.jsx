@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { FaRegTimesCircle } from "react-icons/fa";
 import { getUserById } from "../services/userServices";
-import {getCalendar, addEventCalendar, deleteEventCalendar, updateEventCalendar, getDayEventsInDesk} from "../services/calendarServices";
+import {getCalendar, addEventCalendar, deleteEventCalendar, updateEventCalendar, getDayEventsInDesk, getDayEvents} from "../services/calendarServices";
 import swal from "sweetalert";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -20,18 +20,10 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
 
   const rendering = async () => {
     const deskCalendar =  day ? (await getDayEventsInDesk(day, deskId)): (await getCalendar(deskId));
-    const addTitleAndImg = await Promise.all(
-      deskCalendar.map(async (event) => {
-        let user = {}
-        if(event.usersId.length > 0 ){
-          user = await getUserById(event.usersId[0]);
-          event.title = user.name;
-          event.img = user.img;
-        } 
-        return event;
-      })
-    );
-    setEvents(addTitleAndImg);
+
+    const events = await getDayEvents(deskCalendar)
+
+    setEvents(events);
   };
 
   useEffect(() => {
