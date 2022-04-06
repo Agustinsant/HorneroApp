@@ -6,11 +6,9 @@ import Map from "../commons/Map";
 import Desk from "../commons/Desk";
 
 function Floor({ floor, day }) {
-  console.log("day en floor", day);
   const { desks } = floor;
   const [desk, setDesk] = useState([]);
   const [deskCalendarUp, setDeskCalendarUp] = useState(false);
-  console.log("desk floor", desks);
 
   const onClick = (e) => {
     setDesk(e.target.attrs);

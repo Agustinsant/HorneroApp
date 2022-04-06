@@ -8,9 +8,12 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import { Button } from "bootstrap";
+
 
 
 const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
+  console.log("day", day)
   const user = useSelector((state) => state.user.data);
   const [events, setEvents] = useState([]);
 
@@ -158,37 +161,42 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
 
   /* ---------- COMPONENT --------- */
   return (
-    <div className="calendar_containe">
-      <FullCalendar
-        height={400}
-        longPressDelay={200}
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        headerToolbar={{ right: "next", center: "title", left: "prev" }}
-        footerToolbar={{ center: "dayGridMonth timeGridDay" }}
-        initialView={"dayGridMonth"}
-         visibleRange={{
-         start: "2022-04-01",
-         end: "2022-04-02"
-        }}
-        businessHours={{
-          daysOfWeek: [1, 2, 3, 4, 5],
-          startTime: "07:00",
-          endTime: "21:00",
-        }}
-        events={events}
-        selectOverlap={handleOverlap}
-        editable={true}
-        selectable={true}
-        navLinks={true}
-        selectMirror={true}
-        dayMaxEvents={true}
-        nowIndicator={true}
-        select={handleDateSelect}
-        eventAdd={handleEventAdd}
-        eventContent={renderEventContent}
-        eventRemove={handleEventRemove}
-        eventChange={handleEventChange}
-      />
+    <div>
+      <div className="close-buton-container">
+        <FaRegTimesCircle className="close_calendar" onClick={() => setDeskCalendarUp(false)}/>
+      </div>
+      <div className="calendar_containe">
+        <FullCalendar
+          height={400}
+          longPressDelay={200}
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          headerToolbar={{ right: "next", center: "title", left: "prev" }}
+          footerToolbar={{ center: "dayGridMonth timeGridDay" }}
+          initialView={day ?  "timeGridDay" : "dayGridMonth" }
+          visibleRange={{
+          start: day,
+          end: "2022-04-02"
+          }}
+          businessHours={{
+            daysOfWeek: [1, 2, 3, 4, 5],
+            startTime: "07:00",
+            endTime: "21:00",
+          }}
+          events={events}
+          selectOverlap={handleOverlap}
+          editable={true}
+          selectable={true}
+          navLinks={true}
+          selectMirror={true}
+          dayMaxEvents={true}
+          nowIndicator={true}
+          select={handleDateSelect}
+          eventAdd={handleEventAdd}
+          eventContent={renderEventContent}
+          eventRemove={handleEventRemove}
+          eventChange={handleEventChange}
+        />
+      </div>
     </div>
   );
 };
