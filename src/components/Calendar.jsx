@@ -154,11 +154,6 @@ const Calendar = ({ deskId, closeCalendar }) => {
   };
 };
 
-const hanleDayCLick= (e) => {
-  setView("timeGridDay")
-  rendering()
-  
-}
 
 
 
@@ -188,7 +183,6 @@ const hanleDayCLick= (e) => {
         editable={true}
         selectable={true}
         navLinks={true}
-        dateClick={(e)=> hanleDayCLick(e)}
         selectMirror={true}
         dayMaxEvents={true}
         nowIndicator={true}
