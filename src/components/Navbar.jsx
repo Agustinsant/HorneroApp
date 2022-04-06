@@ -23,9 +23,8 @@ const NavbarComponent = () => {
     if (!token) navigate("/login");
     else if (token) {
       dispatch(persistUser(token));
-     
-    }
-  }, []);
+  }
+  }, [token]);
 
   
   const logoutUser = (e) => {
@@ -50,7 +49,7 @@ const NavbarComponent = () => {
           </Link>
         </div>
         <div className="navMenu">
-          {user && (
+          {user.name && (
             <div className="navProfilePick">
               <img src={user.img}></img>
             </div>
@@ -68,7 +67,7 @@ const NavbarComponent = () => {
               openMenu ? "dropDownSubMenuOpen" : "dropDownSubMenuClosed"
             }
           >
-            {user ? (
+            {user.name ? (
               <Link
                 onClick={() => setOpenMenu(false)}
                 className="linksNav"
@@ -79,7 +78,7 @@ const NavbarComponent = () => {
             ) : (
               <></>
             )}
-            {user ? (
+            {user.name ? (
               <button className="logOutBtn" onClick={logoutUser}>
                 Logout
               </button>
