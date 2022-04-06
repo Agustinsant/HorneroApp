@@ -55,6 +55,7 @@ export const editUserPasswordService = async ({id, password}) => {
 export const getUserById = async (userId) => {
   const user = await axios.get(`http://localhost:3001/api/user/${userId}`)
   return user.data
+
 }
 
 export const sendPasswordService = async (email) => {

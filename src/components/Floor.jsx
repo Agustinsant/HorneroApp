@@ -7,7 +7,6 @@ function Floor({ floor, day }) {
   const [desk, setDesk] = useState([]);
 
   const onClick = (e) => {
-    console.log(e.target.attrs);
     setDesk(e.target.attrs);
   };
 

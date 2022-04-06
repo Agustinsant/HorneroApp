@@ -17,6 +17,8 @@ module.exports.AddEventCalendar = async (req, res, next) => {
         newEventCalendar.usersId.push(userId)
         desk.calendarEvent.push(newEventCalendar)
 
+        await CalendarModel.findByIdAndUpdate(newEventCalendar._id, newEventCalendar, option)
+
         const updateDesk = await DeskModel.findByIdAndUpdate(idDesk, desk, option)
         return res.status(201).send(updateDesk)
     }
@@ -31,7 +33,6 @@ module.exports.getEventCalendarById = async (req, res, next) => {
 
     try {
         const eventCalendar = await CalendarModel.findById(id)
-        console.log(eventCalendar.userId)
         return res.status(200).send(eventCalendar)
     }
     catch (error){
@@ -73,7 +74,6 @@ module.exports.updateEventCalendarById = async (req, res, next) => {
 
         const updateEventCalendar = await CalendarModel.findByIdAndUpdate(id, req.body, option)
 
-        
         const deskByEvent = await DeskModel.findById(updateEventCalendar.deskId)
 
         const positionNewEvent = deskByEvent.calendarEvent.indexOf(beforeUpdate)
