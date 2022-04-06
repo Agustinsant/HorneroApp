@@ -1,6 +1,6 @@
 const { UserModel } = require("../models/users")
-const sendGmail = require("../utils/mailer")
 const bcrypt = require('bcrypt')
+const sendEmailBy = require("../utils/sendEmailBy")
 
 module.exports.ForgotPassword = async (req, res, next) => {
 
@@ -18,7 +18,7 @@ module.exports.ForgotPassword = async (req, res, next) => {
     const idUser = user._id.toHexString()
     const newPassword = `NewPass${Math.floor(Math.random()*9000+1000)}`
 
-    sendGmail(email, newPassword)
+    sendEmailBy('forgotPassword', email, newPassword)
 
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(newPassword, salt)

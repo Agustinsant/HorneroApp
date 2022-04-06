@@ -1,4 +1,5 @@
 const { CalendarModel, DeskModel } = require ('../models/buildings')
+const sendEmailBy = require('../utils/sendEmailBy')
 
 module.exports.AddEventCalendar = async (req, res, next) => {
 
@@ -11,13 +12,15 @@ module.exports.AddEventCalendar = async (req, res, next) => {
 
     try {
 
-
         const desk = await DeskModel.findById(idDesk) 
         const newEventCalendar = await CalendarModel({ start, end, buildingId: desk.buildingId, floorId: desk.floorId, deskId: desk._id}).save()
         newEventCalendar.usersId.push(userId)
         desk.calendarEvent.push(newEventCalendar)
 
         const updateDesk = await DeskModel.findByIdAndUpdate(idDesk, desk, option)
+
+        if(updateDesk) sendEmailBy('addEvent', { start, end, buildingId: desk.buildingId, floorId: desk.floorId, deskId: desk._id, userId })
+
         return res.status(201).send(updateDesk)
     }
     catch (error) {
