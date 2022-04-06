@@ -8,18 +8,19 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { Button } from "bootstrap";
+
 
 
 
 const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
-  console.log("day", day)
   const user = useSelector((state) => state.user.data);
-  const [events, setEvents] = useState([]);
+  const [allEvents, setAllEvents] = useState([]);
+  const [dayEvents, setDayEvents] = useState([])
 
 
   const rendering = async () => {
     const deskCalendar = await getCalendar(deskId);
+    
     const addTitleAndImg = await Promise.all(
       deskCalendar.map(async (event) => {
         let user = {}
@@ -31,7 +32,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
         return event;
       })
     );
-    setEvents(addTitleAndImg);
+    setAllEvents(addTitleAndImg);
   };
 
   useEffect(() => {
@@ -154,8 +155,13 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
   };
 };
 
-
-
+/* -------------  TIME GRID VIEW FUNCTION ------------ */
+ const handleRangeView = () => {
+  let start = new Date(day.concat("T00:00:00")); 
+  let end = new Date(start) 
+  end.setDate(end.getDate()+1)
+  return {start: day,end: end}
+ }
 
 
 
@@ -172,17 +178,14 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{ right: "next", center: "title", left: "prev" }}
           footerToolbar={{ center: "dayGridMonth timeGridDay" }}
-          initialView={day ?  "timeGridDay" : "dayGridMonth" }
-          visibleRange={{
-          start: day,
-          end: "2022-04-02"
-          }}
+          initialView={ day ? "timeGrid" : "dayGridMonth"  }
+          visibleRange ={day && handleRangeView()}
           businessHours={{
             daysOfWeek: [1, 2, 3, 4, 5],
             startTime: "07:00",
             endTime: "21:00",
           }}
-          events={events}
+          events={day ? (dayEvents): (allEvents) }
           selectOverlap={handleOverlap}
           editable={true}
           selectable={true}
