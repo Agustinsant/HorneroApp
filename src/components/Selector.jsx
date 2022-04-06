@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Floor from "./Floor";
 import { getFloor } from "../services/buildingServices";
 import useInput from "../hooks/useInput";
+import { EventBridge } from "aws-sdk";
 
 function Selector() {
   const buildings = useSelector((state) => state.buildings.data);
@@ -29,6 +30,7 @@ function Selector() {
   const showCalendarMonth = () => {
     setDateSelector(true);
   };
+  console.log(day);
 
   return (
     <>
@@ -41,13 +43,11 @@ function Selector() {
                 id="buildings"
                 onChange={handleSelectBuilding}
               >
-                <option value="" disabled selected hidden>
+                <option disabled selected hidden>
                   Select building
                 </option>
                 {buildings.map((building, i) => (
-                  <option key={i} value={building.city}>
-                    {building.city}
-                  </option>
+                  <option key={i}>{building.city}</option>
                 ))}
               </select>
               {floors[0] ? (
@@ -57,13 +57,11 @@ function Selector() {
                     id="floors"
                     onChange={handleSelectFloor}
                   >
-                    <option value="" disabled selected hidden>
+                    <option disabled selected hidden>
                       Select floor
                     </option>
                     {floors.map((f, i) => (
-                      <option key={i} value={f.name}>
-                        {f.name}
-                      </option>
+                      <option key={i}>{f.name}</option>
                     ))}
                   </select>
                 </>
@@ -81,3 +79,7 @@ function Selector() {
 }
 
 export default Selector;
+
+let start = new Date(day.concat("T00:00:00"));
+let end = new Date(start);
+end.setDate(end.getDate() + 1);
