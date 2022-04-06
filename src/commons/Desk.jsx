@@ -44,29 +44,7 @@ function Desk({ desk }) {
         fill="#39B54A"
         rotation={desk.rotation}
       />
-
-      {/* <Rect
-        calendar={desk.calendar}
-        key={desk._id}
-        id={desk._id}
-        x={+6}
-        y={110 - 15}
-        width={10}
-        height={10}
-        fill="#39B54A"
-        rotation={0}
-      />
-      <Rect
-        calendar={desk.calendar}
-        key={desk._id.concat("chair")}
-        id={desk._id}
-        x={390}
-        y={113}
-        width={20}
-        height={12}
-        fill="#39B54A"
-        rotation={0}
-      /> */}
+      {/* ///////////////////////////// */}
     </>
   );
 }
