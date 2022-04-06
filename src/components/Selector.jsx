@@ -29,7 +29,6 @@ function Selector() {
   const showCalendarMonth = () => {
     setDateSelector(true);
   };
-  console.log(day);
 
   return (
     <>

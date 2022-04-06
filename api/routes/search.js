@@ -8,8 +8,8 @@ const searchRouter = express.Router();
 
 searchRouter.post("/nameOrEmail", getForNameOrEmail);
 
-searchRouter.get("/eventDayByDesk", EventDayByDeskId);
+searchRouter.post("/eventDayByDesk", EventDayByDeskId); // desk
 
-searchRouter.get("/eventDayByFloor", EventDayByFloorId);
+searchRouter.post("/eventDayByFloor", EventDayByFloorId); //floor 
 
 module.exports = searchRouter;

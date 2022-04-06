@@ -2,24 +2,24 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { FaRegTimesCircle } from "react-icons/fa";
 import { getUserById } from "../services/userServices";
-import {getCalendar, addEventCalendar, deleteEventCalendar, updateEventCalendar} from "../services/calendarServices";
+import {getCalendar, addEventCalendar, deleteEventCalendar, updateEventCalendar, getDayEventsInDesk} from "../services/calendarServices";
 import swal from "sweetalert";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { Button } from "bootstrap";
+
 
 
 
 const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
-  console.log("day", day)
   const user = useSelector((state) => state.user.data);
   const [events, setEvents] = useState([]);
+ 
 
 
   const rendering = async () => {
-    const deskCalendar = await getCalendar(deskId);
+    const deskCalendar =  day ? (await getDayEventsInDesk(day, deskId)): (await getCalendar(deskId));
     const addTitleAndImg = await Promise.all(
       deskCalendar.map(async (event) => {
         let user = {}
@@ -154,8 +154,13 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
   };
 };
 
-
-
+/* -------------  TIME GRID VIEW FUNCTION ------------ */
+ const handleRangeView = () => {
+  let start = new Date(day.concat("T00:00:00")); 
+  let end = new Date(start) 
+  end.setDate(end.getDate()+1)
+  return {start: day,end: end}
+ }
 
 
 
@@ -172,11 +177,8 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{ right: "next", center: "title", left: "prev" }}
           footerToolbar={{ center: "dayGridMonth timeGridDay" }}
-          initialView={day ?  "timeGridDay" : "dayGridMonth" }
-          visibleRange={{
-          start: day,
-          end: "2022-04-02"
-          }}
+          initialView={ day ? "timeGrid" : "dayGridMonth"  }
+          visibleRange ={day && handleRangeView()}
           businessHours={{
             daysOfWeek: [1, 2, 3, 4, 5],
             startTime: "07:00",

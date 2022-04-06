@@ -29,3 +29,8 @@ export const getUserBooking= async (userId) => {
   return booking.data
 };
 
+export const getDayEventsInDesk = async (date, deskId) => {
+  const allDayEventsinDesk = await axios.post(`http://localhost:3001/api/search/eventDayByDesk`, {date , deskId })
+  return allDayEventsinDesk.data
+};
+
