@@ -24,7 +24,6 @@ function Selector() {
     let selectedFloor = e.target.value;
     let getData = floors.filter((f) => f.name === selectedFloor)[0]._id;
     let data = await getFloor(getData);
-    console.log("floor", data);
     setFloor(data);
   };
   const showCalendarMonth = () => {

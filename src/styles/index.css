@@ -727,6 +727,18 @@ hr {
   border-radius: 50%;
 }
 
+.close-buton-container{
+  display: flex;
+  justify-content: end;
+}
+
+.close_calendar{
+  font-size: 1.8rem;
+  color: #fff;
+  margin: 5px 3px
+}
+
+
 .calendar_container {
   margin: 2em auto 2em auto;
   width: 70% !important;

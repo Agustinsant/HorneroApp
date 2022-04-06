@@ -2,30 +2,32 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { FaRegTimesCircle } from "react-icons/fa";
 import { getUserById } from "../services/userServices";
-import {
-  getCalendar,
-  addEventCalendar,
-  deleteEventCalendar,
-  updateEventCalendar,
-} from "../services/calendarServices";
+import {getCalendar, addEventCalendar, deleteEventCalendar, updateEventCalendar} from "../services/calendarServices";
 import swal from "sweetalert";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import { Button } from "bootstrap";
+
+
 
 const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
+  console.log("day", day)
   const user = useSelector((state) => state.user.data);
   const [events, setEvents] = useState([]);
+
 
   const rendering = async () => {
     const deskCalendar = await getCalendar(deskId);
     const addTitleAndImg = await Promise.all(
       deskCalendar.map(async (event) => {
-        //ver si viene mas de un id
-        const user = await getUserById(event.userId);
-        event.title = user.name;
-        event.img = user.img;
+        let user = {}
+        if(event.usersId.length > 0 ){
+          user = await getUserById(event.usersId[0]);
+          event.title = user.name;
+          event.img = user.img;
+        } 
         return event;
       })
     );
@@ -90,9 +92,9 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
   /* -------------  UPDATE FUNCTION ------------ */
   const handleEventChange = async (eventInfo) => {
     const { end, start, extendedProps } = eventInfo.event.toPlainObject();
-    const isTheUser = extendedProps.userId === user._id;
+    const isTheUser = extendedProps.usersId[0] === user._id;
     if (isTheUser) {
-      await updateEventCalendar(extendedProps._id, { start, end });
+      await updateEventCalendar(extendedProps._id, { start, end, });
       swal("Updated reservation", {
         icon: "success",
         buttons: false,
@@ -121,12 +123,12 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
 
   /* -------------  EVENT VIEW FUNCTION ------------ */
   const renderEventContent = (eventInfo) => {
-    let checkId = eventInfo.event.extendedProps.userId;
-    let isTheUser = user._id === checkId;
-    let userImg = eventInfo.event.extendedProps.img
-      ? eventInfo.event.extendedProps.img
-      : "nophoto.jpg";
-    let colorEvent = isTheUser ? "#00A99D" : "#444444";
+    if(eventInfo.event.title){
+      let checkId = eventInfo.event.extendedProps.usersId[0]
+      let isTheUser = user._id === checkId;
+      let userImg = eventInfo.event.extendedProps.img ? eventInfo.event.extendedProps.img : "nophoto.jpg";
+      let colorEvent = isTheUser ? "#00A99D" : "#444444";
+    
 
     eventInfo.backgroundColor = colorEvent;
     eventInfo.borderColor = colorEvent;
@@ -146,40 +148,55 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
             className="delete_envent"
             onClick={() => handleDelete(eventInfo.event)}
           />
-        )}
+        ) }
       </div>
-    );
+    )
   };
+};
+
+
+
+
+
 
   /* ---------- COMPONENT --------- */
   return (
-    <div className="calendar_container">
-      <FullCalendar
-        height={400}
-        longPressDelay={200}
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        headerToolbar={{ right: "next", center: "title", left: "prev" }}
-        footerToolbar={{ center: "dayGridMonth timeGridDay" }}
-        initialView="dayGridMonth"
-        businessHours={{
-          daysOfWeek: [1, 2, 3, 4, 5],
-          startTime: "07:00",
-          endTime: "21:00",
-        }}
-        events={events}
-        selectOverlap={handleOverlap}
-        editable={true}
-        selectable={true}
-        navLinks={true}
-        selectMirror={true}
-        dayMaxEvents={true}
-        nowIndicator={true}
-        select={handleDateSelect}
-        eventAdd={handleEventAdd}
-        eventContent={renderEventContent}
-        eventRemove={handleEventRemove}
-        eventChange={handleEventChange}
-      />
+    <div>
+      <div className="close-buton-container">
+        <FaRegTimesCircle className="close_calendar" onClick={() => setDeskCalendarUp(false)}/>
+      </div>
+      <div className="calendar_container">
+        <FullCalendar
+          height={400}
+          longPressDelay={200}
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          headerToolbar={{ right: "next", center: "title", left: "prev" }}
+          footerToolbar={{ center: "dayGridMonth timeGridDay" }}
+          initialView={day ?  "timeGridDay" : "dayGridMonth" }
+          visibleRange={{
+          start: day,
+          end: "2022-04-02"
+          }}
+          businessHours={{
+            daysOfWeek: [1, 2, 3, 4, 5],
+            startTime: "07:00",
+            endTime: "21:00",
+          }}
+          events={events}
+          selectOverlap={handleOverlap}
+          editable={true}
+          selectable={true}
+          navLinks={true}
+          selectMirror={true}
+          dayMaxEvents={true}
+          nowIndicator={true}
+          select={handleDateSelect}
+          eventAdd={handleEventAdd}
+          eventContent={renderEventContent}
+          eventRemove={handleEventRemove}
+          eventChange={handleEventChange}
+        />
+      </div>
     </div>
   );
 };
