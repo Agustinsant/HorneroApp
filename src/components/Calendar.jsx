@@ -19,7 +19,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
 
 
   const rendering = async () => {
-    const deskCalendar =  day ? (await getDayEventsInDesk(day, deskId)): (await getCalendar(deskId));
+    const deskCalendar =  day ? (await getDayEventsInDesk(day, deskId)) : (await getCalendar(deskId));
     const addTitleAndImg = await Promise.all(
       deskCalendar.map(async (event) => {
         let user = {}

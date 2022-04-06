@@ -1,20 +1,22 @@
 import { useMatch } from "react-router";
 import { useSelector } from "react-redux";
 import { getUserBooking } from "../services/calendarServices";
+import { getUserById } from "../services/userServices"; 
 import { useEffect, useState } from "react";
-import noPhoto from '../resources/img/noPhoto.webp'
 import FullCalendar from "@fullcalendar/react";
 import listPlugin from '@fullcalendar/list';
 
 const Booking = ({userId}) => {
-    const user = useSelector(state => state.user.data);
+    const [user, setUser]= useState({});
     const [events, setEvents] = useState([]);
     
     
     useEffect(async () => {
         if(userId) {
         const userBooking = await getUserBooking(userId);
+        const user = await getUserById(userId)
         setEvents(userBooking)
+        setUser(user)
         }
     },[userId])
 
