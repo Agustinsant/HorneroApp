@@ -73,15 +73,12 @@ export const editUserPasswordService = async ({id, password}) => {
   return user.data
 }
 
-<<<<<<< HEAD
 export const getUserById = async (userId) => {
   const user = await axios.get(`http://localhost:3001/api/user/${userId}`)
   return user.data
 
 }
-=======
 
->>>>>>> 40b2827f74d93c235f4440c52b4120120bf2b910
 
 export const sendPasswordService = async (email) => {
   const user = await axios.post(`http://localhost:3001/api/recover/${email}`)
