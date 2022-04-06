@@ -2,9 +2,8 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 import Floor from "./Floor";
-import Welcome from "./Welcome";
-import CalendarMonth from "../commons/CalendarMonth";
 import { getFloor } from "../services/buildingServices";
+import useInput from "../hooks/useInput";
 
 function Selector() {
   const buildings = useSelector((state) => state.buildings.data);
@@ -12,7 +11,7 @@ function Selector() {
   const [floors, setFloors] = useState([]);
   const [floor, setFloor] = useState({});
   const [dateSelector, setDateSelector] = useState(false);
-  const [day, setDay] = useState("");
+  const day = useInput();
 
   const handleSelectBuilding = (e) => {
     let selectedBuilding = e.target.value;
@@ -72,11 +71,9 @@ function Selector() {
               ) : (
                 <></>
               )}
-              {floor._id ? <input type="date"></input> : <></>}
-              {}
+              {floor._id ? <input type="date" {...day} /> : <></>}
             </div>
-
-            {floor.desks && <Floor floor={floor} />}
+            {floor.desks && <Floor floor={floor} day={day.value} />}
           </div>
         </div>
       )}

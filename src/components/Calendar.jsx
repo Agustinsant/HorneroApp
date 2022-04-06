@@ -14,10 +14,9 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
-const Calendar = ({ deskId, closeCalendar }) => {
+const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
   const user = useSelector((state) => state.user.data);
   const [events, setEvents] = useState([]);
-  
 
   const rendering = async () => {
     const deskCalendar = await getCalendar(deskId);
@@ -135,12 +134,10 @@ const Calendar = ({ deskId, closeCalendar }) => {
     return (
       <div className="event_container">
         <div className="image_calendar">
-
           {
             //mapear imagenes cierta cantidad
             <img className="userImg_calendar" src={userImg} />
           }
-
         </div>
         <i className="event_calendar">{eventInfo.event.title}</i>
         <b className="event_timeText">{eventInfo.timeText}</b>
