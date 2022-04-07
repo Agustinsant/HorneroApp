@@ -4,7 +4,7 @@ const sendEmailBy = require('../utils/sendEmailBy')
 module.exports.AddEventCalendar = async (req, res, next) => {
 
     const { idDesk } = req.params
-    const { start, end, userId } = req.body
+    const { start, end, userId , allDay } = req.body
 
     const option ={
         returnDocument : "after"
@@ -13,7 +13,7 @@ module.exports.AddEventCalendar = async (req, res, next) => {
     try {
 
         const desk = await DeskModel.findById(idDesk) 
-        const newEventCalendar = await CalendarModel({ start, end, buildingId: desk.buildingId, floorId: desk.floorId, deskId: desk._id}).save()
+        const newEventCalendar = await CalendarModel({ start, end, allDay, buildingId: desk.buildingId, floorId: desk.floorId, deskId: desk._id}).save()
         newEventCalendar.usersId.push(userId)
         desk.calendarEvent.push(newEventCalendar)
 
