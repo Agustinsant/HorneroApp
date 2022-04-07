@@ -1,6 +1,6 @@
 import { RegularPolygon, Rect } from "react-konva";
 
-function Hall({ hall }) {
+function Hall({ hall, color }) {
   return (
     <>
       <RegularPolygon

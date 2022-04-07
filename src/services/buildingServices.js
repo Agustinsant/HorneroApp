@@ -15,3 +15,14 @@ export const getDesk = async (deskId) => {
   return desk.data;
 };
 
+export const getEventsDayByFloor = async (floorId, date) => {
+  const deskEvents = await axios.post(
+    "http://localhost:3001/api/search/eventDayByFloor",
+    {
+      floorId,
+      date,
+    }
+  );
+  console.log("services res", deskEvents.data);
+  return deskEvents.data;
+};
