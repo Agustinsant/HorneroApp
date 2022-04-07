@@ -819,7 +819,7 @@ hr {
 
 .calendar_container {
   margin: 2em auto 2em auto;
-  width: 95% !important;
+  width: 90% !important;
   padding: 1em;
   background: #fff;
 }
@@ -832,14 +832,19 @@ hr {
 }
 
 .event_calendar {
-  font-size: 1.1rem;
+  font-size:0.9rem;
+  color: #fff;
+  margin-left: 2px;
 }
 .event_timeText {
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin-right: 4px;
+  color: #fff;
+  margin-left: 4px;
 }
+
 .delete_envent {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 
 .fc .fc-toolbar-title {
@@ -883,12 +888,24 @@ hr {
   font-size: 0.9rem !important;
 }
 
-.fc .fc-daygrid-day-frame {
+
+
+.fc .fc-daygrid-more-link {
+ font-size: 0.35rem;
+ color: #f7931e;
+ background-color: #f7931e;
+ display: flex;
+ bottom: 5px !important;
+ width: 85%;
+  left: 5px;
+}
+
+
+
+.fc .fc-daygrid-day-number {
   text-decoration: none;
-  align-items: center;
-  text-align: center;
-  display: flex;
-  justify-content: center;
+  color: black;
+  font-size: 1.2rem;
 }
 
 .fc-direction-ltr .fc-timegrid-slot-label-frame {
@@ -898,18 +915,12 @@ hr {
  color: #1a1a1a;
 }
 
-.fc .fc-daygrid-day-number {
-  text-decoration: none;
-  color: black;
-  font-size: 1.2rem;
-}
+
 .fc .fc-daygrid-body-natural .fc-daygrid-day-events {
   margin-bottom: 0 !important;
 }
 
-.fc .fc-daygrid-more-link {
-  display: none;
-}
+
 
 .fc-theme-standard td,
 .fc-theme-standard th {
@@ -941,6 +952,17 @@ hr {
   position: absolute;
   background: rgba(0, 0, 0, 0.4);
 }
+
+/* --------- pop over ----- */
+.fc-popover-header{
+  background: #b0b0b09f !important;
+  color: rgb(18, 18, 18);
+} 
+
+.fc-popover-body {
+  background-color: #bfd732 ;
+}
+
 
 /* --------- RESERVAS ---------- */
 
@@ -1018,6 +1040,7 @@ hr {
     width: 590px !important;
     height: 297px !important;
   }
+ 
 }
 
 @media all and (min-width: 768px) {
@@ -1029,4 +1052,7 @@ hr {
     height: 297px;
     margin-bottom: 0;
   }
+ 
+ 
 }
+

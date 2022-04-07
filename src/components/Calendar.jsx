@@ -5,7 +5,7 @@ import { getDesk } from "../services/buildingServices";
 import {getCalendar, addEventCalendar, deleteEventCalendar, updateEventCalendar, getDayEventsInDesk, getDayEvents} from "../services/calendarServices";
 import swal from "sweetalert";
 import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
+import dayGridPlugin  from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
@@ -30,6 +30,8 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
 
   /* ------------- ADD FUNCTIONS ------------ */
   const handleDateSelect = (selectInfo) => {
+    console.log("seleced" , selectInfo)
+    //selectInfo.view.dataEnv.locale.options.allDayText = "todo el dia"
     let calendarApi = selectInfo.view.calendar;
     calendarApi.unselect();
     calendarApi.addEvent(
@@ -44,6 +46,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
   };
 
   const handleEventAdd = async (addInfo) => {
+    console.log("add", addInfo)
     const allDay =  addInfo.event.allDay
     await addEventCalendar(deskId, addInfo.event.toPlainObject(), allDay);
     swal({
@@ -193,7 +196,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
           visibleRange ={day && handleRangeView()}
           buttonText={{
             month: "Mes",
-            day: "Dia"
+            day: "Dia",
           }}
           businessHours={{
             daysOfWeek: [1, 2, 3, 4, 5],
@@ -203,7 +206,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
           events={events}
           selectOverlap={handleOverlap}
           eventOverlap={false}
-          selectConstraint={"businessHours"}
+          //selectConstraint={"businessHours"}
           editable={true}
           selectable={true}
           navLinks={true}
