@@ -111,14 +111,23 @@ const My_info = () => {
       <form onSubmit={handleNameSubmit}>
         <div className="editInputsContainer">
           {nameEdit ? (
+            <>
+            <p className="misDatosLabel">Nombre y Apellido</p>
             <input
               {...name}
               type="text"
               placeholder="Editar nombre y apellido."
               disabled={!nameEdit}
+              pattern= "^[A-Z]([a-zA-Z]+[',.-]?[a-zA-Z ]*)+[A-Z]([a-zA-Z]+[',.-]?[a-zA-Z ]+)+$"
+              focused="true"
             />
+            <span className="form__input--errormessage"> Respeta Mayúsculas! (ej: Juan Topo)</span>
+            </>
           ) : (
+            <>
+            <p className="misDatosLabel">Nombre y Apellido</p>
             <h5>{user?.name}</h5>
+            </>
           )}
         </div>
         <div className="editBtnsContainer">
@@ -151,18 +160,31 @@ const My_info = () => {
           )}
         </div>
       </form>
-      <hr className="hrDatos"></hr>
+      {!nameEdit ? (
+        <hr className="hrDatos"></hr>
+      ) : (
+        <hr className="hrInvisible"></hr>
+      )}
       <form onSubmit={handleEmailSubmit}>
         <div className="editInputsContainer">
           {emailEdit ? (
+            <>
+            <p className="misDatosLabel">Email</p>
             <input
               {...email}
               type="text"
               placeholder="Editar email."
               disabled={!emailEdit}
-            />
+              pattern= "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$"
+              focused="true"
+              />
+              <span className="form__input--errormessage"> Ingresa un email valido! (ejemplo@mail.com) </span>
+              </>
           ) : (
+            <>
+            <p className="misDatosLabel">E-mail</p>
             <h5>{user?.email}</h5>
+            </>
           )}
         </div>
         <div className="editBtnsContainer">
@@ -195,18 +217,31 @@ const My_info = () => {
           )}
         </div>
       </form>
-      <hr className="hrDatos"></hr>
+      {!emailEdit ? (
+        <hr className="hrDatos"></hr>
+      ) : (
+        <hr className="hrInvisible"></hr>
+      )}
       <form onSubmit={handleCitySubmit}>
         <div className="editInputsContainer">
           {cityEdit ? (
+            <>
+            <p className="misDatosLabel">Ciudad</p>
             <input
               {...city}
               type="text"
               placeholder="Editar ciudad."
               disabled={!cityEdit}
-            />
+              pattern= "^.{4,26}$"
+              focused="true"
+              />
+            <span className="form__input--errormessage"> 4-26 caracteres</span>
+              </>
           ) : (
+            <>
+            <p className="misDatosLabel">Ciudad</p>
             <h5>{user?.city}</h5>
+            </>
           )}
         </div>
         <div className="editBtnsContainer">
@@ -239,19 +274,33 @@ const My_info = () => {
           )}
         </div>
       </form>
-      <hr className="hrDatos"></hr>
+      {!cityEdit ? (
+        <hr className="hrDatos"></hr>
+      ) : (
+        <hr className="hrInvisible"></hr>
+      )}
       <form onSubmit={handlePasswordSubmit}>
         <div className="editInputsContainer">
           {passwordEdit ? (
+            <>
+            <p className="misDatosLabel">Password</p>
             <input
               {...password}
               type="password"
               placeholder="Editar contraseña."
               disabled={!passwordEdit}
-            />
+              pattern= "^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{8,14}$"
+              focused="true"
+              />
+            <span className="form__input--errormessage"> 8-14 caracteres e incluir letras y números! </span>
+              </>
           ) : (
+            <>
+            <p className="misDatosLabel">Password</p>
             <h5>**********</h5>
-          )}
+            </>
+            )}
+          
         </div>
         <div className="editBtnsContainer">
           {passwordEdit ? (
@@ -267,11 +316,11 @@ const My_info = () => {
             </button>
           ) : (
             <button
-              className="misDatosBtns"
-              onClick={(e) => {
-                e.preventDefault();
-                setPasswordEdit(!passwordEdit);
-              }}
+            className="misDatosBtns"
+            onClick={(e) => {
+              e.preventDefault();
+              setPasswordEdit(!passwordEdit);
+            }}
             >
               <FaUserEdit className="editInfoIcon" />
             </button>
@@ -283,7 +332,11 @@ const My_info = () => {
           )}
         </div>
       </form>
-      <hr className="hrDatos"></hr>
+      {!passwordEdit ? (
+        <hr className="hrDatos"></hr>
+      ) : (
+        <hr className="hrInvisible"></hr>
+      )}
     </div>
   );
 };

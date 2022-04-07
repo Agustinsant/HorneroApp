@@ -9,7 +9,6 @@ function Floor({ floor, day }) {
   const { desks } = floor;
   const typeDesks = desks.filter((d) => d.type === "desk");
   const typeHall = desks.filter((d) => d.type === "hall");
-  console.log("floor desks", desks);
   console.log("halls", typeHall);
   console.log("typedesks", typeDesks);
 
@@ -18,6 +17,7 @@ function Floor({ floor, day }) {
 
   const onClick = (e) => {
     setDesk(e.target.attrs);
+    console.log("onclick");
     setDeskCalendarUp((prev) => !prev);
   };
 
@@ -33,12 +33,14 @@ function Floor({ floor, day }) {
               </Group>
             ))}
             {typeHall.map((hall) => (
-              <Hall
-                onClick={onClick}
-                onTap={onClick}
-                key={hall._id}
-                hall={hall}
-              />
+              <Group onClick={onClick} onTap={onClick} key={desk._id}>
+                <Hall
+                  onClick={onClick}
+                  onTap={onClick}
+                  key={hall._id}
+                  hall={hall}
+                />
+              </Group>
             ))}
           </Layer>
         </Stage>
