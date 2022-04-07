@@ -1,23 +1,101 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Stage, Layer, Group } from "react-konva";
 import Calendar from "./Calendar";
 import Map from "../commons/Map";
 import Desk from "../commons/Desk";
 import Hall from "../commons/Hall";
+import { getEventsDayByFloor } from "../services/buildingServices";
 
 function Floor({ floor, day }) {
   const { desks } = floor;
-  const typeDesks = desks.filter((d) => d.type === "desk");
-  const typeHall = desks.filter((d) => d.type === "hall");
-  console.log("halls", typeHall);
-  console.log("typedesks", typeDesks);
+  // const typeDesks = desks.filter((d) => d.type === "desk");
+  // const typeHall = desks.filter((d) => d.type === "hall");
 
+  const [typeDesks, setTypeDesks] = useState(
+    desks.filter((d) => d.type === "desk")
+  );
+  const [typeHall, setTypeHall] = useState(
+    desks.filter((d) => d.type === "hall")
+  );
+  console.log("typedesks", typeDesks);
+  console.log("typeHalls", typeHall);
   const [desk, setDesk] = useState([]);
   const [deskCalendarUp, setDeskCalendarUp] = useState(false);
+  const colors = {
+    desk: {
+      empty: "#39B54A",
+      concurred: "#BFD732",
+      full: "#444444 ",
+    },
+    hall: {
+      empty: "#F7931E",
+      concurred: "#BFD732",
+      full: "#444444 ",
+    },
+  };
+  useEffect(() => {
+    setTypeDesks(desks.filter((d) => d.type === "desk"));
+    setTypeHall(desks.filter((d) => d.type === "hall"));
+  }, [day]);
+
+  useEffect(async () => {
+    console.log("inital day state", day);
+    //look for desk events for the selected day
+    if (day) {
+      const data = await getEventsDayByFloor(floor._id, day);
+      //set the desk color with the data retrived
+      console.log("useEffect", data);
+      data.map((dayEvent) => {
+        //FULL DAY CASE
+        if (dayEvent.allDay) {
+          //check if the event corresponds to a desk or hall
+          let deskIndex = typeDesks.findIndex(
+            (desk) => desk._id === dayEvent.deskId
+          );
+          if (deskIndex < 0) {
+            //identified the hall and update it
+            let hallIndex = typeHall.findIndex(
+              (hall) => hall._id === dayEvent.deskId
+            );
+            typeHall[hallIndex].color = colors.hall.full;
+            console.log("FULLDAY HALL COLOR CHANGE ON", typeHall[hallIndex]);
+            let data = JSON.parse(JSON.stringify(typeHall));
+            setTypeHall(data);
+          } else {
+            typeDesks[deskIndex].color = colors.desk.full;
+            console.log("FULLDAY DESK COLOR CHANGE ON", typeDesks);
+            let data = JSON.parse(JSON.stringify(typeDesks));
+            setTypeDesks(data);
+          }
+        } else {
+          //NO FULL DAY
+          let deskIndex = typeDesks.findIndex(
+            (desk) => desk._id === dayEvent.deskId
+          );
+          if (deskIndex < 0) {
+            //identified the hall and update it
+            let hallIndex = typeHall.findIndex(
+              (hall) => hall._id === dayEvent.deskId
+            );
+            typeHall[hallIndex].color = colors.hall.concurred;
+            console.log("CONCURRED HALL COLOR CHANGE ON", typeHall[hallIndex]);
+            let data = JSON.parse(JSON.stringify(typeHall));
+            setTypeHall(data);
+          } else {
+            typeDesks[deskIndex].color = colors.desk.concurred;
+            console.log("CONCURRED DESK COLOR CHANGE ON", typeDesks);
+            let data = JSON.parse(JSON.stringify(typeDesks));
+            setTypeDesks(data);
+          }
+        }
+      });
+    }
+    console.log("end useEffect desks", typeDesks);
+    console.log("end useEffect halls", typeHall);
+  }, [day]);
 
   const onClick = (e) => {
     setDesk(e.target.attrs);
-    console.log("onclick");
     setDeskCalendarUp((prev) => !prev);
   };
 

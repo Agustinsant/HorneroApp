@@ -1,6 +1,7 @@
 import { Rect } from "react-konva";
 
 function Desk({ desk }) {
+  console.log("desk color", desk.color);
   const chairPositionBaseOnRotation = {
     0: {
       x: desk.positionX + 5,
@@ -19,6 +20,7 @@ function Desk({ desk }) {
       y: desk.positionY - 15,
     },
   };
+
   return (
     <>
       <Rect
@@ -29,7 +31,7 @@ function Desk({ desk }) {
         y={chairPositionBaseOnRotation[desk.rotation].y}
         width={10}
         height={10}
-        fill="#39B54A"
+        fill={desk.color}
         rotation={0}
       />
       <Rect
@@ -40,7 +42,7 @@ function Desk({ desk }) {
         y={desk.positionY}
         width={20}
         height={12}
-        fill="#39B54A"
+        fill={desk.color}
         rotation={desk.rotation}
       />
       {/* ///////////////////////////// */}
