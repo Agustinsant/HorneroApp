@@ -27,6 +27,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
     rendering();
   }, [deskId]);
 
+
   /* ------------- ADD FUNCTIONS ------------ */
   const handleDateSelect = (selectInfo) => {
     let calendarApi = selectInfo.view.calendar;
@@ -129,6 +130,8 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
     });
   };
 
+  
+
   /* -------------  EVENT VIEW FUNCTION ------------ */
   const renderEventContent = (eventInfo) => {
     if(eventInfo.event.title){
@@ -197,8 +200,10 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
             startTime: "07:00",
             endTime: "21:00",
           }}
+          eventConstraint
           events={events}
           selectOverlap={handleOverlap}
+          selectConstraint={"businessHours"}
           editable={true}
           selectable={true}
           navLinks={true}
