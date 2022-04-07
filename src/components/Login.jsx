@@ -57,14 +57,24 @@ function Login() {
         email: values.email,
         password: values.password,
       })
-    );
+    ).then(data => {
+      data.error ? (
+        swal({
+          text: "Email o contraseña incorrecta!",
+          icon: "error",
+          timer: 2000,
+          buttons:false
+        })
+      )  :  (
+        swal({
+          text: "Bienvenido!",
+          icon: "success",
+          timer: 2000,
+          buttons:false
+        }).then(() => navigate("/"))
+      )
+    })
 
-    swal({
-      text: "Bienvenido!",
-      icon: "success",
-      timer: 2000,
-      buttons:false
-    }).then(() => navigate("/"));
   };
 
   const handleRecoverPassword = (e) => {
