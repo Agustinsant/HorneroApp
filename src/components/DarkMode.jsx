@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { FaToggleOff, FaToggleOn, FaRegLightbulb } from "react-icons/fa";
 
 const DarkMode = () => {
@@ -7,6 +7,10 @@ const DarkMode = () => {
   const lightTheme = "light";
   const darkTheme = "dark";
   let theme;
+
+  useEffect(() => {
+    theme === lightTheme ? setLight('darkModeOff') : setLight('darkModeOn')
+  }, [])
 
   theme = localStorage.getItem("theme");
 
