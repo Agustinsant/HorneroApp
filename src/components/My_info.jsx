@@ -112,6 +112,7 @@ const My_info = () => {
         <div className="editInputsContainer">
           {nameEdit ? (
             <>
+            <p className="misDatosLabel">Nombre y Apellido</p>
             <input
               {...name}
               type="text"
@@ -123,7 +124,10 @@ const My_info = () => {
             <span className="form__input--errormessage"> Respeta Mayúsculas! (ej: Juan Topo)</span>
             </>
           ) : (
+            <>
+            <p className="misDatosLabel">Nombre y Apellido</p>
             <h5>{user?.name}</h5>
+            </>
           )}
         </div>
         <div className="editBtnsContainer">
@@ -165,6 +169,7 @@ const My_info = () => {
         <div className="editInputsContainer">
           {emailEdit ? (
             <>
+            <p className="misDatosLabel">Email</p>
             <input
               {...email}
               type="text"
@@ -176,7 +181,10 @@ const My_info = () => {
               <span className="form__input--errormessage"> Ingresa un email valido! (ejemplo@mail.com) </span>
               </>
           ) : (
+            <>
+            <p className="misDatosLabel">E-mail</p>
             <h5>{user?.email}</h5>
+            </>
           )}
         </div>
         <div className="editBtnsContainer">
@@ -218,6 +226,7 @@ const My_info = () => {
         <div className="editInputsContainer">
           {cityEdit ? (
             <>
+            <p className="misDatosLabel">Ciudad</p>
             <input
               {...city}
               type="text"
@@ -229,7 +238,10 @@ const My_info = () => {
             <span className="form__input--errormessage"> 4-26 caracteres</span>
               </>
           ) : (
+            <>
+            <p className="misDatosLabel">Ciudad</p>
             <h5>{user?.city}</h5>
+            </>
           )}
         </div>
         <div className="editBtnsContainer">
@@ -271,6 +283,7 @@ const My_info = () => {
         <div className="editInputsContainer">
           {passwordEdit ? (
             <>
+            <p className="misDatosLabel">Password</p>
             <input
               {...password}
               type="password"
@@ -282,7 +295,10 @@ const My_info = () => {
             <span className="form__input--errormessage"> 8-14 caracteres e incluir letras y números! </span>
               </>
           ) : (
+            <>
+            <p className="misDatosLabel">Password</p>
             <h5>**********</h5>
+            </>
             )}
           
         </div>
