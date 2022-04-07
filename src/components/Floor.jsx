@@ -3,6 +3,7 @@ import { Stage, Layer, Group } from "react-konva";
 import Calendar from "./Calendar";
 import Map from "../commons/Map";
 import Desk from "../commons/Desk";
+import Hall from "../commons/Hall";
 
 function Floor({ floor, day }) {
   const { desks } = floor;
@@ -20,10 +21,18 @@ function Floor({ floor, day }) {
         <Stage width={600} height={300}>
           <Layer>
             <Map url={floor.imgFloor} />
-            {desks.map((desk) => (
+            {typeDesks.map((desk) => (
               <Group onClick={onClick} onTap={onClick} key={desk._id}>
                 <Desk desk={desk} rotation={desk.rotation} />
               </Group>
+            ))}
+            {typeHall.map((hall) => (
+              <Hall
+                onClick={onClick}
+                onTap={onClick}
+                key={hall._id}
+                hall={hall}
+              />
             ))}
           </Layer>
         </Stage>

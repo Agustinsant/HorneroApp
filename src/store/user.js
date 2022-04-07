@@ -31,15 +31,12 @@ export const editUser = createAsyncThunk(
   userServices.editUserService
 );
 
-
 export const addFriend = createAsyncThunk("ADD_FRIEND", userServices.addFriendService);
 
 export const editUserPassword = createAsyncThunk(
   "EDIT_USER_PASSWORD",
   userServices.editUserPasswordService
 );
-
-
 
 export const removeFriend = createAsyncThunk("REMOVE_FRIEND", userServices.removeFriendService)
 

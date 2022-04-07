@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 function Welcome() {
   const user = useSelector((state) => state.user.data);
+  console.log('useeeeeeeeer',user)
   const navigate = useNavigate();
 
   if(!user.name) return navigate('login')
