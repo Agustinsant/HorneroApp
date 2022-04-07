@@ -2,9 +2,8 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 import Floor from "./Floor";
-import Welcome from "./Welcome";
-import CalendarMonth from "../commons/CalendarMonth";
 import { getFloor } from "../services/buildingServices";
+import useInput from "../hooks/useInput";
 
 function Selector() {
   const buildings = useSelector((state) => state.buildings.data);
@@ -12,7 +11,7 @@ function Selector() {
   const [floors, setFloors] = useState([]);
   const [floor, setFloor] = useState({});
   const [dateSelector, setDateSelector] = useState(false);
-  const [day, setDay] = useState("");
+  const day = useInput();
 
   const handleSelectBuilding = (e) => {
     let selectedBuilding = e.target.value;
@@ -25,7 +24,6 @@ function Selector() {
     let selectedFloor = e.target.value;
     let getData = floors.filter((f) => f.name === selectedFloor)[0]._id;
     let data = await getFloor(getData);
-    console.log("floor", data);
     setFloor(data);
   };
   const showCalendarMonth = () => {
@@ -43,13 +41,11 @@ function Selector() {
                 id="buildings"
                 onChange={handleSelectBuilding}
               >
-                <option value="" disabled selected hidden>
+                <option disabled selected hidden>
                   Select building
                 </option>
                 {buildings.map((building, i) => (
-                  <option key={i} value={building.city}>
-                    {building.city}
-                  </option>
+                  <option key={i}>{building.city}</option>
                 ))}
               </select>
               {floors[0] ? (
@@ -59,24 +55,20 @@ function Selector() {
                     id="floors"
                     onChange={handleSelectFloor}
                   >
-                    <option value="" disabled selected hidden>
+                    <option disabled selected hidden>
                       Select floor
                     </option>
                     {floors.map((f, i) => (
-                      <option key={i} value={f.name}>
-                        {f.name}
-                      </option>
+                      <option key={i}>{f.name}</option>
                     ))}
                   </select>
                 </>
               ) : (
                 <></>
               )}
-              {floor._id ? <input type="date"></input> : <></>}
-              {}
+              {floor._id ? <input type="date" {...day} /> : <></>}
             </div>
-
-            {floor.desks && <Floor floor={floor} />}
+            {floor.desks && <Floor floor={floor} day={day.value} />}
           </div>
         </div>
       )}

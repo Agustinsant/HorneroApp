@@ -23,7 +23,7 @@ export default function My_friends() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    dispatch(searchUsers({ value: search.value }));
+    dispatch(searchUsers({ value: search.value, userId: user._id }));
     search.setValue('')
   };
 

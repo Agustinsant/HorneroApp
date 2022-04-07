@@ -1,15 +1,18 @@
-const express = require('express')
-const { getForNameOrEmail, EventDayByDeskId, EventDayByFloorId } = require('../controllers/searchControllers')
-const searchRouter = express.Router()
+const express = require("express");
+const {
+  getForNameOrEmail,
+  EventDayByDeskId,
+  EventDayByFloorId,
+  EventsDay,
+} = require("../controllers/searchControllers");
+const searchRouter = express.Router();
 
+searchRouter.post("/nameOrEmail", getForNameOrEmail);
 
+searchRouter.post("/eventDayByDesk", EventDayByDeskId); // desk
 
-searchRouter.post("/nameOrEmail", getForNameOrEmail )
+searchRouter.post("/eventDayByFloor", EventDayByFloorId); //floor 
 
+searchRouter.post("/eventsDay", EventsDay)
 
-searchRouter.get('/eventDayByDesk', EventDayByDeskId)
-
-searchRouter.get('/eventDAyByFloor', EventDayByFloorId)
-
-
-module.exports = searchRouter
+module.exports = searchRouter;
