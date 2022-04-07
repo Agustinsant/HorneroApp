@@ -29,7 +29,6 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
 
   /* ------------- ADD FUNCTIONS ------------ */
   const handleDateSelect = (selectInfo) => {
-    console.log("selectedIndo", selectInfo)
     let calendarApi = selectInfo.view.calendar;
     calendarApi.unselect();
     calendarApi.addEvent(
@@ -47,8 +46,8 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
     const allDay =  addInfo.event.allDay
     await addEventCalendar(deskId, addInfo.event.toPlainObject(), allDay);
     swal({
-      title: "You made a reservation!",
-      text: "Go to your email to check it",
+      title: "Hiciste una reserva!",
+      text: "Ve a tu email para corroborarlo",
       icon: "success",
       buttons: false,
       timer: 2000,
@@ -70,21 +69,21 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
   /* -------------  DELETE FUNCTIONS ------------ */
   const handleDelete = (eventInfo) => {
     swal({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this reservation!",
+      title: "Estas seguro?",
+      text: "Una vez borrada, no podras recuperar la reserva!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
         eventInfo.remove();
-        swal("Poof! Your reservation has been deleted!", {
+        swal("Poof! tu reserva se elimino!", {
           icon: "success",
           buttons: false,
           timer: 1000,
         });
       } else {
-        swal("Your reservation is safe!", {
+        swal("Tu reserva esa a salvo!", {
           buttons: false,
           timer: 1000,
         });
@@ -104,15 +103,15 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
     const isTheUser = extendedProps.usersId[0] === user._id;
     if (isTheUser) {
       await updateEventCalendar(extendedProps._id, { start, end, });
-      swal("Updated reservation", {
+      swal("Reserva actualizada", {
         icon: "success",
         buttons: false,
         timer: 1000,
       });
     } else {
       swal({
-        title: "Sorry! you cannot",
-        text: "change reservations from other users",
+        title: "Lo siento! no puedes",
+        text: "cambiar la reserva de otros usuarios",
         icon: "error",
         timer: 2000,
         buttons: false,
@@ -123,7 +122,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
 
   /* -------------  OVERLAP FUNCTION ------------ */
   const handleOverlap = () => {
-    swal("Select an available time", {
+    swal("Selecciona un horario disponible", {
       icon: "error",
       buttons: false,
       timer: 1250,
@@ -181,6 +180,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
       </div>
       <div className="calendar_container">
         <FullCalendar
+         locale={"es"}
           height={400}
           longPressDelay={200}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -188,6 +188,10 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
           footerToolbar={{ center: "dayGridMonth timeGridDay" }}
           initialView={ day ? "timeGrid" : "dayGridMonth"  }
           visibleRange ={day && handleRangeView()}
+          buttonText={{
+            month: "Mes",
+            day: "Dia"
+          }}
           businessHours={{
             daysOfWeek: [1, 2, 3, 4, 5],
             startTime: "07:00",

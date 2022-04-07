@@ -36,6 +36,7 @@ const Booking = ({userId}) => {
             <hr/>
             <div className="booking_container">
                 <FullCalendar
+                    locale={"es"}
                     height={340}
                     plugins={[listPlugin]}
                     headerToolbar={{right: "next", center: "title", left: "prev" }}
