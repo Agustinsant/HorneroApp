@@ -200,7 +200,6 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
             startTime: "07:00",
             endTime: "21:00",
           }}
-          eventConstraint
           events={events}
           selectOverlap={handleOverlap}
           selectConstraint={"businessHours"}
