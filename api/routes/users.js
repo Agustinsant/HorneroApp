@@ -9,7 +9,7 @@ const { Register, Login, GetAllUsers, DeleteUser, Me, UpdateUser, GetUser, GetUs
 const { AddFriend, DeleteFriend } = require('../controllers/userFriendControllers')
 const { AddBuilding, addFloor, addDesk, DeleteBuilding, DeleteFloor, DeleteDesk } = require('../controllers/userPreferenceControllers')
 
-const verifyToken = require("./validate-token");
+const verifyToken = require("../middleware/validate-token");
 
 const upload = multer()
 

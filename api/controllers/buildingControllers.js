@@ -5,7 +5,7 @@ module.exports.AddBuilding = async (req, res, next) => {
     const { name, address, city } = req.body
 
     try {
-        const newBuilding = await BuildingModel({ name, address, city }).save()
+        const newBuilding = await BuildingModel({ name , address, city : city.replace(/\b\w/g, (l) => l.toUpperCase()) }).save()
         return res.status(201).send(newBuilding)
     }
     catch (error) {
