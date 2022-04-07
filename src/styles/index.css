@@ -966,15 +966,15 @@ hr {
 
 /* --------- RESERVAS ---------- */
 
-.booking_container {
-  border-radius: 15px;
+.booking_container { 
   width: 95%;
   margin-top: 5px;
 }
 
+
 .fc-theme-standard .fc-list {
   border: 1px solid #bfd732 !important;
-  border-radius: 3px;
+  
 }
 .fc-theme-standard .fc-list-day-cushion {
   background-color: #bfd732 !important;
@@ -1010,8 +1010,7 @@ hr {
   width: 3px !important;
   color: #f7931e !important;
   border: 5px solid #f7931e !important;
-  margin-right: 30px;
-  margin-top: 7px;
+  margin-right: 15px;
 }
 
 .fc-direction-ltr .fc-list-table .fc-list-event-graphic {
@@ -1021,14 +1020,16 @@ hr {
 
 .fc .fc-list-table td,
 .fc .fc-list-day-cushion {
-  padding: 8px 14px;
-  border-style: hidden !important;
   justify-content: end;
   text-align: end;
+ 
+}
+.fc .fc-list-table td {
+  background: none !important;
 }
 
 .swal-modal {
-  max-width: 300px;
+  max-width: 400px;
 }
 
 @media all and (min-width: 600px) {
