@@ -475,6 +475,11 @@ nav {
   margin-bottom: 30px;
 }
 
+.editBtnContainer{
+  padding: 0;
+
+}
+
 .misDatosContainer form {
   margin-top: 20px;
   width: 350px;
@@ -484,13 +489,13 @@ nav {
 }
 
 .editInputsContainer h5 {
-  margin: 0 15px 0 0;
+  margin: 10px 15px 0 0;
 }
 
 .misDatosBtns {
   background: none;
   border: none;
-  margin: 5px;
+  transform: translateY(10px);
   font-size: 20px;
 }
 
@@ -527,6 +532,13 @@ nav {
   color: #ff0000;
 }
 
+
+.misDatosLabel{
+  font-size: 12px;
+  margin-bottom: 0px;
+  margin-top: 0;
+  color: rgb(133, 133, 133);
+}
 /* ------ END MIS DATOS COMPONENT STYLES ------- */
 
 .signin {
