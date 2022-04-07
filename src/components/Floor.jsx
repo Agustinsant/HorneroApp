@@ -7,6 +7,12 @@ import Hall from "../commons/Hall";
 
 function Floor({ floor, day }) {
   const { desks } = floor;
+  const typeDesks = desks.filter((d) => d.type === "desk");
+  const typeHall = desks.filter((d) => d.type === "hall");
+  console.log("floor desks", desks);
+  console.log("halls", typeHall);
+  console.log("typedesks", typeDesks);
+
   const [desk, setDesk] = useState([]);
   const [deskCalendarUp, setDeskCalendarUp] = useState(false);
 
