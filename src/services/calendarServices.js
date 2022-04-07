@@ -5,12 +5,13 @@ export const getCalendar = async (deskId) => {
   return desk.data.calendarEvent;
 };
 
-export const addEventCalendar = async (deskId, eventObject) => {
+export const addEventCalendar = async (deskId, eventObject, allDay) => {
   const {start, end, extendedProps} = eventObject
   const newEvent = await axios.post(`http://localhost:3001/api/calendar/add/${deskId}`, {
       start: start,
       end: end,
       userId: extendedProps.userId,
+      allDay: allDay
   })
   return newEvent.data.calendarEvent;
 };
@@ -34,7 +35,7 @@ export const getDayEventsInDesk = async (date, deskId) => {
   return allDayEventsinDesk.data
 };
 
-export const getDayEvents = async (deskCalendar) => {
-  const allDayEvents = await axios.post(`http://localhost:3001/api/search/eventsDay`, {deskCalendar})
+export const getDayEvents = async (deskCalendar, deskId) => {
+  const allDayEvents = await axios.post(`http://localhost:3001/api/search/eventsDay`, {deskCalendar, deskId})
   return allDayEvents.data
 };

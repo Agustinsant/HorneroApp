@@ -12,6 +12,7 @@ function Floor({ floor, day }) {
   console.log("floor desks", desks);
   console.log("halls", typeHall);
   console.log("typedesks", typeDesks);
+
   const [desk, setDesk] = useState([]);
   const [deskCalendarUp, setDeskCalendarUp] = useState(false);
 
