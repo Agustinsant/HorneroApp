@@ -1,7 +1,6 @@
 const { UserModel } = require("../models/users");
 const bcrypt = require("bcrypt");
 const { randomName } = require("../utils/helpers");
-const sendGmail = require("../utils/mailer")
 const path = require("path");
 const jwt = require("jsonwebtoken");
 const uploadFile = require("../utils/s3");
@@ -9,6 +8,7 @@ require("dotenv").config();
 
 const fs = require("fs");
 const util = require("util");
+const sendEmailBy = require("../utils/sendEmailBy");
 
 const unlinkFile = util.promisify(fs.unlink);
 
@@ -107,29 +107,41 @@ module.exports.GetAllFriends = async (req, res, next) => {
 };
 
 module.exports.UpdateUser = async (req, res, next) => {
+
   const { id } = req.params;
+  const { name, city, email } = req.body
+  const validName = /^([a-zA-Z]+[',.-]?[a-zA-Z ]*)+[ ]([a-zA-Z]+[',.-]?[a-zA-Z ]+)+$/
+  const validCity = /^.{2,26}$/
+  const validEmail = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i
 
   const options = {
     returnDocument: "after",
   };
+
   if (req.file) {
     const file = req.file;
     const result = await uploadFile(file);
 
     try {
       await unlinkFile(file.path);
+      
       const user = await UserModel.findByIdAndUpdate(
         id,
         { img: result.Location },
         options
-      );
-      return res.status(200).send(user);
-    } catch (error) {
-      next(error);
+        );
+        return res.status(200).send(user);
+      } catch (error) {
+        next(error);
+      }
     }
-  }
-
+    
   try {
+
+    if(name || name === '') if(!validName.test(name)) return next()
+    if(email || email === '') if(!validEmail.test(email)) return next()
+    if(city || city === '') if(!validCity.test(city)) return next()
+    
     const user = await UserModel.findByIdAndUpdate(id, req.body, options);
     return res.status(200).send(user);
   } catch (error) {
@@ -137,22 +149,21 @@ module.exports.UpdateUser = async (req, res, next) => {
   }
 };
 
-
 module.exports.updateUserPassword = async (req, res, next) => {
-
 
   const { id } = req.params
   const { password } = req.body
+  const validation = /^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{8,14}$/
   const options = {
     returnDocument: "after",
-
   }
-
+  
   try {
+    if(!validation.test(password)) return next()
 
     const user = await UserModel.findById(id)
 
-    sendGmail(user.email, password, 'updateByClient')
+    if(user) sendEmailBy('editPassByClient', user.email, password)
 
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
@@ -162,7 +173,6 @@ module.exports.updateUserPassword = async (req, res, next) => {
     const passwordUpdate = await UserModel.findByIdAndUpdate( id, user, options)
     return res.status(200).send(passwordUpdate)
     
-
   } catch (error) {
     next(error);
   }

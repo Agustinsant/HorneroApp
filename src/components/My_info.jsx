@@ -26,14 +26,18 @@ const My_info = () => {
         id: user._id,
         name: name.value,
       })
-    );
-    swal({
-      text: "Nombre modificado con éxito!",
-      icon: "success",
-      timer: 1000,
-      buttons:false
-    }).then(() => setNameEdit(!nameEdit));
-    
+    ).then(data => {
+      data.error ? swal({
+        text: "Error al editar Nombre, colocar nombre completo!",
+        icon: "error",
+        buttons:true
+      }) : swal({
+        text: "Nombre modificado con éxito!",
+        icon: "success",
+        timer: 1000,
+        buttons:false
+      }).then(() => setNameEdit(!nameEdit))
+    })
   };
   const handleEmailSubmit = (e) => {
     e.preventDefault();
@@ -42,13 +46,18 @@ const My_info = () => {
         id: user._id,
         email: email.value,
       })
-    );
-    swal({
-      text: "Email modificado con éxito!",
-      icon: "success",
-      timer: 1000,
-      buttons:false
-    }).then(() => setEmailEdit(!emailEdit));
+    ).then(data => {
+      data.error ? swal({
+        text: "Error al editar Email, colocar un email valido!",
+        icon: "error",
+        buttons:true
+      }) : swal({
+        text: "Email modificado con éxito!",
+        icon: "success",
+        timer: 1000,
+        buttons:false
+      }).then(() => setEmailEdit(!emailEdit));
+    })
   };
   const handleCitySubmit = (e) => {
     e.preventDefault();
@@ -57,14 +66,18 @@ const My_info = () => {
         id: user._id,
         city: city.value,
       })
-    );
-    swal({
-      text: "Ciudad modificada con éxito!",
-      icon: "success",
-      timer: 1000,
-      buttons:false
-    }).then(() => setCityEdit(!cityEdit));
-    
+    ).then(data => {
+      data.error ? swal({
+        text: "Error al editar Ciudad, verifique que el campo este completo!",
+        icon: "error",
+        buttons:true
+      }) : swal({
+        text: "Ciudad modificada con éxito!",
+        icon: "success",
+        timer: 1000,
+        buttons:false
+      }).then(() => setCityEdit(!cityEdit));
+    })
   };
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
@@ -73,13 +86,22 @@ const My_info = () => {
         id: user._id,
         password: password.value,
       })
-    );
-    swal({
-      text: "Contraseña modificada con éxito!",
-      icon: "success",
-      timer: 1000,
-      buttons:false
-    }).then(() => setPasswordEdit(!passwordEdit));
+    ).then(data => {
+      data.error ? (
+       swal({
+        text: "Error al editar Contraseña. 8-14 caracteres e incluir letras y números!",
+        icon: "error",
+        buttons:true
+       })
+      ) : (
+       swal({
+        text: "Contraseña modificada con éxito!",
+        icon: "success",
+        timer: 1000,
+        buttons:false
+       }).then(() => setPasswordEdit(!passwordEdit))
+      )
+    })
     
   };
 
