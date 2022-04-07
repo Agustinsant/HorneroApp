@@ -483,6 +483,12 @@ nav {
   margin-top: 5px;
 }
 
+.hrInvisible {
+  visibility: hidden;
+  width: 350px;
+  margin-top: 5px;
+}
+
 .editInfoIcon {
   font-size: 26px;
   color: #bfd732;
@@ -520,7 +526,7 @@ nav {
 }
 .signin__validationCod--title {
   position: relative;
-  font-size: 8px;
+  font-size: 10px;
   margin-bottom: 0;
   cursor: pointer;
 }
