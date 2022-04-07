@@ -39,6 +39,27 @@ nav {
 
 /* ------ START NAV STYLES ----- */
 
+#darkMode{
+  margin-right: 15px;
+  margin-top: 5px;
+  background: transparent url('../resources/img/siwtchOff.svg') no-repeat center;
+  color: #fff;
+  border: none;
+  background-size: 40px;
+  width: 60px ;
+  height: 40px;
+} 
+
+#darkMode.clicked{
+  background: transparent url('../resources/img/siwtchOn.svg') no-repeat center !important;
+  border: none ;
+  background-size: 40px !important;
+  width: 60px ;
+  height: 40px;
+
+
+}
+
 .darkModeBtn {
   margin-right: 20px;
   margin-top: 5px;
@@ -49,6 +70,7 @@ nav {
 .darkModeOn {
   color: #bfd732;
   font-size: 26px;
+
 }
 
 .darkModeOff {
@@ -122,6 +144,7 @@ nav {
 
 .dropDownSubMenuClosed {
   background-color: rgba(255, 255, 255, 0.685);
+  padding-right: 10px;
   display: flex;
   flex-direction: column;
   position: absolute;

@@ -1,5 +1,5 @@
-import { Navbar, Container, NavDropdown, Nav } from "react-bootstrap";
-import logo from "../resources/img/logo.svg";
+import logo from "../resources/img/logoNew.svg";
+
 import { useSelector, useDispatch } from "react-redux";
 import { logOut, persistUser } from "../store/user";
 import { useNavigate } from "react-router";
@@ -10,29 +10,26 @@ import swal from "sweetalert";
 import { FaBars } from "react-icons/fa";
 import DarkMode from "./DarkMode";
 
-
-
 const NavbarComponent = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user.data);
   const token = localStorage.getItem("token");
-  const theme = localStorage.getItem('theme')
+  const theme = localStorage.getItem("theme");
 
   useEffect(() => {
     if (!token) navigate("/login");
     else if (token) {
       dispatch(persistUser(token));
-  }
+    }
   }, [token]);
 
-  
   const logoutUser = (e) => {
     e.preventDefault();
     dispatch(logOut());
     setOpenMenu(false);
-    navigate("/")
+    navigate("/");
     swal({
       text: "Deslogueo Exitoso!",
       icon: "success",
@@ -49,21 +46,19 @@ const NavbarComponent = () => {
             <img src={logo} width="160px" />
           </Link>
         </div>
-        
-        <div className="navMenu">
-        <DarkMode />
-          {user.name && (
-            <div className="navProfilePick">
-              <img src={user.img}></img>
-            </div>
-          )}
 
-          <button
-            onClick={() => setOpenMenu(!openMenu)}
-            className="dropDownMenu"
-          >
-            <FaBars className="dropDownMenuIcon" />
-          </button>
+        <div className="navMenu">
+          <DarkMode />
+          {user.name && (
+            <button
+              onClick={() => setOpenMenu(!openMenu)}
+              className="dropDownMenu"
+            >
+              <div className="navProfilePick">
+                <img src={user.img}></img>
+              </div>
+            </button>
+          )}
 
           <div
             className={
