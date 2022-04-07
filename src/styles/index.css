@@ -895,7 +895,7 @@ hr {
  color: #f7931e;
  background-color: #f7931e;
  display: flex;
- bottom: 5px !important;
+ bottom: 10px !important;
  width: 85%;
   left: 5px;
 }
