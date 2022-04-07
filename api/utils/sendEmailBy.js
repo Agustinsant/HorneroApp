@@ -31,6 +31,17 @@ const sendEmailBy = async (sendingType, data, moreInfo) => {
     sendGmail(email, subject, text)
 
   }
+
+  else if (sendingType === "editPassByClient") {
+
+    const email = data
+    const newPassword = moreInfo
+    const subject = "Nueva contraseña"
+    const text = `<h3>Recuerda, tu nueva contraseña es: <strong>${newPassword}</strong></h3>`
+
+    sendGmail(email, subject, text)
+
+  }
 }
 
 module.exports = sendEmailBy
