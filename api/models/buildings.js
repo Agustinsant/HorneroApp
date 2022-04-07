@@ -7,6 +7,9 @@ const EventItem = new Schema({
     end: {
         type: String
     },
+    allDay: {
+        type: Boolean
+    },
     usersId: {
         type: [String]
     },

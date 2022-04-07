@@ -1,6 +1,7 @@
 const { UserModel } = require('../models/users')
 const { DeskModel, CalendarModel } = require ('../models/buildings')
 
+
 module.exports.getForNameOrEmail = async (req, res, next) => {
 
     const { value , userId } = req.body
@@ -77,20 +78,28 @@ module.exports.EventDayByFloorId = async (req, res, next) => {
 
 module.exports.EventsDay = async (req, res, next) => {
 
-    const { deskCalendar } = req.body
-
+    const { deskCalendar, deskId } = req.body
+    const desk = await DeskModel.findById(deskId)
+    const isHall = desk.type === "hall" ? true : false
+ 
     const events = []
-    
+
+
     try {
     
         for (const event of deskCalendar) {
             let user = {}
             if(event.usersId.length > 0 ){
+              if(isHall){
+                event.title = "Reserved Hall";
+                event.img = "https://hornero-app.s3.amazonaws.com/grupo.png" 
+                events.push(event)
+              } else {
                 user = await UserModel.findById(event.usersId[0]);
                 event.title = user.name;
                 event.img = user.img;
-
                 events.push(event)
+              }
               } 
         }
         return res.status(200).send(events)

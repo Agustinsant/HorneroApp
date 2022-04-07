@@ -6,7 +6,6 @@ import Desk from "../commons/Desk";
 
 function Floor({ floor, day }) {
   const { desks } = floor;
-  console.log("floor desks", desks);
   const [desk, setDesk] = useState([]);
   const [deskCalendarUp, setDeskCalendarUp] = useState(false);
 

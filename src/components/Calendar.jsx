@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { FaRegTimesCircle } from "react-icons/fa";
-import { getUserById } from "../services/userServices";
+import { getDesk } from "../services/buildingServices";
 import {getCalendar, addEventCalendar, deleteEventCalendar, updateEventCalendar, getDayEventsInDesk, getDayEvents} from "../services/calendarServices";
 import swal from "sweetalert";
 import FullCalendar from "@fullcalendar/react";
@@ -17,10 +17,9 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
   const [events, setEvents] = useState([]);
  
 
-
   const rendering = async () => {
-    const deskCalendar =  day ? (await getDayEventsInDesk(day, deskId)): (await getCalendar(deskId));
-    const events = await getDayEvents(deskCalendar)
+    const deskCalendar =  day ? (await getDayEventsInDesk(day, deskId)) : (await getCalendar(deskId));
+    const events = await getDayEvents(deskCalendar, deskId)
     setEvents(events);
   };
 
@@ -30,22 +29,43 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
 
   /* ------------- ADD FUNCTIONS ------------ */
   const handleDateSelect = (selectInfo) => {
+    console.log("selectedIndo", selectInfo)
     let calendarApi = selectInfo.view.calendar;
     calendarApi.unselect();
     calendarApi.addEvent(
       {
         start: selectInfo.startStr,
         end: selectInfo.endStr,
-        userId: user._id,
+        userId: user._id
+        
       },
       true
     );
   };
 
   const handleEventAdd = async (addInfo) => {
-    await addEventCalendar(deskId, addInfo.event.toPlainObject());
+    const allDay =  addInfo.event.allDay
+    await addEventCalendar(deskId, addInfo.event.toPlainObject(), allDay);
+    swal({
+      title: "You made a reservation!",
+      text: "Go to your email to check it",
+      icon: "success",
+      buttons: false,
+      timer: 2000,
+    });
+    const desk = await getDesk(deskId)
+    if(desk.type === "hall") addParticipants()
     rendering();
   };
+
+  const addParticipants= () => {
+    console.log("es un hall y agregamos amigos ahora")
+    return(
+      <h1>Ahora Agregamos amigos</h1>
+    )
+
+   
+  }
 
   /* -------------  DELETE FUNCTIONS ------------ */
   const handleDelete = (eventInfo) => {
@@ -65,7 +85,6 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
         });
       } else {
         swal("Your reservation is safe!", {
-          icon: "success",
           buttons: false,
           timer: 1000,
         });
@@ -189,6 +208,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
           eventChange={handleEventChange}
         />
       </div>
+      {addParticipants}
     </div>
   );
 };
