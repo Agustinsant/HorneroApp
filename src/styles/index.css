@@ -845,7 +845,6 @@ hr {
   right: 3px;
 
   color: #fff;
-
 }
 .delete_envent:hover {
   color: #e20909;
@@ -974,7 +973,6 @@ hr {
   border: 1.5px solid #bfd732 !important;
   overflow: scroll;
   max-height: 200px;
-
 }
 
 /* --------- RESERVAS ---------- */
@@ -1123,12 +1121,13 @@ hr {
     width: 90%;
   }
   .selector__img {
-    width: 100%;
+    width: 95%;
     height: 8rem;
     background-image: linear-gradient(to right bottom, #bfd732, #28b4857c),
       url("../assets/selector.jpg");
     background-size: cover;
     background-position: center;
     clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+    margin: 10px;
   }
 }

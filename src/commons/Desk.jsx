@@ -44,8 +44,17 @@ function Desk({ desk }) {
         height={12}
         fill={desk.color}
         rotation={desk.rotation}
+        onMouseEnter={(e) => {
+          const container = e.target.getStage().container();
+          container.style.cursor = "pointer";
+          e.target.fill("#258EA6");
+        }}
+        onMouseLeave={(e) => {
+          const container = e.target.getStage().container();
+          container.style.cursor = "default";
+          e.target.fill(desk.color);
+        }}
       />
-      {/* ///////////////////////////// */}
     </>
   );
 }
