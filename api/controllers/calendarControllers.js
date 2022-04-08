@@ -113,12 +113,14 @@ module.exports.AddUsersIdEvent = async (req, res, next) => {
       calendar.usersId.push(userId)
 
       let deskEvent = await DeskModel.findById(calendar.deskId)
-
-      const newDeskCalendar =  deskEvent.calendarEvent.filter((event)=> event._id !== calendar._id)
+        
+      const newDeskCalendar =  deskEvent.calendarEvent.filter((event)=> event._id.toHexString() !== calendar._id.toHexString())
+      
       deskEvent.calendarEvent = newDeskCalendar
       deskEvent.calendarEvent.push(calendar)
+      
         
-
+        await DeskModel.findByIdAndUpdate(deskEvent._id, {calendarEvent: []})
       await DeskModel.findByIdAndUpdate(deskEvent._id, deskEvent, options)
       const updateCalendarEvent = await CalendarModel.findByIdAndUpdate(eventId, calendar, options)
   
@@ -145,13 +147,18 @@ module.exports.DeleteUsersIdEvent = async (req, res, next) => {
     try {
       
       const calendar = await CalendarModel.findById(eventId)
+   
       const deskEvent = await DeskModel.findById(calendar.deskId)
+      
 
       const newUsersId = calendar.usersId.filter( (id) =>  id !== friendId)
+   
       calendar.usersId = newUsersId
 
-      const newDeskCalendar =  deskEvent.calendarEvent.filter((event)=> event._id !== calendar._id)
+      const newDeskCalendar =  deskEvent.calendarEvent.filter((event)=> event._id.toHexString() !== calendar._id.toHexString())
+    
       deskEvent.calendarEvent = newDeskCalendar
+     
       deskEvent.calendarEvent.push(calendar)
 
       await DeskModel.findByIdAndUpdate(deskEvent._id, deskEvent, options)
