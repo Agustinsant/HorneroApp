@@ -42,7 +42,6 @@ export const getDayEvents = async (deskCalendar, deskId) => {
 
 
 export const addParticipant = async ( eventId, userId) => {
-  console.log("userId", userId)
   const user = await axios.post(`http://localhost:3001/api/calendar/addUserEvent/${eventId}`, {userId} )
   
 };
