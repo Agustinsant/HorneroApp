@@ -7,7 +7,6 @@ import Hall from "../commons/Hall";
 import AddParticipants from "./AddParticipants";
 import { getEventsDayByFloor } from "../services/buildingServices";
 
-
 function Floor({ floor, day }) {
   const { desks } = floor;
   // const typeDesks = desks.filter((d) => d.type === "desk");
@@ -21,7 +20,7 @@ function Floor({ floor, day }) {
   );
   const [desk, setDesk] = useState([]);
   const [deskCalendarUp, setDeskCalendarUp] = useState(false);
-  const [addParticipantsUp, setAddParticipantsUp] = useState({state: false});
+  const [addParticipantsUp, setAddParticipantsUp] = useState({ state: false });
 
   const colors = {
     desk: {
@@ -41,12 +40,11 @@ function Floor({ floor, day }) {
   }, [day]);
 
   useEffect(async () => {
-   
     //look for desk events for the selected day
     if (day) {
       const data = await getEventsDayByFloor(floor._id, day);
       //set the desk color with the data retrived
-  
+
       data.map((dayEvent) => {
         //FULL DAY CASE
         if (dayEvent.allDay) {
@@ -139,13 +137,14 @@ function Floor({ floor, day }) {
       )}
 
       {addParticipantsUp.state ? (
-        <AddParticipants 
-        eventId={addParticipantsUp.eventId} 
-        state={addParticipantsUp.state} 
-        setAddParticipantsUp={setAddParticipantsUp}/>
-      ): (
+        <AddParticipants
+          eventId={addParticipantsUp.eventId}
+          state={addParticipantsUp.state}
+          setAddParticipantsUp={setAddParticipantsUp}
+        />
+      ) : (
         <></>
-      )} 
+      )}
     </>
   );
 }
