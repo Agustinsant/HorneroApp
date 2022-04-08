@@ -128,6 +128,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp ,day }) => {
 
   /* -------------  EVENT VIEW FUNCTION ------------ */
   const renderEventContent = (eventInfo) => {
+    
     if(eventInfo.event.title){
       let isHall = (eventInfo.event.title === "Sala Reservada");
       let checkId = eventInfo.event.extendedProps.usersId
@@ -164,6 +165,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp ,day }) => {
       )}
       </>
     )
+    
   };
 };
 
