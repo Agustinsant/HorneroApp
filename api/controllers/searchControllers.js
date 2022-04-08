@@ -92,7 +92,7 @@ module.exports.EventsDay = async (req, res, next) => {
             if(event.usersId.length > 0 ){
               if(isHall){
                 event.title = "Sala Reservada";
-                event.img = "https://hornero-app.s3.amazonaws.com/grupo.png" 
+                event.img = "https://hornero-app.s3.amazonaws.com/user-group.png" 
                 events.push(event)
               } else {
                 user = await UserModel.findById(event.usersId[0]);
