@@ -159,11 +159,10 @@ const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp ,day }) => {
         ) }
       </div>
        {isTheUser && isHall && (
-        <div className="addIconEvent">
+       
           <AiOutlineUsergroupAdd 
           onClick={()=> setAddParticipantsUp({state: true, eventId: eventInfo.event.extendedProps._id})} 
           className="addParticipantsIconinEvent" />
-        </div>
       )}
       </>
     )
