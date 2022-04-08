@@ -193,6 +193,17 @@ const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp ,day }) => {
           footerToolbar={{ center: "dayGridMonth timeGridDay" }}
           initialView={ day ? "timeGrid" : "dayGridMonth"  }
           visibleRange ={day && handleRangeView()}
+          dayMaxEventRows={true}
+          views={{
+            dayGrid: {
+              dayMaxEventRows: 4,
+             
+            },
+            timeGrid: {
+              dayMaxEventRows: 4,
+              
+            },
+          }}
           buttonText={{
             month: "Mes",
             day: "Dia",
@@ -204,6 +215,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp ,day }) => {
           }}
           events={events}
           selectOverlap={handleOverlap}
+          
           eventOverlap={false}
           //selectConstraint={"businessHours"}
           editable={true}
