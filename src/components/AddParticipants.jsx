@@ -7,7 +7,6 @@ import swal from "sweetalert";
 
 
 const AddParticipants = ({eventId}) => {
-  console.log("eventId", eventId)
     const user = useSelector(state => state.user.data)
     const friends = useSelector(state => state.user.friends)
     const dispatch = useDispatch();
@@ -17,7 +16,6 @@ const AddParticipants = ({eventId}) => {
       }, [])
 
      const handleAddtoEvent = async (friend) => {
-      console.log("eventId", eventId)
        await addParticipant(eventId, friend._id)
        swal(`Agregaste a ${friend.name} a la sala`, {
         icon: "success",
@@ -26,7 +24,6 @@ const AddParticipants = ({eventId}) => {
       })
      }
 
-    console.log("friends", friends)
 
     return (
       <div className="friends_container">

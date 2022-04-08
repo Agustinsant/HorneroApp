@@ -19,8 +19,6 @@ function Floor({ floor, day }) {
   const [typeHall, setTypeHall] = useState(
     desks.filter((d) => d.type === "hall")
   );
-  console.log("typedesks", typeDesks);
-  console.log("typeHalls", typeHall);
   const [desk, setDesk] = useState([]);
   const [deskCalendarUp, setDeskCalendarUp] = useState(false);
   const [addParticipantsUp, setAddParticipantsUp] = useState({state: false});
@@ -43,12 +41,12 @@ function Floor({ floor, day }) {
   }, [day]);
 
   useEffect(async () => {
-    console.log("inital day state", day);
+   
     //look for desk events for the selected day
     if (day) {
       const data = await getEventsDayByFloor(floor._id, day);
       //set the desk color with the data retrived
-      console.log("useEffect", data);
+  
       data.map((dayEvent) => {
         //FULL DAY CASE
         if (dayEvent.allDay) {
@@ -94,8 +92,6 @@ function Floor({ floor, day }) {
         }
       });
     }
-    console.log("end useEffect desks", typeDesks);
-    console.log("end useEffect halls", typeHall);
   }, [day]);
 
   const onClick = (e) => {

@@ -102,10 +102,7 @@ module.exports.AddUsersIdEvent = async (req, res, next) => {
     const { eventId } = req.params
   
     const {userId} = req.body
-  console.log("req", req.body)
-  console.log("eventId", eventId)
-  console.log("userId", userId)
-  
+
     const options = {
       returnDocument: "after",
     };
