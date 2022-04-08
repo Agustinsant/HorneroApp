@@ -55,6 +55,7 @@ function Selector() {
     <>
       {buildings[0] && (
         <div className="selector__container">
+          <div className="selector__img"></div>
           <div className="selector__inputs">
             <div className="selector__box">
               <select

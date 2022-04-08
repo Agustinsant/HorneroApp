@@ -39,25 +39,23 @@ nav {
 
 /* ------ START NAV STYLES ----- */
 
-#darkMode{
+#darkMode {
   margin-right: 15px;
   margin-top: 5px;
-  background: transparent url('../resources/img/siwtchOff.svg') no-repeat center;
+  background: transparent url("../resources/img/siwtchOff.svg") no-repeat center;
   color: #fff;
   border: none;
   background-size: 40px;
-  width: 60px ;
+  width: 60px;
   height: 40px;
-} 
+}
 
-#darkMode.clicked{
-  background: transparent url('../resources/img/siwtchOn.svg') no-repeat center !important;
-  border: none ;
+#darkMode.clicked {
+  background: transparent url("../resources/img/siwtchOn.svg") no-repeat center !important;
+  border: none;
   background-size: 40px !important;
-  width: 60px ;
+  width: 60px;
   height: 40px;
-
-
 }
 
 .darkModeBtn {
@@ -70,7 +68,6 @@ nav {
 .darkModeOn {
   color: #bfd732;
   font-size: 26px;
-
 }
 
 .darkModeOff {
@@ -475,9 +472,8 @@ nav {
   margin-bottom: 30px;
 }
 
-.editBtnContainer{
+.editBtnContainer {
   padding: 0;
-
 }
 
 .misDatosContainer form {
@@ -532,8 +528,7 @@ nav {
   color: #ff0000;
 }
 
-
-.misDatosLabel{
+.misDatosLabel {
   font-size: 12px;
   margin-bottom: 0px;
   margin-top: 0;
@@ -659,6 +654,7 @@ input:invalid[focused="true"] ~ span {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 8rem;
 }
 .profile_container {
   margin-top: 20px;
@@ -830,36 +826,32 @@ hr {
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  
 }
 
 .event_calendar {
-  font-size:0.9rem;
+  font-size: 0.9rem;
   color: #fff;
   margin-left: 2px;
-  
 }
 .event_timeText {
   font-size: 1rem;
   margin-right: 15px;
   color: #fff;
   margin-left: 4px;
-
 }
 
 .delete_envent {
   font-size: 1.2rem;
   right: 3px;
-
 }
 .delete_envent:hover {
   color: #e20909;
 }
 
-.addParticipantsIcon{
+.addParticipantsIcon {
   font-size: 1.2rem;
 }
-.addParticipantsIconinEvent{
+.addParticipantsIconinEvent {
   font-size: 1.8rem;
   color: #fff;
   position: absolute;
@@ -867,14 +859,12 @@ hr {
   right: 4px;
 }
 
-.addParticipantsIconinEvent:hover{
+.addParticipantsIconinEvent:hover {
   color: #bfd732;
 }
-.addIconEvent{
- 
+.addIconEvent {
   border: #ff0000 solid 1px;
 }
-
 
 .fc .fc-toolbar-title {
   margin-left: 3px !important;
@@ -907,8 +897,6 @@ hr {
   text-align: center;
 }
 
-
-
 .fc .fc-col-header-cell-cushion {
   display: inline-block;
   padding: 2px 4px;
@@ -917,19 +905,15 @@ hr {
   font-size: 0.9rem !important;
 }
 
-
-
 .fc .fc-daygrid-more-link {
- font-size: 0.35rem;
- color: #f7931e;
- background-color: #f7931e;
- display: flex;
- bottom: 10px !important;
- width: 85%;
+  font-size: 0.35rem;
+  color: #f7931e;
+  background-color: #f7931e;
+  display: flex;
+  bottom: 10px !important;
+  width: 85%;
   left: 5px;
 }
-
-
 
 .fc .fc-daygrid-day-number {
   text-decoration: none;
@@ -941,15 +925,12 @@ hr {
   color: #1a1a1a;
 }
 .fc .fc-timegrid-axis-cushion {
- color: #1a1a1a;
+  color: #1a1a1a;
 }
-
 
 .fc .fc-daygrid-body-natural .fc-daygrid-day-events {
   margin-bottom: 0 !important;
 }
-
-
 
 .fc-theme-standard td,
 .fc-theme-standard th {
@@ -962,11 +943,6 @@ hr {
   border: 1px solid var(--fc-border-color, #bfd732) !important;
 }
 
-
-
-
-
-
 .fc .fc-scrollgrid-liquid {
   border-style: none !important;
 }
@@ -975,7 +951,6 @@ hr {
   text-align: center;
 }
 
-
 .desk__calendar {
   width: 100%;
   position: absolute;
@@ -983,31 +958,28 @@ hr {
 }
 
 /* --------- pop over ----- */
-.fc-popover-header{
+.fc-popover-header {
   background: #f1efef9f !important;
   color: rgb(18, 18, 18);
-} 
+}
 
 .fc-popover-body {
-  background-color: #bfd732 ;
+  background-color: #bfd732;
 }
 
 .fc-theme-standard .fc-popover {
   border: 1.5px solid #bfd732 !important;
 }
 
-
 /* --------- RESERVAS ---------- */
 
-.booking_container { 
+.booking_container {
   width: 95%;
   margin-top: 5px;
 }
 
-
 .fc-theme-standard .fc-list {
   border: 1px solid #bfd732 !important;
-  
 }
 .fc-theme-standard .fc-list-day-cushion {
   background-color: #bfd732 !important;
@@ -1055,7 +1027,6 @@ hr {
 .fc .fc-list-day-cushion {
   justify-content: end;
   text-align: end;
- 
 }
 .fc .fc-list-table td {
   background: none !important;
@@ -1064,9 +1035,6 @@ hr {
 .swal-modal {
   max-width: 400px;
 }
-
-
-
 
 /* --------- ADD PARTICIPANTS  ----------- */
 .close_addParticipants {
@@ -1128,19 +1096,33 @@ hr {
     width: 590px !important;
     height: 297px !important;
   }
- 
 }
 
 @media all and (min-width: 768px) {
-  .selector__inputs {
-    flex-direction: row;
+  .floor_container {
+    width: 75% !important;
   }
   .selector__box {
-    width: 200px;
+    width: 30%;
+    background: #bfd732;
     height: 297px;
     margin-bottom: 0;
   }
- 
- 
+  .selector__inputs {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .selector__inputs select,
+  .selector__inputs input {
+    width: 90%;
+  }
+  .selector__img {
+    width: 100%;
+    height: 8rem;
+    background-image: linear-gradient(to right bottom, #bfd732, #28b4857c),
+      url("../assets/selector.jpg");
+    background-size: cover;
+    background-position: center;
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+  }
 }
-
