@@ -843,6 +843,9 @@ hr {
 .delete_envent {
   font-size: 1.2rem;
   right: 3px;
+
+  color: #fff;
+
 }
 .delete_envent:hover {
   color: #e20909;
@@ -969,6 +972,9 @@ hr {
 
 .fc-theme-standard .fc-popover {
   border: 1.5px solid #bfd732 !important;
+  overflow: scroll;
+  max-height: 200px;
+
 }
 
 /* --------- RESERVAS ---------- */
