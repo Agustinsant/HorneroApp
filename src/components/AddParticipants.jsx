@@ -21,7 +21,6 @@ const AddParticipants = ({eventId, state, setAddParticipantsUp}) => {
     useEffect(async () => {
         renderingEvent()
         dispatch(getAllFriends(user._id))  
-        
       }, [])
 
 
@@ -64,9 +63,9 @@ const AddParticipants = ({eventId, state, setAddParticipantsUp}) => {
                   <img src={friend.img} alt="friend pick"></img>
                 </div>
                 {event.usersId && event.usersId.includes(friend._id) ? (
-                    <button className="IconsRemoveParticipants">
-                    <FaUsersSlash onClick={()=> handleRemove(friend)} className="addParticipantsIcon" />
-                  </button>
+                      <button className="IconsRemoveParticipants">
+                        <FaUsersSlash onClick={()=> handleRemove(friend)} className="addParticipantsIcon" />
+                      </button>
                 ) : (
                       <button className="IconsAddParticipants">
                         <FaUsers onClick={()=> handleAddtoEvent(friend)} className="addParticipantsIcon" />
