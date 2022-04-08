@@ -858,7 +858,6 @@ hr {
 
 .addParticipantsIcon{
   font-size: 1.2rem;
-  color: #070707;
 }
 .addParticipantsIconinEvent{
   font-size: 1.8rem;
@@ -985,12 +984,16 @@ hr {
 
 /* --------- pop over ----- */
 .fc-popover-header{
-  background: #b0b0b09f !important;
+  background: #f1efef9f !important;
   color: rgb(18, 18, 18);
 } 
 
 .fc-popover-body {
   background-color: #bfd732 ;
+}
+
+.fc-theme-standard .fc-popover {
+  border: 1.5px solid #bfd732 !important;
 }
 
 
@@ -1066,9 +1069,55 @@ hr {
 
 
 /* --------- ADD PARTICIPANTS  ----------- */
+.close_addParticipants {
+  position: absolute;
+  font-size: 1.8rem;
+  right: 20px;
+}
 
+.friends_containerAddP {
+  width: 100%;
+  padding: 20px;
+  margin: 29px auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  border: solid 1px;
+  border-radius: 10px;
+}
 
+.IconsAddParticipants {
+  display: flex;
+  padding-left: 2px;
 
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  border: solid 4px white;
+  width: 35px;
+  height: 35px;
+  background: #bfd732;
+  color: white;
+  border-radius: 50%;
+}
+
+.IconsRemoveParticipants {
+  display: flex;
+  padding-left: 2px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  border: solid 4px white;
+  width: 35px;
+  height: 35px;
+  background: #ff0000;
+  color: white;
+  border-radius: 50%;
+}
 
 @media all and (min-width: 600px) {
   .floor_container {
