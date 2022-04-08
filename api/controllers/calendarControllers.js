@@ -99,10 +99,12 @@ module.exports.updateEventCalendarById = async (req, res, next) => {
 
 module.exports.AddUsersIdEvent = async (req, res, next) => { 
     
-    const { id } = req.params
+    const { eventId } = req.params
   
     const {userId} = req.body
-  
+  console.log("req", req.body)
+  console.log("eventId", eventId)
+  console.log("userId", userId)
   
     const options = {
       returnDocument: "after",
@@ -110,10 +112,10 @@ module.exports.AddUsersIdEvent = async (req, res, next) => {
   
     try {
       
-      const calendarEvent = await CalendarModel.findById(id)
+      const calendarEvent = await CalendarModel.findById(eventId)
 
       calendarEvent.usersId.push(userId)
-      const updateCalendarEvent = await CalendarModel.findByIdAndUpdate(id, calendarEvent, options)
+      const updateCalendarEvent = await CalendarModel.findByIdAndUpdate(eventId, calendarEvent, options)
   
       return res.status(201).send(updateCalendarEvent)
   
@@ -129,19 +131,18 @@ module.exports.AddUsersIdEvent = async (req, res, next) => {
 module.exports.DeleteUsersIdEvent = async (req, res, next) => { 
 
  
-    const {id} = req.params
+    const {eventId, friendId} = req.params
   
-    const {userId} = req.body
     const options = {
       returnDocument: "after",
     };
   
     try {
       
-      const calendarEvent = await CalendarModel.findById(id)
-      const newUsersId = calendarEvent.usersId.filter( (id) =>  id !== userId)
+      const calendarEvent = await CalendarModel.findById(eventId)
+      const newUsersId = calendarEvent.usersId.filter( (id) =>  id !== friendId)
       calendarEvent.usersId = newUsersId
-      const updateCalendarEvent = await CalendarModel.findByIdAndUpdate(id, calendarEvent, options)
+      const updateCalendarEvent = await CalendarModel.findByIdAndUpdate(eventId, calendarEvent, options)
   
       return res.status(200).send(updateCalendarEvent)
   

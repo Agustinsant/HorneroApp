@@ -63,7 +63,6 @@ export const removeFriendService = async ({userId, friendId}) => {
 
 export const getAllFriendsService = async (userId) => {
   const friends = await axios.get(`http://localhost:3001/api/user/${userId}/allFriends`)
-
   return friends.data
 }
 
