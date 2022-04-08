@@ -1,6 +1,6 @@
 const express = require('express')
 const calendarRouter = express.Router()
-const { AddEventCalendar, getEventCalendarById, getAllEventCalendar, updateEventCalendarById, deleteEventCalendarById, getAllEventCalendarByUserId, updateUsersIdEvent, AddUsersIdEvent, DeleteUsersIdEvent } = require('../controllers/calendarControllers')
+const { AddEventCalendar, getEventCalendarById, getAllEventCalendar, updateEventCalendarById, deleteEventCalendarById, getAllEventCalendarByUserId, AddUsersIdEvent, DeleteUsersIdEvent } = require('../controllers/calendarControllers')
 
 calendarRouter.post('/add/:idDesk', AddEventCalendar) // registra un evento del calendario
 
@@ -12,9 +12,9 @@ calendarRouter.get('/all/:userId', getAllEventCalendarByUserId) // trae todos lo
 
 calendarRouter.put('/update/:id', updateEventCalendarById) // edita un evento
 
-calendarRouter.post('addUserEvent/:id', AddUsersIdEvent) // añade usuarios al evento
+calendarRouter.post('/addUserEvent/:eventId', AddUsersIdEvent) // añade usuarios al evento
 
-calendarRouter.delete('deleteUserEvent/:id', DeleteUsersIdEvent) // eliminar usuarios al evento
+calendarRouter.delete('/deleteUserEvent/:eventId/:friendId', DeleteUsersIdEvent) // eliminar usuarios al evento
 
 calendarRouter.delete('/delete/:id', deleteEventCalendarById) // elimina un evento
 

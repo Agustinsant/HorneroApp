@@ -17,12 +17,12 @@ export const addEventCalendar = async (deskId, eventObject, allDay) => {
 };
 
 export const deleteEventCalendar = async (evenId) => {
-  const deletedEvent = await axios.delete(`http://localhost:3001/api/calendar/delete/${evenId}`)
+   await axios.delete(`http://localhost:3001/api/calendar/delete/${evenId}`)
 };
 
 
 export const updateEventCalendar = async (evenId, eventObject) => {
-  const updatedEvent = await axios.put(`http://localhost:3001/api/calendar/update/${evenId}`, eventObject)
+   await axios.put(`http://localhost:3001/api/calendar/update/${evenId}`, eventObject)
 };
 
 export const getUserBooking= async (userId) => {
@@ -39,3 +39,16 @@ export const getDayEvents = async (deskCalendar, deskId) => {
   const allDayEvents = await axios.post(`http://localhost:3001/api/search/eventsDay`, {deskCalendar, deskId})
   return allDayEvents.data
 };
+
+
+export const addParticipant = async ( eventId, userId) => {
+  console.log("userId", userId)
+  const user = await axios.post(`http://localhost:3001/api/calendar/addUserEvent/${eventId}`, {userId} )
+  
+};
+
+export const removeParticipant = async (evenId, friendId) => {
+   await axios.delete(`http://localhost:3001/api/calendar/deleteUserEvent/${evenId}/${friendId}`)
+};
+
+

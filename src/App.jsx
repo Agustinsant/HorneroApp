@@ -19,6 +19,7 @@ import My_friends from "./components/My_friends";
 import My_info from "./components/My_info";
 
 import Booking from "./commons/Bookings";
+import AddParticipants from "./components/AddParticipants";
 
 
 const App = () => {
@@ -60,6 +61,7 @@ const App = () => {
         />
         <Route path="/mi_perfil/mis_datos" element={<My_info />} />
         <Route path="/explore" element={<Selector />} />
+        <Route path="/addParticipants" element={ <AddParticipants/>}/>
       </Routes>
       <Footer />
       <Modal modalState={modalState} setModalState={setModalState} />

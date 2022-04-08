@@ -822,6 +822,7 @@ hr {
   width: 90% !important;
   padding: 1em;
   background: #fff;
+  border-radius: 10px;
 }
 
 .event_container {
@@ -1031,6 +1032,27 @@ hr {
 .swal-modal {
   max-width: 400px;
 }
+
+
+
+
+/* --------- ADD PARTICIPANTS  ----------- */
+
+.addParticipantsIcon{
+  font-size: 1.2rem;
+  color: #070707;
+}
+.addParticipantsIconinEvent{
+  font-size: 1.8rem;
+  color: #fff;
+}
+.addIconEvent{
+  text-align: end;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-top: 40px;
+}
+
 
 @media all and (min-width: 600px) {
   .floor_container {

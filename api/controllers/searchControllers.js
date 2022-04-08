@@ -91,7 +91,7 @@ module.exports.EventsDay = async (req, res, next) => {
             let user = {}
             if(event.usersId.length > 0 ){
               if(isHall){
-                event.title = "Reserved Hall";
+                event.title = "Sala Reservada";
                 event.img = "https://hornero-app.s3.amazonaws.com/grupo.png" 
                 events.push(event)
               } else {

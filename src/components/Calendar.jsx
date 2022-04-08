@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { FaRegTimesCircle } from "react-icons/fa";
+import {AiOutlineUsergroupAdd} from "react-icons/ai";
 import { getDesk } from "../services/buildingServices";
 import {getCalendar, addEventCalendar, deleteEventCalendar, updateEventCalendar, getDayEventsInDesk, getDayEvents} from "../services/calendarServices";
 import swal from "sweetalert";
@@ -12,7 +13,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 
 
 
-const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
+const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp ,day }) => {
   const user = useSelector((state) => state.user.data);
   const [events, setEvents] = useState([]);
  
@@ -30,8 +31,6 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
 
   /* ------------- ADD FUNCTIONS ------------ */
   const handleDateSelect = (selectInfo) => {
-    console.log("seleced" , selectInfo)
-    //selectInfo.view.dataEnv.locale.options.allDayText = "todo el dia"
     let calendarApi = selectInfo.view.calendar;
     calendarApi.unselect();
     calendarApi.addEvent(
@@ -46,7 +45,6 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
   };
 
   const handleEventAdd = async (addInfo) => {
-    console.log("add", addInfo)
     const allDay =  addInfo.event.allDay
     await addEventCalendar(deskId, addInfo.event.toPlainObject(), allDay);
     swal({
@@ -56,19 +54,12 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
       buttons: false,
       timer: 2000,
     });
-    const desk = await getDesk(deskId)
-    if(desk.type === "hall") addParticipants()
     rendering();
   };
 
-  const addParticipants= () => {
-    console.log("es un hall y agregamos amigos ahora")
-    return(
-      <h1>Ahora Agregamos amigos</h1>
-    )
-
+  
    
-  }
+ 
 
   /* -------------  DELETE FUNCTIONS ------------ */
   const handleDelete = (eventInfo) => {
@@ -133,14 +124,16 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
     });
   };
 
-  
+  console.log("events", events)
 
   /* -------------  EVENT VIEW FUNCTION ------------ */
   const renderEventContent = (eventInfo) => {
+    console.log("eventinfo title", console.log(eventInfo.event.extendedProps))
     if(eventInfo.event.title){
-      let checkId = eventInfo.event.extendedProps.usersId[0]
-      let isTheUser = user._id === checkId;
-      let userImg = eventInfo.event.extendedProps.img ? eventInfo.event.extendedProps.img : "nophoto.jpg";
+      let isHall = (eventInfo.event.title === "Sala Reservada");
+      let checkId = eventInfo.event.extendedProps.usersId
+      let isTheUser = checkId.includes(user._id)
+      let userImg = eventInfo.event.extendedProps.img 
       let colorEvent = isTheUser ? "#00A99D" : "#444444";
     
 
@@ -148,6 +141,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
     eventInfo.borderColor = colorEvent;
 
     return (
+      <>
       <div className="event_container">
         <div className="image_calendar">
           {
@@ -164,6 +158,14 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
           />
         ) }
       </div>
+       {isTheUser && isHall && (
+        <div className="addIconEvent">
+          <AiOutlineUsergroupAdd 
+          onClick={()=> setAddParticipantsUp({state: true, eventId: eventInfo.event.extendedProps._id})} 
+          className="addParticipantsIconinEvent" />
+        </div>
+      )}
+      </>
     )
   };
 };
@@ -220,7 +222,6 @@ const Calendar = ({ deskId, setDeskCalendarUp, day }) => {
           eventChange={handleEventChange}
         />
       </div>
-      {addParticipants}
     </div>
   );
 };
