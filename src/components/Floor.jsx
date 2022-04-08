@@ -139,7 +139,10 @@ function Floor({ floor, day }) {
       )}
 
       {addParticipantsUp.state ? (
-        <AddParticipants eventId={addParticipantsUp.eventId}/>
+        <AddParticipants 
+        eventId={addParticipantsUp.eventId} 
+        state={addParticipantsUp.state} 
+        setAddParticipantsUp={setAddParticipantsUp}/>
       ): (
         <></>
       )} 

@@ -16,6 +16,11 @@ export const addEventCalendar = async (deskId, eventObject, allDay) => {
   return newEvent.data.calendarEvent;
 };
 
+export const getEventById= async (eventId) => {
+  const event = await axios.get(`http://localhost:3001/api/calendar/${eventId}`)
+  return event.data
+};
+
 export const deleteEventCalendar = async (evenId) => {
    await axios.delete(`http://localhost:3001/api/calendar/delete/${evenId}`)
 };
