@@ -1,7 +1,6 @@
 import { Rect } from "react-konva";
 
 function Desk({ desk }) {
-  console.log("desk color", desk.color);
   const chairPositionBaseOnRotation = {
     0: {
       x: desk.positionX + 5,
