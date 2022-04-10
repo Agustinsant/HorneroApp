@@ -21,15 +21,12 @@ import My_info from "./components/My_info";
 import Booking from "./commons/Bookings";
 import AddParticipants from "./components/AddParticipants";
 
-
 const App = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLogged = useSelector((state) => state.user.isLogged);
   const user = useSelector((state) => state.user.data);
   const token = localStorage.getItem("token");
-
-  console.log(token);
 
   const [modalState, setModalState] = useState(false);
 
@@ -61,7 +58,7 @@ const App = () => {
         />
         <Route path="/mi_perfil/mis_datos" element={<My_info />} />
         <Route path="/explore" element={<Selector />} />
-        <Route path="/addParticipants" element={ <AddParticipants/>}/>
+        <Route path="/addParticipants" element={<AddParticipants />} />
       </Routes>
       <Footer />
       <Modal modalState={modalState} setModalState={setModalState} />

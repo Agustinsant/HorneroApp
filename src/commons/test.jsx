@@ -1,41 +1,34 @@
-import React, { Component } from "react";
-import { render } from "react-dom";
-import { Stage, Layer, Rect, Text } from "react-konva";
+///////////////TO DO LIST
+//////CANVAS
+//Icono representativo indicando escritorio con reserva propia
+//Mapa posicion vertical mobile
+//Re-render al cambiar filtros (edificio/piso)
+//Referencias mapa
+//Seed segundo piso
 
-const items = [1, 2, 3, 4];
+//////CALENDAR
+//No se actualiza reserva fullday
+//Agregar boton fullday
+//No permitir reservas domingos/hs no habiles
+//Configuracion mails en reserva salas
 
-class App extends Component {
-  render() {
-    return (
-      <Stage width={window.innerWidth} height={window.innerHeight}>
-        <Layer>
-          <Text
-            text="Try to hover rectangles, see cursor changes."
-            fontSize={15}
-          />
-          {items.map(offset => (
-            <Rect
-              key={offset}
-              x={70 * offset}
-              y={50}
-              width={50}
-              height={50}
-              fill="red"
-              shadowBlur={10}
-              onMouseEnter={e => {
-                const container = e.target.getStage().container();
-                container.style.cursor = "pointer";
-              }}
-              onMouseLeave={e => {
-                const container = e.target.getStage().container();
-                container.style.cursor = "default";
-              }}
-            />
-          ))}
-        </Layer>
-      </Stage>
-    );
-  }
-}
+//////FORMULARIOS (Login/register/mi perfil)
+//Mensaje "no hay resultados" sin buscar
+//Busqueda por localizacion
+//Bloquear busqueda cuando esta cargando
+//Labels p/inputs
+//Mensajes despues de actualizar campos
+//Cambio password envia texto plano
 
-render(<App />, document.getElementById("root"));
+//////ESTILOS Y CSS
+//Retoques pantalla welcome
+//Retoques pantalla selector y mapeo responsive
+//Estilado mi perfil responsive
+//Modulo del calendario (no cubre full vp)
+//Retocar padding, ubicacion y otros s/material (buenas practicas)
+//Cambio barras de scroll
+//Ver alturas de elementos (referencia Globant/material)
+//Modular CSS (SASS)
+
+///////ADMIN MODE
+//VER METODO

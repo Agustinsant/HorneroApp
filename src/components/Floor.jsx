@@ -105,11 +105,15 @@ function Floor({ floor, day }) {
             <Map url={floor.imgFloor} />
             {typeDesks.map((desk) => (
               <Group onClick={onClick} onTap={onClick} key={desk._id}>
-                <Desk desk={desk} rotation={desk.rotation} />
+                <Desk
+                  desk={desk}
+                  rotation={desk.rotation}
+                  key={desk._id + "d"}
+                />
               </Group>
             ))}
             {typeHall.map((hall) => (
-              <Group onClick={onClick} onTap={onClick} key={desk._id}>
+              <Group onClick={onClick} onTap={onClick} key={hall._id + "h"}>
                 <Hall
                   onClick={onClick}
                   onTap={onClick}
