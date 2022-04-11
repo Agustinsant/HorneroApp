@@ -1,11 +1,14 @@
 const { BuildingModel, FloorModel, DeskModel, CalendarModel } = require('../models/buildings')
+const geocoder = require('../utils/geocoder')
 
 module.exports.AddBuilding = async (req, res, next) => {
 
     const { name, address, city } = req.body
-
+    const localizacion = await geocoder.geocode(address)
+    const { latitude , longitude } = localizacion[0]
+  
     try {
-        const newBuilding = await BuildingModel({ name , address, city : city.replace(/\b\w/g, (l) => l.toUpperCase()) }).save()
+        const newBuilding = await BuildingModel({ name, address, latitude, longitude, city : city.replace(/\b\w/g, (l) => l.toUpperCase()) }).save()
         return res.status(201).send(newBuilding)
     }
     catch (error) {
