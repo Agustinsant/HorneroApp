@@ -1,6 +1,8 @@
-import { RegularPolygon, Rect } from "react-konva";
+import { RegularPolygon, Image } from "react-konva";
+import useImage from "use-image";
 
-function Hall({ hall, color }) {
+function Hall({ hall, userImg }) {
+  const [image] = useImage(userImg);
   let hallColor = hall.color;
   if (hallColor === "#39B54A") hallColor = "#F7931E";
   return (
@@ -24,6 +26,13 @@ function Hall({ hall, color }) {
           container.style.cursor = "default";
           e.target.fill(hallColor);
         }}
+      />
+      <Image
+        image={image}
+        width={15}
+        height={15}
+        x={hall.positionX - 7}
+        y={hall.positionY - 8}
       />
     </>
   );
