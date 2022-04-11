@@ -1,5 +1,6 @@
 const { UserModel } = require('../models/users')
 const { DeskModel, CalendarModel, BuildingModel } = require ('../models/buildings')
+const DistanciaMetros = require('../utils/distanceInMeters')
 
 
 module.exports.getForNameOrEmail = async (req, res, next) => {
@@ -124,4 +125,36 @@ module.exports.BuildingName = async (req, res, next) => {
     catch (error) {
         next(error)
     }
+}
+
+module.exports.ClosestBuilding = async (req, res, next) => {
+
+    const { latitude, longitude } = req.body
+ 
+    try {
+        
+        const buildings = await BuildingModel.find({})
+        
+        let distanceBuilding = buildings.map((building) => {
+
+            let newObj = {}
+            let distance =  DistanciaMetros(building.latitude,building.longitude,latitude,longitude)
+
+            newObj.idBuilding = building._id
+            newObj.city= building.city
+            newObj.distance = distance
+
+            return newObj
+        })
+
+        distanceBuilding.sort(function(a, b){return a.distance - b.distance}) 
+
+        return res.status(200).send(distanceBuilding)
+
+    } 
+    
+    catch (error) {
+        next (error)
+    }
+
 }
