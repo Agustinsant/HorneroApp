@@ -9,10 +9,11 @@ import useInput from "../hooks/useInput";
 const My_info = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.data);
-  const name = useInput();
-  const email = useInput();
-  const city = useInput();
   const password = useInput();
+
+  const [nameValue, setNameValue] = useState(user.name);
+  const [emailValue, setEmailValue] = useState(user.email);
+  const [cityValue, setCityValue] = useState(user.city);
 
   const [nameEdit, setNameEdit] = useState(false);
   const [emailEdit, setEmailEdit] = useState(false);
@@ -24,7 +25,7 @@ const My_info = () => {
     dispatch(
       editUser({
         id: user._id,
-        name: name.value,
+        name: nameValue,
       })
     ).then(data => {
       data.error ? swal({
@@ -44,7 +45,7 @@ const My_info = () => {
     dispatch(
       editUser({
         id: user._id,
-        email: email.value,
+        email: emailValue,
       })
     ).then(data => {
       data.error ? swal({
@@ -64,7 +65,7 @@ const My_info = () => {
     dispatch(
       editUser({
         id: user._id,
-        city: city.value,
+        city: cityValue,
       })
     ).then(data => {
       data.error ? swal({
@@ -114,12 +115,13 @@ const My_info = () => {
             <>
             <p className="misDatosLabel">Nombre y Apellido</p>
             <input
-              {...name}
+              onChange={e=>setNameValue(e.target.value)}
+              value={nameValue}
               type="text"
-              placeholder="Editar nombre y apellido."
               disabled={!nameEdit}
               pattern= "^[A-Z]([a-zA-Z]+[',.-]?[a-zA-Z ]*)+[A-Z]([a-zA-Z]+[',.-]?[a-zA-Z ]+)+$"
               focused="true"
+              
             />
             <span className="form__input--errormessage"> Respeta Mayúsculas! (ej: Juan Topo)</span>
             </>
@@ -136,7 +138,6 @@ const My_info = () => {
               className="misDatosBtns"
               onClick={(e) => {
                 e.preventDefault();
-                name.setValue("");
                 setNameEdit(!nameEdit);
               }}
             >
@@ -169,11 +170,11 @@ const My_info = () => {
         <div className="editInputsContainer">
           {emailEdit ? (
             <>
-            <p className="misDatosLabel">Email</p>
+            <p className="misDatosLabel">E-mail</p>
             <input
-              {...email}
+              onChange={e=>setEmailValue(e.target.value)}
+              value={emailValue}
               type="text"
-              placeholder="Editar email."
               disabled={!emailEdit}
               pattern= "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$"
               focused="true"
@@ -193,7 +194,6 @@ const My_info = () => {
               className="misDatosBtns"
               onClick={(e) => {
                 e.preventDefault();
-                name.setValue("");
                 setEmailEdit(!emailEdit);
               }}
             >
@@ -228,9 +228,9 @@ const My_info = () => {
             <>
             <p className="misDatosLabel">Ciudad</p>
             <input
-              {...city}
+              onChange={e=>setCityValue(e.target.value)}
+              value={cityValue}
               type="text"
-              placeholder="Editar ciudad."
               disabled={!cityEdit}
               pattern= "^.{4,26}$"
               focused="true"
@@ -250,7 +250,6 @@ const My_info = () => {
               className="misDatosBtns"
               onClick={(e) => {
                 e.preventDefault();
-                name.setValue("");
                 setCityEdit(!cityEdit);
               }}
             >
@@ -287,7 +286,7 @@ const My_info = () => {
             <input
               {...password}
               type="password"
-              placeholder="Editar contraseña."
+              placeholder="Insertar nueva contraseña."
               disabled={!passwordEdit}
               pattern= "^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{8,14}$"
               focused="true"
@@ -308,7 +307,6 @@ const My_info = () => {
               className="misDatosBtns"
               onClick={(e) => {
                 e.preventDefault();
-                name.setValue("");
                 setPasswordEdit(!passwordEdit);
               }}
             >
