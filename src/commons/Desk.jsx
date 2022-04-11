@@ -23,8 +23,7 @@ function Desk({ desk }) {
   return (
     <>
       <Rect
-        calendar={desk.calendar}
-        key={desk._id}
+        key={desk._id.concat("chair")}
         id={desk._id}
         x={chairPositionBaseOnRotation[desk.rotation].x}
         y={chairPositionBaseOnRotation[desk.rotation].y}
@@ -32,10 +31,11 @@ function Desk({ desk }) {
         height={10}
         fill={desk.color}
         rotation={0}
+        shadowBlur={4}
+        shadowOpacity={0.6}
       />
       <Rect
-        calendar={desk.calendar}
-        key={desk._id.concat("chair")}
+        key={desk._id}
         id={desk._id}
         x={desk.positionX}
         y={desk.positionY}
@@ -43,6 +43,8 @@ function Desk({ desk }) {
         height={12}
         fill={desk.color}
         rotation={desk.rotation}
+        shadowBlur={5}
+        shadowOpacity={0.6}
         onMouseEnter={(e) => {
           const container = e.target.getStage().container();
           container.style.cursor = "pointer";

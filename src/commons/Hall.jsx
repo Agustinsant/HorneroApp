@@ -6,13 +6,14 @@ function Hall({ hall, color }) {
   return (
     <>
       <RegularPolygon
-        calendar={hall.calendar}
         id={hall._id}
         x={hall.positionX}
         y={hall.positionY}
         sides={3}
         radius={25}
         fill={hallColor}
+        shadowBlur={4}
+        shadowOpacity={0.6}
         onMouseEnter={(e) => {
           const container = e.target.getStage().container();
           container.style.cursor = "pointer";
