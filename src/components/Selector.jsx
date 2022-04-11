@@ -33,6 +33,7 @@ function Selector() {
   const resetColor = async () => {
     let data = await getFloor(floor._id);
     const resetColors = data.desks.map((d) => (d.color = colors.desk.empty));
+    data.desk = resetColors;
     setFloor(data);
   };
 
@@ -41,6 +42,7 @@ function Selector() {
     let getData = floors.filter((f) => f.name === selectedFloor)[0]._id;
     let data = await getFloor(getData);
     const resetColors = data.desks.map((d) => (d.color = colors.desk.empty));
+    data.desk = resetColors;
     setFloor(data);
   };
   const showCalendarMonth = () => {

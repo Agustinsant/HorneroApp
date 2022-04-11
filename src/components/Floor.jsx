@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
 import { Stage, Layer, Group } from "react-konva";
+import { useSelector } from "react-redux";
 import Calendar from "./Calendar";
 import Map from "../commons/Map";
 import Desk from "../commons/Desk";
 import Hall from "../commons/Hall";
 import AddParticipants from "./AddParticipants";
 import { getEventsDayByFloor } from "../services/buildingServices";
+import user from "../store/user";
 
 function Floor({ floor, day }) {
+  const userLoged = useSelector((state) => state.user.data);
+  console.log(userLoged);
   const { desks } = floor;
   // const typeDesks = desks.filter((d) => d.type === "desk");
   // const typeHall = desks.filter((d) => d.type === "hall");
@@ -59,10 +63,15 @@ function Floor({ floor, day }) {
               (hall) => hall._id === dayEvent.deskId
             );
             typeHall[hallIndex].color = colors.hall.full;
+            //if user have a booking on that desk, mark it
+            if (dayEvent.usersId.filter((user) => user === userLoged._id)[0])
+              typeHall[hallIndex].userWillBeHere = true;
             let data = JSON.parse(JSON.stringify(typeHall));
             setTypeHall(data);
           } else {
             typeDesks[deskIndex].color = colors.desk.full;
+            if (dayEvent.usersId.filter((user) => user === userLoged._id)[0])
+              typeDesks[deskIndex].userWillBeHere = true;
             let data = JSON.parse(JSON.stringify(typeDesks));
             setTypeDesks(data);
           }
@@ -77,12 +86,14 @@ function Floor({ floor, day }) {
               (hall) => hall._id === dayEvent.deskId
             );
             typeHall[hallIndex].color = colors.hall.concurred;
-
+            if (dayEvent.usersId.filter((user) => user === userLoged._id)[0])
+              typeHall[hallIndex].userWillBeHere = true;
             let data = JSON.parse(JSON.stringify(typeHall));
             setTypeHall(data);
           } else {
             typeDesks[deskIndex].color = colors.desk.concurred;
-
+            if (dayEvent.usersId.filter((user) => user === userLoged._id)[0])
+              typeDesks[deskIndex].userWillBeHere = true;
             let data = JSON.parse(JSON.stringify(typeDesks));
             setTypeDesks(data);
           }
@@ -106,8 +117,8 @@ function Floor({ floor, day }) {
               <Group onClick={onClick} onTap={onClick} key={desk._id}>
                 <Desk
                   desk={desk}
-                  rotation={desk.rotation}
                   key={desk._id + "d"}
+                  userImg={userLoged.img}
                 />
               </Group>
             ))}
@@ -118,6 +129,7 @@ function Floor({ floor, day }) {
                   onTap={onClick}
                   key={hall._id}
                   hall={hall}
+                  userImg={userLoged.img}
                 />
               </Group>
             ))}
