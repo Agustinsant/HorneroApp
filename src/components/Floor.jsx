@@ -18,6 +18,7 @@ function Floor({ floor, day }) {
   const [typeHall, setTypeHall] = useState(
     desks.filter((d) => d.type === "hall")
   );
+
   const [desk, setDesk] = useState([]);
   const [deskCalendarUp, setDeskCalendarUp] = useState(false);
   const [addParticipantsUp, setAddParticipantsUp] = useState({ state: false });
@@ -37,7 +38,7 @@ function Floor({ floor, day }) {
   useEffect(() => {
     setTypeDesks(desks.filter((d) => d.type === "desk"));
     setTypeHall(desks.filter((d) => d.type === "hall"));
-  }, [day]);
+  }, [day, floor]);
 
   useEffect(async () => {
     //look for desk events for the selected day
@@ -58,12 +59,10 @@ function Floor({ floor, day }) {
               (hall) => hall._id === dayEvent.deskId
             );
             typeHall[hallIndex].color = colors.hall.full;
-            console.log("FULLDAY HALL COLOR CHANGE ON", typeHall[hallIndex]);
             let data = JSON.parse(JSON.stringify(typeHall));
             setTypeHall(data);
           } else {
             typeDesks[deskIndex].color = colors.desk.full;
-            console.log("FULLDAY DESK COLOR CHANGE ON", typeDesks);
             let data = JSON.parse(JSON.stringify(typeDesks));
             setTypeDesks(data);
           }
@@ -78,12 +77,12 @@ function Floor({ floor, day }) {
               (hall) => hall._id === dayEvent.deskId
             );
             typeHall[hallIndex].color = colors.hall.concurred;
-            console.log("CONCURRED HALL COLOR CHANGE ON", typeHall[hallIndex]);
+
             let data = JSON.parse(JSON.stringify(typeHall));
             setTypeHall(data);
           } else {
             typeDesks[deskIndex].color = colors.desk.concurred;
-            console.log("CONCURRED DESK COLOR CHANGE ON", typeDesks);
+
             let data = JSON.parse(JSON.stringify(typeDesks));
             setTypeDesks(data);
           }
