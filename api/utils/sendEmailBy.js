@@ -41,7 +41,18 @@ const sendEmailBy = async (sendingType, data, moreInfo) => {
 
     sendGmail(email, subject, text)
 
+  }  /// ('addUserToEvent', {user: user.email, otherUser: otherUser.email, building: building.name, floor: floor.name })
+
+  else if (sendingType === "addUserToEvent") {
+
+    const { sendingUser, otherUser, building, floor, start } = data
+    const subject = "Añadido a reserva"
+    const text = `<h3>Has sido añadido a la reserva del Hall en ${building}, ${floor}, por ${sendingUser}, en la fecha/hora: ${start}</h3>`
+
+    sendGmail(otherUser, subject, text)
+
   }
+
 }
 
 module.exports = sendEmailBy

@@ -25,7 +25,7 @@ const AddParticipants = ({eventId, state, setAddParticipantsUp}) => {
 
 
      const handleAddtoEvent = async (friend) => {
-       await addParticipant(eventId, friend._id)
+       await addParticipant(eventId, friend._id, user.name)
        swal(`Agregaste a ${friend.name} a la sala`, {
         icon: "success",
         buttons: false,
