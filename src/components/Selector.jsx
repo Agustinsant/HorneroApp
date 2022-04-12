@@ -6,10 +6,16 @@ import { getFloor } from "../services/buildingServices";
 
 function Selector() {
   const buildings = useSelector((state) => state.buildings.data);
-  const [floors, setFloors] = useState([]);
-  const [floor, setFloor] = useState({});
+  const [floors, setFloors] = useState({
+    data: [],
+    disabled: true,
+  });
+  const [floor, setFloor] = useState("");
   const [dateSelector, setDateSelector] = useState(false);
-  const [day, setDay] = useState("");
+  const [day, setDay] = useState({
+    data: "",
+    disabled: true,
+  });
 
   const colors = {
     desk: {
@@ -24,12 +30,32 @@ function Selector() {
     },
   };
 
+  const floorNames = () => {
+    return floors.data.map((f, i) => <option key={i}>{f.name}</option>);
+  };
+
   const handleSelectBuilding = (e) => {
+    setFloors({
+      data: [],
+      disabled: true,
+    });
+    setFloor({});
+    setDay({
+      data: "",
+      disabled: true,
+    });
     let selectedBuilding = e.target.value;
     let getData = buildings.filter((b) => b.city === selectedBuilding)[0]
       .floors;
-    setFloors(getData);
+
+    setTimeout(() => {
+      setFloors({
+        data: getData,
+        disabled: false,
+      });
+    }, 0);
   };
+
   const resetColor = async () => {
     let data = await getFloor(floor._id);
     const resetColors = data.desks.map((d) => (d.color = colors.desk.empty));
@@ -39,11 +65,15 @@ function Selector() {
 
   const handleSelectFloor = async (e) => {
     let selectedFloor = e.target.value;
-    let getData = floors.filter((f) => f.name === selectedFloor)[0]._id;
+    let getData = floors.data.filter((f) => f.name === selectedFloor)[0]._id;
     let data = await getFloor(getData);
     const resetColors = data.desks.map((d) => (d.color = colors.desk.empty));
     data.desk = resetColors;
     setFloor(data);
+    setDay({
+      data: "",
+      disabled: false,
+    });
   };
   const showCalendarMonth = () => {
     setDateSelector(true);
@@ -62,43 +92,42 @@ function Selector() {
                 onChange={handleSelectBuilding}
               >
                 <option disabled selected hidden>
-                  Seleccione un Edificio
+                  Seleccione un edificio
                 </option>
+
                 {buildings.map((building, i) => (
                   <option key={i}>{building.city}</option>
                 ))}
               </select>
-              {floors[0] ? (
-                <>
-                  <select
-                    name="floors"
-                    id="floors"
-                    onChange={handleSelectFloor}
-                  >
-                    <option disabled selected hidden>
-                      Seleccione un piso
-                    </option>
-                    {floors.map((f, i) => (
-                      <option key={i}>{f.name}</option>
-                    ))}
-                  </select>
-                </>
-              ) : (
-                <></>
-              )}
-              {floor._id ? (
-                <input
-                  type="date"
-                  onChange={(e) => {
-                    setDay(e.target.value);
-                    resetColor();
-                  }}
-                />
-              ) : (
-                <></>
-              )}
+              <select
+                name="floors"
+                id="floors"
+                onChange={handleSelectFloor}
+                disabled={floors.disabled}
+              >
+                <option selected hidden>
+                  Seleccione un piso
+                </option>
+                {floorNames()}
+              </select>
+              <input
+                type="date"
+                value={day.data}
+                disabled={day.disabled}
+                onChange={(e) => {
+                  setDay({
+                    data: e.target.value,
+                    disabled: false,
+                  });
+                  resetColor();
+                }}
+              />
             </div>
-            {floor.desks && <Floor floor={floor} day={day} />}
+            {!floor.desks ? (
+              <div className="floor_container"></div>
+            ) : (
+              <Floor floor={floor} day={day.data} />
+            )}
           </div>
         </div>
       )}

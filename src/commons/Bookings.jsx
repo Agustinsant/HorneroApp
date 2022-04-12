@@ -6,8 +6,8 @@ import FullCalendar from "@fullcalendar/react";
 import listPlugin from "@fullcalendar/list";
 import useFetch from "../hooks/useFetch";
 import { render } from "@testing-library/react";
-
 import "./booking.css";
+const horneroImg = require("../assets/hornero.png");
 
 const Booking = () => {
   const { userId } = useParams();
@@ -61,10 +61,7 @@ const Booking = () => {
       ) : (
         <div className="booking_container">
           <div className="deskCanFly">
-            <img
-              src="https://cdn.iconscout.com/icon/premium/png-256-thumb/employee-desk-24-1125109.png"
-              alt="loading"
-            />
+            <img src={horneroImg} alt="loading" />
           </div>
         </div>
       )}
