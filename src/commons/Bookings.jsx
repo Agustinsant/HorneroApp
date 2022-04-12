@@ -11,7 +11,6 @@ const Booking = () => {
     const [user, setUser]= useState({});
     const [events, setEvents] = useState([]);
     
-    console.log("events", events)
 
     useEffect(async () => {
         if(userId) {
@@ -24,10 +23,12 @@ const Booking = () => {
 
 
 const renderEventContent = (eventInfo) =>{
+     const {extendedProps} = eventInfo.event.toPlainObject()
     return(
         <div className="event-booking">
-            <div className="floor-book">1 er piso</div>
-            <div className="building-book">mar del plata</div>
+            <div className="building-book">{extendedProps.city}</div>
+            <div className="floor-book">{extendedProps.buildingName}</div>
+            <div className="floor-book">{extendedProps.floorName}</div>
         </div>
     )
 }
