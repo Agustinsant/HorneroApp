@@ -32,6 +32,7 @@ export const updateEventCalendar = async (evenId, eventObject) => {
 
 export const getUserBooking= async (userId) => {
   const booking = await axios.get(`http://localhost:3001/api/calendar/all/${userId}`)
+  console.log("boking",booking)
   return booking.data
 };
 

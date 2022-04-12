@@ -800,6 +800,7 @@ hr {
   width: 100%;
   height: 100%;
   border-radius: 50%;
+  background-color: #29ABE2;
 }
 
 .close-buton-container {
@@ -961,12 +962,12 @@ hr {
 
 /* --------- pop over ----- */
 .fc-popover-header {
-  background: #f1efef9f !important;
+  background: #dadada!important;
   color: rgb(18, 18, 18);
 }
 
 .fc-popover-body {
-  background-color: #bfd732;
+  background-color: #00292E;
 }
 
 .fc-theme-standard .fc-popover {
@@ -980,6 +981,10 @@ hr {
 .booking_container {
   width: 95%;
   margin-top: 5px;
+}
+.event-booking{
+  display: flex;
+  justify-content: space-between;
 }
 
 .fc-theme-standard .fc-list {

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { FaRegTimesCircle } from "react-icons/fa";
 import {AiOutlineUsergroupAdd} from "react-icons/ai";
-import { getDesk } from "../services/buildingServices";
+import { getEventsDayByDesk } from "../services/buildingServices";
 import {getCalendar, addEventCalendar, deleteEventCalendar, updateEventCalendar, getDayEventsInDesk, getDayEvents} from "../services/calendarServices";
 import swal from "sweetalert";
 import FullCalendar from "@fullcalendar/react";
@@ -16,6 +16,8 @@ import interactionPlugin from "@fullcalendar/interaction";
 const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp ,day }) => {
   const user = useSelector((state) => state.user.data);
   const [events, setEvents] = useState([]);
+  const [dayView, setDayView] = useState(false);
+
  
 
   const rendering = async () => {
@@ -134,7 +136,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp ,day }) => {
       let checkId = eventInfo.event.extendedProps.usersId
       let isTheUser = checkId.includes(user._id)
       let userImg = eventInfo.event.extendedProps.img 
-      let colorEvent = isTheUser ? "#00A99D" : "#444444";
+      let colorEvent = isTheUser ? "#00A99D" : "#666666";
     
 
     eventInfo.backgroundColor = colorEvent;
@@ -169,14 +171,36 @@ const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp ,day }) => {
   };
 };
 
-/* -------------  TIME GRID VIEW FUNCTION ------------ */
- const handleRangeView = () => {
-  let start = new Date(day.concat("T00:00:00")); 
-  let end = new Date(start) 
-  end.setDate(end.getDate()+1)
-  return {start: day,end: end}
+/* -------------  TIME GRID VIEW FUNCTIONs ------------ */
+ const handleRangeView = (day) => {
+    let start = new Date(day.concat("T00:00:00")); 
+    let end = new Date(start) 
+    end.setDate(end.getDate()+1)
+    return {start: day,end: end}
  }
 
+ const handleAllday = async () => {
+    const dayEvents = await getEventsDayByDesk(deskId, day)
+    if(dayEvents.length > 0 ) {
+      swal( {
+        title: "Selecciona un dia disponible",
+        text: "existe ya una reserva en esta lugar",
+        icon: "error",
+        buttons: false,
+        timer: 1250,
+      });
+    } else {
+      let eventObject = {
+        start: `${day}T07:00:00`,
+        end: `${day}T21:00:00`,
+        extendedProps: {
+        userId: user._id
+        }
+      }
+      await addEventCalendar(deskId, eventObject, true)
+  }
+    rendering()
+ }
 
 
   /* ---------- COMPONENT --------- */
@@ -191,21 +215,15 @@ const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp ,day }) => {
           height={400}
           longPressDelay={200}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          headerToolbar={{ right: "next", center: "title", left: "prev" }}
-          footerToolbar={{ center: "dayGridMonth timeGridDay" }}
-          initialView={ day ? "timeGrid" : "dayGridMonth"  }
-          visibleRange ={day && handleRangeView()}
-          dayMaxEventRows={true}
-          views={{
-            dayGrid: {
-              dayMaxEventRows: 4,
-             
-            },
-            timeGrid: {
-              dayMaxEventRows: 4,
-              
-            },
-          }}
+          headerToolbar={day ? ({right:"allDay"}):({right: "prev next" })}
+          footerToolbar={day ? ({}) : ({ center: "dayGridMonth timeGridDay" })}
+          initialView={day ? "timeGrid": "dayGridMonth"}
+          visibleRange ={day && handleRangeView(day) }
+          customButtons= {{
+            allDay: {
+            text: 'todo el dia',
+            click: handleAllday
+          }}}
           buttonText={{
             month: "Mes",
             day: "Dia",
@@ -215,11 +233,10 @@ const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp ,day }) => {
             startTime: "07:00",
             endTime: "21:00",
           }}
-          events={events}
+          events={events} 
           selectOverlap={handleOverlap}
-          
           eventOverlap={false}
-          //selectConstraint={"businessHours"}
+          selectConstraint={"businessHours"}
           editable={true}
           selectable={true}
           navLinks={true}
