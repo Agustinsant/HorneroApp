@@ -60,7 +60,7 @@ module.exports.getAllEventCalendarByUserId = async (req, res, next) => {
     const { userId } = req.params
     const events = []
     try {
-        const eventsCalendar = await CalendarModel.find({userId: userId})
+        const eventsCalendar = await CalendarModel.find({usersId: userId})
 
         for (const book of eventsCalendar) {
           
@@ -69,13 +69,11 @@ module.exports.getAllEventCalendarByUserId = async (req, res, next) => {
             book.buildingName = building.name;
             book.city = building.city;
             book.floorName = floor[0].name;
-            
             events.push(book)
-
-           
         }
 
         return res.status(200).send(events)
+
     }
     catch (error){
         next (error)
