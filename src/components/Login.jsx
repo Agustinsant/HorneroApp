@@ -123,7 +123,7 @@ function Login() {
           Ingresar <FaAngleRight />
         </FormButton>
         <hr></hr>
-        <Link to="/signin">Registrarme</Link>
+        <Link to="/signin" className="btn" >Registrarme</Link>
       </form>
     </div>
   );
