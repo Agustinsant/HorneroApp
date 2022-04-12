@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '../styles/misDatos.css'
 import { useDispatch, useSelector } from "react-redux";
 import { FaUserEdit, FaReply, FaAngleRight } from "react-icons/fa";
 import { editUser, editUserPassword } from "../store/user";
