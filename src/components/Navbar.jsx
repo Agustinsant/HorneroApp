@@ -1,4 +1,5 @@
 import logo from "../resources/img/logoNew.svg";
+import '../styles/navbar.css'
 
 import { useSelector, useDispatch } from "react-redux";
 import { logOut, persistUser } from "../store/user";

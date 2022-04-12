@@ -137,7 +137,7 @@ function Floor({ floor, day }) {
         </Stage>
       </div>
       {deskCalendarUp ? (
-        <div className="desk__calendar">
+        <div >
           {desk.id && (
             <Calendar
               deskId={desk.id}

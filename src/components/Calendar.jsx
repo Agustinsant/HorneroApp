@@ -1,35 +1,38 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { FaRegTimesCircle } from "react-icons/fa";
-import {AiOutlineUsergroupAdd} from "react-icons/ai";
+import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { getEventsDayByDesk } from "../services/buildingServices";
-import {getCalendar, addEventCalendar, deleteEventCalendar, updateEventCalendar, getDayEventsInDesk, getDayEvents} from "../services/calendarServices";
+import {
+  getCalendar,
+  addEventCalendar,
+  deleteEventCalendar,
+  updateEventCalendar,
+  getDayEventsInDesk,
+  getDayEvents,
+} from "../services/calendarServices";
 import swal from "sweetalert";
 import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin  from "@fullcalendar/daygrid";
+import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
-
-
-
-const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp ,day }) => {
+const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp, day }) => {
   const user = useSelector((state) => state.user.data);
   const [events, setEvents] = useState([]);
   const [dayView, setDayView] = useState(false);
 
- 
-
   const rendering = async () => {
-    const deskCalendar =  day ? (await getDayEventsInDesk(day, deskId)) : (await getCalendar(deskId));
-    const events = await getDayEvents(deskCalendar, deskId)
+    const deskCalendar = day
+      ? await getDayEventsInDesk(day, deskId)
+      : await getCalendar(deskId);
+    const events = await getDayEvents(deskCalendar, deskId);
     setEvents(events);
   };
 
   useEffect(() => {
     rendering();
   }, [deskId]);
-
 
   /* ------------- ADD FUNCTIONS ------------ */
   const handleDateSelect = (selectInfo) => {
@@ -39,15 +42,14 @@ const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp ,day }) => {
       {
         start: selectInfo.startStr,
         end: selectInfo.endStr,
-        userId: user._id
-        
+        userId: user._id,
       },
       true
     );
   };
 
   const handleEventAdd = async (addInfo) => {
-    const allDay =  addInfo.event.allDay
+    const allDay = addInfo.event.allDay;
     await addEventCalendar(deskId, addInfo.event.toPlainObject(), allDay);
     swal({
       title: "Hiciste una reserva!",
@@ -58,10 +60,6 @@ const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp ,day }) => {
     });
     rendering();
   };
-
-  
-   
- 
 
   /* -------------  DELETE FUNCTIONS ------------ */
   const handleDelete = (eventInfo) => {
@@ -99,7 +97,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp ,day }) => {
     const { end, start, extendedProps } = eventInfo.event.toPlainObject();
     const isTheUser = extendedProps.usersId[0] === user._id;
     if (isTheUser) {
-      await updateEventCalendar(extendedProps._id, { start, end, });
+      await updateEventCalendar(extendedProps._id, { start, end });
       swal("Reserva actualizada", {
         icon: "success",
         buttons: false,
@@ -126,63 +124,64 @@ const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp ,day }) => {
     });
   };
 
-
-
   /* -------------  EVENT VIEW FUNCTION ------------ */
   const renderEventContent = (eventInfo) => {
-    
-    if(eventInfo.event.title){
-      let isHall = (eventInfo.event.title === "Sala Reservada");
-      let checkId = eventInfo.event.extendedProps.usersId
-      let isTheUser = checkId.includes(user._id)
-      let userImg = eventInfo.event.extendedProps.img 
+    if (eventInfo.event.title) {
+      let isHall = eventInfo.event.title === "Sala Reservada";
+      let checkId = eventInfo.event.extendedProps.usersId;
+      let isTheUser = checkId.includes(user._id);
+      let userImg = eventInfo.event.extendedProps.img;
       let colorEvent = isTheUser ? "#00A99D" : "#666666";
-    
 
-    eventInfo.backgroundColor = colorEvent;
-    eventInfo.borderColor = colorEvent;
+      eventInfo.backgroundColor = colorEvent;
+      eventInfo.borderColor = colorEvent;
 
-    return (
-      <>
-      <div className="event_container">
-        <div className="image_calendar">
-          {
-            //mapear imagenes cierta cantidad
-            <img className="userImg_calendar" src={userImg} />
-          }
-        </div>
-        <i className="event_calendar">{eventInfo.event.title}</i>
-        <b className="event_timeText">{eventInfo.timeText}</b>
-        {isTheUser && (
-          <FaRegTimesCircle
-            className="delete_envent"
-            onClick={() => handleDelete(eventInfo.event)}
-          />
-        ) }
-      </div>
-       {isTheUser && isHall && (
-          <AiOutlineUsergroupAdd 
-          onClick={()=> setAddParticipantsUp({state: true, eventId: eventInfo.event.extendedProps._id})} 
-          className="addParticipantsIconinEvent" />
-      )}
-      </>
-    )
-    
+      return (
+        <>
+          <div className="event_container">
+            <div className="image_calendar">
+              {
+                //mapear imagenes cierta cantidad
+                <img className="userImg_calendar" src={userImg} />
+              }
+            </div>
+            <i className="event_calendar">{eventInfo.event.title}</i>
+            <b className="event_timeText">{eventInfo.timeText}</b>
+            {isTheUser && (
+              <FaRegTimesCircle
+                className="delete_envent"
+                onClick={() => handleDelete(eventInfo.event)}
+              />
+            )}
+          </div>
+          {isTheUser && isHall && (
+            <AiOutlineUsergroupAdd
+              onClick={() =>
+                setAddParticipantsUp({
+                  state: true,
+                  eventId: eventInfo.event.extendedProps._id,
+                })
+              }
+              className="addParticipantsIconinEvent"
+            />
+          )}
+        </>
+      );
+    }
   };
-};
 
-/* -------------  TIME GRID VIEW FUNCTIONs ------------ */
- const handleRangeView = (day) => {
-    let start = new Date(day.concat("T00:00:00")); 
-    let end = new Date(start) 
-    end.setDate(end.getDate()+1)
-    return {start: day,end: end}
- }
+  /* -------------  TIME GRID VIEW FUNCTIONs ------------ */
+  const handleRangeView = (day) => {
+    let start = new Date(day.concat("T00:00:00"));
+    let end = new Date(start);
+    end.setDate(end.getDate() + 1);
+    return { start: day, end: end };
+  };
 
- const handleAllday = async () => {
-    const dayEvents = await getEventsDayByDesk(deskId, day)
-    if(dayEvents.length > 0 ) {
-      swal( {
+  const handleAllday = async () => {
+    const dayEvents = await getEventsDayByDesk(deskId, day);
+    if (dayEvents.length > 0) {
+      swal({
         title: "Selecciona un dia disponible",
         text: "existe ya una reserva en esta lugar",
         icon: "error",
@@ -194,36 +193,39 @@ const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp ,day }) => {
         start: `${day}T07:00:00`,
         end: `${day}T21:00:00`,
         extendedProps: {
-        userId: user._id
-        }
-      }
-      await addEventCalendar(deskId, eventObject, true)
-  }
-    rendering()
- }
-
+          userId: user._id,
+        },
+      };
+      await addEventCalendar(deskId, eventObject, true);
+    }
+    rendering();
+  };
 
   /* ---------- COMPONENT --------- */
   return (
-    <div>
-      <div className="close-buton-container">
-        <FaRegTimesCircle className="close_calendar" onClick={() => setDeskCalendarUp(false)}/>
-      </div>
+    <div className="calendar_overlay">
       <div className="calendar_container">
+        <div className="close-buton-container">
+          <FaRegTimesCircle
+            className="close_calendar"
+            onClick={() => setDeskCalendarUp(false)}
+          />
+        </div>
         <FullCalendar
-         locale={"es"}
+          locale={"es"}
           height={400}
           longPressDelay={200}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          headerToolbar={day ? ({right:"allDay"}):({right: "prev next" })}
-          footerToolbar={day ? ({}) : ({ center: "dayGridMonth timeGridDay" })}
-          initialView={day ? "timeGrid": "dayGridMonth"}
-          visibleRange ={day && handleRangeView(day) }
-          customButtons= {{
+          headerToolbar={day ? { right: "allDay" } : { right: "prev next" }}
+          footerToolbar={day ? {} : { center: "dayGridMonth timeGridDay" }}
+          initialView={day ? "timeGrid" : "dayGridMonth"}
+          visibleRange={day && handleRangeView(day)}
+          customButtons={{
             allDay: {
-            text: 'todo el dia',
-            click: handleAllday
-          }}}
+              text: "todo el dia",
+              click: handleAllday,
+            },
+          }}
           buttonText={{
             month: "Mes",
             day: "Dia",
@@ -233,7 +235,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp ,day }) => {
             startTime: "07:00",
             endTime: "21:00",
           }}
-          events={events} 
+          events={events}
           selectOverlap={handleOverlap}
           eventOverlap={false}
           selectConstraint={"businessHours"}
