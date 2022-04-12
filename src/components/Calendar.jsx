@@ -10,17 +10,20 @@ import {
   updateEventCalendar,
   getDayEventsInDesk,
   getDayEvents,
+  addParticipant,
 } from "../services/calendarServices";
 import swal from "sweetalert";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import AddParticipants from "./AddParticipants";
 
-const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp, day }) => {
+const Calendar = ({ deskId, setDeskCalendarUp, day}) => {
   const user = useSelector((state) => state.user.data);
   const [events, setEvents] = useState([]);
   const [dayView, setDayView] = useState(false);
+  const [addParticipantsUp, setAddParticipantsUp] = useState({ state: false });
 
   const rendering = async () => {
     const deskCalendar = day
@@ -115,6 +118,38 @@ const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp, day }) => {
     rendering();
   };
 
+   /* -------------  TIME GRID VIEW FUNCTIONs ------------ */
+   const handleRangeView = (day) => {
+    let start = new Date(day.concat("T00:00:00"));
+    let end = new Date(start);
+    end.setDate(end.getDate() + 1);
+    return { start: day, end: end };
+  };
+
+  const handleAllday = async () => {
+    const dayEvents = await getEventsDayByDesk(deskId, day);
+    if (dayEvents.length > 0) {
+      swal({
+        title: "Selecciona un dia disponible",
+        text: "existe ya una reserva en esta lugar",
+        icon: "error",
+        buttons: false,
+        timer: 1250,
+      });
+    } else {
+      let eventObject = {
+        start: `${day}T07:00:00`,
+        end: `${day}T21:00:00`,
+        extendedProps: {
+          userId: user._id,
+        },
+      };
+      await addEventCalendar(deskId, eventObject, true);
+    }
+    rendering();
+  };
+
+
   /* -------------  OVERLAP FUNCTION ------------ */
   const handleOverlap = () => {
     swal("Selecciona un horario disponible", {
@@ -170,36 +205,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp, day }) => {
     }
   };
 
-  /* -------------  TIME GRID VIEW FUNCTIONs ------------ */
-  const handleRangeView = (day) => {
-    let start = new Date(day.concat("T00:00:00"));
-    let end = new Date(start);
-    end.setDate(end.getDate() + 1);
-    return { start: day, end: end };
-  };
-
-  const handleAllday = async () => {
-    const dayEvents = await getEventsDayByDesk(deskId, day);
-    if (dayEvents.length > 0) {
-      swal({
-        title: "Selecciona un dia disponible",
-        text: "existe ya una reserva en esta lugar",
-        icon: "error",
-        buttons: false,
-        timer: 1250,
-      });
-    } else {
-      let eventObject = {
-        start: `${day}T07:00:00`,
-        end: `${day}T21:00:00`,
-        extendedProps: {
-          userId: user._id,
-        },
-      };
-      await addEventCalendar(deskId, eventObject, true);
-    }
-    rendering();
-  };
+ 
 
   /* ---------- COMPONENT --------- */
   return (
@@ -251,7 +257,17 @@ const Calendar = ({ deskId, setDeskCalendarUp, setAddParticipantsUp, day }) => {
           eventRemove={handleEventRemove}
           eventChange={handleEventChange}
         />
+      {addParticipantsUp.state ? (
+        <AddParticipants
+        eventId = {addParticipantsUp.eventId}
+        state = {addParticipantsUp.state}
+        setAddParticipantsUp = {setAddParticipantsUp}
+        />
+      ): (
+        <></>
+      )}
       </div>
+
     </div>
   );
 };

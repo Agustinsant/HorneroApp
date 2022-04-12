@@ -572,24 +572,34 @@ hr {
 .close_addParticipants {
   position: absolute;
   font-size: 1.8rem;
-  right: 20px;
+  right: 5px;
+  top: -35px;
+  color: #bfd732
+}
+.add-container{
+  margin-top: 50px;
+  position: relative;
 }
 
 .friends_containerAddP {
+  position: relative;
+  background: rgba(0, 0, 0, 0.178);
+  padding: 15px;
   width: 100%;
-  padding: 20px;
-  margin: 29px auto;
+  height: 185px;
+  margin: 25px auto 0 auto;
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  border: solid 1px;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-x: scroll; 
+  overflow-y: hidden;
   border-radius: 10px;
 }
 
 .IconsAddParticipants {
   display: flex;
   padding-left: 2px;
-
   align-items: center;
   justify-content: center;
   position: absolute;
@@ -617,6 +627,10 @@ hr {
   background: #ff0000;
   color: white;
   border-radius: 50%;
+}
+
+.participants{
+  margin: 15px 5px 0 5px ;
 }
 
 @media all and (min-width: 600px) {

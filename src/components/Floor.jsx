@@ -5,7 +5,6 @@ import Calendar from "./Calendar";
 import Map from "../commons/Map";
 import Desk from "../commons/Desk";
 import Hall from "../commons/Hall";
-import AddParticipants from "./AddParticipants";
 import { getEventsDayByFloor } from "../services/buildingServices";
 import user from "../store/user";
 
@@ -25,7 +24,7 @@ function Floor({ floor, day }) {
 
   const [desk, setDesk] = useState([]);
   const [deskCalendarUp, setDeskCalendarUp] = useState(false);
-  const [addParticipantsUp, setAddParticipantsUp] = useState({ state: false });
+ 
 
   const colors = {
     desk: {
@@ -146,21 +145,10 @@ function Floor({ floor, day }) {
             <Calendar
               deskId={desk.id}
               setDeskCalendarUp={setDeskCalendarUp}
-              setAddParticipantsUp={setAddParticipantsUp}
               day={day}
             />
           )}
         </div>
-      ) : (
-        <></>
-      )}
-
-      {addParticipantsUp.state ? (
-        <AddParticipants
-          eventId={addParticipantsUp.eventId}
-          state={addParticipantsUp.state}
-          setAddParticipantsUp={setAddParticipantsUp}
-        />
       ) : (
         <></>
       )}
