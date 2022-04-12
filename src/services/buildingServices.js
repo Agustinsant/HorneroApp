@@ -23,6 +23,18 @@ export const getEventsDayByFloor = async (floorId, date) => {
       date,
     }
   );
-  console.log("services res", deskEvents.data);
   return deskEvents.data;
 };
+
+
+export const getEventsDayByDesk= async (deskId, date) => {
+  const deskEvents = await axios.post(
+    "http://localhost:3001/api/search/eventDayByDesk",
+    {
+      deskId,
+      date,
+    }
+  );
+  return deskEvents.data;
+};
+

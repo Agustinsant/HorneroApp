@@ -21,4 +21,5 @@ searchRouter.post("/buildingName", BuildingName) // trae los edificios por nombr
 
 searchRouter.post("/closestBuilding", ClosestBuilding)
 
+
 module.exports = searchRouter;

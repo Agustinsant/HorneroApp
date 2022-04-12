@@ -11,6 +11,8 @@ const Booking = () => {
     const [user, setUser]= useState({});
     const [events, setEvents] = useState([]);
     
+    console.log("events", events)
+
     useEffect(async () => {
         if(userId) {
         const userBooking = await getUserBooking(userId);
@@ -20,6 +22,15 @@ const Booking = () => {
         }
     },[userId])
 
+
+const renderEventContent = (eventInfo) =>{
+    return(
+        <div className="event-booking">
+            <div className="floor-book">1 er piso</div>
+            <div className="building-book">mar del plata</div>
+        </div>
+    )
+}
 
     return(
         <>
@@ -41,6 +52,7 @@ const Booking = () => {
                     headerToolbar={{right: "next", center: "title", left: "prev" }}
                     initialView="listMonth"
                     events={events}
+                    eventContent={renderEventContent}
                 />
             </div>
         </div>
