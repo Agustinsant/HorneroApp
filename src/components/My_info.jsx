@@ -140,6 +140,7 @@ const My_info = () => {
               onClick={(e) => {
                 e.preventDefault();
                 setNameEdit(!nameEdit);
+                setNameValue(user.name)
               }}
             >
               <FaReply className="cancelEditIcon" />
@@ -196,6 +197,7 @@ const My_info = () => {
               onClick={(e) => {
                 e.preventDefault();
                 setEmailEdit(!emailEdit);
+                setEmailValue(user.email)
               }}
             >
               <FaReply className="cancelEditIcon" />
@@ -252,6 +254,7 @@ const My_info = () => {
               onClick={(e) => {
                 e.preventDefault();
                 setCityEdit(!cityEdit);
+                setCityValue(user.city)
               }}
             >
               <FaReply className="cancelEditIcon" />
