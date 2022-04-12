@@ -1,5 +1,6 @@
-const { CalendarModel, DeskModel } = require ('../models/buildings')
+const { CalendarModel, DeskModel, BuildingModel, FloorModel } = require ('../models/buildings')
 const sendEmailBy = require('../utils/sendEmailBy')
+const { BuildingName } = require('./searchControllers')
 
 module.exports.AddEventCalendar = async (req, res, next) => {
 
@@ -56,9 +57,24 @@ module.exports.getAllEventCalendar = async (req, res, next) => {
 
 module.exports.getAllEventCalendarByUserId = async (req, res, next) => {
     const { userId } = req.params
+    const events = []
     try {
         const eventsCalendar = await CalendarModel.find({userId: userId})
-        return res.status(200).send(eventsCalendar)
+
+        for (const book of eventsCalendar) {
+          
+            const building = await BuildingModel.findById(book.buildingId);
+            const floor = building.floors.filter(floor => floor._id.toHexString() === book.floorId);
+            book.buildingName = building.name;
+            book.city = building.city;
+            book.floorName = floor[0].name;
+            
+            events.push(book)
+
+           
+        }
+
+        return res.status(200).send(events)
     }
     catch (error){
         next (error)

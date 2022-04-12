@@ -1,5 +1,5 @@
 const { UserModel } = require('../models/users')
-const { DeskModel, CalendarModel, BuildingModel } = require ('../models/buildings')
+const { DeskModel, CalendarModel, BuildingModel, FloorModel } = require ('../models/buildings')
 
 
 module.exports.getForNameOrEmail = async (req, res, next) => {
@@ -88,14 +88,13 @@ module.exports.EventsDay = async (req, res, next) => {
     try {
     
         for (const event of deskCalendar) {
-            let user = {}
             if(event.usersId.length > 0 ){
               if(isHall){
                 event.title = "Sala Reservada";
                 event.img = "https://hornero-app.s3.amazonaws.com/user-group.png" 
                 events.push(event)
               } else {
-                user = await UserModel.findById(event.usersId[0]);
+                let user = await UserModel.findById(event.usersId[0]);
                 event.title = user.name;
                 event.img = user.img;
                 events.push(event)
@@ -119,6 +118,22 @@ module.exports.BuildingName = async (req, res, next) => {
         const building = await BuildingModel.find({ city: { $regex: value.replace(/\b\w/g, l => l.toUpperCase()) }})
 
         return res.status(200).send(building)
+    }
+    
+    catch (error) {
+        next(error)
+    }
+}
+
+module.exports.BuildingNameAndFloor = async (req, res, next) => {
+
+    const {buildingId , floorId} = req.body
+    try {
+        const building = await BuildingModel.findById(buildingId)
+        const floor = await FloorModel.findById(floorId)
+        const buildingAndFloor = {}
+
+        return res.status(200).send({})
     }
     
     catch (error) {

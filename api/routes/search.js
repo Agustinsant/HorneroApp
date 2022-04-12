@@ -19,5 +19,4 @@ searchRouter.post("/eventsDay", EventsDay) // trae los eventos del dia de un esc
 searchRouter.post("/buildingName", BuildingName) // trae los edificios por nombre
 
 
-
 module.exports = searchRouter;
