@@ -1,4 +1,5 @@
 import React from "react";
+import '../styles/cards.css'
 import {useDispatch, useSelector} from 'react-redux'
 import {addFriend, removeFriend} from '../store/user'
 import { FaUserPlus, FaUserMinus } from "react-icons/fa";

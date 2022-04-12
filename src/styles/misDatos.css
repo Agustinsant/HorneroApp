@@ -1,0 +1,77 @@
+/* ------ START MIS DATOS COMPONENT STYLES ------- */
+.misDatosContainer {
+    width: 100%;
+    padding: 20px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .misDatosContainer > h6 {
+    margin-bottom: 30px;
+  }
+  
+  .editBtnContainer {
+    padding: 0;
+  }
+  
+  .misDatosContainer form {
+    margin-top: 20px;
+    width: 350px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .editInputsContainer h5 {
+    margin: 10px 15px 0 0;
+  }
+  
+  .misDatosBtns {
+    background: none;
+    border: none;
+    transform: translateY(10px);
+    font-size: 20px;
+  }
+  
+  .editInputsContainer input {
+    width: 250px;
+    margin-right: 15px;
+    padding: 5px 10px;
+    border: 1px solid #bfd732;
+  }
+  
+  .hrDatos {
+    width: 350px;
+    margin-top: 5px;
+  }
+  
+  .hrInvisible {
+    visibility: hidden;
+    width: 350px;
+    margin-top: 5px;
+  }
+  
+  .editInfoIcon {
+    font-size: 26px;
+    color: #bfd732;
+  }
+  
+  .submitInfoIcon {
+    font-size: 30px;
+    color: #bfd732;
+  }
+  
+  .cancelEditIcon {
+    font-size: 22px;
+    color: #ff0000;
+  }
+  
+  .misDatosLabel {
+    font-size: 12px;
+    margin-bottom: 0px;
+    margin-top: 0;
+    color: rgb(133, 133, 133);
+  }
+  /* ------ END MIS DATOS COMPONENT STYLES ------- */

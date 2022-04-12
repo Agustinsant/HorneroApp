@@ -1,0 +1,140 @@
+/* ------ START NAV STYLES ----- */
+
+nav {
+  padding: 10px 15px;
+}
+
+#darkMode {
+    margin-right: 15px;
+    margin-top: 10px;
+    background: transparent url("../resources/img/darkSun.svg") no-repeat center;
+    color: #fff;
+    border: none;
+    background-size: 40px;
+    width: 60px;
+    height: 40px;
+  }
+  
+  #darkMode.clicked {
+    background: transparent url("../resources/img/darkMoon.svg") no-repeat center !important;
+    border: none;
+    background-size: 40px !important;
+    width: 60px;
+    height: 40px;
+  }
+  
+  .darkModeBtn {
+    margin-right: 20px;
+    margin-top: 5px;
+    background: none;
+    border: none;
+  }
+  
+  .darkModeOn {
+    color: #bfd732;
+    font-size: 26px;
+  }
+  
+  .darkModeOff {
+    color: #1a1a1a;
+    font-size: 26px;
+  }
+  
+  .navProfilePick {
+    margin-right: 20px;
+    margin-top: 5px;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+  
+  .navProfilePick img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .navContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .linksNav {
+    margin-top: 10px;
+    text-align: right;
+    text-decoration: none;
+    color: #444444;
+  }
+  
+  .linksNav:hover {
+    color: #bfd732;
+  }
+  
+  .logOutBtn {
+    text-align: right;
+    background: none;
+    border: none;
+    color: #444444;
+  }
+  
+  .logOutBtn:hover {
+    color: #bfd732;
+  }
+  
+  .navMenu {
+    display: flex;
+    align-items: center;
+  }
+  
+  .dropDown {
+    position: relative;
+    display: block;
+  }
+  
+  .dropDownMenu {
+    background: none;
+    border: none;
+  }
+  
+  .dropDownMenuIcon {
+    color: #bfd732;
+    margin-top: 10px;
+    font-size: 30px;
+  }
+  
+  .dropDownSubMenuClosed {
+    background-color: rgba(255, 255, 255, 0.685);
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 1;
+    width: 140px;
+    right: 15px;
+    top: 60px;
+    max-height: 0px;
+    overflow: hidden;
+    transition: all 300ms ease;
+  }
+  
+  .dropDownSubMenuOpen {
+    background-color: rgba(255, 255, 255, 0.685);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: left;
+    position: absolute;
+    z-index: 1;
+    width: 140px;
+    right: 15px;
+    top: 60px;
+    min-height: 80px;
+    max-height: 150px;
+    overflow: hidden;
+    transition: all 300ms ease;
+  }
+  
+  /* ------ END NAV STYLES ----- */
