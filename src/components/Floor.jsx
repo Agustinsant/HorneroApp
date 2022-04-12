@@ -11,7 +11,7 @@ import user from "../store/user";
 
 function Floor({ floor, day }) {
   const userLoged = useSelector((state) => state.user.data);
-  console.log(userLoged);
+
   const { desks } = floor;
   // const typeDesks = desks.filter((d) => d.type === "desk");
   // const typeHall = desks.filter((d) => d.type === "hall");
@@ -106,6 +106,10 @@ function Floor({ floor, day }) {
     setDesk(e.target.attrs);
     setDeskCalendarUp((prev) => !prev);
   };
+
+  setTimeout(() => {
+    console.log("Hello, World!");
+  }, 1500);
 
   return (
     <>
