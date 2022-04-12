@@ -47,8 +47,8 @@ export const getDayEvents = async (deskCalendar, deskId) => {
 };
 
 
-export const addParticipant = async ( eventId, userId) => {
-  const user = await axios.post(`http://localhost:3001/api/calendar/addUserEvent/${eventId}`, {userId} )
+export const addParticipant = async ( eventId, userId, sendingUser) => {
+  const user = await axios.post(`http://localhost:3001/api/calendar/addUserEvent/${eventId}`, {userId, sendingUser} )
   
 };
 

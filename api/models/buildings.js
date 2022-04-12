@@ -95,8 +95,15 @@ const BuildingSchema = new Schema({
     },
     imgBuilding: {
         type: String,
+    },
+    latitude: {
+        type: Number
+    },
+    longitude: {
+        type: Number
     }
 })
+
 
 const BuildingModel = model( "Building", BuildingSchema );
 

@@ -5,6 +5,7 @@ const {
   EventDayByFloorId,
   EventsDay,
   BuildingName,
+  ClosestBuilding,
 } = require("../controllers/searchControllers");
 const searchRouter = express.Router();
 
@@ -17,6 +18,8 @@ searchRouter.post("/eventDayByFloor", EventDayByFloorId); // trae todos los even
 searchRouter.post("/eventsDay", EventsDay) // trae los eventos del dia de un escritorio y agrega titulo e imagi¿en del user id
 
 searchRouter.post("/buildingName", BuildingName) // trae los edificios por nombre
+
+searchRouter.post("/closestBuilding", ClosestBuilding)
 
 
 module.exports = searchRouter;

@@ -3,11 +3,9 @@ import { useSelector } from "react-redux";
 
 import Floor from "./Floor";
 import { getFloor } from "../services/buildingServices";
-import useInput from "../hooks/useInput";
 
 function Selector() {
   const buildings = useSelector((state) => state.buildings.data);
-
   const [floors, setFloors] = useState([]);
   const [floor, setFloor] = useState({});
   const [dateSelector, setDateSelector] = useState(false);

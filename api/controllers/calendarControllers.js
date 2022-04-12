@@ -1,4 +1,5 @@
 const { CalendarModel, DeskModel, BuildingModel, FloorModel } = require ('../models/buildings')
+const { UserModel } = require('../models/users')
 const sendEmailBy = require('../utils/sendEmailBy')
 const { BuildingName } = require('./searchControllers')
 
@@ -117,7 +118,7 @@ module.exports.AddUsersIdEvent = async (req, res, next) => {
     
     const { eventId } = req.params
   
-    const {userId} = req.body
+    const {userId, sendingUser} = req.body
 
     const options = {
       returnDocument: "after",
@@ -127,6 +128,12 @@ module.exports.AddUsersIdEvent = async (req, res, next) => {
       
       const calendar = await CalendarModel.findById(eventId)
       calendar.usersId.push(userId)
+
+      const otherUser = await UserModel.findById(userId)
+      const building = await BuildingModel.findById(calendar.buildingId)
+      const floor = await FloorModel.findById(calendar.floorId)
+    
+      if(calendar) sendEmailBy('addUserToEvent', { sendingUser, otherUser: otherUser.email, building: building.name, floor: floor.name, start: calendar.start })
 
       let deskEvent = await DeskModel.findById(calendar.deskId)
         
