@@ -59,7 +59,7 @@ const MyProfile = ({ modalState, setModalState }) => {
         </div>
         <div>
           <h4> Mis reservas</h4>
-          <Link className="link_arrows" to="/reservas">
+          <Link className="link_arrows" to={`/reservas/${user._id}`}>
             <FaAngleRight />
           </Link>
         </div>

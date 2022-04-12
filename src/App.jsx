@@ -53,8 +53,8 @@ const App = () => {
         />
         <Route path="/mi_perfil/mis_amigos" element={<My_friends />} />
         <Route
-          path="/reservas"
-          element={isLogged ? <Booking userId={user?._id} /> : <Login />}
+          path="/reservas/:userId"
+          element={isLogged ? <Booking/> : <Login />}
         />
         <Route path="/mi_perfil/mis_datos" element={<My_info />} />
         <Route path="/explore" element={<Selector />} />

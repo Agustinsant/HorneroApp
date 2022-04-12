@@ -1,15 +1,15 @@
-import { useMatch } from "react-router";
-import { useSelector } from "react-redux";
+import { useParams } from "react-router";
 import { getUserBooking } from "../services/calendarServices";
 import { getUserById } from "../services/userServices"; 
 import { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import listPlugin from '@fullcalendar/list';
+import { render } from "@testing-library/react";
 
-const Booking = ({userId}) => {
+const Booking = () => {
+    const {userId} = useParams();
     const [user, setUser]= useState({});
     const [events, setEvents] = useState([]);
-    
     
     useEffect(async () => {
         if(userId) {
@@ -19,8 +19,6 @@ const Booking = ({userId}) => {
         setUser(user)
         }
     },[userId])
-
-
 
 
     return(
@@ -35,6 +33,7 @@ const Booking = ({userId}) => {
             <h5>{user.name}</h5>
             <hr/>
             <div className="booking_container">
+               
                 <FullCalendar
                     locale={"es"}
                     height={340}
@@ -47,6 +46,8 @@ const Booking = ({userId}) => {
         </div>
         </>
     )
+
 }
+
 
 export default Booking;
