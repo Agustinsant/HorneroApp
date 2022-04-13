@@ -16,7 +16,7 @@ function CanvasReferences({ setReferences }) {
   return (
     <div className="references">
       <div className="references__container">
-        <div className="close-buton-container">
+        <div className="close__references">
           <FaRegTimesCircle onClick={() => setReferences(false)} />
         </div>
         <table className="references__table">
