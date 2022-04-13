@@ -8,11 +8,13 @@ import store from "./store";
 import { Provider } from "react-redux";
 import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 
+
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <App/>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,

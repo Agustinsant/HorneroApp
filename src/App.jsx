@@ -22,13 +22,13 @@ import getGeoLocation from "./utils/getGeoLocation";
 
 
 const App = () => {
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLogged = useSelector((state) => state.user.isLogged);
   const user = useSelector((state) => state.user.data);
   const token = localStorage.getItem("token");
-  const userUbication = getGeoLocation()
-  
+ 
   const [modalState, setModalState] = useState(false);
   
   useEffect(() => {
@@ -36,9 +36,17 @@ const App = () => {
     else if (token) {
       dispatch(persistUser(token));
       dispatch(getBuildings())
-      dispatch(getClosestBildings(userUbication))
+      
     }
   }, [token]);
+
+  useEffect(() => {
+    let userUbication = getGeoLocation()
+    setTimeout (()=>{
+       dispatch(getClosestBildings(userUbication))
+    }, 1000 )
+    
+  }, [])
 
   return (
     <div>

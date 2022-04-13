@@ -14,7 +14,6 @@ function Signin() {
 
   const [btnDisable, setBtnDisable] = useState(true);
   const [values, setValues] = useState({
-    validationCod: "",
     fullname: "",
     email: "",
     city: "",

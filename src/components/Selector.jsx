@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import swal from "sweetalert";
 
 import Floor from "./Floor";
+import CanvasReferences from "../commons/CanvasReferences";
 import { getFloor } from "../services/buildingServices";
 
 function Selector() {
@@ -16,6 +18,7 @@ function Selector() {
     data: "",
     disabled: true,
   });
+  const [references, setReferences] = useState(false);
 
   const colors = {
     desk: {
@@ -78,12 +81,14 @@ function Selector() {
   const showCalendarMonth = () => {
     setDateSelector(true);
   };
+  const openReference = () => {};
 
   return (
     <>
       {buildings[0] && (
         <div className="selector__container">
           <div className="selector__img"></div>
+
           <div className="selector__inputs">
             <div className="selector__box">
               <select
@@ -123,6 +128,14 @@ function Selector() {
                 }}
               />
             </div>
+            <div className="selector__references">
+              <button
+                onClick={() => setReferences(true)}
+                className="references__button"
+              >
+                Referencias
+              </button>
+            </div>
             {!floor.desks ? (
               <div className="floor_container--empty">
                 <h3>Hace tu reserva desde aca</h3>
@@ -135,6 +148,7 @@ function Selector() {
               <Floor floor={floor} day={day.data} />
             )}
           </div>
+          {references && <CanvasReferences setReferences={setReferences} />}
         </div>
       )}
     </>

@@ -6,6 +6,9 @@ import { useNavigate } from "react-router"
 import { Link } from "react-router-dom"
 import { toogleCheck } from "../store/user"
 
+import "../styles/booking.css";
+const horneroImg = require("../assets/hornero.png");
+
 const My_preferences = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -15,9 +18,15 @@ const My_preferences = () => {
     (state) => state.buildings.closetsBuilding
   )
 
-  const [checkMe, setCheckMe] = useState()
+  const [checkMe, setCheckMe] = useState(user.emailMyReserve)
   const [checkFriend, setCheckFriend] = useState(user.emailFriendsReserve)
   const [checkGroup, setCheckGroup] = useState(user.emailGroupReserve)
+
+  useEffect(() => {
+    setCheckMe(user.emailMyReserve)
+    setCheckFriend(user.emailFriendsReserve)
+    setCheckGroup(user.emailGroupReserve)
+  }, [])
 
   useEffect(() => {
     setCheckMe(user.emailMyReserve)
@@ -57,15 +66,10 @@ const My_preferences = () => {
   return (
     <div className="profile_container">
       <h6>Mis Preferencias</h6>
-
-      <div className="profile_links">
-        {closestBuildings[0] ? (
-          <h5>Edificio más cercano en {closestBuildings[0].city}</h5>
-        ) : (
-          <h5></h5>
-        )}
-        <div>
-          {closestBuildings[0] ? (
+      { closestBuildings[0] ? (
+        <div className="profile_mapUbication">
+          <h6>Edificio más cercano en {closestBuildings[0].city}</h6>
+        <div className="iframe_container">
             <iframe
               src={`https://maps.google.com/?ll=${closestBuildings[0]["latitude"]},${closestBuildings[0]["longitude"]}&z=13&t=m&output=embed`}
               height="300"
@@ -73,29 +77,23 @@ const My_preferences = () => {
               frameBorder="0"
               allowFullScreen
             ></iframe>
-          ) : (
-            <iframe
-              // src={`https://maps.google.com/?ll=${closestBuildings[0]['longitude']},${closestBuildings[0]['latitude']}&z=14&t=m&output=embed`}
-              height="300"
-              width="400"
-              frameBorder="0"
-              allowFullScreen
-            ></iframe>
-          )}
         </div>
       </div>
+        ) : (
+          <div className="deskCanFly">
+            <img src={horneroImg} alt="loading" />
+          </div>
+        ) }
 
       <div className="profile_links">
-        <h5>Notificaciones vía email</h5>
+        <h6>Notificaciones vía email</h6>
         <div>
           <h4>Mi reserva</h4>
           <div onClick={handleCheckMe} className="link_check">
             {checkMe ? (
               <BsFillCheckSquareFill />
             ) : (
-              <>
                 <BsFillSquareFill />
-              </>
             )}
           </div>
         </div>
@@ -105,10 +103,7 @@ const My_preferences = () => {
             {checkFriend ? (
               <BsFillCheckSquareFill />
             ) : (
-              <>
-                {" "}
                 <BsFillSquareFill />
-              </>
             )}
           </div>
         </div>
@@ -118,10 +113,7 @@ const My_preferences = () => {
             {checkGroup ? (
               <BsFillCheckSquareFill />
             ) : (
-              <>
-                {" "}
                 <BsFillSquareFill />
-              </>
             )}
           </div>
         </div>

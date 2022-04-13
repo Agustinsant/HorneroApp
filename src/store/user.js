@@ -149,7 +149,7 @@ const userSlice = createSlice({
       state.loading = true;
     },
     [toogleCheck.fulfilled]: (state, action) => {
-      state.friends = action.payload;
+      state.data = action.payload;
       state.loading = false;
     },
     [toogleCheck.rejected]: (state, action) => {
