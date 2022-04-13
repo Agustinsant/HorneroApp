@@ -63,6 +63,8 @@ module.exports.EventDayByFloorId = async (req, res, next) => {
 
     const validateDate = new RegExp("^((?!"+date+").)*$")
 
+    console.log("validateDate", validateDate)
+
     try {
         
       const calendars = await CalendarModel.find({floorId})
