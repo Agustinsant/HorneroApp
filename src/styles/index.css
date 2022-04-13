@@ -658,6 +658,9 @@ hr {
   overflow-y: hidden;
   border-radius: 10px;
 }
+.UpStadistics{
+  text-align: left;
+}
 
 .IconsAddParticipants {
   display: flex;
@@ -700,14 +703,13 @@ hr {
 .selector__inputsAdmin {
   position: relative;
   width: 100%;
-  height: 8rem;
+  height: 5rem;
   padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  top: 0;
 }
-
-
 
 .selector__inputsAdmin select,
 .selector__inputsAdmin input {
@@ -715,19 +717,27 @@ hr {
   border-radius: 100px;
   background-color: none;
   padding: 10px;
-  margin: 10px;
   display: block;
   align-self: center;
-  border: none;
-  background-color: #bfd732;
-  border-bottom: 2px solid #bfd732;
+  background-color: #efefec;
+  border: 2px solid #bfd732;
+}
+
+.ChartView{
+  display: flex;
+  justify-content: space-between;
 }
 .buttonsChart{
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 97%;
-  margin: 0 auto;
+  width: 100%;
+}
+
+.CharSelector{
+  display: flex;
+  justify-content: center;
 }
 .buttonSelector{
   color: #fff;
@@ -736,11 +746,37 @@ hr {
   border-color: #00A99D;
   padding: 5px;
   margin: 5px;
+  width: 100%;
+  
 }
 
 .chart-Container{
-  width: 97%;
+  width: 100%;
   margin: 0 auto;
+  height: 26rem;
+}
+
+.UpStadistics{
+  margin-top: 20px;
+}
+
+.daySeetings{
+
+}
+.daySet{
+  font-size: 0.9rem !important;
+}
+
+.green{
+  color: #bfd732;
+}
+.headerAdmin{
+  border-bottom: none !important ;
+}
+
+.topmargin{
+  position: relative !important;
+  top: 0 !important;
 }
 
 

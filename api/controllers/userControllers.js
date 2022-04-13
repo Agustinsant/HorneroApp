@@ -71,7 +71,6 @@ module.exports.GetUser = async (req, res, next) => {
 
 module.exports.GetUserByEmail = async (req, res, next) => {
   const { email } = req.params;
-  console.log("email ===>", email);
   try {
     const user = await UserModel.findOne({ email: email });
     return res.status(200).send(user);
@@ -183,7 +182,7 @@ module.exports.updateUserPassword = async (req, res, next) => {
 module.exports.DeleteUser = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const userDelete = await UserModel.findOneAndRemove(id);
+    const userDelete = await UserModel.findByIdAndDelete(id);
     return res.status(200).send(userDelete);
   } catch (error) {
     next(error);
