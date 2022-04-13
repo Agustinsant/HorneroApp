@@ -1,12 +1,17 @@
 import { useParams } from "react-router";
-import { getUserBooking } from "../services/calendarServices";
 import { getUserById } from "../services/userServices";
 import { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import listPlugin from "@fullcalendar/list";
 import useFetch from "../hooks/useFetch";
-import { render } from "@testing-library/react";
-import "./booking.css";
+import {GiModernCity} from "react-icons/gi";
+import {BiBuildingHouse, BiDesktop} from "react-icons/bi";
+import {MdMeetingRoom} from "react-icons/md";
+import {BsUiChecksGrid} from "react-icons/bs";
+import {HiOutlineUserGroup} from "react-icons/hi"
+
+
+import "../styles/booking.css";
 const horneroImg = require("../assets/hornero.png");
 
 const Booking = () => {
@@ -27,9 +32,18 @@ const Booking = () => {
     const { extendedProps } = eventInfo.event.toPlainObject();
     return (
       <div className="event-booking">
-        <div className="building-book">{extendedProps.city}</div>
-        <div className="floor-book">{extendedProps.buildingName}</div>
-        <div className="floor-book">{extendedProps.floorName}</div>
+        <div className="book"><GiModernCity className="iconBooking"/><br/> {extendedProps.city}</div>
+        <div className="book"><BiBuildingHouse className="iconBooking"/><br/>{extendedProps.buildingName}</div>
+        <div className="book"><BsUiChecksGrid className="iconBooking"/><br/>{extendedProps.floorName}</div>
+        <div className="book2">{extendedProps.deskType === "hall" ? (
+          <>
+            <HiOutlineUserGroup className="iconBooking"/><br/>meeting room
+          </>
+        ):(
+          <>
+            <BiDesktop className="iconBooking"/><br/>desk
+          </>
+        )}</div>
       </div>
     );
   };

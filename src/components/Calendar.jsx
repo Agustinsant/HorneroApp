@@ -64,6 +64,29 @@ const Calendar = ({ deskId, setDeskCalendarUp, day}) => {
     rendering();
   };
 
+  const handleAllday = async () => {
+    const dayEvents = await getEventsDayByDesk(deskId, day);
+    if (dayEvents.length > 0) {
+      swal({
+        title: "Selecciona un dia disponible",
+        text: "existe ya una reserva en esta lugar",
+        icon: "error",
+        buttons: false,
+        timer: 1250,
+      });
+    } else {
+      let eventObject = {
+        start: `${day}T07:00:00`,
+        end: `${day}T21:00:00`,
+        extendedProps: {
+          userId: user._id,
+        },
+      };
+      await addEventCalendar(deskId, eventObject, true);
+    }
+    rendering();
+  };
+
   /* -------------  DELETE FUNCTIONS ------------ */
   const handleDelete = (eventInfo) => {
     swal({
@@ -126,30 +149,6 @@ const Calendar = ({ deskId, setDeskCalendarUp, day}) => {
     return { start: day, end: end };
   };
 
-  const handleAllday = async () => {
-    const dayEvents = await getEventsDayByDesk(deskId, day);
-    if (dayEvents.length > 0) {
-      swal({
-        title: "Selecciona un dia disponible",
-        text: "existe ya una reserva en esta lugar",
-        icon: "error",
-        buttons: false,
-        timer: 1250,
-      });
-    } else {
-      let eventObject = {
-        start: `${day}T07:00:00`,
-        end: `${day}T21:00:00`,
-        extendedProps: {
-          userId: user._id,
-        },
-      };
-      await addEventCalendar(deskId, eventObject, true);
-    }
-    rendering();
-  };
-
-
   /* -------------  OVERLAP FUNCTION ------------ */
   const handleOverlap = () => {
     swal("Selecciona un horario disponible", {
@@ -190,15 +189,23 @@ const Calendar = ({ deskId, setDeskCalendarUp, day}) => {
             )}
           </div>
           {isTheUser && isHall && (
-            <AiOutlineUsergroupAdd
-              onClick={() =>
-                setAddParticipantsUp({
-                  state: true,
-                  eventId: eventInfo.event.extendedProps._id,
-                })
-              }
-              className="addParticipantsIconinEvent"
-            />
+            <div className="addParticipants">
+              <AiOutlineUsergroupAdd 
+                onClick={() =>
+                  setAddParticipantsUp({
+                    state: true,
+                    eventId: eventInfo.event.extendedProps._id,
+                  })
+                }
+                className="addParticipantsIconinEvent"
+              />
+              <div className="infoAdd" onClick={() =>
+                  setAddParticipantsUp({
+                    state: true,
+                    eventId: eventInfo.event.extendedProps._id,
+                  })
+                }><p >Agrega amigos a la sala</p></div>
+            </div>
           )}
         </>
       );
@@ -222,7 +229,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, day}) => {
           height={400}
           longPressDelay={200}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          headerToolbar={day ? { right: "allDay" } : { right: "prev next" }}
+          headerToolbar={day ? { right: "allDay" } : {left: "prev", center: "title", right: "next" }}
           footerToolbar={day ? {} : { center: "dayGridMonth timeGridDay" }}
           initialView={day ? "timeGrid" : "dayGridMonth"}
           visibleRange={day && handleRangeView(day)}

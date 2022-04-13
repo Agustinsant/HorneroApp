@@ -292,7 +292,6 @@ hr {
 /* ///////////// CALENDAR  \\\\\\\\\\\\\ */
 
 .calendar_overlay {
-  padding: 30px;
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -335,7 +334,7 @@ hr {
 .calendar_container {
   margin: 2em auto 2em auto;
   position: relative;
-  width: 100%;
+  width: 93%;
   margin-top: 150px;
   min-width: 300px;
   max-width: 500px !important;
@@ -367,11 +366,17 @@ hr {
 .delete_envent {
   font-size: 1.2rem;
   right: 3px;
-
+  margin-left: 2px;
+  margin-right: 3px;
   color: #fff;
 }
 .delete_envent:hover {
   color: #e20909;
+}
+.addParticipants{
+  position: absolute;
+  bottom: 0;
+  right: 4px;
 }
 
 .addParticipantsIcon {
@@ -385,18 +390,34 @@ hr {
   right: 4px;
 }
 
+.infoAdd{
+  position: relative;
+  right: 0;
+  bottom: 0;
+  background-color: #444444;
+  opacity: 0;
+}
+
+.infoAdd:hover{
+  opacity: 1;
+}
+
+
 .addParticipantsIconinEvent:hover {
   color: #bfd732;
 }
+
+
 .addIconEvent {
   border: #ff0000 solid 1px;
 }
 
 .fc .fc-toolbar-title {
-  margin-left: 3px !important;
-  margin-right: 3px !important;
-  font-size: 1.5rem !important;
-  color: #1a1a1a;
+  display: flex !important;
+  justify-content: center !important;
+  text-align: center;
+  font-size: 1.3rem !important;
+  color: #1a1a1a !important; 
 }
 
 .fc .fc-button-primary {
@@ -506,8 +527,29 @@ hr {
   margin-top: 5px;
 }
 .event-booking {
-  display: flex;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  align-items: center;
+  text-align: center;
   justify-content: space-between;
+  grid-template-columns: repeat(4, 5fr);
+  flex-direction: row;
+}
+.book{
+  text-align: center;
+  height: 100%;
+  padding: 2px 3px 2px 3px;
+  width: 100%;
+  border-right: #bfd732 0.5px solid ;
+  font-size: 0.9rem;
+}
+.book2{
+  text-align: center;
+  height: 100%;
+  padding: 2px;
+  width: 100%;
+  font-size: 0.9rem;
 }
 
 .fc-theme-standard .fc-list {
@@ -540,28 +582,49 @@ hr {
 }
 
 .fc .fc-list-event-dot {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  width: 3px !important;
+  width: 5px !important;
   color: #f7931e !important;
-  border: 5px solid #f7931e !important;
-  margin-right: 15px;
+  border: 4px solid #f7931e !important;
+ 
 }
+
+.iconBooking{
+  color: #f7931e !important;
+  font-size: 1rem;
+}
+.fc-list-event-title{
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 !important;
+
+}
+
+.fc .fc-list-table td, .fc .fc-list-day-cushion {
+  font-size: 0.9rem;
+}
+
 
 .fc-direction-ltr .fc-list-table .fc-list-event-graphic {
-  display: flex;
-  justify-content: center;
+  position: absolute;
+  left: -15px;
+
 }
 
-.fc .fc-list-table td,
-.fc .fc-list-day-cushion {
-  justify-content: end;
+.fc .fc-list-table td{
   text-align: end;
 }
+
+
 .fc .fc-list-table td {
   background: none !important;
+  align-items: center;
+}
+
+.fc .fc-list-table td, .fc .fc-list-day-cushion {
+  padding: 2px 5px !important;
+  align-items: center;
+  
 }
 
 .swal-modal {
@@ -633,6 +696,8 @@ hr {
   margin: 15px 5px 0 5px ;
 }
 
+
+
 @media all and (min-width: 600px) {
   .floor_container {
     width: 590px !important;
@@ -642,6 +707,7 @@ hr {
     width: 590px !important;
     height: 297px !important;
   }
+ 
 }
 
 @media all and (min-width: 768px) {
@@ -681,6 +747,7 @@ hr {
     width: 768px !important;
     height: 297px !important;
   }
+
 }
 
 @media all and (min-width: 1080px) {
