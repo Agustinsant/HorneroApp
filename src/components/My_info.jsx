@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '../styles/misDatos.css'
 import { useDispatch, useSelector } from "react-redux";
 import { FaUserEdit, FaReply, FaAngleRight } from "react-icons/fa";
 import { editUser, editUserPassword } from "../store/user";
@@ -139,6 +140,7 @@ const My_info = () => {
               onClick={(e) => {
                 e.preventDefault();
                 setNameEdit(!nameEdit);
+                setNameValue(user.name)
               }}
             >
               <FaReply className="cancelEditIcon" />
@@ -195,6 +197,7 @@ const My_info = () => {
               onClick={(e) => {
                 e.preventDefault();
                 setEmailEdit(!emailEdit);
+                setEmailValue(user.email)
               }}
             >
               <FaReply className="cancelEditIcon" />
@@ -251,6 +254,7 @@ const My_info = () => {
               onClick={(e) => {
                 e.preventDefault();
                 setCityEdit(!cityEdit);
+                setCityValue(user.city)
               }}
             >
               <FaReply className="cancelEditIcon" />

@@ -1,3 +1,4 @@
+import '../styles/friends.css'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchUsers } from "../store/users";

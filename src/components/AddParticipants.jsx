@@ -8,6 +8,7 @@ import swal from "sweetalert";
 
 
 const AddParticipants = ({eventId, state, setAddParticipantsUp}) => {
+
     const user = useSelector(state => state.user.data)
     const friends = useSelector(state => state.user.friends)
     const [event, setEvent] = useState({})
@@ -52,30 +53,31 @@ const AddParticipants = ({eventId, state, setAddParticipantsUp}) => {
       })
      } */
 
-
     return (
-      <div className="friends_containerAddP">
-          <FaRegTimesCircle className="close_addParticipants" onClick={() => setAddParticipantsUp({state: false})}/>
-        {friends[0] && friends.map((friend,i)=> (
-              <div className="cardContainer">
-              <div className="cardPhotoContainer">
-                <div className="cardImg">
-                  <img src={friend.img} alt="friend pick"></img>
+      <div className="add-container">
+            <FaRegTimesCircle className="close_addParticipants" onClick={() => setAddParticipantsUp({state: false})}/>
+        <div className="friends_containerAddP">
+          {friends[0] && friends.map((friend,i)=> (
+                <div className="cardContainer participants">
+                <div className="cardPhotoContainer">
+                  <div className="cardImg">
+                    <img src={friend.img} alt="friend pick"></img>
+                  </div>
+                  {event.usersId && event.usersId.includes(friend._id) ? (
+                        <button className="IconsRemoveParticipants">
+                          <FaUsersSlash onClick={()=> handleRemove(friend)} className="addParticipantsIcon" />
+                        </button>
+                  ) : (
+                        <button className="IconsAddParticipants">
+                          <FaUsers onClick={()=> handleAddtoEvent(friend)} className="addParticipantsIcon" />
+                        </button>
+                  )}
+                
                 </div>
-                {event.usersId && event.usersId.includes(friend._id) ? (
-                      <button className="IconsRemoveParticipants">
-                        <FaUsersSlash onClick={()=> handleRemove(friend)} className="addParticipantsIcon" />
-                      </button>
-                ) : (
-                      <button className="IconsAddParticipants">
-                        <FaUsers onClick={()=> handleAddtoEvent(friend)} className="addParticipantsIcon" />
-                      </button>
-                )}
-               
+                <h5>{friend.name}</h5>
               </div>
-              <h5>{friend.name}</h5>
-            </div>
-        ))}
+          ))}
+          </div>
         </div>
       );
 }

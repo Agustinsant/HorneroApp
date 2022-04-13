@@ -65,17 +65,20 @@ module.exports.getAllEventCalendar = async (req, res, next) => {
 module.exports.getAllEventCalendarByUserId = async (req, res, next) => {
     const { userId } = req.params
     const events = []
+    
     try {
         const eventsCalendar = await CalendarModel.find({usersId: userId})
 
-        for (const book of eventsCalendar) {
-          
-            const building = await BuildingModel.findById(book.buildingId);
-            const floor = building.floors.filter(floor => floor._id.toHexString() === book.floorId);
-            book.buildingName = building.name;
-            book.city = building.city;
-            book.floorName = floor[0].name;
-            events.push(book)
+        for (const event of eventsCalendar) {
+            let newEvents = {}
+            const building = await BuildingModel.findById(event.buildingId);
+            const floor = building.floors.filter(floor => floor._id.toHexString() === event.floorId);
+            newEvents.buildingName = building.name;
+            newEvents.city = building.city;
+            newEvents.floorName = floor[0].name;
+            newEvents.start = event.start;
+            newEvents.end = event.end
+            events.push(newEvents)
         }
 
         return res.status(200).send(events)

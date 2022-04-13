@@ -1,0 +1,113 @@
+/* ------ START WELCOME STYLES ----- */
+@keyframes moveInLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    80% {
+      transform: translate(15px);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0);
+    }
+  }
+  @keyframes moveInRight {
+    0% {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    80% {
+      transform: translate(-15px);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0);
+    }
+  }
+  @keyframes goButton {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    80% {
+      opacity: 0.4;
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0);
+    }
+  }
+  
+  .welcome__container {
+    margin: 1em;
+    height: 60vh;
+    background-image: linear-gradient(to right bottom, #bfd732, #28b4857c),
+      url("../assets/main.jpg");
+    background-size: cover;
+    background-position: left;
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+    position: relative;
+  }
+  
+  .welcome__box {
+    text-align: center;
+    color: #444444;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* offset-x | offset-y | blur-radius | color */
+    text-shadow: 5px 5px 20px rgba(0, 0, 0, 0.301);
+  }
+  .welcome__title {
+    animation: moveInLeft 1s ease-in;
+  }
+  .welcome__message {
+    font-style: italic;
+    animation: moveInRight 1s ease-in;
+  }
+  .welcome__goButton {
+    display: inline-block;
+    position: relative;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #555;
+    margin-top: 15px;
+    padding: 12px 50px;
+    border-radius: 100px;
+    border-color: #bfd732;
+    animation: goButton 1s ease-out 1.5s;
+    animation-fill-mode: backwards;
+    transition: all 0.2s;
+  }
+  
+  .welcome__goButton::after {
+    content: "";
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 100px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+  }
+  
+  .welcome__goButton:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .welcome__goButton:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+  }
+  
+  .welcome__goButton:active {
+    transform: translateY(1px);
+  }
+  
+  /* ------ END WELCOME STYLES ----- */

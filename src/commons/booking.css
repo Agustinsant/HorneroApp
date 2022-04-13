@@ -1,0 +1,22 @@
+.deskCanFly {
+  display: flex;
+  justify-content: center;
+  margin-top: 8rem;
+}
+.deskCanFly img {
+  align-self: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 5px solid #bfd732;
+  animation: deskFly 1.2s ease-in-out;
+}
+
+@keyframes deskFly {
+  0% {
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

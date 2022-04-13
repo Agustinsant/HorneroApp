@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '../styles/imgModal.css'
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { persistUser } from "../store/user";

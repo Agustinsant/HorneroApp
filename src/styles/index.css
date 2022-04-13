@@ -12,10 +12,13 @@
 }
 
 body {
+  position: relative;
   font-family: "Heebo", sans-serif;
   background: var(--background-color);
   color: var(--text-color);
   transition: background 0.3s ease-in-out, color 0.6s ease-in-out;
+  padding-bottom: 120px;
+  min-height: 100vh; 
 }
 
 body.light {
@@ -32,538 +35,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-nav {
-  padding: 10px 15px;
-}
-
-/* ------ START NAV STYLES ----- */
-
-#darkMode {
-  margin-right: 15px;
-  margin-top: 5px;
-  background: transparent url("../resources/img/siwtchOff.svg") no-repeat center;
-  color: #fff;
-  border: none;
-  background-size: 40px;
-  width: 60px;
-  height: 40px;
-}
-
-#darkMode.clicked {
-  background: transparent url("../resources/img/siwtchOn.svg") no-repeat center !important;
-  border: none;
-  background-size: 40px !important;
-  width: 60px;
-  height: 40px;
-}
-
-.darkModeBtn {
-  margin-right: 20px;
-  margin-top: 5px;
-  background: none;
-  border: none;
-}
-
-.darkModeOn {
-  color: #bfd732;
-  font-size: 26px;
-}
-
-.darkModeOff {
-  color: #1a1a1a;
-  font-size: 26px;
-}
-
-.navProfilePick {
-  margin-right: 20px;
-  margin-top: 5px;
-  width: 40px;
-  height: 40px;
-  overflow: hidden;
-  border-radius: 50%;
-}
-
-.navProfilePick img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.navContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.linksNav {
-  margin-top: 10px;
-  text-align: right;
-  text-decoration: none;
-  color: #444444;
-}
-
-.linksNav:hover {
-  color: #bfd732;
-}
-
-.logOutBtn {
-  text-align: right;
-  background: none;
-  border: none;
-  color: #444444;
-}
-
-.logOutBtn:hover {
-  color: #bfd732;
-}
-
-.navMenu {
-  display: flex;
-  align-items: center;
-}
-
-.dropDown {
-  position: relative;
-  display: block;
-}
-
-.dropDownMenu {
-  background: none;
-  border: none;
-}
-
-.dropDownMenuIcon {
-  color: #bfd732;
-  margin-top: 10px;
-  font-size: 30px;
-}
-
-.dropDownSubMenuClosed {
-  background-color: rgba(255, 255, 255, 0.685);
-  padding-right: 10px;
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  z-index: 1;
-  width: 140px;
-  right: 15px;
-  top: 60px;
-  max-height: 0px;
-  overflow: hidden;
-  transition: all 300ms ease;
-}
-
-.dropDownSubMenuOpen {
-  background-color: rgba(255, 255, 255, 0.685);
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: left;
-  position: absolute;
-  z-index: 1;
-  width: 140px;
-  right: 15px;
-  top: 60px;
-  min-height: 80px;
-  max-height: 150px;
-  overflow: hidden;
-  transition: all 300ms ease;
-}
-
-/* ------ END NAV STYLES ----- */
-
-/* ------ START WELCOME STYLES ----- */
-@keyframes moveInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-100px);
-  }
-  80% {
-    transform: translate(15px);
-  }
-  100% {
-    opacity: 1;
-    transform: translate(0);
-  }
-}
-@keyframes moveInRight {
-  0% {
-    opacity: 0;
-    transform: translateX(100px);
-  }
-  80% {
-    transform: translate(-15px);
-  }
-  100% {
-    opacity: 1;
-    transform: translate(0);
-  }
-}
-@keyframes goButton {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  80% {
-    opacity: 0.4;
-  }
-  100% {
-    opacity: 1;
-    transform: translate(0);
-  }
-}
-
-.welcome__container {
-  margin: 1em;
-  height: 60vh;
-  background-image: linear-gradient(to right bottom, #bfd732, #28b4857c),
-    url("../assets/main.jpg");
-  background-size: cover;
-  background-position: left;
-  clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
-  position: relative;
-}
-
-.welcome__box {
-  text-align: center;
-  color: #444444;
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  /* offset-x | offset-y | blur-radius | color */
-  text-shadow: 5px 5px 20px rgba(0, 0, 0, 0.301);
-}
-.welcome__title {
-  animation: moveInLeft 1s ease-in;
-}
-.welcome__message {
-  font-style: italic;
-  animation: moveInRight 1s ease-in;
-}
-.welcome__goButton {
-  display: inline-block;
-  position: relative;
-  text-transform: uppercase;
-  font-weight: bold;
-  color: #555;
-  margin-top: 15px;
-  padding: 12px 50px;
-  border-radius: 100px;
-  border-color: #bfd732;
-  animation: goButton 1s ease-out 1.5s;
-  animation-fill-mode: backwards;
-  transition: all 0.2s;
-}
-
-.welcome__goButton::after {
-  content: "";
-  display: inline-block;
-  background-color: #fff;
-  border-radius: 100px;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  transition: all 0.4s;
-}
-
-.welcome__goButton:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.welcome__goButton:hover::after {
-  transform: scaleX(1.4) scaleY(1.6);
-  opacity: 0;
-}
-
-.welcome__goButton:active {
-  transform: translateY(1px);
-}
-
-/* ------ END WELCOME STYLES ----- */
-
-/* ------ START MODAL STYLES ----- */
-
-.overlay {
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modalContainer {
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-  padding: 20px;
-  min-height: 100px;
-  background: white;
-  border-radius: 5px;
-  box-shadow: 0 7px 30px 0 rgba(0, 0, 0, 0.5);
-}
-
-.modalContainer form {
-  display: flex;
-  flex-direction: column;
-}
-
-.modalContainer input {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-}
-
-.loadImageBtn {
-  text-align: center;
-  background-color: #bfd732;
-  padding: 10px 40px;
-  margin-bottom: 20px;
-}
-
-.modalSendBtn {
-  padding: 5px;
-  background-color: rgb(209, 209, 209);
-  border: none;
-  margin-bottom: 5px;
-}
-
-.modalCancelBtn {
-  color: white;
-  font-weight: 600;
-  padding: 5px;
-  background-color: rgb(255, 0, 0);
-  border: none;
-}
-
-/* ------ END MODAL STYLES ----- */
-
-/* -------- START CARDS STYLES-------- */
-
-.friendIconsAdd {
-  display: flex;
-  padding-left: 4px;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-  border: solid 4px white;
-  width: 35px;
-  height: 35px;
-  background: #bfd732;
-  color: white;
-  border-radius: 50%;
-}
-
-.friendIconsRemove {
-  display: flex;
-  padding-left: 4px;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-  border: solid 4px white;
-  width: 35px;
-  height: 35px;
-  background: #ff0000;
-  color: white;
-  border-radius: 50%;
-}
-
-.dropDownMenu {
-  background: none;
-  border: none;
-}
-
-.addRemoveFrienIcon {
-  font-size: 18px;
-}
-
-.cardContainer {
-  width: 120px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.cardPhotoContainer {
-  position: relative;
-}
-
-.cardContainer h5 {
-  text-align: center;
-  padding: 10px;
-  font-size: 14px;
-}
-
-.cardImg {
-  width: 100%;
-  overflow: hidden;
-  border-radius: 50%;
-}
-
-.cardImg img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-}
-.image-overlay{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.501);
-  font-size: 1.4rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  opacity: 0;
-  transition: 0.6s;
-}
-
-.image-overlay:hover {
-  opacity: 1;
-}
-.linksFriend{
-  text-decoration: none;
-  color: #fff;
-}
-.linksFriend:hover{
-  color: #bfd732;
-}
-
-/* ------ END CARDS STYLES ------- */
-
-/* ------ START FRIENDS COMPONENT STYLES ------- */
-
-.friendsCompContainer {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.friends_container {
-  width: 100%;
-  padding: 20px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.friendsSearch {
-  margin-top: 15px;
-
-  display: flex;
-  align-items: center;
-}
-
-.friendsSearch button {
-  background: none;
-  border: none;
-  margin-bottom: 30px;
-}
-
-
-
-/* ------ END FRIENDS COMPONENT STYLES ------- */
-
-/* ------ START MIS DATOS COMPONENT STYLES ------- */
-.misDatosContainer {
-  width: 100%;
-  padding: 20px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.misDatosContainer > h6 {
-  margin-bottom: 30px;
-}
-
-.editBtnContainer {
-  padding: 0;
-}
-
-.misDatosContainer form {
-  margin-top: 20px;
-  width: 350px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.editInputsContainer h5 {
-  margin: 10px 15px 0 0;
-}
-
-.misDatosBtns {
-  background: none;
-  border: none;
-  transform: translateY(10px);
-  font-size: 20px;
-}
-
-.editInputsContainer input {
-  width: 250px;
-  margin-right: 15px;
-  padding: 5px 10px;
-  border: 1px solid #bfd732;
-}
-
-.hrDatos {
-  width: 350px;
-  margin-top: 5px;
-}
-
-.hrInvisible {
-  visibility: hidden;
-  width: 350px;
-  margin-top: 5px;
-}
-
-.editInfoIcon {
-  font-size: 26px;
-  color: #bfd732;
-}
-
-.submitInfoIcon {
-  font-size: 30px;
-  color: #bfd732;
-}
-
-.cancelEditIcon {
-  font-size: 22px;
-  color: #ff0000;
-}
-
-.misDatosLabel {
-  font-size: 12px;
-  margin-bottom: 0px;
-  margin-top: 0;
-  color: rgb(133, 133, 133);
-}
-/* ------ END MIS DATOS COMPONENT STYLES ------- */
 
 .signin {
   display: flex;
@@ -585,7 +56,7 @@ nav {
 }
 .signin__validationCod--title {
   position: relative;
-  font-size: 10px;
+  font-size: 12px;
   margin-bottom: 0;
   cursor: pointer;
 }
@@ -635,7 +106,7 @@ input:focus {
 }
 
 .form__input--errormessage {
-  font-size: 12px;
+  font-size: 14px;
   padding: 3px;
   margin-top: 0;
   color: red;
@@ -669,6 +140,7 @@ input:invalid[focused="true"] ~ span {
   margin: 20px;
   background: #fff;
   color: #444444;
+  border: none;
   font-weight: 400;
   font-size: 20px;
   line-height: 21px;
@@ -676,76 +148,14 @@ input:invalid[focused="true"] ~ span {
 }
 
 .footer {
-  position: relative;
+  position: absolute;
   padding: 30px;
   width: 100%;
   bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 8rem;
-}
-.profile_container {
-  margin-top: 20px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.profile_photo {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.profile_photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.profilePhotoContainer {
-  position: relative;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  width: 220px;
-  height: 220px;
-}
-
-.editProfilePhotoBtn {
-  display: flex;
-  padding-left: 4px;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  bottom: 0px;
-  right: 15px;
-  border: solid 4px white;
-  width: 50px;
-  height: 50px;
-  background: #bfd732;
-  border-radius: 50%;
-}
-
-.editPhotoIcon {
-  color: white;
-  font-size: 24px;
-}
-
-.profile_links {
-  width: 100%;
-  padding: 25px;
-}
-
-.profile_links div {
-  margin-top: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #bfd732;
+  margin-top: auto;
 }
 
 .profile_links h4 {
@@ -818,6 +228,7 @@ hr {
 
 .floor_container {
   overflow: scroll;
+
   width: 300px;
   height: 298px;
   border: 5px solid #666666;
@@ -825,6 +236,18 @@ hr {
 }
 
 /* ///////////// CALENDAR  \\\\\\\\\\\\\ */
+
+.calendar_overlay {
+  padding: 30px;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
 .image_calendar {
   position: relative;
   width: 50px;
@@ -837,10 +260,14 @@ hr {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: #29ABE2;
+  background-color: #29abe2;
 }
 
 .close-buton-container {
+  position: absolute;
+  right: -5px;
+  top: -40px;
+  cursor: pointer;
   display: flex;
   justify-content: end;
 }
@@ -853,8 +280,13 @@ hr {
 
 .calendar_container {
   margin: 2em auto 2em auto;
-  width: 90% !important;
-  padding: 1em;
+  position: relative;
+  width: 100%;
+  margin-top: 150px;
+  min-width: 300px;
+  max-width: 500px !important;
+  padding: 20px;
+  box-shadow: 0 7px 30px 0 rgba(0, 0, 0, 0.5);
   background: #fff;
   border-radius: 10px;
 }
@@ -999,12 +431,12 @@ hr {
 
 /* --------- pop over ----- */
 .fc-popover-header {
-  background: #dadada!important;
+  background: #dadada !important;
   color: rgb(18, 18, 18);
 }
 
 .fc-popover-body {
-  background-color: #00292E;
+  background-color: #00292e;
 }
 
 .fc-theme-standard .fc-popover {
@@ -1019,7 +451,7 @@ hr {
   width: 95%;
   margin-top: 5px;
 }
-.event-booking{
+.event-booking {
   display: flex;
   justify-content: space-between;
 }
@@ -1086,24 +518,34 @@ hr {
 .close_addParticipants {
   position: absolute;
   font-size: 1.8rem;
-  right: 20px;
+  right: 5px;
+  top: -35px;
+  color: #bfd732
+}
+.add-container{
+  margin-top: 50px;
+  position: relative;
 }
 
 .friends_containerAddP {
+  position: relative;
+  background: rgba(0, 0, 0, 0.178);
+  padding: 15px;
   width: 100%;
-  padding: 20px;
-  margin: 29px auto;
+  height: 185px;
+  margin: 25px auto 0 auto;
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  border: solid 1px;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-x: scroll; 
+  overflow-y: hidden;
   border-radius: 10px;
 }
 
 .IconsAddParticipants {
   display: flex;
   padding-left: 2px;
-
   align-items: center;
   justify-content: center;
   position: absolute;
@@ -1133,6 +575,10 @@ hr {
   border-radius: 50%;
 }
 
+.participants{
+  margin: 15px 5px 0 5px ;
+}
+
 @media all and (min-width: 600px) {
   .floor_container {
     width: 590px !important;
@@ -1153,8 +599,11 @@ hr {
     background: #bfd732;
     height: 297px;
     margin-bottom: 0;
+    clip-path: none;
+    margin-right: 10px;
   }
   .selector__inputs {
+    margin-top: 80px;
     flex-direction: row;
     justify-content: center;
   }
@@ -1163,6 +612,7 @@ hr {
     width: 90%;
   }
   .selector__img {
+    display: none;
     width: 95%;
     height: 8rem;
     background-image: linear-gradient(to right bottom, #bfd732, #28b4857c),
@@ -1171,5 +621,36 @@ hr {
     background-position: center;
     clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
     margin: 10px;
+  }
+
+  .floor_container {
+    width: 768px !important;
+    height: 297px !important;
+  }
+}
+
+@media all and (min-width: 1080px) {
+  .navContainer {
+    width: 1080px;
+    margin: 0 auto;
+    padding: 10px;
+  }
+  .calendar_overlay {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+  }
+
+  .calendar_container {
+    margin-top: 150px;
+  }
+
+  .selector__inputs {
+    width: 1080px;
+    margin-top: 80px;
+    margin: 0 auto;
+    flex-direction: row;
+    justify-content: center;
   }
 }
