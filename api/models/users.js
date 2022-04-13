@@ -45,6 +45,18 @@ const UserSchema = new Schema({
     img: {
         type: String,
         default: 'https://hornero-app.s3.amazonaws.com/no-user-image-icon-3.jpg'
+    },
+    emailMyReserve: {
+        type: Boolean,
+        default: true
+    },
+    emailFriendsReserve: {
+        type: Boolean,
+        default: true
+    },
+    emailGroupReserve: {
+        type: Boolean,
+        default: true
     }
 })
 //HASH PASSWORD
