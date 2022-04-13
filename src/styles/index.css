@@ -915,6 +915,12 @@ select {
 }
 
 @media all and (min-width: 1080px) {
+  .selector__container {
+    margin-top: 2rem;
+  }
+  .selector__references {
+    top: -50px;
+  }
   .navContainer {
     width: 1080px;
     margin: 0 auto;
