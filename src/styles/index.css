@@ -691,6 +691,53 @@ hr {
   margin: 15px 5px 0 5px;
 }
 
+/* ----------- ADMIN -------- */
+
+.selector__inputsAdmin {
+  position: relative;
+  width: 100%;
+  height: 8rem;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+.selector__inputsAdmin select,
+.selector__inputsAdmin input {
+  width: 30vh;
+  border-radius: 100px;
+  background-color: none;
+  padding: 10px;
+  margin: 10px;
+  display: block;
+  align-self: center;
+  border: none;
+  background-color: #bfd732;
+  border-bottom: 2px solid #bfd732;
+}
+.buttonsChart{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 97%;
+  margin: 0 auto;
+}
+.buttonSelector{
+  color: #fff;
+  background-color: #00A99D ;
+  border-radius: 5px;
+  border-color: #00A99D;
+  padding: 5px;
+  margin: 5px;
+}
+
+.chart-Container{
+  width: 97%;
+  margin: 0 auto;
+}
 
 
 @media all and (min-width: 600px) {

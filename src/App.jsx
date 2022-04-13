@@ -9,19 +9,17 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Signin from "./components/Signin";
 import MyProfile from "./components/MyProfile";
-
 import Welcome from "./components/Welcome";
 import Modal from "./components/Modal";
-
 import Selector from "./components/Selector";
 import My_friends from "./components/My_friends";
-
 import My_info from "./components/My_info";
-
 import Booking from "./commons/Bookings";
 import AddParticipants from "./components/AddParticipants";
+import AdminReport from "./components/AdminRep";
 import My_preferences from "./components/My_preferences";
 import getGeoLocation from "./utils/getGeoLocation";
+
 
 const App = () => {
   const navigate = useNavigate();
@@ -64,6 +62,7 @@ const App = () => {
         <Route path="/mi_perfil/mis_datos" element={<My_info />} />
         <Route path="/explore" element={<Selector />} />
         <Route path="/addParticipants" element={<AddParticipants />} />
+        <Route path="/adminPanel" element={<AdminReport/>}/>
       </Routes>
       <Footer />
       <Modal modalState={modalState} setModalState={setModalState} />

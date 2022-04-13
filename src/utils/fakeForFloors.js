@@ -129,3 +129,26 @@ export const buildings = [
     ],
   },
 ];
+
+export const  data= {
+  labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octumbre','Noviembre','Diciembre'],
+  datasets: [{
+      label: 'Reservas por Mes',
+      data: [12, 19, 3, 5, 2, 3, 50, 80, 100, 25],
+      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      borderColor: 'rgba(255, 99, 132, 1)',
+      borderWidth: 1
+  }]
+}
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'bottom' 
+    },
+    title: {
+      display: true,
+      text: 'Reservas del Ano',
+    },
+  },
+}

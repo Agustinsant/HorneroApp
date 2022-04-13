@@ -8,6 +8,7 @@ const calendar = require('./calendar')
 const search = require('./search')
 const recover = require('./forgotPassword')
 const check = require('./checks')
+const admin = require("./adminReport")
 
 router.use("/user", user)
 
@@ -24,5 +25,7 @@ router.use("/search", search)
 router.use("/recover", recover)
 
 router.use("/checks", check)
+
+router.use("/admin", admin)
 
 module.exports = router
