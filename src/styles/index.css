@@ -313,16 +313,22 @@ select {
   background: rgba(0, 0, 0, 0.4);
 }
 
-.references__container {
-  position: relative;
-}
-.close_references {
+.close__references {
   position: absolute;
+  right: 5px;
+  top: 110px;
   cursor: pointer;
-  right: -5px;
+  display: flex;
+  justify-content: end;
+}
+
+.close__references svg {
+  width: 2em;
+  height: 2em;
 }
 
 .references__table {
+  color: #444444;
   margin: 2em auto 2em auto;
   width: 93%;
   margin-top: 150px;
@@ -861,6 +867,9 @@ select {
 }
 
 @media all and (min-width: 768px) {
+  .close__references {
+    right: 20%;
+  }
   .selector__references {
     top: -40px;
     right: 5px;
@@ -953,11 +962,10 @@ select {
   max-width: 600px;
   padding: 25px;
 }
-.profile_mapUbication h6{
+.profile_mapUbication h6 {
   text-align: center;
-} 
+}
 .iframe_container {
-
   display: flex;
   align-items: center;
   justify-content: center;
