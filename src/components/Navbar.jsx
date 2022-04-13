@@ -90,6 +90,13 @@ const NavbarComponent = () => {
                 Login
               </Link>
             )}
+            {user.isAdmin && <Link
+                onClick={() => setOpenMenu(false)}
+                className="linksNav"
+                to="adminPanel"
+              >
+                Admin Panel
+              </Link> }
           </div>
         </div>
       </div>
