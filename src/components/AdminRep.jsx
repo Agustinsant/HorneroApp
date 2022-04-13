@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react"
+import { useSelector, useDispatch } from "react-redux";
 import {Bar} from "react-chartjs-2"
-import {yearMonths, Weeks} from "../utils/chartUtils"
+import {yearMonths, Weeks ,dayOfWeek , Hours} from "../utils/chartUtils"
 import { yearReport, monthReport, weekReport } from "../services/adminServices"; 
-import {BsClipboardData} from "react-icons/bs";
+import {updateHoursBilding ,addDayWeekBuilding, removeDayWeekBuilding, getSingleBuilding} from "../store/building"
+import swal from "sweetalert";
+import {BsClipboardData, BsCalendarCheck, BsClockHistory} from "react-icons/bs";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -12,8 +15,7 @@ import {
     Tooltip,
     Legend,
   } from 'chart.js';
-import { useSelector } from "react-redux";
-
+import { useNavigate } from "react-router";
 
 
 
@@ -35,12 +37,42 @@ const AdminReport = ()=> {
     const [dataInfo, setDataInfo] = useState({})
     const [optionsInfo, setOptionsInfo] = useState({})
 
+    const [color, setColor] = useState("green")
+    const [UpSetingsDays, setUpsetingsDays]= useState(false)
+    const [UpSetingsHours, setUpsetingsHours]= useState(false)
+    const [UpStadistics, setUpStadistics]= useState(false)
     const [dropMonthUp, setDropMonthUp] = useState(false)
     const [dropWeekUp, setDropWeekUp] = useState(false)
     const [dropYearUp, setDropYearUp] = useState(false)
     const [monthSelect, setMonthSelect] = useState(0)
     const [weekSelect, setWeekSelect] = useState("")
     const [yearSelect, setYearSelect]= useState("")
+    const [hourStartSelect, sethourStartSelect] = useState("")
+    const [isAdmin, setIsAdmin] = useState(false)
+
+
+
+    const building = useSelector(state => state.buildings.singleBuilding)
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+
+    useEffect(() => {
+        if(user){
+            if(user.isAdmin) {
+                setIsAdmin(true)
+            } else{
+                swal("Solo Perfiles de Administrador pueden acceder aqui!",{
+                    icon: "error",
+                    buttons: false,
+                    timer: 2000,
+                  });
+                  navigate("/")
+            }
+        } else {
+            navigate("/login")
+        }
+    },[])
 
 
     /* ---------- SETERS ---------- */
@@ -108,7 +140,6 @@ const AdminReport = ()=> {
 
     const handlerWeekSelect = async (e) => {
         const weekSelected = e.target.value
-        console.log("week target", weekSelect)
         setWeekSelect(weekSelected)
         const week = await weekReport(buildingId,yearSelect,monthSelect,weekSelected)
         setDataInfo(setData(week))
@@ -116,17 +147,68 @@ const AdminReport = ()=> {
     }
 
       /* ----------- HANDLERS ---------*/ 
+
+      const handlerCheckBox = async (e) => {
+          if(e.target.checked){
+            dispatch(
+              addDayWeekBuilding({buildingId, dayId: e.target.value})
+            )
+        } else {
+          dispatch(
+            removeDayWeekBuilding({buildingId, dayId: e.target.value})
+          )
+        }
+      }
+      
+       
+
+      const handleUp = (type) => {
+        if(type === "days"){
+            UpSetingsDays ? ( setUpsetingsDays(false)):(setUpsetingsDays(true))
+        }
+        if(type === "hours"){
+            UpSetingsHours ? ( setUpsetingsHours(false)):(setUpsetingsHours(true))
+        }
+        if(type === "chart"){
+            UpStadistics ? ( setUpStadistics(false)):(setUpStadistics(true))
+        }
+      }
+
+      const handleHourSelectStart = (e) => {
+        sethourStartSelect(e.target.value)
+      }
+
+      const handleHourSelectEnd = async (e) => {
+        
+        dispatch(
+          updateHoursBilding({buildingId, start: hourStartSelect, end: e.target.value})
+        )
+        swal("Horarios Actualizados",{
+            icon: "success",
+            buttons: false,
+            timer: 2000,
+          });
+        setUpsetingsHours(false)
+    }
    
 
     return (
         <>
-        <h1 className="UpStadistics">Estadisticas<BsClipboardData/></h1>
-                <div className="selector__inputsAdmin">
+ <div className="profile_container">
+                <h6 className="headerAdmin">Panel de Administrador</h6>
+</div>
+        <div className="profile_links topmargin">
+            <div className="selector__inputsAdmin">
                 <div>
                   <select
                     name="building"
                     id="buildings"
-                    onChange={(e) => setBuildingId(e.target.value)}
+                    onChange={(e) => {
+                      setBuildingId(e.target.value)
+                      dispatch(
+                        getSingleBuilding({buildingId: e.target.value})
+                      )
+                    }}
                   >
                     <option disabled selected hidden>
                       Seleccione un Edificio
@@ -138,14 +220,77 @@ const AdminReport = ()=> {
                   </select>
                   </div>
             </div>
-            {buildingId && (
-                <div className="buttonsChart">
+            {buildingId && <><h5 className="UpStadistics">Configurar Dias de Trabajo <BsCalendarCheck className="green" onClick={() => handleUp("days")}/></h5> <hr/></>}
+            
+           
+            {building && UpSetingsDays && dayOfWeek.map((day,i)=> (
+                <div key={i} className="daySeetings">
                     <div>
+                        <h4 className="daySet">{day.name}</h4>
+                    </div>
+                    <input type="checkbox" checked={building.availableDays.includes(day.id)}value={day.id} onChange={handlerCheckBox}/>
+                </div>
+                ))}
+        </div>
+
+
+        {buildingId && <div className="profile_links"><h5 className="UpStadistics">Configurar Horas de Oficina <BsClockHistory className="green" onClick={() => handleUp("hours")}/></h5> <hr/></div>}
+
+        {UpSetingsHours && (
+            <>
+            <div className="selector__inputsAdmin">
+                <h6>Horario de Apertura</h6>
+            <div>
+              <select
+                name="Start"
+                id="buildings"
+                onChange={handleHourSelectStart}
+              >
+                <option disabled selected hidden>
+                  Seleccione un Horario
+                </option>
+
+                {Hours.map((hour, i) => (
+                  <option key={i} value={hour}>{hour}</option>
+                ))}
+              </select>
+              </div>
+              </div>
+
+              <div className="selector__inputsAdmin">
+                <h6>Horario de Cierre</h6>
+                <div>
+                  <select
+                    name="End"
+                    id="buildings"
+                    onChange={handleHourSelectEnd}
+                  >
+                    <option disabled selected hidden>
+                      Seleccione un Edificio
+                    </option>
+    
+                    {Hours.map((hour, i) => (
+                    <option key={i} value={hour}>{hour}</option>
+                ))}
+                  </select>
+                  </div>
+                  </div>
+                  </>
+        )}
+
+        {buildingId && <div className="profile_links"><h5 className="UpStadistics">Estadisticas  <BsClipboardData className="green" onClick={() => handleUp("chart")}/></h5> <hr/></div>}
+        <div className="profile_container">
+        
+       
+        
+            {UpStadistics && (
+                <div className="buttonsChart">
+                    <div className="ChartView">
                       <button className="buttonSelector" onClick={handleYear}>Año</button>
                       <button className="buttonSelector"onClick={handleMonth}>Mes</button>
                       <button className="buttonSelector"onClick={handleWeek}>Semana</button>
                     </div>
-                    <div>
+                    <div className="CharSelector">
                         {dropYearUp && (
                              <select 
                              className="buttonSelector"
@@ -198,11 +343,12 @@ const AdminReport = ()=> {
                 </div>
                   )}
           
-            {dataInfo.labels && yearSelect && (   
+            {dataInfo.labels && yearSelect && UpStadistics &&(   
                 <div className="chart-Container">
                 <Bar data={dataInfo} options={optionsInfo}/>
                 </div>
             )}
+</div>
 </>
     )
 }

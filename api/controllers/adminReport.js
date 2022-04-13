@@ -1,5 +1,72 @@
 const { UserModel } = require('../models/users')
 const { DeskModel, CalendarModel, BuildingModel, FloorModel } = require ('../models/buildings')
+const { options } = require('../routes/adminReport')
+
+
+
+
+module.exports.AddDayWeek = async (req, res, next) => {
+    const {buildingId} = req.params
+    const {dayId} = req.body
+
+    const options = {
+        returnDocument: "after",
+      };
+
+    try {
+        const building = await BuildingModel.findById(buildingId)
+        if(dayId) building.availableDays.push(dayId)
+        const newBuilding = await BuildingModel.findByIdAndUpdate(buildingId, building,options)
+       res.status(201).send(newBuilding)
+    }
+    catch (error) {
+        next(error)
+    }
+
+}
+
+module.exports.UpdateBusinessHours = async (req, res, next) => {
+    const {buildingId} = req.params
+    const {start , end } = req.body
+    const hours = [start, end]
+
+    const options = {
+        returnDocument: "after",
+      };
+
+
+    try {
+        const building = await BuildingModel.findByIdAndUpdate(buildingId, {businessHours: hours}, options)
+       res.status(201).send(building)
+    }
+    catch (error) {
+        next(error)
+    }
+
+}
+
+module.exports.RemoveDayWeek = async (req, res, next) => {
+    const {buildingId} = req.params
+    const {dayId} = req.body
+    let days = [];
+
+    const options = {
+        returnDocument: "after",
+      };
+    try {
+        const building = await BuildingModel.findById(buildingId)
+        days = building.availableDays.filter(day => parseInt(day) !== parseInt(dayId))
+        const newBuilding =await BuildingModel.findByIdAndUpdate(buildingId, {availableDays: days}, options)
+        
+       res.status(201).send(newBuilding)
+    }
+    catch (error) {
+        next(error)
+    }
+
+}
+
+
 
 
 
