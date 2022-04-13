@@ -38,6 +38,11 @@ export const editUserPassword = createAsyncThunk(
   userServices.editUserPasswordService
 );
 
+export const toogleCheck = createAsyncThunk(
+  'TOOGLE-CHECK',
+  userServices.checkValidateService
+)
+
 export const removeFriend = createAsyncThunk("REMOVE_FRIEND", userServices.removeFriendService)
 
 export const getAllFriends = createAsyncThunk("GET_ALL_FRIENDS", userServices.getAllFriendsService)
@@ -139,7 +144,17 @@ const userSlice = createSlice({
     [editUserPassword.rejected]: (state, action) => {
 
       state.error = action.error.message;
-    }
+    },
+    [toogleCheck.pending]: (state) => {
+      state.loading = true;
+    },
+    [toogleCheck.fulfilled]: (state, action) => {
+      state.friends = action.payload;
+      state.loading = false;
+    },
+    [toogleCheck.rejected]: (state, action) => {
+      state.error = action.error.message;
+    },
   },
 });
 

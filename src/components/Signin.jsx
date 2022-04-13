@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-
+import swal from "sweetalert";
 import FormInput from "../commons/FormInput";
 import FormButton from "../commons/FormButton";
 import { signInUser } from "../store/user";
@@ -96,8 +96,24 @@ function Signin() {
         email: values.email,
         password: values.password,
       })
-    );
-    navigate("/login");
+    ).then(data => {
+      data.error ? (
+        swal({
+          text: "Ocurrió un error en el registro.",
+          icon: "error",
+          timer: 2000,
+          buttons:false
+        })
+      )  :  (
+        swal({
+          text: "Registro exitoso!",
+          icon: "success",
+          timer: 2000,
+          buttons:false
+        }).then(() => navigate("/"))
+      )
+    });
+   
   };
   return (
     <div className="signin">
