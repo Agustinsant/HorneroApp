@@ -6,7 +6,8 @@ import Map from "../commons/Map";
 import Desk from "../commons/Desk";
 import Hall from "../commons/Hall";
 import { getEventsDayByFloor } from "../services/buildingServices";
-import user from "../store/user";
+import useFetch from "../hooks/useFetch";
+const horneroImg = require("../assets/hornero.png");
 
 function Floor({ floor, day }) {
   const userLoged = useSelector((state) => state.user.data);
@@ -24,7 +25,6 @@ function Floor({ floor, day }) {
 
   const [desk, setDesk] = useState([]);
   const [deskCalendarUp, setDeskCalendarUp] = useState(false);
- 
 
   const colors = {
     desk: {
@@ -106,9 +106,18 @@ function Floor({ floor, day }) {
     setDeskCalendarUp((prev) => !prev);
   };
 
-  setTimeout(() => {
-    console.log("Hello, World!");
-  }, 1500);
+  const { loading } = useFetch(
+    `http://localhost:3001/api/calendar/all/${userLoged._id}`
+  );
+  if (loading) {
+    return (
+      <div className="booking_container">
+        <div className="deskCanFly">
+          <img src={horneroImg} alt="loading" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -140,7 +149,7 @@ function Floor({ floor, day }) {
         </Stage>
       </div>
       {deskCalendarUp ? (
-        <div >
+        <div>
           {desk.id && (
             <Calendar
               deskId={desk.id}
