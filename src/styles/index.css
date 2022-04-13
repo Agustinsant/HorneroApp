@@ -158,7 +158,6 @@ input:invalid[focused="true"] ~ span {
   margin-top: auto;
 }
 
-
 .profile_links h4 {
   font-weight: 200;
   font-size: 18px;
@@ -225,6 +224,14 @@ hr {
   border: none;
   background-color: #fff;
   border-bottom: 2px solid #bfd732;
+}
+
+select {
+  background: URL("../resources/img/flechaSelect.png") no-repeat 95%
+    rgb(255, 255, 255) !important;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .floor_container {
@@ -371,7 +378,7 @@ hr {
 .delete_envent:hover {
   color: #e20909;
 }
-.addParticipants{
+.addParticipants {
   position: absolute;
   bottom: 0;
   right: 4px;
@@ -388,7 +395,7 @@ hr {
   right: 4px;
 }
 
-.infoAdd{
+.infoAdd {
   position: relative;
   right: 0;
   bottom: 0;
@@ -396,15 +403,13 @@ hr {
   opacity: 0;
 }
 
-.infoAdd:hover{
+.infoAdd:hover {
   opacity: 1;
 }
-
 
 .addParticipantsIconinEvent:hover {
   color: #bfd732;
 }
-
 
 .addIconEvent {
   border: #ff0000 solid 1px;
@@ -415,7 +420,7 @@ hr {
   justify-content: center !important;
   text-align: center;
   font-size: 1.3rem !important;
-  color: #1a1a1a !important; 
+  color: #1a1a1a !important;
 }
 
 .fc .fc-button-primary {
@@ -535,15 +540,15 @@ hr {
   grid-template-columns: repeat(4, 5fr);
   flex-direction: row;
 }
-.book{
+.book {
   text-align: center;
   height: 100%;
   padding: 2px 3px 2px 3px;
   width: 100%;
-  border-right: #bfd732 0.5px solid ;
+  border-right: #bfd732 0.5px solid;
   font-size: 0.9rem;
 }
-.book2{
+.book2 {
   text-align: center;
   height: 100%;
   padding: 2px;
@@ -584,46 +589,42 @@ hr {
   width: 5px !important;
   color: #f7931e !important;
   border: 4px solid #f7931e !important;
- 
 }
 
-.iconBooking{
+.iconBooking {
   color: #f7931e !important;
   font-size: 1rem;
 }
-.fc-list-event-title{
+.fc-list-event-title {
   display: flex !important;
   justify-content: center;
   align-items: center;
   border-radius: 0 !important;
-
 }
 
-.fc .fc-list-table td, .fc .fc-list-day-cushion {
+.fc .fc-list-table td,
+.fc .fc-list-day-cushion {
   font-size: 0.9rem;
 }
-
 
 .fc-direction-ltr .fc-list-table .fc-list-event-graphic {
   position: absolute;
   left: -15px;
-
 }
 
-.fc .fc-list-table td{
+.fc .fc-list-table td {
   text-align: end;
 }
-
 
 .fc .fc-list-table td {
   background: none !important;
   align-items: center;
 }
 
-.fc .fc-list-table td, .fc .fc-list-day-cushion {
+.fc .fc-list-table td,
+.fc .fc-list-day-cushion {
   padding: 2px 5px !important;
   align-items: center;
-  
 }
 
 .swal-modal {
@@ -707,8 +708,6 @@ hr {
   align-items: center;
 }
 
-
-
 .selector__inputsAdmin select,
 .selector__inputsAdmin input {
   width: 30vh;
@@ -722,27 +721,26 @@ hr {
   background-color: #bfd732;
   border-bottom: 2px solid #bfd732;
 }
-.buttonsChart{
+.buttonsChart {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 97%;
   margin: 0 auto;
 }
-.buttonSelector{
+.buttonSelector {
   color: #fff;
-  background-color: #00A99D ;
+  background-color: #00a99d;
   border-radius: 5px;
-  border-color: #00A99D;
+  border-color: #00a99d;
   padding: 5px;
   margin: 5px;
 }
 
-.chart-Container{
+.chart-Container {
   width: 97%;
   margin: 0 auto;
 }
-
 
 @media all and (min-width: 600px) {
   .floor_container,
@@ -754,7 +752,6 @@ hr {
     width: 590px !important;
     height: 297px !important;
   }
- 
 }
 
 @media all and (min-width: 768px) {
@@ -796,7 +793,6 @@ hr {
     width: 768px !important;
     height: 297px !important;
   }
-
 }
 
 @media all and (min-width: 1080px) {
@@ -825,7 +821,7 @@ hr {
   }
 }
 
-.goBackBtn{
+.goBackBtn {
   width: 150px;
   height: 40px;
   display: flex;
@@ -838,6 +834,6 @@ hr {
   font-size: 18px;
 }
 
-.goBackBtn:hover{
+.goBackBtn:hover {
   color: #666666;
 }
