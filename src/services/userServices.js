@@ -84,6 +84,6 @@ export const sendPasswordService = async (email) => {
 }
 
 export const checkValidateService = async ({id, type}) => {
-  const check = await axios.post(`http://localhost:3001/api/checks`, { id, type })
-  return check.data
+  const user = await axios.post(`http://localhost:3001/api/checks`, { id, type })
+  return user.data
 }

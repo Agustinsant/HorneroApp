@@ -18,9 +18,15 @@ const My_preferences = () => {
     (state) => state.buildings.closetsBuilding
   )
 
-  const [checkMe, setCheckMe] = useState()
+  const [checkMe, setCheckMe] = useState(user.emailMyReserve)
   const [checkFriend, setCheckFriend] = useState(user.emailFriendsReserve)
   const [checkGroup, setCheckGroup] = useState(user.emailGroupReserve)
+
+  useEffect(() => {
+    setCheckMe(user.emailMyReserve)
+    setCheckFriend(user.emailFriendsReserve)
+    setCheckGroup(user.emailGroupReserve)
+  }, [])
 
   useEffect(() => {
     setCheckMe(user.emailMyReserve)
@@ -61,9 +67,9 @@ const My_preferences = () => {
     <div className="profile_container">
       <h6>Mis Preferencias</h6>
       { closestBuildings[0] ? (
-      <div className="profile_links">
-          <h5>Edificio más cercano en {closestBuildings[0].city}</h5>
-        <div>
+        <div className="profile_mapUbication">
+          <h6>Edificio más cercano en {closestBuildings[0].city}</h6>
+        <div className="iframe_container">
             <iframe
               src={`https://maps.google.com/?ll=${closestBuildings[0]["latitude"]},${closestBuildings[0]["longitude"]}&z=13&t=m&output=embed`}
               height="300"
@@ -80,16 +86,14 @@ const My_preferences = () => {
         ) }
 
       <div className="profile_links">
-        <h5>Notificaciones vía email</h5>
+        <h6>Notificaciones vía email</h6>
         <div>
           <h4>Mi reserva</h4>
           <div onClick={handleCheckMe} className="link_check">
             {checkMe ? (
               <BsFillCheckSquareFill />
             ) : (
-              <>
                 <BsFillSquareFill />
-              </>
             )}
           </div>
         </div>
@@ -99,10 +103,7 @@ const My_preferences = () => {
             {checkFriend ? (
               <BsFillCheckSquareFill />
             ) : (
-              <>
-                {" "}
                 <BsFillSquareFill />
-              </>
             )}
           </div>
         </div>
@@ -112,10 +113,7 @@ const My_preferences = () => {
             {checkGroup ? (
               <BsFillCheckSquareFill />
             ) : (
-              <>
-                {" "}
                 <BsFillSquareFill />
-              </>
             )}
           </div>
         </div>

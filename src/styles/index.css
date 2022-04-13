@@ -859,3 +859,18 @@ select {
 .goBackBtn:hover {
   color: #666666;
 }
+
+.profile_mapUbication {
+  width: 100%;
+  max-width: 600px;
+  padding: 25px;
+}
+.profile_mapUbication h6{
+  text-align: center;
+} 
+.iframe_container {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
