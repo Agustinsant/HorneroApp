@@ -1,4 +1,5 @@
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import { getUserById } from "../services/userServices";
 import { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
@@ -6,7 +7,7 @@ import listPlugin from "@fullcalendar/list";
 import useFetch from "../hooks/useFetch";
 import {GiModernCity} from "react-icons/gi";
 import {BiBuildingHouse, BiDesktop} from "react-icons/bi";
-import {MdMeetingRoom} from "react-icons/md";
+import {FaAngleLeft } from "react-icons/fa";
 import {BsUiChecksGrid} from "react-icons/bs";
 import {HiOutlineUserGroup} from "react-icons/hi"
 
@@ -71,6 +72,7 @@ const Booking = () => {
               eventContent={renderEventContent}
             />
           </div>
+          <Link to='/mi_perfil' className="goBackBtn"><FaAngleLeft className="link_arrows"/>Volver  </Link>
         </div>
       ) : (
         <div className="booking_container">
@@ -79,6 +81,7 @@ const Booking = () => {
           </div>
         </div>
       )}
+      
     </>
   );
 };

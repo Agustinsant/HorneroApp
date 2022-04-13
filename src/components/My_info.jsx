@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import '../styles/misDatos.css'
 import { useDispatch, useSelector } from "react-redux";
-import { FaUserEdit, FaReply, FaAngleRight } from "react-icons/fa";
+import {Link} from 'react-router-dom'
+import { FaUserEdit, FaReply, FaAngleRight, FaAngleLeft } from "react-icons/fa";
 import { editUser, editUserPassword } from "../store/user";
 import swal from "sweetalert";
 
@@ -339,6 +340,7 @@ const My_info = () => {
       ) : (
         <hr className="hrInvisible"></hr>
       )}
+      <Link to='/mi_perfil' className="goBackBtn"><FaAngleLeft className="link_arrows"/>Volver  </Link>
     </div>
   );
 };

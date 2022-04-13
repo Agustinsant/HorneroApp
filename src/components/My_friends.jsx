@@ -1,11 +1,12 @@
 import '../styles/friends.css'
 import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { searchUsers } from "../store/users";
 import { getAllFriends } from "../store/user";
 import FrienCard from "../commons/FrienCard";
 import useInput from "../hooks/useInput";
-import { FaAngleRight } from "react-icons/fa";
+import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 import swal from "sweetalert";
 
 export default function My_friends() {
@@ -85,6 +86,7 @@ export default function My_friends() {
           );
         })}
       </div>
+      <Link to='/mi_perfil' className="goBackBtn"><FaAngleLeft className="link_arrows"/>Volver  </Link>
     </div>
   );
 }

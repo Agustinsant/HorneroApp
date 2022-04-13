@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNavigate} from "react-router";
+import {Link} from 'react-router-dom'
 import swal from "sweetalert";
 import FormInput from "../commons/FormInput";
 import FormButton from "../commons/FormButton";
 import { signInUser } from "../store/user";
-import { FaAngleRight } from "react-icons/fa";
+import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 
 function Signin() {
   const navigate = useNavigate();
@@ -27,16 +28,7 @@ function Signin() {
   }, [values]);
 
   const inputs = [
-    {
-      name: "validationCod",
-      type: "text",
-      placeholder: "Ingresa tu codigo de validación",
-      errorMessage: "Ingrese el codigo alfanumérico de 8 digitos",
-      //label: "ValidationCod",
-      //pattern: "^(?=.*[0-9]+.*)(?=.*[A-Z]+.*)[0-9A-Z]{8}$",
-      required: true,
-    },
-    {
+     {
       name: "fullname",
       type: "text",
       placeholder: "Ingresa tu nombre completo",
@@ -50,7 +42,7 @@ function Signin() {
       name: "email",
       type: "email",
       placeholder: "Ingresa un email",
-      errorMessage: "Ingrese un email valido",
+      errorMessage: "Ingrese un email válido",
       //label: "",
       required: true,
     },
@@ -58,7 +50,7 @@ function Signin() {
       name: "city",
       type: "text",
       placeholder: "Ingrese ciudad de residencia",
-      errorMessage: "Ingrese una residencia valida",
+      errorMessage: "Ingrese una residencia válida",
       //label: "ValidationCod",
       pattern: "^[a-zA-Z]+(([',.- ][a-zA-Z ])?[a-zA-Z]*)*$",
       required: true,
@@ -118,10 +110,10 @@ function Signin() {
   return (
     <div className="signin">
       <form className={`form`} onSubmit={handleSubmit}>
-        <h2 className="signin__title">Nuevo por Aqui?</h2>
+        <h2 className="signin__title">¿Nuevo por Aquí?</h2>
         <h3 className="signin__subtitle">Registro</h3>
         <div className="signin__validationCod">
-          <div className="signin__validationCod--title">¿Qué es esto?</div>
+          
           <span className="signin__validationCod--message">
             Permite acreditar su relación con Globant. Solicitelo a su
             responsable.
@@ -139,6 +131,8 @@ function Signin() {
           Enviar <FaAngleRight />
         </FormButton>
       </form>
+      <Link to='/login' className="goBackBtn"><FaAngleLeft className="link_arrows"/>Volver  </Link>
+
     </div>
   );
 }

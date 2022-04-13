@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { BsFillCheckSquareFill, BsFillSquareFill } from "react-icons/bs"
+import { FaAngleLeft } from "react-icons/fa"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router"
+import { Link } from "react-router-dom"
 import { toogleCheck } from "../store/user"
 
 const My_preferences = () => {
@@ -124,6 +126,7 @@ const My_preferences = () => {
           </div>
         </div>
       </div>
+      <Link to='/mi_perfil' className="goBackBtn"><FaAngleLeft className="link_arrows"/>Volver  </Link>
     </div>
   )
 }
