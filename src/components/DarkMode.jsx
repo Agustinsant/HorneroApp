@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FaToggleOff, FaToggleOn, FaRegLightbulb } from "react-icons/fa";
 
 const DarkMode = () => {
   const [light, setLight] = useState("darkModeOff");

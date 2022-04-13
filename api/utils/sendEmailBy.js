@@ -19,8 +19,26 @@ const sendEmailBy = async (sendingType, data, moreInfo) => {
     } catch (error) {
       return
     }
-  } 
+  }
   
+  else if (sendingType === "addEventFriends") {
+
+    const { start, end, buildingId, floorId, userId } = data
+    const { userFriend } = moreInfo
+
+    try {
+      const build = await BuildingModel.findById(buildingId)
+      const floor = await FloorModel.findById(floorId)
+      const user = await UserModel.findById(userId)
+      const subject = `${userFriend} ha reservado`
+      const text = `<h3>${userFriend} ha reservado en ${build.name}, ${floor.name}, en la fecha/hora: ${start}</h3>`
+
+      if(user) sendGmail(user.email, subject, text)
+    } catch (error) {
+      return
+    }
+  }
+
   else if (sendingType === "forgotPassword") {
 
     const email = data
@@ -41,7 +59,7 @@ const sendEmailBy = async (sendingType, data, moreInfo) => {
 
     sendGmail(email, subject, text)
 
-  }  /// ('addUserToEvent', {user: user.email, otherUser: otherUser.email, building: building.name, floor: floor.name })
+  }
 
   else if (sendingType === "addUserToEvent") {
 

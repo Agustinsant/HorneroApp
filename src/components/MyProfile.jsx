@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import '../styles/miPerfil.css'
 import { Link } from "react-router-dom";
 import { FaAngleRight, FaUserEdit } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";

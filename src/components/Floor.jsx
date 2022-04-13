@@ -5,13 +5,13 @@ import Calendar from "./Calendar";
 import Map from "../commons/Map";
 import Desk from "../commons/Desk";
 import Hall from "../commons/Hall";
-import AddParticipants from "./AddParticipants";
 import { getEventsDayByFloor } from "../services/buildingServices";
-import user from "../store/user";
+import useFetch from "../hooks/useFetch";
+const horneroImg = require("../assets/hornero.png");
 
 function Floor({ floor, day }) {
   const userLoged = useSelector((state) => state.user.data);
-  console.log(userLoged);
+
   const { desks } = floor;
   // const typeDesks = desks.filter((d) => d.type === "desk");
   // const typeHall = desks.filter((d) => d.type === "hall");
@@ -25,7 +25,6 @@ function Floor({ floor, day }) {
 
   const [desk, setDesk] = useState([]);
   const [deskCalendarUp, setDeskCalendarUp] = useState(false);
-  const [addParticipantsUp, setAddParticipantsUp] = useState({ state: false });
 
   const colors = {
     desk: {
@@ -107,6 +106,19 @@ function Floor({ floor, day }) {
     setDeskCalendarUp((prev) => !prev);
   };
 
+  const { loading } = useFetch(
+    `http://localhost:3001/api/calendar/all/${userLoged._id}`
+  );
+  if (loading) {
+    return (
+      <div className="booking_container">
+        <div className="deskCanFly">
+          <img src={horneroImg} alt="loading" />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="floor_container">
@@ -137,26 +149,15 @@ function Floor({ floor, day }) {
         </Stage>
       </div>
       {deskCalendarUp ? (
-        <div >
+        <div>
           {desk.id && (
             <Calendar
               deskId={desk.id}
               setDeskCalendarUp={setDeskCalendarUp}
-              setAddParticipantsUp={setAddParticipantsUp}
               day={day}
             />
           )}
         </div>
-      ) : (
-        <></>
-      )}
-
-      {addParticipantsUp.state ? (
-        <AddParticipants
-          eventId={addParticipantsUp.eventId}
-          state={addParticipantsUp.state}
-          setAddParticipantsUp={setAddParticipantsUp}
-        />
       ) : (
         <></>
       )}
