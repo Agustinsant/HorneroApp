@@ -5,8 +5,9 @@ module.exports.NotificationCheck = async (req, res, next) => {
     console.log('id===>', id)
 
     const options = {
-        retureDocuments: 'after'
+        returnDocument: 'after'
     }
+
     try {
         const user = await UserModel.findById(id)
     console.log('user===>', user)
