@@ -141,13 +141,16 @@ module.exports.ClosestBuilding = async (req, res, next) => {
             let distance =  DistanciaMetros(building.latitude,building.longitude,latitude,longitude)
 
             newObj.idBuilding = building._id
+            newObj.floors = building.floors
             newObj.city= building.city
             newObj.distance = distance
+            newObj.latitude = building.latitude
+            newObj.longitude = building.longitude
 
             return newObj
         })
 
-        distanceBuilding.sort(function(a, b){return a.distance - b.distance}) 
+        distanceBuilding.sort(function(a, b){return a.distance - b.distance})
 
         return res.status(200).send(distanceBuilding)
 

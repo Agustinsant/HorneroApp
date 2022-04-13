@@ -15,6 +15,7 @@ module.exports.AddEventCalendar = async (req, res, next) => {
     try {
 
         const desk = await DeskModel.findById(idDesk) 
+        const user = await UserModel.findById(userId)
         const newEventCalendar = await CalendarModel({ start, end, allDay, buildingId: desk.buildingId, floorId: desk.floorId, deskId: desk._id}).save()
         newEventCalendar.usersId.push(userId)
         desk.calendarEvent.push(newEventCalendar)
@@ -23,7 +24,12 @@ module.exports.AddEventCalendar = async (req, res, next) => {
 
         const updateDesk = await DeskModel.findByIdAndUpdate(idDesk, desk, option)
 
-        if(updateDesk) sendEmailBy('addEvent', { start, end, buildingId: desk.buildingId, floorId: desk.floorId, deskId: desk._id, userId })
+        if(updateDesk && user.emailMyReserve === true) sendEmailBy('addEvent', { start, end, buildingId: desk.buildingId, floorId: desk.floorId, deskId: desk._id, userId })
+         
+        for (const friendId of user.friends) {
+            const friend = await UserModel.findById(friendId)
+            if(friend && friend.emailFriendsReserve === true) sendEmailBy('addEventFriends', { start, end, buildingId: desk.buildingId, floorId: desk.floorId, deskId: desk._id, userId }, { userFriend: user.name })
+        }
 
         return res.status(201).send(updateDesk)
     }
@@ -127,6 +133,7 @@ module.exports.AddUsersIdEvent = async (req, res, next) => {
   
     try {
       
+      const user = await UserModel.findById(userId)
       const calendar = await CalendarModel.findById(eventId)
       calendar.usersId.push(userId)
 
@@ -134,7 +141,7 @@ module.exports.AddUsersIdEvent = async (req, res, next) => {
       const building = await BuildingModel.findById(calendar.buildingId)
       const floor = await FloorModel.findById(calendar.floorId)
     
-      if(calendar) sendEmailBy('addUserToEvent', { sendingUser, otherUser: otherUser.email, building: building.name, floor: floor.name, start: calendar.start })
+      if(calendar && user.emailGroupReserve === true) sendEmailBy('addUserToEvent', { sendingUser, otherUser: otherUser.email, building: building.name, floor: floor.name, start: calendar.start })
 
       let deskEvent = await DeskModel.findById(calendar.deskId)
         

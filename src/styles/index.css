@@ -158,6 +158,31 @@ input:invalid[focused="true"] ~ span {
   margin-top: auto;
 }
 
+
+.profile_links h4 {
+  font-weight: 200;
+  font-size: 18px;
+}
+
+.link_arrows {
+  text-decoration: none;
+  color: #bfd732;
+  font-size: 30px;
+}
+
+.link_check {
+  text-decoration: none;
+  color: #bfd732;
+  font-size: 30px;
+  padding-bottom: 10px;
+}
+
+hr {
+  align-self: center;
+  width: 50%;
+  border-top: 2px solid #bfd732;
+}
+
 .floor {
   width: 50vh;
   height: 50vh;
