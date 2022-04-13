@@ -18,7 +18,7 @@ body {
   color: var(--text-color);
   transition: background 0.3s ease-in-out, color 0.6s ease-in-out;
   padding-bottom: 120px;
-  min-height: 100vh; 
+  min-height: 100vh;
 }
 
 body.light {
@@ -158,7 +158,6 @@ input:invalid[focused="true"] ~ span {
   margin-top: auto;
 }
 
-
 .floor {
   width: 50vh;
   height: 50vh;
@@ -210,6 +209,54 @@ input:invalid[focused="true"] ~ span {
   height: 298px;
   border: 5px solid #666666;
   background: #fff;
+}
+
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  80% {
+    transform: translate(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  80% {
+    transform: translate(-15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+.floor_container--empty {
+  padding: 5rem;
+  text-align: center;
+  color: #444444;
+  width: 300px;
+  height: 298px;
+  border: 5px solid #666666;
+  background: #fff;
+  background-image: linear-gradient(to right bottom, #bfd732, #28b4857c),
+    url("../assets/main.jpg");
+  background-size: cover;
+  background-position: left;
+}
+
+.floor_container--empty h3 {
+  animation: moveInLeft 1.5s ease-out;
+}
+.floor_container--empty h5 {
+  animation: moveInRight 1.5s ease-out;
 }
 
 /* ///////////// CALENDAR  \\\\\\\\\\\\\ */
@@ -497,9 +544,9 @@ input:invalid[focused="true"] ~ span {
   font-size: 1.8rem;
   right: 5px;
   top: -35px;
-  color: #bfd732
+  color: #bfd732;
 }
-.add-container{
+.add-container {
   margin-top: 50px;
   position: relative;
 }
@@ -515,7 +562,7 @@ input:invalid[focused="true"] ~ span {
   flex-wrap: nowrap;
   align-items: center;
   justify-content: flex-start;
-  overflow-x: scroll; 
+  overflow-x: scroll;
   overflow-y: hidden;
   border-radius: 10px;
 }
@@ -552,12 +599,13 @@ input:invalid[focused="true"] ~ span {
   border-radius: 50%;
 }
 
-.participants{
-  margin: 15px 5px 0 5px ;
+.participants {
+  margin: 15px 5px 0 5px;
 }
 
 @media all and (min-width: 600px) {
-  .floor_container {
+  .floor_container,
+  .floor_container--empty {
     width: 590px !important;
     height: 297px !important;
   }
@@ -568,7 +616,8 @@ input:invalid[focused="true"] ~ span {
 }
 
 @media all and (min-width: 768px) {
-  .floor_container {
+  .floor_container,
+  .floor_container--empty {
     width: 75% !important;
   }
   .selector__box {
@@ -600,7 +649,8 @@ input:invalid[focused="true"] ~ span {
     margin: 10px;
   }
 
-  .floor_container {
+  .floor_container,
+  .floor_container--empty {
     width: 768px !important;
     height: 297px !important;
   }

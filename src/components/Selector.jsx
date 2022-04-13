@@ -124,7 +124,13 @@ function Selector() {
               />
             </div>
             {!floor.desks ? (
-              <div className="floor_container"></div>
+              <div className="floor_container--empty">
+                <h3>Hace tu reserva desde aca</h3>
+                <h5>
+                  ¡Elegi un edificio, elegi un piso y, si queres reservar una
+                  fecha especifica, un dia!
+                </h5>
+              </div>
             ) : (
               <Floor floor={floor} day={day.data} />
             )}
