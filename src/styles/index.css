@@ -243,6 +243,16 @@ select {
   background: #fff;
 }
 
+.floor_container::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.floor_container::-webkit-scrollbar-thumb {
+  background: #bfd732;
+  border-radius: 4px;
+}
+
 @keyframes moveInLeft {
   0% {
     opacity: 0;
@@ -496,6 +506,18 @@ select {
 .fc .fc-scrollgrid-liquid {
   border-style: none !important;
 }
+
+.fc-scroller-liquid::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.fc-scroller-liquid::-webkit-scrollbar-thumb {
+  background: #686868;
+  border-radius: 4px;
+}
+
+
 
 .recover {
   text-align: center;
