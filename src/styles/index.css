@@ -758,6 +758,14 @@ input:invalid[focused="true"] ~ span {
   color: #bfd732;
   font-size: 30px;
 }
+
+.link_check {
+  text-decoration: none;
+  color: #bfd732;
+  font-size: 30px;
+  padding-bottom: 10px;
+}
+
 hr {
   align-self: center;
   width: 50%;
