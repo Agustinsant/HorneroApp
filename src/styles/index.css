@@ -303,6 +303,92 @@ select {
 .floor_container--empty h5 {
   animation: moveInRight 1.5s ease-out;
 }
+.references {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.references__container {
+  position: relative;
+}
+.close_references {
+  position: absolute;
+  cursor: pointer;
+  right: -5px;
+}
+
+.references__table {
+  margin: 2em auto 2em auto;
+  width: 93%;
+  margin-top: 150px;
+  min-width: 300px;
+  max-width: 500px !important;
+  padding: 20px;
+  box-shadow: 0 7px 30px 0 rgba(0, 0, 0, 0.5);
+  background: #fff;
+  border-radius: 10px;
+}
+.references__table th {
+  background-color: #bfd732;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+}
+.references__table th,
+.references__table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.references__table tr:hover {
+  background-color: #ddd;
+}
+
+.selector__references {
+  top: 222px;
+  position: absolute;
+  align-self: flex-end;
+  padding: 10px;
+}
+.references__button {
+  background-color: #fff;
+  position: relative;
+  color: black;
+  padding: 5px;
+  border-radius: 100px;
+  border-color: #bfd732;
+}
+
+.emptyDesk {
+  align-self: center;
+  border-radius: 50%;
+  background-color: #39b54a;
+  width: 12px;
+  height: 12px;
+}
+.emptyHall {
+  border-radius: 50%;
+  background-color: #f7931e;
+  width: 12px;
+  height: 12px;
+}
+.concurred {
+  border-radius: 50%;
+  background-color: #bfd732;
+  width: 12px;
+  height: 12px;
+}
+.full {
+  border-radius: 50%;
+  background-color: #444444;
+  width: 12px;
+  height: 12px;
+}
 
 /* ///////////// CALENDAR  \\\\\\\\\\\\\ */
 
@@ -516,8 +602,6 @@ select {
   background: #686868;
   border-radius: 4px;
 }
-
-
 
 .recover {
   text-align: center;
@@ -777,6 +861,10 @@ select {
 }
 
 @media all and (min-width: 768px) {
+  .selector__references {
+    top: -40px;
+    right: 5px;
+  }
   .floor_container,
   .floor_container--empty {
     width: 75% !important;
