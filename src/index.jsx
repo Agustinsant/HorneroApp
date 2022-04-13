@@ -7,12 +7,15 @@ import { BrowserRouter } from "react-router-dom";
 import store from "./store";
 import { Provider } from "react-redux";
 import * as serviceWorkerRegistration from './serviceWorkerRegistration'
+import getGeoLocation from "./utils/getGeoLocation";
+
+const userUbication = getGeoLocation()
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <App userUbication={userUbication} />
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
