@@ -264,7 +264,10 @@ hr {
 }
 
 .floor_container--empty {
-  padding: 5rem;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
   color: #444444;
   width: 300px;
@@ -520,6 +523,7 @@ hr {
 .booking_container {
   width: 95%;
   margin-top: 5px;
+  margin-bottom: 20px;
 }
 .event-booking {
   height: 100%;
@@ -819,4 +823,21 @@ hr {
     flex-direction: row;
     justify-content: center;
   }
+}
+
+.goBackBtn{
+  width: 150px;
+  height: 40px;
+  display: flex;
+  padding-right: 15px;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  background: white;
+  color: #444444;
+  font-size: 18px;
+}
+
+.goBackBtn:hover{
+  color: #666666;
 }
