@@ -72,12 +72,14 @@ module.exports.getAllEventCalendarByUserId = async (req, res, next) => {
         for (const event of eventsCalendar) {
             let newEvents = {}
             const building = await BuildingModel.findById(event.buildingId);
+            const desk = await DeskModel.findById(event.deskId)
             const floor = building.floors.filter(floor => floor._id.toHexString() === event.floorId);
             newEvents.buildingName = building.name;
             newEvents.city = building.city;
             newEvents.floorName = floor[0].name;
             newEvents.start = event.start;
             newEvents.end = event.end
+            newEvents.deskType = desk.type
             events.push(newEvents)
         }
 
