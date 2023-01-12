@@ -25,7 +25,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, day}) => {
   const [dayView, setDayView] = useState(false);
   const [addParticipantsUp, setAddParticipantsUp] = useState({ state: false });
 
-  const rendering = async () => {
+  const uploadEvents = async () => {
     const deskCalendar = day
       ? await getDayEventsInDesk(day, deskId)
       : await getCalendar(deskId);
@@ -34,7 +34,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, day}) => {
   };
 
   useEffect(() => {
-    rendering();
+    uploadEvents();
   }, [deskId]);
 
   /* ------------- ADD FUNCTIONS ------------ */
@@ -61,7 +61,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, day}) => {
       buttons: false,
       timer: 2000,
     });
-    rendering();
+    uploadEvents();
   };
 
   const handleAllday = async () => {
@@ -84,7 +84,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, day}) => {
       };
       await addEventCalendar(deskId, eventObject, true);
     }
-    rendering();
+    uploadEvents();
   };
 
   /* -------------  DELETE FUNCTIONS ------------ */
@@ -115,7 +115,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, day}) => {
   const handleEventRemove = async (eventInfo) => {
     const eventId = eventInfo.event.extendedProps._id;
     await deleteEventCalendar(eventId);
-    rendering();
+    uploadEvents();
   };
 
   /* -------------  UPDATE FUNCTION ------------ */
@@ -138,7 +138,7 @@ const Calendar = ({ deskId, setDeskCalendarUp, day}) => {
         buttons: false,
       });
     }
-    rendering();
+    uploadEvents();
   };
 
    /* -------------  TIME GRID VIEW FUNCTIONs ------------ */

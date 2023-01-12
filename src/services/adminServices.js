@@ -3,7 +3,6 @@ import axios from "axios";
 
 export const singleBuilding = async ({buildingId}) => {
     const info = await axios.get(`http://localhost:3001/api/building/${buildingId}`)
-    console.log("infor--->", info)
     return info.data
 }
 

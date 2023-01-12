@@ -1,7 +1,23 @@
+import { useState } from "react";
 import { Rect, Image } from "react-konva";
 import useImage from "use-image";
 
-function Desk({ desk, userImg }) {
+function Desk({ userImg }) {
+  // este desk esta hardcodeado para mostrar BORRAR
+  const [desk, setDesk] = useState({
+    _id: "637e825b04ab6558b51a934d",
+    type: "desk",
+    positionX: 70,
+    positionY: 100,
+    rotation: 90,
+    imgDesk: "",
+    buildingId: "637e7ef404ab6558b51a9348",
+    floorId: "637e813e04ab6558b51a934c",
+    calendarEvent: [{}],
+    userWillBeHere: true,
+    color: "#39B54A"
+  });
+
   const [image] = useImage(userImg);
   const chairPositionBaseOnRotation = {
     0: {
@@ -78,13 +94,13 @@ function Desk({ desk, userImg }) {
               e.target.fill(desk.color);
             }}
           />
-          <Image
+         {/*    <Image
             image={image}
             width={10}
             height={10}
             x={imgPositionBaseOnRotation[desk.rotation].x}
             y={imgPositionBaseOnRotation[desk.rotation].y}
-          />
+          /> */}
         </>
       ) : (
         <>

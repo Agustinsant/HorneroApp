@@ -69,6 +69,7 @@ function Selector() {
   const handleSelectFloor = async (e) => {
     let selectedFloor = e.target.value;
     let getData = floors.data.filter((f) => f.name === selectedFloor)[0]._id;
+    getData = "637e813e04ab6558b51a934c" // harcodeado para mostrar
     let data = await getFloor(getData);
     const resetColors = data.desks.map((d) => (d.color = colors.desk.empty));
     data.desk = resetColors;

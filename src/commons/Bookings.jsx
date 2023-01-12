@@ -25,9 +25,15 @@ const Booking = () => {
     setUser(user);
   }, [userId]);
 
-  const { data, loading } = useFetch(
+  const { loading } = useFetch(
     `http://localhost:3001/api/calendar/all/${userId}`
   );
+
+  const data = [
+    {"_id":{"$oid":"637e8c691cb53e6b014a0bc2"},"start":"2022-11-09T07:00:00-03:00","end":"2022-11-09T09:00:00-03:00","allDay":false,"usersId":["637e7a191cb53e6b014a0b4f"],"buildingName":"Poseidon I","floorName":"1º Piso","city":"Cordoba","deskId":"637e825b04ab6558b51a934d","__v":{"$numberInt":"0"}},
+    {"_id":{"$oid":"637e8c691cb53e6b014a0bc2"},"start":"2022-11-12T07:00:00-03:00","end":"2022-11-09T09:00:00-03:00","allDay":false,"usersId":["637e7a191cb53e6b014a0b4f"],"buildingName":"Poseidon I","floorName":"1º Piso","city":"Cordoba","deskId":"637e825b04ab6558b51a934d","__v":{"$numberInt":"0"}},
+    {"_id":{"$oid":"637e8c691cb53e6b014a0bc2"},"start":"2022-11-13T07:00:00-03:00","end":"2022-11-09T09:00:00-03:00","allDay":false,"usersId":["637e7a191cb53e6b014a0b4f"],"buildingName":"Poseidon I","floorName":"1º Piso","city":"Cordoba","deskId":"637e825b04ab6558b51a934d","__v":{"$numberInt":"0"}},
+  ]
 
   const renderEventContent = (eventInfo) => {
     const { extendedProps } = eventInfo.event.toPlainObject();
